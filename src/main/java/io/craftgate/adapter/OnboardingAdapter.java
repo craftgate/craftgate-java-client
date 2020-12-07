@@ -1,0 +1,40 @@
+package io.craftgate.adapter;
+
+import io.craftgate.net.HttpClient;
+import io.craftgate.request.CreateMemberRequest;
+import io.craftgate.request.SearchMemberRequest;
+import io.craftgate.request.UpdateMemberRequest;
+import io.craftgate.request.common.RequestOptions;
+import io.craftgate.request.common.RequestQueryParamsBuilder;
+import io.craftgate.response.MemberListResponse;
+import io.craftgate.response.MemberResponse;
+
+public class OnboardingAdapter extends BaseAdapter {
+
+    public OnboardingAdapter(RequestOptions requestOptions) {
+        super(requestOptions);
+    }
+
+    public MemberResponse createMember(CreateMemberRequest createMemberRequest) {
+        String path = "/onboarding/v1/members";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMemberRequest, path, requestOptions),
+                createMemberRequest, MemberResponse.class);
+    }
+
+    public MemberResponse updateMember(Long id, UpdateMemberRequest updateMemberRequest) {
+        String path = "/onboarding/v1/members/" + id;
+        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateMemberRequest, path, requestOptions),
+                updateMemberRequest, MemberResponse.class);
+    }
+
+    public MemberResponse retrieveMember(Long id) {
+        String path = "/onboarding/v1/members/" + id;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MemberResponse.class);
+    }
+
+    public MemberListResponse searchMembers(SearchMemberRequest searchMemberRequest) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(searchMemberRequest);
+        String path = "/onboarding/v1/members" + query;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MemberListResponse.class);
+    }
+}
