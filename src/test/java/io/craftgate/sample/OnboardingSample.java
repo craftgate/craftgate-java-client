@@ -3,7 +3,7 @@ package io.craftgate.sample;
 import io.craftgate.Craftgate;
 import io.craftgate.model.MemberType;
 import io.craftgate.request.CreateMemberRequest;
-import io.craftgate.request.SearchMemberRequest;
+import io.craftgate.request.SearchMembersRequest;
 import io.craftgate.request.UpdateMemberRequest;
 import io.craftgate.response.MemberListResponse;
 import io.craftgate.response.MemberResponse;
@@ -107,7 +107,7 @@ public class OnboardingSample {
             add(2L);
         }};
 
-        SearchMemberRequest request = SearchMemberRequest.builder()
+        SearchMembersRequest request = SearchMembersRequest.builder()
                 .memberIds(memberIds)
                 .name("Zeytinyağı Üretim")
                 .build();

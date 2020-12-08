@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class SearchMemberRequest {
+public class SearchMembersRequest {
 
     @Builder.Default
     private Integer page = 0;
