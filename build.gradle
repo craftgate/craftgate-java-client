@@ -1,0 +1,79 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'commons-codec:commons-codec:1.15'
+
+    compileOnly "org.projectlombok:lombok:1.18.4"
+    annotationProcessor("org.projectlombok:lombok:1.18.4")
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+}
+
+test {
+    useJUnitPlatform()
+    exclude 'io/craftgate/sample/**'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+group = 'io.craftgate'
+sourceCompatibility = '1.8'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = 'Craftgate'
+                description = 'Craftgate Java API Client'
+                url = 'https://github.com/craftgate/craftgate-java-client'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'Craftgate'
+                        name = 'Craftgate'
+                        email = 'info@craftgate.io'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/craftgate/craftgate-java-client'
+                    developerConnection = 'scm:git:git@github.com:craftgate/craftgate-java-client'
+                    url = 'https://github.com/craftgate/craftgate-java-client'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name 'nexus'
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username project.repoUser
+                password project.repoPassword
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
