@@ -8,8 +8,21 @@ This repo contains the Java client for Craftgate API.
 - Java 1.8 or newer
 
 ## Installation
+Apache Maven:
 ```bash
-
+<dependency>
+  <groupId>io.craftgate</groupId>
+  <artifactId>craftgate</artifactId>
+  <version>0.0.1</version>
+</dependency>
+```
+Gradle Groovy DSL
+```
+implementation 'io.craftgate:craftgate:0.0.1'
+```
+Gradle Kotlin DSL
+```
+implementation("io.craftgate:craftgate:0.0.1")
 ```
 
 ## Usage

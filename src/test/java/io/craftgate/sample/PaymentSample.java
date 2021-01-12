@@ -291,33 +291,79 @@ public class PaymentSample {
     }
 
     @Test
-    void approve_payment_transactions() {
-        ApprovePaymentTransactionsRequest request = ApprovePaymentTransactionsRequest.builder()
-                .isTransactional(true)
-                .paymentTransactionIds(new HashSet<Long>() {{
-                    add(1L);
-                    add(2L);
-                }})
+    void create_deposit_payment() {
+        CreateDepositPaymentRequest request = CreateDepositPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .buyerMemberId(1L)
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .build())
                 .build();
 
-        PaymentTransactionApprovalListResponse response = craftgate.payment().approvePaymentTransactions(request);
-        assertNotNull(response);
-        assertEquals(2, response.getSize());
+        DepositPaymentResponse response = craftgate.payment().createDepositPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(request.getBuyerMemberId(), response.getBuyerMemberId());
+        assertEquals(request.getPrice(), response.getPrice());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+        assertEquals(PaymentType.DEPOSIT_PAYMENT, response.getPaymentType());
     }
 
     @Test
-    void disapprove_payment_transactions() {
-        DisapprovePaymentTransactionsRequest request = DisapprovePaymentTransactionsRequest.builder()
-                .isTransactional(true)
-                .paymentTransactionIds(new HashSet<Long>() {{
-                    add(1L);
-                    add(2L);
-                }})
+    void refund_deposit_payment() {
+        Long paymentId = 1L;
+        RefundDepositPaymentRequest request = RefundDepositPaymentRequest.builder()
+                .price(BigDecimal.valueOf(50))
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .build();
 
-        PaymentTransactionApprovalListResponse response = craftgate.payment().disapprovePaymentTransactions(request);
+        DepositPaymentRefundResponse response = craftgate.payment().refundDepositPayment(paymentId, request);
         assertNotNull(response);
-        assertEquals(2, response.getSize());
+        assertEquals(paymentId, response.getPaymentId());
+        assertEquals(RefundStatus.SUCCESS, response.getStatus());
+        assertEquals(BigDecimal.valueOf(50), response.getRefundPrice());
+    }
+
+    @Test
+    void initialize_3DS_deposit_payment() {
+        InitThreeDSPaymentRequest request = InitThreeDSPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.valueOf(100))
+                .currency(Currency.TRY)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .build())
+                .build();
+
+        InitThreeDSPaymentResponse response = craftgate.payment().init3DSDepositPayment(request);
+        assertNotNull(response);
+        assertNotNull(response.getHtmlContent());
+        assertNotNull(response.getDecodedHtmlContent());
+    }
+
+    @Test
+    void complete_3DS_deposit_payment() {
+        CompleteThreeDSPaymentRequest request = CompleteThreeDSPaymentRequest.builder()
+                .paymentId(1L)
+                .build();
+
+        DepositPaymentResponse response = craftgate.payment().complete3DSDepositPayment(request);
+        assertNotNull(response);
+        assertEquals(BigDecimal.valueOf(100), response.getPrice());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+        assertEquals(PaymentType.DEPOSIT_PAYMENT, response.getPaymentType());
     }
 
     @Test
@@ -434,5 +480,35 @@ public class PaymentSample {
                 .build();
 
         craftgate.payment().deleteStoredCard(request);
+    }
+
+    @Test
+    void approve_payment_transactions() {
+        ApprovePaymentTransactionsRequest request = ApprovePaymentTransactionsRequest.builder()
+                .isTransactional(true)
+                .paymentTransactionIds(new HashSet<Long>() {{
+                    add(1L);
+                    add(2L);
+                }})
+                .build();
+
+        PaymentTransactionApprovalListResponse response = craftgate.payment().approvePaymentTransactions(request);
+        assertNotNull(response);
+        assertEquals(2, response.getSize());
+    }
+
+    @Test
+    void disapprove_payment_transactions() {
+        DisapprovePaymentTransactionsRequest request = DisapprovePaymentTransactionsRequest.builder()
+                .isTransactional(true)
+                .paymentTransactionIds(new HashSet<Long>() {{
+                    add(1L);
+                    add(2L);
+                }})
+                .build();
+
+        PaymentTransactionApprovalListResponse response = craftgate.payment().disapprovePaymentTransactions(request);
+        assertNotNull(response);
+        assertEquals(2, response.getSize());
     }
 }
