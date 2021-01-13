@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SearchWalletTxRequest {
+public class SearchWalletTransactionRequest {
 
     @Builder.Default
     private Integer page = 0;

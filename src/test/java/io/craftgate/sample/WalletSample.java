@@ -27,10 +27,10 @@ public class WalletSample {
     @Test
     void search_wallet_transactions() {
         Long walletId = 1L;
-        SearchWalletTxRequest request = SearchWalletTxRequest.builder()
+        SearchWalletTransactionRequest request = SearchWalletTransactionRequest.builder()
                 .build();
 
-        WalletTxListResponse response = craftgate.wallet().searchWalletTransactions(walletId, request);
+        WalletTransactionListResponse response = craftgate.wallet().searchWalletTransactions(walletId, request);
         assertTrue(response.getItems().size() > 0);
     }
 

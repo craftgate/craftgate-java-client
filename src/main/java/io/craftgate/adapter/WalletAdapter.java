@@ -3,12 +3,12 @@ package io.craftgate.adapter;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreateRemittanceRequest;
 import io.craftgate.request.SearchWalletRequest;
-import io.craftgate.request.SearchWalletTxRequest;
+import io.craftgate.request.SearchWalletTransactionRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.RemittanceResponse;
 import io.craftgate.response.WalletListResponse;
-import io.craftgate.response.WalletTxListResponse;
+import io.craftgate.response.WalletTransactionListResponse;
 
 public class WalletAdapter extends BaseAdapter {
 
@@ -22,10 +22,10 @@ public class WalletAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletListResponse.class);
     }
 
-    public WalletTxListResponse searchWalletTransactions(Long walletId, SearchWalletTxRequest searchWalletRequest) {
+    public WalletTransactionListResponse searchWalletTransactions(Long walletId, SearchWalletTransactionRequest searchWalletRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchWalletRequest);
         String path = "/wallet/v1/wallets/" + walletId + "/wallet-transactions" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletTxListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletTransactionListResponse.class);
     }
 
     public RemittanceResponse sendRemittance(CreateRemittanceRequest createRemittanceRequest) {

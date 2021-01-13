@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class WalletTxResponse {
+public class WalletTransactionResponse {
 
     private Long id;
     private LocalDateTime createdDate;

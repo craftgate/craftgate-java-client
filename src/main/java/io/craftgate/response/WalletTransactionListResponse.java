@@ -4,5 +4,5 @@ import io.craftgate.response.common.ListResponse;
 import lombok.Data;
 
 @Data
-public class WalletTxListResponse extends ListResponse<WalletTxResponse> {
+public class WalletTransactionListResponse extends ListResponse<WalletTransactionResponse> {
 }
