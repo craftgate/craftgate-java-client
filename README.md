@@ -1,6 +1,7 @@
 # Craftgate Java Client
 
 [![Build Status](https://github.com/craftgate/craftgate-java-client/workflows/Craftgate%20Java%20CI/badge.svg?branch=master)](https://github.com/craftgate/craftgate-java-client/actions)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.craftgate/craftgate/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.craftgate/craftgate)
 
 This repo contains the Java client for Craftgate API.
 
