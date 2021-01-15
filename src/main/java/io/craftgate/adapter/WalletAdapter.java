@@ -2,8 +2,8 @@ package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreateRemittanceRequest;
-import io.craftgate.request.SearchWalletRequest;
-import io.craftgate.request.SearchWalletTransactionRequest;
+import io.craftgate.request.SearchWalletsRequest;
+import io.craftgate.request.SearchWalletTransactionsRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.RemittanceResponse;
@@ -16,14 +16,14 @@ public class WalletAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public WalletListResponse searchWallets(SearchWalletRequest searchWalletRequest) {
-        String query = RequestQueryParamsBuilder.buildQueryParam(searchWalletRequest);
+    public WalletListResponse searchWallets(SearchWalletsRequest searchWalletsRequest) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(searchWalletsRequest);
         String path = "/wallet/v1/wallets" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletListResponse.class);
     }
 
-    public WalletTransactionListResponse searchWalletTransactions(Long walletId, SearchWalletTransactionRequest searchWalletRequest) {
-        String query = RequestQueryParamsBuilder.buildQueryParam(searchWalletRequest);
+    public WalletTransactionListResponse searchWalletTransactions(Long walletId, SearchWalletTransactionsRequest searchWalletTransactionsRequest) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(searchWalletTransactionsRequest);
         String path = "/wallet/v1/wallets/" + walletId + "/wallet-transactions" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletTransactionListResponse.class);
     }

@@ -47,10 +47,10 @@ public class PaymentAdapter extends BaseAdapter {
                 refundDepositPaymentRequest, DepositPaymentRefundResponse.class);
     }
 
-    public InitThreeDSPaymentResponse init3DSDepositPayment(InitThreeDSPaymentRequest initThreeDSPaymentRequest) {
+    public InitThreeDSPaymentResponse init3DSDepositPayment(CreateDepositPaymentRequest createDepositPaymentRequest) {
         String path = "/payment/v1/deposits/3ds-init";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initThreeDSPaymentRequest, path, requestOptions),
-                initThreeDSPaymentRequest, InitThreeDSPaymentResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createDepositPaymentRequest, path, requestOptions),
+                createDepositPaymentRequest, InitThreeDSPaymentResponse.class);
     }
 
     public DepositPaymentResponse complete3DSDepositPayment(CompleteThreeDSPaymentRequest completeThreeDSPaymentRequest) {
