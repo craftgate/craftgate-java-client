@@ -331,10 +331,9 @@ public class PaymentSample {
 
     @Test
     void initialize_3DS_deposit_payment() {
-        InitThreeDSPaymentRequest request = InitThreeDSPaymentRequest.builder()
+        CreateDepositPaymentRequest request = CreateDepositPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
-                .paidPrice(BigDecimal.valueOf(100))
-                .walletPrice(BigDecimal.valueOf(100))
+                .buyerMemberId(1L)
                 .currency(Currency.TRY)
                 .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")

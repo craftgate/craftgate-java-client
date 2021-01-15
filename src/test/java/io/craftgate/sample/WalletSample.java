@@ -16,7 +16,7 @@ public class WalletSample {
 
     @Test
     void search_wallets() {
-        SearchWalletRequest request = SearchWalletRequest.builder()
+        SearchWalletsRequest request = SearchWalletsRequest.builder()
                 .memberId(1L)
                 .build();
 
@@ -27,7 +27,7 @@ public class WalletSample {
     @Test
     void search_wallet_transactions() {
         Long walletId = 1L;
-        SearchWalletTransactionRequest request = SearchWalletTransactionRequest.builder()
+        SearchWalletTransactionsRequest request = SearchWalletTransactionsRequest.builder()
                 .build();
 
         WalletTransactionListResponse response = craftgate.wallet().searchWalletTransactions(walletId, request);
