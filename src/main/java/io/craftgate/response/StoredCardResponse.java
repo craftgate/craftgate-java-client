@@ -1,16 +1,14 @@
 package io.craftgate.response;
 
-import lombok.Data;
 import io.craftgate.model.CardAssociation;
 import io.craftgate.model.CardType;
+import lombok.Data;
 
 @Data
 public class StoredCardResponse {
 
     private String binNumber;
     private String lastFourDigits;
-    private String expireYear;
-    private String expireMonth;
     private String cardHolderName;
     private String cardUserKey;
     private String cardToken;

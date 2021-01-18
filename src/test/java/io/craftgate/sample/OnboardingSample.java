@@ -10,8 +10,8 @@ import io.craftgate.response.MemberListResponse;
 import io.craftgate.response.MemberResponse;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -104,7 +104,7 @@ public class OnboardingSample {
 
     @Test
     void search_sub_merchants() {
-        List<Long> memberIds = new ArrayList<Long>() {{
+        Set<Long> memberIds = new HashSet<Long>() {{
             add(1L);
             add(2L);
         }};
@@ -121,14 +121,10 @@ public class OnboardingSample {
     @Test
     void create_buyer_member() {
         CreateMemberRequest request = CreateMemberRequest.builder()
-                .isBuyer(true)
-                .isSubMerchant(false)
                 .memberExternalId(UUID.randomUUID().toString())
+                .name("Haluk Demir")
                 .email("haluk.demir@example.com")
                 .phoneNumber("905551111111")
-                .name("Haluk Demir")
-                .identityNumber("11111111110")
-                .memberType(MemberType.PERSONAL)
                 .address("Suadiye Mah. Örnek Cd. No:23, 34740 Kadıköy/İstanbul")
                 .contactName("Haluk")
                 .contactSurname("Demir")
@@ -136,6 +132,7 @@ public class OnboardingSample {
 
         MemberResponse response = craftgate.onboarding().createMember(request);
         assertNotNull(response.getId());
+        assertTrue(response.getIsBuyer());
         assertEquals(request.getMemberExternalId(), response.getMemberExternalId());
         assertEquals(request.getEmail(), response.getEmail());
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
@@ -148,24 +145,20 @@ public class OnboardingSample {
         Long memberId = 1L;
 
         UpdateMemberRequest request = UpdateMemberRequest.builder()
-                .isBuyer(true)
-                .isSubMerchant(false)
+                .name("Haluk Demir")
                 .email("haluk.demir@example.com")
                 .phoneNumber("905551111111")
-                .name("Haluk Demir")
-                .identityNumber("11111111110")
-                .memberType(MemberType.PERSONAL)
                 .address("Suadiye Mah. Örnek Cd. No:23, 34740 Kadıköy/İstanbul")
                 .contactName("Haluk")
                 .contactSurname("Demir")
                 .build();
 
         MemberResponse response = craftgate.onboarding().updateMember(memberId, request);
+        assertTrue(response.getIsBuyer());
         assertEquals(memberId, response.getId());
         assertEquals(request.getEmail(), response.getEmail());
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
         assertEquals(request.getName(), response.getName());
-        assertEquals(request.getIdentityNumber(), response.getIdentityNumber());
     }
 
     @Test

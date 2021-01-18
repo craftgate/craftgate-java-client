@@ -9,9 +9,6 @@ import lombok.Data;
 @Builder
 public class CreateMemberRequest {
 
-    private Boolean isBuyer;
-    private Boolean isSubMerchant;
-    private MemberType memberType;
     private String memberExternalId;
     private String name;
     private String address;
@@ -20,10 +17,12 @@ public class CreateMemberRequest {
     private String identityNumber;
     private String contactName;
     private String contactSurname;
+    private MemberType memberType;
     private String legalCompanyTitle;
     private String taxOffice;
     private String taxNumber;
     private String iban;
     private SettlementEarningsDestination settlementEarningsDestination;
-
+    private Boolean isBuyer;
+    private Boolean isSubMerchant;
 }
