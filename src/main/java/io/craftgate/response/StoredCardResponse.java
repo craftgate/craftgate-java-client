@@ -9,7 +9,6 @@ public class StoredCardResponse {
 
     private String binNumber;
     private String lastFourDigits;
-    private String cardHolderName;
     private String cardUserKey;
     private String cardToken;
     private String cardAlias;
