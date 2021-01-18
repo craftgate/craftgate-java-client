@@ -4,7 +4,7 @@ import io.craftgate.model.MemberType;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -18,7 +18,7 @@ public class SearchMembersRequest {
     private Boolean isBuyer;
     private Boolean isSubMerchant;
     private String name;
-    private List<Long> memberIds;
+    private Set<Long> memberIds;
     private MemberType memberType;
     private String memberExternalId;
 

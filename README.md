@@ -61,30 +61,23 @@ Let's quickly review an example where we implement a credit card payment scenari
 ```java
 Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
-List<CreatePaymentItemDto> items = new ArrayList<>();
+List<PaymentItem> items = new ArrayList<>();
 
-items.add(CreatePaymentItemDto.builder()
+items.add(PaymentItem.builder()
         .name("item 1")
-        .externalId("110948")
         .price(BigDecimal.valueOf(30))
-        .subMerchantMemberId(1L)
-        .subMerchantMemberPrice(BigDecimal.valueOf(27))
+        .externalId("110948")
         .build());
 
-items.add(CreatePaymentItemDto.builder()
+items.add(PaymentItem.builder()
         .name("item 2")
-        .externalId("110952")
         .price(BigDecimal.valueOf(50))
-        .subMerchantMemberId(2L)
-        .subMerchantMemberPrice(BigDecimal.valueOf(42))
         .build());
 
-items.add(CreatePaymentItemDto.builder()
+items.add(PaymentItem.builder()
         .name("item 3")
-        .externalId("100251")
         .price(BigDecimal.valueOf(20))
-        .subMerchantMemberId(3L)
-        .subMerchantMemberPrice(BigDecimal.valueOf(18))
+        .externalId("100251")
         .build());
 
 CreatePaymentRequest request = CreatePaymentRequest.builder()
@@ -93,8 +86,8 @@ CreatePaymentRequest request = CreatePaymentRequest.builder()
         .walletPrice(BigDecimal.ZERO)
         .installment(1)
         .currency(CurrencyCode.TRY)
-        .conversationId("asdjasdjasdfjhasd")
-        .paymentGroup(PaymentGroup.PRODUCT)
+        .conversationId("conversationId-1")
+        .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
         .paymentPhase(PaymentPhase.AUTH)
         .card(CardDto.builder()
                 .cardHolderName("Pharmacy User")
@@ -122,6 +115,7 @@ For all adapters in the `Craftgate`, their purposes, accessors, as well as direc
 | `InstallmentAdapter` | Retrieving per-installment pricing information based on installment count or BIN number | `installment()` |
 | `OnboardingAdapter` | Conducting CRUD operations on buyers and submerchants | `onboarding()` |
 | `PaymentAdapter` | Conducting payments, retrieving payment information, managing stored cards | `payment()` |
+| `WalletAdapter` | Wallet operations like send, receive remittance and search wallets or wallet transactions of member's | `wallet()` |
 
 ## License
 MIT

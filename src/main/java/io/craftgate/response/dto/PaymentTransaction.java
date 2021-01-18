@@ -26,5 +26,5 @@ public class PaymentTransaction {
     private BigDecimal subMerchantMemberPayoutAmount;
     private TransactionStatus transactionStatus;
     private LocalDateTime blockageResolvedDate;
-    private Payout convertedPayout;
+    private Payout payout;
 }

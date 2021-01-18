@@ -450,8 +450,6 @@ public class PaymentSample {
         assertEquals("525864", response.getBinNumber());
         assertEquals("0001", response.getLastFourDigits());
         assertEquals("My Other Cards", response.getCardAlias());
-        assertEquals("07", response.getExpireMonth());
-        assertEquals("2044", response.getExpireYear());
     }
 
     @Test
