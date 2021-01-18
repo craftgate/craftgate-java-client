@@ -1,8 +1,8 @@
 package io.craftgate.response;
 
-import lombok.Data;
 import io.craftgate.model.CardAssociation;
 import io.craftgate.model.CardType;
+import lombok.Data;
 
 @Data
 public class BinNumberResponse {

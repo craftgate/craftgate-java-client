@@ -14,5 +14,4 @@ public class SearchWalletsRequest {
     private Integer size = 10;
 
     private Long memberId;
-
 }

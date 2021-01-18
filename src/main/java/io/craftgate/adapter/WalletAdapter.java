@@ -2,8 +2,8 @@ package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreateRemittanceRequest;
-import io.craftgate.request.SearchWalletsRequest;
 import io.craftgate.request.SearchWalletTransactionsRequest;
+import io.craftgate.request.SearchWalletsRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.RemittanceResponse;

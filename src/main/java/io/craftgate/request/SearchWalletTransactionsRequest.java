@@ -14,5 +14,4 @@ public class SearchWalletTransactionsRequest {
     @Builder.Default
     private Integer size = 10;
     private WalletTransactionType walletTransactionType;
-
 }

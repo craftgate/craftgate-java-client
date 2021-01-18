@@ -1,9 +1,14 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
-import io.craftgate.model.*;
-import io.craftgate.request.*;
-import io.craftgate.response.*;
+import io.craftgate.model.RemittanceReasonType;
+import io.craftgate.model.RemittanceType;
+import io.craftgate.request.CreateRemittanceRequest;
+import io.craftgate.request.SearchWalletTransactionsRequest;
+import io.craftgate.request.SearchWalletsRequest;
+import io.craftgate.response.RemittanceResponse;
+import io.craftgate.response.WalletListResponse;
+import io.craftgate.response.WalletTransactionListResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -27,6 +32,7 @@ public class WalletSample {
     @Test
     void search_wallet_transactions() {
         Long walletId = 1L;
+
         SearchWalletTransactionsRequest request = SearchWalletTransactionsRequest.builder()
                 .build();
 
@@ -38,6 +44,7 @@ public class WalletSample {
     void remittance_send() {
         long memberId = 1L;
         BigDecimal price = BigDecimal.valueOf(50);
+
         CreateRemittanceRequest request = CreateRemittanceRequest.builder()
                 .memberId(memberId)
                 .price(price)
@@ -58,6 +65,7 @@ public class WalletSample {
     void remittance_receive() {
         long memberId = 1L;
         BigDecimal price = BigDecimal.valueOf(50);
+
         CreateRemittanceRequest request = CreateRemittanceRequest.builder()
                 .memberId(memberId)
                 .price(price)

@@ -13,6 +13,5 @@ import lombok.NoArgsConstructor;
 public class Response {
 
     private ErrorResponse errors;
-
     private JsonObject data;
 }

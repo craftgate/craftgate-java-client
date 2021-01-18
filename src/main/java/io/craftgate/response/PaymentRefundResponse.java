@@ -1,10 +1,10 @@
 package io.craftgate.response;
 
-import lombok.Data;
 import io.craftgate.model.Currency;
 import io.craftgate.model.RefundDestinationType;
 import io.craftgate.model.RefundStatus;
 import io.craftgate.model.RefundType;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

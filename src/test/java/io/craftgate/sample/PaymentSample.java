@@ -162,24 +162,18 @@ public class PaymentSample {
                 .name("item 1")
                 .externalId(UUID.randomUUID().toString())
                 .price(BigDecimal.valueOf(30))
-                .subMerchantMemberId(1L)
-                .subMerchantMemberPrice(BigDecimal.valueOf(27))
                 .build());
 
         items.add(PaymentItem.builder()
                 .name("item 2")
                 .externalId(UUID.randomUUID().toString())
                 .price(BigDecimal.valueOf(50))
-                .subMerchantMemberId(2L)
-                .subMerchantMemberPrice(BigDecimal.valueOf(42))
                 .build());
 
         items.add(PaymentItem.builder()
                 .name("item 3")
                 .externalId(UUID.randomUUID().toString())
                 .price(BigDecimal.valueOf(20))
-                .subMerchantMemberId(3L)
-                .subMerchantMemberPrice(BigDecimal.valueOf(18))
                 .build());
 
         CreatePaymentRequest request = CreatePaymentRequest.builder()
@@ -189,7 +183,7 @@ public class PaymentSample {
                 .installment(1)
                 .currency(Currency.TRY)
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
-                .paymentGroup(PaymentGroup.PRODUCT)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .paymentPhase(PaymentPhase.AUTH)
                 .card(Card.builder()
                         .cardHolderName("Haluk Demir")
@@ -227,7 +221,116 @@ public class PaymentSample {
     }
 
     @Test
+    void create_payment_using_stored_card() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .card(Card.builder()
+                        .cardUserKey("fac377f2-ab15-4696-88d2-5e71b27ec378")
+                        .cardToken("11a078c4-3c32-4796-90b1-51ee5517a212")
+                        .build())
+                .items(items)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(request.getPrice(), response.getPrice());
+        assertEquals(request.getPaidPrice(), response.getPaidPrice());
+        assertEquals(request.getWalletPrice(), response.getWalletPrice());
+        assertEquals(request.getCurrency(), response.getCurrency());
+        assertEquals(request.getInstallment(), response.getInstallment());
+        assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
+        assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
+        assertEquals(false, response.getIsThreeDS());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
+        assertEquals(false, response.getPaidWithStoredCard());
+        assertEquals("525864", response.getBinNumber());
+        assertEquals("0001", response.getLastFourDigits());
+        assertEquals(CardType.CREDIT_CARD, response.getCardType());
+        assertEquals(CardAssociation.MASTER_CARD, response.getCardAssociation());
+        assertEquals("World", response.getCardBrand());
+        assertEquals(3, response.getPaymentTransactions().size());
+        assertNull(response.getCardUserKey());
+        assertNull(response.getCardToken());
+    }
+
+    @Test
     void init_3DS_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        InitThreeDSPaymentRequest request = InitThreeDSPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .build())
+                .items(items)
+                .build();
+
+        InitThreeDSPaymentResponse response = craftgate.payment().init3DSPayment(request);
+        assertNotNull(response);
+        assertNotNull(response.getHtmlContent());
+        assertNotNull(response.getDecodedHtmlContent());
+    }
+
+    @Test
+    void init_3DS_marketplace_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
         items.add(PaymentItem.builder()
@@ -270,6 +373,101 @@ public class PaymentSample {
                         .expireYear("2044")
                         .expireMonth("07")
                         .cvc("000")
+                        .build())
+                .items(items)
+                .build();
+
+        InitThreeDSPaymentResponse response = craftgate.payment().init3DSPayment(request);
+        assertNotNull(response);
+        assertNotNull(response.getHtmlContent());
+        assertNotNull(response.getDecodedHtmlContent());
+    }
+
+    @Test
+    void init_3DS_payment_and_store_card() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        InitThreeDSPaymentRequest request = InitThreeDSPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .storeCardAfterSuccessPayment(true)
+                        .cardAlias("My YKB Card")
+                        .build())
+                .items(items)
+                .build();
+
+        InitThreeDSPaymentResponse response = craftgate.payment().init3DSPayment(request);
+        assertNotNull(response);
+        assertNotNull(response.getHtmlContent());
+        assertNotNull(response.getDecodedHtmlContent());
+    }
+
+    @Test
+    void init_3DS_payment_using_stored_card() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        InitThreeDSPaymentRequest request = InitThreeDSPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .card(Card.builder()
+                        .cardUserKey("fac377f2-ab15-4696-88d2-5e71b27ec378")
+                        .cardToken("11a078c4-3c32-4796-90b1-51ee5517a212")
                         .build())
                 .items(items)
                 .build();
@@ -330,7 +528,7 @@ public class PaymentSample {
     }
 
     @Test
-    void initialize_3DS_deposit_payment() {
+    void init_3DS_deposit_payment() {
         CreateDepositPaymentRequest request = CreateDepositPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
                 .buyerMemberId(1L)

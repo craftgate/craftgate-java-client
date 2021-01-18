@@ -21,7 +21,7 @@ public class OnboardingSample {
     private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
-    void create_sub_merchant_member() {
+    void create_sub_merchant() {
         CreateMemberRequest request = CreateMemberRequest.builder()
                 .isBuyer(false)
                 .isSubMerchant(true)
@@ -103,23 +103,7 @@ public class OnboardingSample {
     }
 
     @Test
-    void search_sub_merchants() {
-        Set<Long> memberIds = new HashSet<Long>() {{
-            add(1L);
-            add(2L);
-        }};
-
-        SearchMembersRequest request = SearchMembersRequest.builder()
-                .memberIds(memberIds)
-                .name("Zeytinyağı Üretim")
-                .build();
-
-        MemberListResponse response = craftgate.onboarding().searchMembers(request);
-        assertTrue(response.getItems().size() > 0);
-    }
-
-    @Test
-    void create_buyer_member() {
+    void create_buyer() {
         CreateMemberRequest request = CreateMemberRequest.builder()
                 .memberExternalId(UUID.randomUUID().toString())
                 .name("Haluk Demir")
@@ -170,7 +154,23 @@ public class OnboardingSample {
     }
 
     @Test
-    void create_sub_merchant_buyer_member() {
+    void search_members() {
+        Set<Long> memberIds = new HashSet<Long>() {{
+            add(1L);
+            add(2L);
+        }};
+
+        SearchMembersRequest request = SearchMembersRequest.builder()
+                .memberIds(memberIds)
+                .name("Zeytinyağı Üretim")
+                .build();
+
+        MemberListResponse response = craftgate.onboarding().searchMembers(request);
+        assertTrue(response.getItems().size() > 0);
+    }
+
+    @Test
+    void create_member_as_sub_merchant_and_buyer() {
         CreateMemberRequest request = CreateMemberRequest.builder()
                 .isBuyer(true)
                 .isSubMerchant(true)
@@ -204,13 +204,5 @@ public class OnboardingSample {
         assertEquals(request.getTaxNumber(), response.getTaxNumber());
         assertEquals(request.getTaxOffice(), response.getTaxOffice());
         assertEquals(request.getAddress(), response.getAddress());
-    }
-
-    @Test
-    void retrieve_sub_merchant_buyer() {
-        Long memberId = 1L;
-
-        MemberResponse response = craftgate.onboarding().retrieveMember(memberId);
-        assertEquals(memberId, response.getId());
     }
 }
