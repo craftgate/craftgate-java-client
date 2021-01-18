@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 public class MemberResponse {
 
     private Long id;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
     private Status status;
     private Boolean isBuyer;
     private Boolean isSubMerchant;

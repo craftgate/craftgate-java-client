@@ -16,6 +16,7 @@ public class RefundPaymentTransactionRequest {
 
     @Builder.Default
     private RefundDestinationType refundDestinationType = RefundDestinationType.CARD;
+
     @Builder.Default
     private Boolean chargeFromMe = false;
 }

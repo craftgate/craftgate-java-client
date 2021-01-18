@@ -13,6 +13,7 @@ public class RefundPaymentRequest {
 
     @Builder.Default
     private RefundDestinationType refundDestinationType = RefundDestinationType.CARD;
+
     @Builder.Default
     private Boolean chargeFromMe = false;
 }

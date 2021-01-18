@@ -1,7 +1,7 @@
 package io.craftgate.response;
 
-import lombok.Data;
 import io.craftgate.response.dto.PaymentTransactionApproval;
+import lombok.Data;
 
 import java.util.List;
 

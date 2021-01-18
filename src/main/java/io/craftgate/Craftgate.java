@@ -47,5 +47,4 @@ public class Craftgate {
     public WalletAdapter wallet() {
         return walletAdapter;
     }
-
 }

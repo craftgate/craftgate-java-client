@@ -1,8 +1,8 @@
 package io.craftgate.response.dto;
 
+import io.craftgate.model.Currency;
 import lombok.Builder;
 import lombok.Data;
-import io.craftgate.model.Currency;
 
 import java.math.BigDecimal;
 

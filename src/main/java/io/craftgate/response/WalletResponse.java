@@ -15,5 +15,4 @@ public class WalletResponse {
     private BigDecimal amount;
     private Currency currency;
     private Long memberId;
-
 }

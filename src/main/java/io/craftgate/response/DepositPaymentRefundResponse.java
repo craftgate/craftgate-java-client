@@ -18,5 +18,4 @@ public class DepositPaymentRefundResponse {
     private RefundType refundType;
     private BigDecimal refundPrice;
     private LocalDateTime createdDate;
-
 }

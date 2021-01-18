@@ -1,8 +1,8 @@
 package io.craftgate.response.dto;
 
-import lombok.Data;
 import io.craftgate.model.CardAssociation;
 import io.craftgate.model.CardType;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;

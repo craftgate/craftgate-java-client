@@ -21,5 +21,4 @@ public class SearchMembersRequest {
     private Set<Long> memberIds;
     private MemberType memberType;
     private String memberExternalId;
-
 }

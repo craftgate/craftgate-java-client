@@ -15,5 +15,4 @@ public class WalletTransactionResponse {
     private BigDecimal amount;
     private Long transactionId;
     private Long walletId;
-
 }

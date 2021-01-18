@@ -1,7 +1,7 @@
 package io.craftgate.response.dto;
 
-import lombok.Data;
 import io.craftgate.model.ApprovalStatus;
+import lombok.Data;
 
 @Data
 public class PaymentTransactionApproval {

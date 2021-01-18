@@ -11,5 +11,4 @@ public class RefundDepositPaymentRequest {
 
     private BigDecimal price;
     private String conversationId;
-
 }
