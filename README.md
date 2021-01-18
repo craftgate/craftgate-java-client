@@ -27,7 +27,7 @@ implementation("io.craftgate:craftgate:0.0.1")
 ```
 
 ## Usage
-To access the Craftgate API you'll first need to obtain API credentials (e.g. an API key and a secret key). If you don't already have a Craftgate account, you can signup at [https://craftgate.io/](https://craftgate.io)
+To access the Craftgate API you'll first need to obtain API credentials (e.g. an API key and a secret key). If you don't already have a Craftgate account, you can signup at [https://craftgate.io](https://craftgate.io)
 
 Once you've obtained your API credentials, you can start using Craftgate by instantiating a `Craftgate` with your credentials.
 
@@ -65,19 +65,20 @@ List<PaymentItem> items = new ArrayList<>();
 
 items.add(PaymentItem.builder()
         .name("item 1")
+        .externalId(UUID.randomUUID().toString())
         .price(BigDecimal.valueOf(30))
-        .externalId("110948")
         .build());
 
 items.add(PaymentItem.builder()
         .name("item 2")
+        .externalId(UUID.randomUUID().toString())
         .price(BigDecimal.valueOf(50))
         .build());
 
 items.add(PaymentItem.builder()
         .name("item 3")
+        .externalId(UUID.randomUUID().toString())
         .price(BigDecimal.valueOf(20))
-        .externalId("100251")
         .build());
 
 CreatePaymentRequest request = CreatePaymentRequest.builder()
@@ -85,22 +86,22 @@ CreatePaymentRequest request = CreatePaymentRequest.builder()
         .paidPrice(BigDecimal.valueOf(100))
         .walletPrice(BigDecimal.ZERO)
         .installment(1)
-        .currency(CurrencyCode.TRY)
-        .conversationId("conversationId-1")
+        .currency(Currency.TRY)
+        .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
         .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
         .paymentPhase(PaymentPhase.AUTH)
-        .card(CardDto.builder()
-                .cardHolderName("Pharmacy User")
-                .cardNumber("5406670000000009")
-                .expireYear("2035")
-                .expireMonth("11")
-                .cvc("123")
+        .card(Card.builder()
+                .cardHolderName("Haluk Demir")
+                .cardNumber("5258640000000001")
+                .expireYear("2044")
+                .expireMonth("07")
+                .cvc("000")
                 .build())
         .items(items)
         .build();
 
-PaymentResponse paymentResponse = craftgate.payment().createPayment(request);
-System.out.println(String.format("Create Payment Result: %s", paymentResponse));
+PaymentResponse response = craftgate.payment().createPayment(request);
+System.out.println(String.format("Create Payment Result: %s", response));
 ```
 
 ### Advanced Usage: Adapters
