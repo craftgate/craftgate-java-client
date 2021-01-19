@@ -270,7 +270,7 @@ public class PaymentSample {
         assertEquals(false, response.getIsThreeDS());
         assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
         assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
-        assertEquals(false, response.getPaidWithStoredCard());
+        assertEquals(true, response.getPaidWithStoredCard());
         assertEquals("525864", response.getBinNumber());
         assertEquals("0001", response.getLastFourDigits());
         assertEquals(CardType.CREDIT_CARD, response.getCardType());
