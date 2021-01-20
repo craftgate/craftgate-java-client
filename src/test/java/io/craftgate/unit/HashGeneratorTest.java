@@ -11,7 +11,7 @@ public class HashGeneratorTest {
     @Test
     void should_generate_hash() {
         //given
-        String expectedSignature = "QQO5OHUUCNZHD9SJC3RFDQBHHX1UQQIWSJYL3XOQAYA=";
+        String expectedSignature = "QQO5oHUUcNzHd9Sjc3RfDQbhHX1UqQiWsjYL3xoQaYA=";
         CreateMemberRequest request = CreateMemberRequest.builder()
                 .memberExternalId("ext-1511")
                 .email("haluk.demir@example.com")
@@ -31,7 +31,7 @@ public class HashGeneratorTest {
     @Test
     void should_generate_hash_when_request_body_null() {
         //given
-        String expectedSignature = "LECLRGZXO5U+OQ3V33VIQTBLU2FOPBIH78KQ6WJWNDQ=";
+        String expectedSignature = "lecLrGZXo5u+Oq3V33vIqtbLU2fopbiH78kq6wjWNDQ=";
 
         //when
         String signature = HashGenerator.generateHash("http://api.craftgate.io", "api-key", "secret-key",

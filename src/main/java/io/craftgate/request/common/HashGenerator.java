@@ -15,7 +15,7 @@ public final class HashGenerator {
 
     public static String generateHash(String baseUrl, String apiKey, String secretKey, String randomString, Object request, String path) {
         try {
-            String hashData = "";
+            String hashData;
             String decodedUrl = URLDecoder.decode(baseUrl + path, StandardCharsets.UTF_8.toString());
 
             if (request != null) {
@@ -26,7 +26,7 @@ public final class HashGenerator {
                 hashData = decodedUrl + apiKey + secretKey + randomString;
             }
 
-            return Base64.encodeBase64String(DigestUtils.sha256(hashData)).toUpperCase();
+            return Base64.encodeBase64String(DigestUtils.sha256(hashData));
         } catch (Exception e) {
             throw new CraftgateException(e);
         }
