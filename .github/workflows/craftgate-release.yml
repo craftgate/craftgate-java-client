@@ -27,4 +27,11 @@ jobs:
 
       - name: Build and Publish with Gradle
         run: openssl enc -aes-256-cbc -md sha256 -pass pass:${{secrets.ENC_KEY}} -d -A -in craftgate.gpg.enc -out craftgate.gpg &&
-            ./gradlew clean publish -Pversion=${{github.event.release.tag_name}} -PrepoUser=${{secrets.NEXUS_USER}} -PrepoPassword=${{secrets.NEXUS_PASSWORD}} -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}}
+            ./gradlew clean publish
+          -Dorg.gradle.internal.http.socketTimeout=120000 \
+          -Dorg.gradle.internal.http.connectionTimeout=120000 \
+          -Pversion=${{github.event.release.tag_name}} \
+          -PrepoUser=${{secrets.NEXUS_USER}}\
+          -PrepoPassword=${{secrets.NEXUS_PASSWORD}} \
+          -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} \
+          -Psigning.password=${{secrets.SIGNING_PASSWORD}} \
