@@ -1,10 +1,10 @@
 package io.craftgate.response;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
+@Builder
 public class InitCheckoutPaymentResponse {
 
     protected String token;

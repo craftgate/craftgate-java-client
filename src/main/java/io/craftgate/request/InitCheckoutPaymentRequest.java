@@ -6,13 +6,12 @@ import io.craftgate.model.PaymentPhase;
 import io.craftgate.request.dto.PaymentItem;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-@SuperBuilder
+@Builder
 public class InitCheckoutPaymentRequest {
 
     protected BigDecimal price;
