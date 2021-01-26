@@ -489,6 +489,58 @@ public class PaymentSample {
     }
 
     @Test
+    void init_checkout_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        InitCheckoutPaymentRequest request = InitCheckoutPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .buyerMemberId(1L)
+                .installment(1)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .items(items)
+                .build();
+
+        InitCheckoutPaymentResponse response = craftgate.payment().initCheckoutPayment(request);
+
+        assertNotNull(response);
+        assertNotNull(response.getPageUrl());
+        assertNotNull(response.getToken());
+    }
+
+    @Test
+    void retrieve_checkout_payment() {
+        String token = "456d1297-908e-4bd6-a13b-4be31a6e47d5";
+
+        PaymentResponse response = craftgate.payment().retrieveCheckoutPayment(token);
+
+        assertNotNull(response);
+    }
+
+    @Test
     void create_deposit_payment() {
         CreateDepositPaymentRequest request = CreateDepositPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
