@@ -514,7 +514,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(100))
                 .paidPrice(BigDecimal.valueOf(100))
                 .walletPrice(BigDecimal.ZERO)
-                .buyerMemberId(4L)
+                .buyerMemberId(1L)
                 .installment(1)
                 .callbackUrl("https://www.your-website.com/craftgate-checkout-callback")
                 .currency(Currency.TRY)
