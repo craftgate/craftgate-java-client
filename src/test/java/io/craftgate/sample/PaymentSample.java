@@ -516,7 +516,7 @@ public class PaymentSample {
                 .walletPrice(BigDecimal.ZERO)
                 .buyerMemberId(1L)
                 .installment(1)
-                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .callbackUrl("https://www.your-website.com/craftgate-checkout-callback")
                 .currency(Currency.TRY)
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
