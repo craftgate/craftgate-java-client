@@ -36,13 +36,13 @@ public class PaymentAdapter extends BaseAdapter {
     }
 
     public InitCheckoutPaymentResponse initCheckoutPayment(InitCheckoutPaymentRequest initCheckoutPaymentRequest) {
-        String path = "/payment/v1/checkout-payment/init";
+        String path = "/payment/v1/checkout-payments/init";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initCheckoutPaymentRequest, path, requestOptions),
                 initCheckoutPaymentRequest, InitCheckoutPaymentResponse.class);
     }
 
     public PaymentResponse retrieveCheckoutPayment(String token) {
-        String path = "/payment/v1/checkout-payment?token=" + token;
+        String path = "/payment/v1/checkout-payments?token=" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
 
