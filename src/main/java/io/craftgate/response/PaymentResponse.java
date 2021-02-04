@@ -2,6 +2,7 @@ package io.craftgate.response;
 
 import io.craftgate.model.*;
 import io.craftgate.response.dto.MerchantPos;
+import io.craftgate.response.dto.PaymentError;
 import io.craftgate.response.dto.PaymentTransaction;
 import lombok.Data;
 
@@ -37,5 +38,6 @@ public class PaymentResponse {
     private CardAssociation cardAssociation;
     private String cardBrand;
     private MerchantPos pos;
+    private PaymentError paymentError;
     private List<PaymentTransaction> paymentTransactions;
 }
