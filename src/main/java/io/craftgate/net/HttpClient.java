@@ -21,8 +21,8 @@ public class HttpClient {
     private static final String APPLICATION_JSON = "application/json";
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String ACCEPT = "Accept";
-    private static final int CONNECT_TIMEOUT = 15000;
-    private static final int READ_TIMEOUT = 140000;
+    private static final int CONNECT_TIMEOUT = 10000;
+    private static final int READ_TIMEOUT = 150000;
     private static final Gson gson = buildGson();
 
     private HttpClient() {
