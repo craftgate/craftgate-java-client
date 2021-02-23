@@ -14,6 +14,9 @@ public class DepositPaymentRefundResponse {
     private Long paymentId;
     private String currency;
     private RefundStatus status;
+    private String authCode;
+    private String hostReference;
+    private String transId;
     private String conversationId;
     private RefundType refundType;
     private BigDecimal refundPrice;

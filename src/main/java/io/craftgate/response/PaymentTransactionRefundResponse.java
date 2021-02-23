@@ -19,6 +19,9 @@ public class PaymentTransactionRefundResponse {
     private BigDecimal refundPrice;
     private BigDecimal refundBankPrice;
     private BigDecimal refundWalletPrice;
+    private String authCode;
+    private String hostReference;
+    private String transId;
     private Currency currency;
     private Long paymentTransactionId;
     private Long paymentId;

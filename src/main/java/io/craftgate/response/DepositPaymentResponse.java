@@ -15,6 +15,10 @@ public class DepositPaymentResponse {
     private String currency;
     private Long buyerMemberId;
     private String conversationId;
+    private String authCode;
+    private String hostReference;
+    private String transId;
+    private String orderId;
     private PaymentType paymentType;
     private LocalDateTime createdDate;
     private PaymentStatus paymentStatus;
