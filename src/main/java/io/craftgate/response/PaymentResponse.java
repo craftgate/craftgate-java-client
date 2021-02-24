@@ -34,6 +34,10 @@ public class PaymentResponse {
     private Boolean paidWithStoredCard;
     private String binNumber;
     private String lastFourDigits;
+    private String authCode;
+    private String hostReference;
+    private String transId;
+    private String orderId;
     private CardType cardType;
     private CardAssociation cardAssociation;
     private String cardBrand;
