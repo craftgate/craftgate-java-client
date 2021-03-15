@@ -2,6 +2,6 @@ package io.craftgate.model;
 
 public enum RemittanceReasonType {
 
-    REMITTANCE,
-    LOYALTY
+    SUBMERCHANT_SEND_RECEIVE,
+    REDEEM_ONLY_LOYALTY
 }
