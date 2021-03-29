@@ -16,14 +16,9 @@ public class InitCheckoutPaymentRequest {
 
     protected BigDecimal price;
     protected BigDecimal paidPrice;
-
-    @Builder.Default
-    protected BigDecimal walletPrice = BigDecimal.ZERO;
-
     protected Currency currency;
     protected PaymentGroup paymentGroup;
     protected String conversationId;
-    protected Integer installment;
     protected String callbackUrl;
 
     @Builder.Default
