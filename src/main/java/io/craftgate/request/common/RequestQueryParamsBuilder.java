@@ -28,7 +28,7 @@ public class RequestQueryParamsBuilder {
                 Object value = field.get(object);
 
                 if (Objects.nonNull(value)) {
-                    query.append(field.getName()).append("=").append(URLEncoder.encode(formatValue(value))).append("&");
+                    query.append(field.getName()).append("=").append(URLEncoder.encode(formatValue(value), "UTF-8")).append("&");
                 }
             }
 
@@ -38,6 +38,7 @@ public class RequestQueryParamsBuilder {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static String formatValue(Object value) {
         if (value instanceof LocalDateTime) return formatDateValue((LocalDateTime) value);
         if (value instanceof Collection) return formatCollectionValue((Collection<Object>) value);
