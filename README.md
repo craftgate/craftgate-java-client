@@ -9,21 +9,23 @@ This repo contains the Java client for Craftgate API.
 - Java 1.8 or newer
 
 ## Installation
+Please replace LATEST_VERSION placeholder with [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.craftgate/craftgate/badge.svg?style=for-the-badge)](https://maven-badges.herokuapp.com/maven-central/io.craftgate/craftgate)
+
 Apache Maven:
 ```bash
 <dependency>
   <groupId>io.craftgate</groupId>
   <artifactId>craftgate</artifactId>
-  <version>1.0.3</version>
+  <version>{LATEST_VERSION}</version>
 </dependency>
 ```
 Gradle Groovy DSL
 ```
-implementation 'io.craftgate:craftgate:1.0.3'
+implementation 'io.craftgate:craftgate:{LATEST_VERSION}'
 ```
 Gradle Kotlin DSL
 ```
-implementation("io.craftgate:craftgate:1.0.3")
+implementation("io.craftgate:craftgate:{LATEST_VERSION}")
 ```
 
 ## Usage
