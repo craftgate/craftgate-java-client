@@ -27,5 +27,6 @@ public class InitCheckoutPaymentRequest {
     protected String cardUserKey;
 
     protected Long buyerMemberId;
+    protected List<Integer> enabledInstallments;
     protected List<PaymentItem> items;
 }
