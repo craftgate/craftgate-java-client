@@ -1,9 +1,6 @@
 package io.craftgate;
 
-import io.craftgate.adapter.InstallmentAdapter;
-import io.craftgate.adapter.OnboardingAdapter;
-import io.craftgate.adapter.PaymentAdapter;
-import io.craftgate.adapter.WalletAdapter;
+import io.craftgate.adapter.*;
 import io.craftgate.request.common.RequestOptions;
 
 public class Craftgate {
@@ -14,6 +11,7 @@ public class Craftgate {
     private final InstallmentAdapter installmentAdapter;
     private final OnboardingAdapter onboardingAdapter;
     private final WalletAdapter walletAdapter;
+    private final SettlementReportingAdapter settlementReportingAdapter;
 
     public Craftgate(String apiKey, String secretKey) {
         this(apiKey, secretKey, BASE_URL);
@@ -30,6 +28,7 @@ public class Craftgate {
         this.installmentAdapter = new InstallmentAdapter(requestOptions);
         this.onboardingAdapter = new OnboardingAdapter(requestOptions);
         this.walletAdapter = new WalletAdapter(requestOptions);
+        this.settlementReportingAdapter = new SettlementReportingAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
@@ -46,5 +45,9 @@ public class Craftgate {
 
     public WalletAdapter wallet() {
         return walletAdapter;
+    }
+
+    public SettlementReportingAdapter settlementReporting() {
+        return settlementReportingAdapter;
     }
 }
