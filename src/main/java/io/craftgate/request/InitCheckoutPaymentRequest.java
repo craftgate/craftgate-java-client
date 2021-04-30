@@ -29,5 +29,6 @@ public class InitCheckoutPaymentRequest {
     protected Long buyerMemberId;
     protected List<Integer> enabledInstallments;
     protected boolean allowOnlyStoredCards;
+    protected boolean allowOnlyCreditCard;
     protected List<PaymentItem> items;
 }
