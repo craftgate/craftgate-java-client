@@ -28,6 +28,6 @@ public class InitCheckoutPaymentRequest {
 
     protected Long buyerMemberId;
     protected List<Integer> enabledInstallments;
-    protected boolean alwaysSaveCardAfterPayment;
+    protected boolean alwaysStoreCardAfterPayment;
     protected List<PaymentItem> items;
 }
