@@ -23,13 +23,13 @@ public class InstallmentSample {
         String binNumber = "525864";
 
         BinNumberResponse response = craftgate.installment().retrieveBinNumber(binNumber);
-        assertEquals(response.getBinNumber(), binNumber);
-        assertEquals(response.getCardType(), CardType.CREDIT_CARD);
-        assertEquals(response.getCardAssociation(), CardAssociation.MASTER_CARD);
-        assertEquals(response.getCardBrand(), "World");
-        assertEquals(response.getBankName(), "YAPI VE KREDİ BANKASI A.Ş.");
-        assertEquals(response.getBankCode(), 67L);
-        assertEquals(response.getCommercial(), false);
+        assertEquals(binNumber, response.getBinNumber());
+        assertEquals(CardType.CREDIT_CARD, response.getCardType());
+        assertEquals(CardAssociation.MASTER_CARD, response.getCardAssociation());
+        assertEquals("World", response.getCardBrand());
+        assertEquals("YAPI VE KREDİ BANKASI A.Ş.", response.getBankName());
+        assertEquals(67L, response.getBankCode());
+        assertEquals(false, response.getCommercial());
     }
 
     @Test
