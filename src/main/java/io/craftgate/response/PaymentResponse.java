@@ -22,6 +22,7 @@ public class PaymentResponse {
     private Long buyerMemberId;
     private Integer installment;
     private String conversationId;
+    private String externalId;
     private PaymentType paymentType;
     private PaymentGroup paymentGroup;
     private PaymentStatus paymentStatus;

@@ -1,6 +1,7 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
+import io.craftgate.model.Currency;
 import io.craftgate.model.*;
 import io.craftgate.request.*;
 import io.craftgate.request.dto.Card;
@@ -9,10 +10,7 @@ import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -184,6 +182,7 @@ public class PaymentSample {
                 .installment(1)
                 .currency(Currency.TRY)
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("external_id-123456789")
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .paymentPhase(PaymentPhase.AUTH)
                 .card(Card.builder()
@@ -207,6 +206,8 @@ public class PaymentSample {
         assertEquals(request.getInstallment(), response.getInstallment());
         assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
         assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
+        assertEquals(request.getConversationId(), response.getConversationId());
+        assertEquals(request.getExternalId(), response.getExternalId());
         assertEquals(false, response.getIsThreeDS());
         assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
         assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
@@ -278,6 +279,74 @@ public class PaymentSample {
         assertEquals(CardAssociation.MASTER_CARD, response.getCardAssociation());
         assertEquals("World", response.getCardBrand());
         assertEquals(3, response.getPaymentTransactions().size());
+        assertNull(response.getCardUserKey());
+        assertNull(response.getCardToken());
+    }
+
+    @Test
+    void create_payment_using_external_payment_provider_stored_card() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        Map<String, Map<String, Object>> additionalParams = new HashMap<>();
+        Map<String, Object> paymentProviderParams = new HashMap<String, Object>() {{
+            put("cardUserKey", "test-cardUserKey");
+            put("cardToken", "tuz8imxv30");
+        }};
+        additionalParams.put("paymentProvider", paymentProviderParams);
+
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .posAlias("6007-posAlias-1")
+                .installment(1)
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("external_id-123456789")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .items(items)
+                .additionalParams(additionalParams)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(request.getPrice(), response.getPrice());
+        assertEquals(request.getPaidPrice(), response.getPaidPrice());
+        assertEquals(request.getWalletPrice(), response.getWalletPrice());
+        assertEquals(request.getCurrency(), response.getCurrency());
+        assertEquals(request.getInstallment(), response.getInstallment());
+        assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
+        assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
+        assertEquals(request.getExternalId(), response.getExternalId());
+        assertEquals(false, response.getIsThreeDS());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
+        assertEquals(false, response.getPaidWithStoredCard());
+        assertEquals(3, response.getPaymentTransactions().size());
+        assertNull(response.getBinNumber());
+        assertNull(response.getLastFourDigits());
+        assertNull(response.getCardType());
+        assertNull(response.getCardAssociation());
+        assertNull(response.getCardBrand());
         assertNull(response.getCardUserKey());
         assertNull(response.getCardToken());
     }

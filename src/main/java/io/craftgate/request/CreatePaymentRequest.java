@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @SuperBuilder
@@ -27,6 +28,7 @@ public class CreatePaymentRequest {
     protected Currency currency;
     protected PaymentGroup paymentGroup;
     protected String conversationId;
+    protected String externalId;
 
     @Builder.Default
     protected PaymentPhase paymentPhase = PaymentPhase.AUTH;
@@ -34,4 +36,5 @@ public class CreatePaymentRequest {
     protected Long buyerMemberId;
     protected Card card;
     protected List<PaymentItem> items;
+    protected Map<String, Map<String, Object>> additionalParams;
 }
