@@ -5,9 +5,9 @@ import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentStatus;
 import io.craftgate.model.PaymentType;
 import io.craftgate.model.RefundStatus;
+import io.craftgate.request.SearchPaymentRefundsRequest;
+import io.craftgate.request.SearchPaymentTransactionRefundsRequest;
 import io.craftgate.request.SearchPaymentsRequest;
-import io.craftgate.request.SearchRefundTransactionsRequest;
-import io.craftgate.request.SearchRefundsRequest;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,6 @@ public class PaymentReportingSample {
                 .buyerMemberId(1L)
                 .conversationId("conversationId")
                 .externalId("externalId")
-                .merchantPosId(1L)
                 .orderId("orderId")
                 .paymentType(PaymentType.CARD_PAYMENT)
                 .paymentStatus(PaymentStatus.SUCCESS)
@@ -45,7 +44,7 @@ public class PaymentReportingSample {
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 
-        PaymentReportingListResponse response = craftgate.paymentReporting().searchPayments(searchPaymentsRequest);
+        ReportingPaymentListResponse response = craftgate.paymentReporting().searchPayments(searchPaymentsRequest);
         assertTrue(response.getItems().size() > 0);
     }
 
@@ -53,7 +52,7 @@ public class PaymentReportingSample {
     void retrieve_payment() {
         long paymentId = 1L;
 
-        PaymentReportingResponse response = craftgate.paymentReporting().retrievePayment(paymentId);
+        ReportingPaymentResponse response = craftgate.paymentReporting().retrievePayment(paymentId);
 
         assertEquals(paymentId, response.getId());
         assertNotNull(response.getPrice());
@@ -67,7 +66,7 @@ public class PaymentReportingSample {
     void retrieve_payment_transactions() {
         long paymentId = 1L;
 
-        PaymentTransactionListResponse response = craftgate.paymentReporting().retrievePaymentTransactions(paymentId);
+        ReportingPaymentTransactionListResponse response = craftgate.paymentReporting().retrievePaymentTransactions(paymentId);
 
         assertTrue(response.getItems().size() > 0);
     }
@@ -76,7 +75,7 @@ public class PaymentReportingSample {
     void retrieve_payment_refunds() {
         long paymentId = 1L;
 
-        PaymentRefundReportingListResponse response = craftgate.paymentReporting().retrievePaymentRefunds(paymentId);
+        ReportingPaymentRefundListResponse response = craftgate.paymentReporting().retrievePaymentRefunds(paymentId);
 
         assertTrue(response.getItems().size() > 0);
     }
@@ -86,21 +85,20 @@ public class PaymentReportingSample {
         long paymentId = 1L;
         long paymentTransactionId = 100L;
 
-        PaymentTransactionRefundReportingListResponse response = craftgate.paymentReporting().retrievePaymentTransactionRefunds(paymentId, paymentTransactionId);
+        ReportingPaymentTransactionRefundListResponse response = craftgate.paymentReporting().retrievePaymentTransactionRefunds(paymentId, paymentTransactionId);
 
         assertTrue(response.getItems().size() > 0);
     }
 
     @Test
     void search_payment_refunds() {
-        SearchRefundsRequest searchRefundsRequest = SearchRefundsRequest.builder()
+        SearchPaymentRefundsRequest searchPaymentRefundsRequest = SearchPaymentRefundsRequest.builder()
                 .page(0)
                 .size(10)
                 .id(1L)
                 .paymentId(100L)
                 .buyerMemberId(1L)
                 .conversationId("conversationId")
-                .merchantPosId(1L)
                 .refundStatus(RefundStatus.SUCCESS)
                 .currency(Currency.TRY)
                 .minRefundPrice(BigDecimal.ZERO)
@@ -109,13 +107,13 @@ public class PaymentReportingSample {
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 
-        PaymentRefundSearchListResponse response = craftgate.paymentReporting().searchPaymentRefunds(searchRefundsRequest);
+        ReportingSearchPaymentRefundListResponse response = craftgate.paymentReporting().searchPaymentRefunds(searchPaymentRefundsRequest);
         assertTrue(response.getItems().size() > 0);
     }
 
     @Test
     void search_payment_transaction_refunds() {
-        SearchRefundTransactionsRequest searchPaymentTransactionRefundsRequest = SearchRefundTransactionsRequest.builder()
+        SearchPaymentTransactionRefundsRequest searchPaymentTransactionRefundsRequest = SearchPaymentTransactionRefundsRequest.builder()
                 .page(0)
                 .size(10)
                 .id(1L)
@@ -123,7 +121,6 @@ public class PaymentReportingSample {
                 .paymentTransactionId(1000L)
                 .buyerMemberId(1L)
                 .conversationId("conversationId")
-                .merchantPosId(1L)
                 .refundStatus(RefundStatus.SUCCESS)
                 .currency(Currency.TRY)
                 .minRefundPrice(BigDecimal.ZERO)
@@ -133,7 +130,7 @@ public class PaymentReportingSample {
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 
-        PaymentTransactionRefundSearchListResponse response = craftgate.paymentReporting().searchPaymentTransactionRefunds(searchPaymentTransactionRefundsRequest);
+        ReportingSearchPaymentTransactionRefundListResponse response = craftgate.paymentReporting().searchPaymentTransactionRefunds(searchPaymentTransactionRefundsRequest);
         assertTrue(response.getItems().size() > 0);
     }
 }

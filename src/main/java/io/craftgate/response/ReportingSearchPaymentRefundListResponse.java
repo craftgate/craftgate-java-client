@@ -6,5 +6,5 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class PaymentTransactionRefundSearchListResponse extends ListResponse<PaymentTransactionRefundSearchResponse> {
+public class ReportingSearchPaymentRefundListResponse extends ListResponse<ReportingSearchPaymentRefundResponse> {
 }

@@ -21,7 +21,6 @@ public class SearchPaymentsRequest {
     private Long buyerMemberId;
     private String conversationId;
     private String externalId;
-    private Long merchantPosId;
     private String orderId;
     private PaymentType paymentType;
     private PaymentStatus paymentStatus;

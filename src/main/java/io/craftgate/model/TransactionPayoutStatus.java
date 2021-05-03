@@ -1,6 +1,6 @@
 package io.craftgate.model;
 
-public enum PayoutStatus {
+public enum TransactionPayoutStatus {
 
     CANCELLED,
     WAITING_FOR_PAYOUT,
