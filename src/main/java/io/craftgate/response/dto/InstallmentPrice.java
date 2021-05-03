@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Builder
 public class InstallmentPrice {
 
+    private String posAlias;
     private Integer installmentNumber;
     private BigDecimal installmentPrice;
     private BigDecimal totalPrice;

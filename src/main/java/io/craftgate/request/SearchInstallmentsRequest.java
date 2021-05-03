@@ -13,4 +13,5 @@ public class SearchInstallmentsRequest {
     private String binNumber;
     private BigDecimal price;
     private Currency currency;
+    private boolean distinctCardBrandsWithLowestCommissions;
 }

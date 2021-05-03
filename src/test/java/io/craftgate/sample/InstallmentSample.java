@@ -43,4 +43,17 @@ public class InstallmentSample {
         InstallmentListResponse response = craftgate.installment().searchInstallments(request);
         assertTrue(response.getItems().size() > 0);
     }
+
+    @Test
+    void search_installments_with_distinct_card_brand_with_lowest_commissions() {
+        SearchInstallmentsRequest request = SearchInstallmentsRequest.builder()
+                .binNumber("525864")
+                .price(BigDecimal.valueOf(100L))
+                .currency(Currency.TRY)
+                .distinctCardBrandsWithLowestCommissions(true)
+                .build();
+
+        InstallmentListResponse response = craftgate.installment().searchInstallments(request);
+        assertTrue(response.getItems().size() > 0);
+    }
 }
