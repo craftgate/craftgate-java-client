@@ -121,6 +121,7 @@ For all adapters in the `Craftgate`, their purposes, accessors, as well as direc
 | `PaymentAdapter` | Conducting payments, retrieving payment information, managing stored cards | `payment()` |
 | `WalletAdapter` | Wallet operations like send, receive remittance and search wallets or wallet transactions of member's | `wallet()` |
 | `SettlementReportingAdapter` | Settlement operations like search payout completed transactions, search bounced payout transactions | `settlementReporting()` |
+| `SettlementAdapter` | Settlement operations like create instant wallet settlement | `settlement()` |
 
 ### Contributions
 
