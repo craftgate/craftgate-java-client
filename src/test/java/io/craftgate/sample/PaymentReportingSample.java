@@ -36,11 +36,11 @@ public class PaymentReportingSample {
                 .binNumber("123456")
                 .lastFourDigits("1234")
                 .currency(Currency.TRY)
-                .minPaidPrice(BigDecimal.ZERO)
+                .minPaidPrice(BigDecimal.ONE)
                 .maxPaidPrice(BigDecimal.valueOf(100))
                 .installment(1)
                 .isThreeDS(false)
-                .minCreatedDate(LocalDateTime.MIN)
+                .minCreatedDate(LocalDateTime.now().minusDays(30L))
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 
@@ -101,9 +101,9 @@ public class PaymentReportingSample {
                 .conversationId("conversationId")
                 .refundStatus(RefundStatus.SUCCESS)
                 .currency(Currency.TRY)
-                .minRefundPrice(BigDecimal.ZERO)
+                .minRefundPrice(BigDecimal.ONE)
                 .maxRefundPrice(BigDecimal.valueOf(100))
-                .minCreatedDate(LocalDateTime.MIN)
+                .minCreatedDate(LocalDateTime.now().minusDays(30))
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 
@@ -123,10 +123,10 @@ public class PaymentReportingSample {
                 .conversationId("conversationId")
                 .refundStatus(RefundStatus.SUCCESS)
                 .currency(Currency.TRY)
-                .minRefundPrice(BigDecimal.ZERO)
+                .minRefundPrice(BigDecimal.ONE)
                 .maxRefundPrice(BigDecimal.valueOf(100))
                 .isAfterSettlement(false)
-                .minCreatedDate(LocalDateTime.MIN)
+                .minCreatedDate(LocalDateTime.now().minusDays(30))
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 

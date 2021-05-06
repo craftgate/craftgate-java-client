@@ -12,7 +12,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class ReportingPaymentResponse extends BasePaymentResponse {
 
-    private String externalId;
     private Integer retryCount;
     private BigDecimal refundablePrice;
     private PaymentRefundStatus refundStatus;
@@ -21,5 +20,6 @@ public class ReportingPaymentResponse extends BasePaymentResponse {
     private Integer mdStatus;
     private BigDecimal bankCommissionRate;
     private BigDecimal bankCommissionRateAmount;
+    private MemberResponse buyerMember;
     private List<ReportingPaymentRefundResponse> refunds;
 }

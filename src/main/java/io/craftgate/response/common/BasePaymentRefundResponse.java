@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 public class BasePaymentRefundResponse {
 
     private Long id;
-    private String conversationId;
     private LocalDateTime createdDate;
     private RefundStatus status;
     private RefundDestinationType refundDestinationType;
     private BigDecimal refundPrice;
     private BigDecimal refundBankPrice;
     private BigDecimal refundWalletPrice;
+    private String conversationId;
     private String authCode;
     private String hostReference;
     private String transId;
