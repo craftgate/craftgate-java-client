@@ -10,6 +10,5 @@ import lombok.EqualsAndHashCode;
 public class PaymentTransactionRefundResponse extends BasePaymentTransactionRefundResponse {
 
     private Currency currency;
-    private Long paymentTransactionId;
     private Long paymentId;
 }

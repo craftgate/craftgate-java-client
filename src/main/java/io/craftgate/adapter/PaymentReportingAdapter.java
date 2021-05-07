@@ -40,15 +40,15 @@ public class PaymentReportingAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingPaymentTransactionRefundListResponse.class);
     }
 
-    public ReportingSearchPaymentRefundListResponse searchPaymentRefunds(SearchPaymentRefundsRequest searchPaymentRefundsRequest) {
+    public ReportingPaymentRefundListResponse searchPaymentRefunds(SearchPaymentRefundsRequest searchPaymentRefundsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPaymentRefundsRequest);
         String path = "/payment-reporting/v1/refunds" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingSearchPaymentRefundListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingPaymentRefundListResponse.class);
     }
 
-    public ReportingSearchPaymentTransactionRefundListResponse searchPaymentTransactionRefunds(SearchPaymentTransactionRefundsRequest searchPaymentTransactionRefundsRequest) {
+    public ReportingPaymentTransactionRefundListResponse searchPaymentTransactionRefunds(SearchPaymentTransactionRefundsRequest searchPaymentTransactionRefundsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPaymentTransactionRefundsRequest);
         String path = "/payment-reporting/v1/refund-transactions" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingSearchPaymentTransactionRefundListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingPaymentTransactionRefundListResponse.class);
     }
 }

@@ -19,7 +19,7 @@ public class SearchPaymentTransactionRefundsRequest {
     private Long paymentTransactionId;
     private Long buyerMemberId;
     private String conversationId;
-    private RefundStatus refundStatus;
+    private RefundStatus status;
     private Currency currency;
     private BigDecimal minRefundPrice;
     private BigDecimal maxRefundPrice;

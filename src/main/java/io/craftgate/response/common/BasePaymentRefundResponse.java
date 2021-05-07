@@ -21,4 +21,5 @@ public class BasePaymentRefundResponse {
     private String authCode;
     private String hostReference;
     private String transId;
+    private Long paymentId;
 }

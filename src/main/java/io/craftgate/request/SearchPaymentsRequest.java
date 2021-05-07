@@ -17,8 +17,8 @@ public class SearchPaymentsRequest {
     private Integer size;
     private Long paymentId;
     private Long paymentTransactionId;
-    private Long subMerchantMemberId;
     private Long buyerMemberId;
+    private Long subMerchantMemberId;
     private String conversationId;
     private String externalId;
     private String orderId;

@@ -2,7 +2,6 @@ package io.craftgate.response.dto;
 
 import io.craftgate.model.PaymentRefundStatus;
 import io.craftgate.response.MemberResponse;
-import io.craftgate.response.common.BasePaymentTransaction;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ReportingPaymentTransaction extends BasePaymentTransaction {
+public class ReportingPaymentTransaction extends PaymentTransaction {
 
     private LocalDateTime createdDate;
     private LocalDateTime transactionStatusDate;

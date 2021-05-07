@@ -99,7 +99,7 @@ public class PaymentReportingSample {
                 .paymentId(100L)
                 .buyerMemberId(1L)
                 .conversationId("conversationId")
-                .refundStatus(RefundStatus.SUCCESS)
+                .status(RefundStatus.SUCCESS)
                 .currency(Currency.TRY)
                 .minRefundPrice(BigDecimal.ONE)
                 .maxRefundPrice(BigDecimal.valueOf(100))
@@ -107,7 +107,7 @@ public class PaymentReportingSample {
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 
-        ReportingSearchPaymentRefundListResponse response = craftgate.paymentReporting().searchPaymentRefunds(searchPaymentRefundsRequest);
+        ReportingPaymentRefundListResponse response = craftgate.paymentReporting().searchPaymentRefunds(searchPaymentRefundsRequest);
         assertTrue(response.getItems().size() > 0);
     }
 
@@ -121,7 +121,7 @@ public class PaymentReportingSample {
                 .paymentTransactionId(1000L)
                 .buyerMemberId(1L)
                 .conversationId("conversationId")
-                .refundStatus(RefundStatus.SUCCESS)
+                .status(RefundStatus.SUCCESS)
                 .currency(Currency.TRY)
                 .minRefundPrice(BigDecimal.ONE)
                 .maxRefundPrice(BigDecimal.valueOf(100))
@@ -130,7 +130,7 @@ public class PaymentReportingSample {
                 .maxCreatedDate(LocalDateTime.now())
                 .build();
 
-        ReportingSearchPaymentTransactionRefundListResponse response = craftgate.paymentReporting().searchPaymentTransactionRefunds(searchPaymentTransactionRefundsRequest);
+        ReportingPaymentTransactionRefundListResponse response = craftgate.paymentReporting().searchPaymentTransactionRefunds(searchPaymentTransactionRefundsRequest);
         assertTrue(response.getItems().size() > 0);
     }
 }

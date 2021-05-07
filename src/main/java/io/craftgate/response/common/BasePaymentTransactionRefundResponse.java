@@ -22,4 +22,5 @@ public class BasePaymentTransactionRefundResponse {
     private String hostReference;
     private String transId;
     private Boolean isAfterSettlement;
+    private Long paymentTransactionId;
 }

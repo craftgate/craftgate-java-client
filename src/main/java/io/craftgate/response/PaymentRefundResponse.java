@@ -14,6 +14,5 @@ public class PaymentRefundResponse extends BasePaymentRefundResponse {
 
     private RefundType refundType;
     private Currency currency;
-    private Long paymentId;
     private List<PaymentTransactionRefundResponse> paymentTransactionRefunds;
 }
