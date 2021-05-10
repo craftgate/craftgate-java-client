@@ -10,20 +10,18 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class SearchPaymentTransactionRefundsRequest {
+public class SearchPaymentRefundsRequest {
 
     private Integer page;
     private Integer size;
     private Long id;
     private Long paymentId;
-    private Long paymentTransactionId;
     private Long buyerMemberId;
     private String conversationId;
     private RefundStatus status;
     private Currency currency;
     private BigDecimal minRefundPrice;
     private BigDecimal maxRefundPrice;
-    private Boolean isAfterSettlement;
     private LocalDateTime minCreatedDate;
     private LocalDateTime maxCreatedDate;
 }

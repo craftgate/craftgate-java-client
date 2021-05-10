@@ -13,6 +13,7 @@ public class Craftgate {
     private final WalletAdapter walletAdapter;
     private final SettlementReportingAdapter settlementReportingAdapter;
     private final SettlementAdapter settlementAdapter;
+    private final PaymentReportingAdapter paymentReportingAdapter;
 
     public Craftgate(String apiKey, String secretKey) {
         this(apiKey, secretKey, BASE_URL);
@@ -31,6 +32,7 @@ public class Craftgate {
         this.walletAdapter = new WalletAdapter(requestOptions);
         this.settlementReportingAdapter = new SettlementReportingAdapter(requestOptions);
         this.settlementAdapter = new SettlementAdapter(requestOptions);
+        this.paymentReportingAdapter = new PaymentReportingAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
@@ -47,6 +49,10 @@ public class Craftgate {
 
     public WalletAdapter wallet() {
         return walletAdapter;
+    }
+
+    public PaymentReportingAdapter paymentReporting() {
+        return paymentReportingAdapter;
     }
 
     public SettlementReportingAdapter settlementReporting() {

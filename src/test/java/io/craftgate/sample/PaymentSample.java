@@ -740,17 +740,6 @@ public class PaymentSample {
     }
 
     @Test
-    void search_payment_transaction_refunds() {
-        SearchPaymentTransactionRefundsRequest request = SearchPaymentTransactionRefundsRequest.builder()
-                .paymentId(1L)
-                .build();
-
-        PaymentTransactionRefundListResponse response = craftgate.payment().searchPaymentTransactionRefunds(request);
-        assertNotNull(response);
-        assertTrue(response.getItems().size() > 0);
-    }
-
-    @Test
     void store_card() {
         final StoreCardRequest storeCardRequest = StoreCardRequest.builder()
                 .cardHolderName("Haluk Demir")

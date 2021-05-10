@@ -1,8 +1,8 @@
 package io.craftgate.response;
 
 import io.craftgate.model.Currency;
-import io.craftgate.model.PayoutStatus;
 import io.craftgate.model.Status;
+import io.craftgate.model.TransactionPayoutStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ public class WithdrawResponse {
     private BigDecimal price;
     private String description;
     private Currency currency;
-    private PayoutStatus payoutStatus;
+    private TransactionPayoutStatus payoutStatus;
     private Long memberId;
     private Long payoutId;
 }

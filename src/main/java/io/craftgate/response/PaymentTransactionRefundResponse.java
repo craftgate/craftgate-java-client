@@ -1,29 +1,14 @@
 package io.craftgate.response;
 
 import io.craftgate.model.Currency;
-import io.craftgate.model.RefundDestinationType;
-import io.craftgate.model.RefundStatus;
+import io.craftgate.response.common.BasePaymentTransactionRefundResponse;
 import lombok.Data;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class PaymentTransactionRefundResponse {
+@EqualsAndHashCode(callSuper = true)
+public class PaymentTransactionRefundResponse extends BasePaymentTransactionRefundResponse {
 
-    private Long id;
-    private String conversationId;
-    private LocalDateTime createdDate;
-    private RefundStatus status;
-    private Boolean isAfterSettlement;
-    private BigDecimal refundPrice;
-    private BigDecimal refundBankPrice;
-    private BigDecimal refundWalletPrice;
-    private String authCode;
-    private String hostReference;
-    private String transId;
     private Currency currency;
-    private Long paymentTransactionId;
     private Long paymentId;
-    private RefundDestinationType refundDestinationType;
 }

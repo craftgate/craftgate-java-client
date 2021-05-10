@@ -81,12 +81,6 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentTransactionRefundResponse.class);
     }
 
-    public PaymentTransactionRefundListResponse searchPaymentTransactionRefunds(SearchPaymentTransactionRefundsRequest searchPaymentTransactionRefundsRequest) {
-        String query = RequestQueryParamsBuilder.buildQueryParam(searchPaymentTransactionRefundsRequest);
-        String path = "/payment/v1/refund-transactions" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentTransactionRefundListResponse.class);
-    }
-
     public PaymentRefundResponse refundPayment(RefundPaymentRequest refundPaymentRequest) {
         String path = "/payment/v1/refunds";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(refundPaymentRequest, path, requestOptions),

@@ -158,7 +158,7 @@ public class WalletSample {
         assertEquals(request.getPrice(), response.getPrice());
         assertEquals(request.getCurrency(), response.getCurrency());
         assertEquals(request.getDescription(), response.getDescription());
-        assertEquals(PayoutStatus.WAITING_FOR_PAYOUT, response.getPayoutStatus());
+        assertEquals(TransactionPayoutStatus.WAITING_FOR_PAYOUT, response.getPayoutStatus());
         assertEquals(request.getMemberId(), response.getMemberId());
     }
 
@@ -171,7 +171,7 @@ public class WalletSample {
         assertNotNull(response.getId());
         assertNotNull(response.getCreatedDate());
         assertEquals(Status.ACTIVE, response.getStatus());
-        assertEquals(PayoutStatus.CANCELLED, response.getPayoutStatus());
+        assertEquals(TransactionPayoutStatus.CANCELLED, response.getPayoutStatus());
     }
 
     @Test
@@ -184,13 +184,13 @@ public class WalletSample {
         assertNotNull(response.getCreatedDate());
         assertEquals(Status.ACTIVE, response.getStatus());
         assertEquals(Currency.TRY, response.getCurrency());
-        assertEquals(PayoutStatus.WAITING_FOR_PAYOUT, response.getPayoutStatus());
+        assertEquals(TransactionPayoutStatus.WAITING_FOR_PAYOUT, response.getPayoutStatus());
     }
 
     @Test
     void search_withdraws() {
         SearchWithdrawsRequest request = SearchWithdrawsRequest.builder()
-                .payoutStatus(PayoutStatus.WAITING_FOR_PAYOUT)
+                .payoutStatus(TransactionPayoutStatus.WAITING_FOR_PAYOUT)
                 .minWithdrawPrice(BigDecimal.valueOf(5))
                 .maxWithdrawPrice(BigDecimal.valueOf(1000))
                 .build();
