@@ -7,6 +7,7 @@ import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.PayoutBouncedTransactionListResponse;
 import io.craftgate.response.PayoutCompletedTransactionListResponse;
+import io.craftgate.response.PayoutDetailResponse;
 
 public class SettlementReportingAdapter extends BaseAdapter {
 
@@ -24,5 +25,10 @@ public class SettlementReportingAdapter extends BaseAdapter {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPayoutBouncedTransactionsRequest);
         String path = "/settlement-reporting/v1/settlement-file/bounced-sub-merchant-rows" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutBouncedTransactionListResponse.class);
+    }
+
+    public PayoutDetailResponse retrievePayoutDetails(Long id) {
+        String path = "/settlement-reporting/v1/settlement-file/payout-details/" + id;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutDetailResponse.class);
     }
 }
