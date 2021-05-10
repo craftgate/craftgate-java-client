@@ -152,6 +152,7 @@ public class WalletSample {
         WithdrawResponse response = craftgate.wallet().createWithdraw(request);
 
         assertNotNull(response.getId());
+        assertNull(response.getPayoutId());
         assertNotNull(response.getCreatedDate());
         assertEquals(Status.ACTIVE, response.getStatus());
         assertEquals(request.getPrice(), response.getPrice());

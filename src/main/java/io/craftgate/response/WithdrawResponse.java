@@ -19,4 +19,5 @@ public class WithdrawResponse {
     private Currency currency;
     private PayoutStatus payoutStatus;
     private Long memberId;
+    private Long payoutId;
 }
