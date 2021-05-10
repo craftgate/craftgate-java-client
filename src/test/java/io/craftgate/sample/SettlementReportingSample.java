@@ -6,10 +6,12 @@ import io.craftgate.request.SearchPayoutBouncedTransactionsRequest;
 import io.craftgate.request.SearchPayoutCompletedTransactionsRequest;
 import io.craftgate.response.PayoutBouncedTransactionListResponse;
 import io.craftgate.response.PayoutCompletedTransactionListResponse;
+import io.craftgate.response.PayoutDetailResponse;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SettlementReportingSample {
@@ -49,5 +51,13 @@ public class SettlementReportingSample {
 
         PayoutBouncedTransactionListResponse response = craftgate.settlementReporting().searchBouncedPayoutTransactions(request);
         assertTrue(response.getItems().size() > 0);
+    }
+
+    @Test
+    void retrieve_payout_details() {
+        Long payoutId = 1L;
+
+        PayoutDetailResponse response = craftgate.settlementReporting().retrievePayoutDetails(payoutId);
+        assertNotNull(response);
     }
 }
