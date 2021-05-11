@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @Data
 public class PayoutCompletedTransaction {
 
+    private Long payoutId;
     private Long transactionId;
     private String transactionType;
     private BigDecimal payoutAmount;
