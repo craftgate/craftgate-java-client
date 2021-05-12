@@ -12,10 +12,9 @@ public class WalletAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public WalletListResponse searchWallets(SearchWalletsRequest searchWalletsRequest) {
-        String query = RequestQueryParamsBuilder.buildQueryParam(searchWalletsRequest);
-        String path = "/wallet/v1/wallets" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletListResponse.class);
+    public WalletResponse retrieveMemberWallet(Long memberId) {
+        String path = "/wallet/v1/members/" + memberId + "/wallet";
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletResponse.class);
     }
 
     public WalletTransactionListResponse searchWalletTransactions(Long walletId, SearchWalletTransactionsRequest searchWalletTransactionsRequest) {

@@ -13,6 +13,7 @@ public class WalletResponse {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private BigDecimal amount;
+    private BigDecimal withdrawalAmount;
     private Currency currency;
     private Long memberId;
 }
