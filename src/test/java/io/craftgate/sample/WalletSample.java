@@ -15,13 +15,17 @@ public class WalletSample {
     private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
-    void search_wallets() {
-        SearchWalletsRequest request = SearchWalletsRequest.builder()
-                .memberId(1L)
-                .build();
+    void retrieveMemberWallet() {
+        Long memberId = 1L;
 
-        WalletListResponse response = craftgate.wallet().searchWallets(request);
-        assertTrue(response.getItems().size() > 0);
+        WalletResponse response = craftgate.wallet().retrieveMemberWallet(memberId);
+
+        assertNotNull(response.getId());
+        assertNotNull(response.getCreatedDate());
+        assertNotNull(response.getAmount());
+        assertNotNull(response.getWithdrawalAmount());
+        assertEquals(memberId, response.getMemberId());
+        assertEquals(Currency.TRY, response.getCurrency());
     }
 
     @Test
