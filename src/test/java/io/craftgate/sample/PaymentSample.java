@@ -633,21 +633,6 @@ public class PaymentSample {
     }
 
     @Test
-    void refund_deposit_payment() {
-        Long paymentId = 1L;
-        RefundDepositPaymentRequest request = RefundDepositPaymentRequest.builder()
-                .price(BigDecimal.valueOf(50))
-                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
-                .build();
-
-        DepositPaymentRefundResponse response = craftgate.payment().refundDepositPayment(paymentId, request);
-        assertNotNull(response);
-        assertEquals(paymentId, response.getPaymentId());
-        assertEquals(RefundStatus.SUCCESS, response.getStatus());
-        assertEquals(BigDecimal.valueOf(50), response.getRefundPrice());
-    }
-
-    @Test
     void init_3DS_deposit_payment() {
         CreateDepositPaymentRequest request = CreateDepositPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
