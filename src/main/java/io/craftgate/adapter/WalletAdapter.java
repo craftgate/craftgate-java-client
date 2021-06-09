@@ -35,6 +35,11 @@ public class WalletAdapter extends BaseAdapter {
                 createRemittanceRequest, RemittanceResponse.class);
     }
 
+    public RemittanceResponse retrieveRemittance(Long id) {
+        String path = "/wallet/v1/remittances/" + id;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), RemittanceResponse.class);
+    }
+
     public WalletResponse retrieveMerchantMemberWallet() {
         String path = "/wallet/v1/merchants/me/wallet";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletResponse.class);

@@ -82,6 +82,19 @@ public class WalletSample {
     }
 
     @Test
+    void remittance_retrieve() {
+        long remittanceId = 1L;
+
+        RemittanceResponse response = craftgate.wallet().retrieveRemittance(remittanceId);
+        assertNotNull(response);
+        assertNotNull(response.getPrice());
+        assertNotNull(response.getMemberId());
+        assertNotNull(response.getDescription());
+        assertEquals(RemittanceType.SEND, response.getRemittanceType());
+        assertEquals(RemittanceReasonType.SUBMERCHANT_SEND_RECEIVE, response.getRemittanceReasonType());
+    }
+
+    @Test
     void retrieve_merchant_member_wallet() {
         WalletResponse response = craftgate.wallet().retrieveMerchantMemberWallet();
 
