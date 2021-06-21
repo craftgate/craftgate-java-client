@@ -17,5 +17,6 @@ public class CreateDepositPaymentRequest {
     private String conversationId;
     private String callbackUrl;
     private String posAlias;
+    private String clientIp;
     private Card card;
 }
