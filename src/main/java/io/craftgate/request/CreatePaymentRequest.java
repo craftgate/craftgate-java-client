@@ -29,6 +29,7 @@ public class CreatePaymentRequest {
     protected PaymentGroup paymentGroup;
     protected String conversationId;
     protected String externalId;
+    protected String clientIp;
 
     @Builder.Default
     protected PaymentPhase paymentPhase = PaymentPhase.AUTH;

@@ -20,6 +20,7 @@ public class InitCheckoutPaymentRequest {
     protected PaymentGroup paymentGroup;
     protected String conversationId;
     protected String callbackUrl;
+    protected String clientIp;
 
     @Builder.Default
     protected PaymentPhase paymentPhase = PaymentPhase.AUTH;
