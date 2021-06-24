@@ -2,5 +2,7 @@ package io.craftgate.model;
 
 public enum PaymentPhase {
 
-    AUTH
+    AUTH,
+    PRE_AUTH,
+    POST_AUTH
 }

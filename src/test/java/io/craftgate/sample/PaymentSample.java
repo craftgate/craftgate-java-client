@@ -800,4 +800,81 @@ public class PaymentSample {
         assertNotNull(response);
         assertEquals(2, response.getSize());
     }
+
+    @Test
+    void create_pre_auth_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.PRE_AUTH)
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .build())
+                .items(items)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(request.getPrice(), response.getPrice());
+        assertEquals(request.getPaidPrice(), response.getPaidPrice());
+        assertEquals(request.getWalletPrice(), response.getWalletPrice());
+        assertEquals(request.getCurrency(), response.getCurrency());
+        assertEquals(request.getInstallment(), response.getInstallment());
+        assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
+        assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
+        assertEquals(false, response.getIsThreeDS());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
+        assertEquals(false, response.getPaidWithStoredCard());
+        assertEquals("525864", response.getBinNumber());
+        assertEquals("0001", response.getLastFourDigits());
+        assertEquals(CardType.CREDIT_CARD, response.getCardType());
+        assertEquals(CardAssociation.MASTER_CARD, response.getCardAssociation());
+        assertEquals("World", response.getCardBrand());
+        assertEquals(3, response.getPaymentTransactions().size());
+        assertNull(response.getCardUserKey());
+        assertNull(response.getCardToken());
+        assertNull(response.getPaymentError());
+    }
+
+    @Test
+    void post_auth_payment() {
+        long paymentId = 1L;
+        PostAuthPaymentRequest request = PostAuthPaymentRequest.builder()
+                .paidPrice(BigDecimal.valueOf(100))
+                .build();
+
+        PaymentResponse response = craftgate.payment().postAuthPayment(paymentId, request);
+        assertEquals(paymentId, response.getId());
+        assertEquals(PaymentPhase.POST_AUTH, response.getPaymentPhase());
+    }
 }

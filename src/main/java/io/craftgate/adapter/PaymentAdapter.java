@@ -35,6 +35,12 @@ public class PaymentAdapter extends BaseAdapter {
                 completeThreeDSPaymentRequest, PaymentResponse.class);
     }
 
+    public PaymentResponse postAuthPayment(long paymentId, PostAuthPaymentRequest postAuthPaymentRequest) {
+        String path = "/payment/v1/card-payments/" + paymentId + "/post-auth";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(postAuthPaymentRequest, path, requestOptions),
+                postAuthPaymentRequest, PaymentResponse.class);
+    }
+
     public InitCheckoutPaymentResponse initCheckoutPayment(InitCheckoutPaymentRequest initCheckoutPaymentRequest) {
         String path = "/payment/v1/checkout-payments/init";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initCheckoutPaymentRequest, path, requestOptions),
