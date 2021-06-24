@@ -9,6 +9,5 @@ import java.math.BigDecimal;
 @Builder
 public class PostAuthPaymentRequest {
 
-    private Long paymentId;
     private BigDecimal paidPrice;
 }

@@ -868,13 +868,13 @@ public class PaymentSample {
 
     @Test
     void post_auth_payment() {
+        long paymentId = 1L;
         PostAuthPaymentRequest request = PostAuthPaymentRequest.builder()
-                .paymentId(1L)
                 .paidPrice(BigDecimal.valueOf(100))
                 .build();
 
-        PaymentResponse response = craftgate.payment().postAuthPayment(request);
-        assertEquals(request.getPaymentId(), response.getId());
+        PaymentResponse response = craftgate.payment().postAuthPayment(paymentId, request);
+        assertEquals(paymentId, response.getId());
         assertEquals(PaymentPhase.POST_AUTH, response.getPaymentPhase());
     }
 }
