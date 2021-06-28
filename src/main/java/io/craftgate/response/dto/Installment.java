@@ -18,6 +18,7 @@ public class Installment {
     private String bankName;
     private Long bankCode;
     private Boolean force3ds;
+    private Boolean cvcRequired;
     private Boolean commercial;
     private List<InstallmentPrice> installmentPrices;
 }
