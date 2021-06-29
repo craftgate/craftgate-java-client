@@ -19,6 +19,7 @@ public class InitCheckoutPaymentRequest {
     protected Currency currency;
     protected PaymentGroup paymentGroup;
     protected String conversationId;
+    protected String externalId;
     protected String callbackUrl;
     protected String clientIp;
 
