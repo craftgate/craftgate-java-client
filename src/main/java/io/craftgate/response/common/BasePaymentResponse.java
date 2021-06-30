@@ -28,6 +28,8 @@ public class BasePaymentResponse {
     private Boolean isThreeDS;
     private BigDecimal merchantCommissionRate;
     private BigDecimal merchantCommissionRateAmount;
+    private BigDecimal bankCommissionRate;
+    private BigDecimal bankCommissionRateAmount;
     private Boolean paidWithStoredCard;
     private String binNumber;
     private String lastFourDigits;

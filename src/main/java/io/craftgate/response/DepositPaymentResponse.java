@@ -15,6 +15,8 @@ public class DepositPaymentResponse {
     private String currency;
     private Long buyerMemberId;
     private String conversationId;
+    private BigDecimal bankCommissionRate;
+    private BigDecimal bankCommissionRateAmount;
     private String authCode;
     private String hostReference;
     private String transId;
