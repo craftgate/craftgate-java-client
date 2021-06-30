@@ -18,8 +18,6 @@ public class ReportingPaymentResponse extends BasePaymentResponse {
     private String cardHolderName;
     private String cardIssuerBankName;
     private Integer mdStatus;
-    private BigDecimal bankCommissionRate;
-    private BigDecimal bankCommissionRateAmount;
     private MemberResponse buyerMember;
     private List<ReportingPaymentRefundResponse> refunds;
 }
