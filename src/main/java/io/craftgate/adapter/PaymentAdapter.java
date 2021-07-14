@@ -98,6 +98,12 @@ public class PaymentAdapter extends BaseAdapter {
                 storeCardRequest, StoredCardResponse.class);
     }
 
+    public StoredCardResponse updateCard(UpdateCardRequest updateCardRequest) {
+        String path = "/payment/v1/cards/update";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(updateCardRequest, path, requestOptions),
+                updateCardRequest, StoredCardResponse.class);
+    }
+
     public StoredCardListResponse searchStoredCards(SearchStoredCardsRequest searchStoredCardsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchStoredCardsRequest);
         String path = "/payment/v1/cards" + query;
