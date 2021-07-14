@@ -745,6 +745,24 @@ public class PaymentSample {
     }
 
     @Test
+    void update_stored_card() {
+        final UpdateCardRequest updateCardRequest = UpdateCardRequest.builder()
+                .cardUserKey("fac377f2-ab15-4696-88d2-5e71b27ec378")
+                .cardToken("11a078c4-3c32-4796-90b1-51ee5517a212")
+                .expireYear("2044")
+                .expireMonth("07")
+                .build();
+
+        StoredCardResponse response = craftgate.payment().updateCard(updateCardRequest);
+
+        assertNotNull(response);
+        assertNotNull(response.getCardToken());
+        assertNotNull(response.getCardUserKey());
+        assertEquals("525864", response.getBinNumber());
+        assertEquals("0001", response.getLastFourDigits());
+    }
+
+    @Test
     void search_stored_cards() {
         SearchStoredCardsRequest request = SearchStoredCardsRequest.builder()
                 .cardAlias("My YKB Card")
