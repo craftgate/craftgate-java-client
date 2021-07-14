@@ -1,5 +1,6 @@
 package io.craftgate.response;
 
+import io.craftgate.model.BounceStatus;
 import io.craftgate.response.dto.PayoutDetailTransaction;
 import lombok.Data;
 
@@ -20,5 +21,6 @@ public class PayoutDetailResponse {
     private String merchantType;
     private String settlementEarningsDestination;
     private String settlementSource;
+    private BounceStatus bounceStatus;
     private List<PayoutDetailTransaction> payoutTransactions;
 }
