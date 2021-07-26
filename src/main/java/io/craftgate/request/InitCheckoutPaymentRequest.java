@@ -21,6 +21,7 @@ public class InitCheckoutPaymentRequest {
     protected String conversationId;
     protected String externalId;
     protected String callbackUrl;
+    protected String merchantWebhookUrl;
     protected String clientIp;
 
     @Builder.Default
