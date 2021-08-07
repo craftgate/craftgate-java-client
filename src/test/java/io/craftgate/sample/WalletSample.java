@@ -40,7 +40,7 @@ public class WalletSample {
     }
 
     @Test
-    void remittance_send() {
+    void send_remittance() {
         long memberId = 1L;
         BigDecimal price = BigDecimal.valueOf(50);
 
@@ -61,7 +61,7 @@ public class WalletSample {
     }
 
     @Test
-    void remittance_receive() {
+    void receive_remittance() {
         long memberId = 1L;
         BigDecimal price = BigDecimal.valueOf(50);
 
@@ -82,7 +82,7 @@ public class WalletSample {
     }
 
     @Test
-    void remittance_retrieve() {
+    void retrieve_remittance() {
         long remittanceId = 1L;
 
         RemittanceResponse response = craftgate.wallet().retrieveRemittance(remittanceId);
@@ -148,7 +148,7 @@ public class WalletSample {
     }
 
     @Test
-    void retrieve_wallet_transactions_to_card() {
+    void retrieve_refund_wallet_transactions_to_card() {
         long walletTransactionId = 1;
 
         RefundWalletTransactionToCardListResponse response = craftgate.wallet().retrieveRefundWalletTransactionsToCard(walletTransactionId);
