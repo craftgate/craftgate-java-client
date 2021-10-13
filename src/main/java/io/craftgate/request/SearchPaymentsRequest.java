@@ -1,6 +1,7 @@
 package io.craftgate.request;
 
 import io.craftgate.model.Currency;
+import io.craftgate.model.PaymentSource;
 import io.craftgate.model.PaymentStatus;
 import io.craftgate.model.PaymentType;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class SearchPaymentsRequest {
     private String orderId;
     private PaymentType paymentType;
     private PaymentStatus paymentStatus;
+    private PaymentSource paymentSource;
     private String binNumber;
     private String lastFourDigits;
     private Currency currency;
