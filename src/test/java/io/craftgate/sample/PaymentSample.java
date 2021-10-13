@@ -66,6 +66,7 @@ public class PaymentSample {
         assertEquals(request.getWalletPrice(), response.getWalletPrice());
         assertEquals(request.getCurrency(), response.getCurrency());
         assertEquals(request.getInstallment(), response.getInstallment());
+        assertEquals(PaymentSource.API, response.getPaymentSource());
         assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
         assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
         assertEquals(false, response.getIsThreeDS());
