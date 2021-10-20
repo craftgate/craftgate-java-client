@@ -896,4 +896,14 @@ public class PaymentSample {
         assertEquals(paymentId, response.getId());
         assertEquals(PaymentPhase.POST_AUTH, response.getPaymentPhase());
     }
+
+    @Test
+    void check_masterpass_user() {
+        CheckMasterpassUserRequest request = CheckMasterpassUserRequest.builder()
+                .masterpassGsmNumber("903000000000")
+                .build();
+
+        CheckMasterpassUserResponse response = craftgate.payment().checkMasterpassUser(request);
+        assertNotNull(response);
+    }
 }
