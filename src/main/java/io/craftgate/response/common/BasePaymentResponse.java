@@ -26,6 +26,7 @@ public class BasePaymentResponse {
     private PaymentGroup paymentGroup;
     private PaymentStatus paymentStatus;
     private PaymentPhase paymentPhase;
+    private String paymentChannel;
     private Boolean isThreeDS;
     private BigDecimal merchantCommissionRate;
     private BigDecimal merchantCommissionRateAmount;
