@@ -27,6 +27,7 @@ public class InitCheckoutPaymentRequest {
 
     @Builder.Default
     protected PaymentPhase paymentPhase = PaymentPhase.AUTH;
+    protected String paymentChannel;
 
     protected List<PaymentMethod> enabledPaymentMethods;
     protected String masterpassGsmNumber;

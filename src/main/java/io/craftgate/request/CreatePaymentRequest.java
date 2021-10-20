@@ -34,6 +34,7 @@ public class CreatePaymentRequest {
     @Builder.Default
     protected PaymentPhase paymentPhase = PaymentPhase.AUTH;
 
+    protected String paymentChannel;
     protected Long buyerMemberId;
     protected Card card;
     protected List<PaymentItem> items;

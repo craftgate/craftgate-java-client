@@ -26,6 +26,7 @@ public class SearchPaymentsRequest {
     private PaymentType paymentType;
     private PaymentStatus paymentStatus;
     private PaymentSource paymentSource;
+    private String paymentChannel;
     private String binNumber;
     private String lastFourDigits;
     private Currency currency;
