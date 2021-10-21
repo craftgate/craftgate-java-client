@@ -36,6 +36,7 @@ public class CreatePaymentRequest {
 
     protected String paymentChannel;
     protected Long buyerMemberId;
+    protected String bankOrderId;
     protected Card card;
     protected List<PaymentItem> items;
     protected Map<String, Map<String, Object>> additionalParams;
