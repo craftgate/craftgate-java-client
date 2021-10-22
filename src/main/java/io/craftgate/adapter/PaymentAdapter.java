@@ -127,4 +127,10 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(disapprovePaymentTransactionsRequest, path, requestOptions),
                 disapprovePaymentTransactionsRequest, PaymentTransactionApprovalListResponse.class);
     }
+
+    public CheckMasterpassUserResponse checkMasterpassUser(CheckMasterpassUserRequest checkMasterpassUserRequest) {
+        String path = "/payment/v1/masterpass-payments/check-user";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(checkMasterpassUserRequest, path, requestOptions),
+                checkMasterpassUserRequest, CheckMasterpassUserResponse.class);
+    }
 }
