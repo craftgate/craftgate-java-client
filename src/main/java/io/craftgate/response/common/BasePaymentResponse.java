@@ -39,6 +39,8 @@ public class BasePaymentResponse {
     private String hostReference;
     private String transId;
     private String orderId;
+    private String cardHolderName;
+    private String bankCardHolderName;
     private CardType cardType;
     private CardAssociation cardAssociation;
     private String cardBrand;
