@@ -15,7 +15,6 @@ public class ReportingPaymentResponse extends BasePaymentResponse {
     private Integer retryCount;
     private BigDecimal refundablePrice;
     private PaymentRefundStatus refundStatus;
-    private String cardHolderName;
     private String cardIssuerBankName;
     private Integer mdStatus;
     private MemberResponse buyerMember;
