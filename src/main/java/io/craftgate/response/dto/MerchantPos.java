@@ -8,4 +8,5 @@ public class MerchantPos {
     private Long id;
     private String name;
     private String alias;
+    private Long bankId;
 }
