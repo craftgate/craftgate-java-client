@@ -31,6 +31,7 @@ public class InitCheckoutPaymentRequest {
 
     protected List<PaymentMethod> enabledPaymentMethods;
     protected String masterpassGsmNumber;
+    protected String masterpassUserId;
 
     protected String cardUserKey;
 
