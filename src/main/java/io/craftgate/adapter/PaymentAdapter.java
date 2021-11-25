@@ -70,6 +70,12 @@ public class PaymentAdapter extends BaseAdapter {
                 completeThreeDSPaymentRequest, DepositPaymentResponse.class);
     }
 
+    public RetrieveLoyaltiesResponse retrieveLoyalties(RetrieveLoyaltiesRequest retrieveLoyaltiesRequest) {
+        String path = "/payment/v1/card-loyalties/retrieve";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(retrieveLoyaltiesRequest, path, requestOptions),
+                retrieveLoyaltiesRequest, RetrieveLoyaltiesResponse.class);
+    }
+
     public PaymentTransactionRefundResponse refundPaymentTransaction(RefundPaymentTransactionRequest refundPaymentTransactionRequest) {
         String path = "/payment/v1/refund-transactions";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(refundPaymentTransactionRequest, path, requestOptions),
