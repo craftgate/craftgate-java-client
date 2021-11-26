@@ -1,5 +1,6 @@
 package io.craftgate.request.dto;
 
+import io.craftgate.model.Loyalty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ public class Card {
     private String cardAlias;
     private String cardUserKey;
     private String cardToken;
+    private Loyalty loyalty;
 
     @Builder.Default
     private Boolean storeCardAfterSuccessPayment = false;
