@@ -353,6 +353,85 @@ public class PaymentSample {
     }
 
     @Test
+    void create_payment_with_loyalty() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("4043080000000003")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .loyalty(Loyalty.builder()
+                                .type(LoyaltyType.REWARD_MONEY)
+                                .reward(Reward.builder()
+                                        .cardRewardMoney(new BigDecimal("1.36"))
+                                        .firmRewardMoney(new BigDecimal("3.88"))
+                                        .build()
+                                )
+                                .build())
+                        .build())
+                .items(items)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(request.getPrice(), response.getPrice());
+        assertEquals(request.getPaidPrice(), response.getPaidPrice());
+        assertEquals(request.getWalletPrice(), response.getWalletPrice());
+        assertEquals(request.getCurrency(), response.getCurrency());
+        assertEquals(request.getInstallment(), response.getInstallment());
+        assertEquals(PaymentSource.API, response.getPaymentSource());
+        assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
+        assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
+        assertEquals(false, response.getIsThreeDS());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
+        assertEquals(false, response.getPaidWithStoredCard());
+        assertEquals("404308", response.getBinNumber());
+        assertEquals("0003", response.getLastFourDigits());
+        assertEquals(CardType.CREDIT_CARD, response.getCardType());
+        assertEquals(CardAssociation.VISA, response.getCardAssociation());
+        assertEquals("Bonus", response.getCardBrand());
+        assertEquals(3, response.getPaymentTransactions().size());
+        assertNull(response.getCardUserKey());
+        assertNull(response.getCardToken());
+        assertNull(response.getPaymentError());
+        assertNotNull(response.getLoyalty());
+        assertEquals(LoyaltyType.REWARD_MONEY, response.getLoyalty().getType());
+        assertNotNull(response.getLoyalty().getReward());
+        assertEquals(new BigDecimal("1.36"), response.getLoyalty().getReward().getCardRewardMoney());
+        assertEquals(new BigDecimal("3.88"), response.getLoyalty().getReward().getFirmRewardMoney());
+    }
+
+    @Test
     void init_3DS_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
@@ -676,6 +755,26 @@ public class PaymentSample {
         PaymentResponse response = craftgate.payment().retrievePayment(paymentId);
         assertNotNull(response);
         assertEquals(paymentId, response.getId());
+    }
+
+    @Test
+    void retrieve_loyalties() {
+        RetrieveLoyaltiesRequest request = RetrieveLoyaltiesRequest.builder()
+                .cardNumber("4043080000000003")
+                .expireYear("2044")
+                .expireMonth("07")
+                .cvc("000")
+                .build();
+
+        RetrieveLoyaltiesResponse response = craftgate.payment().retrieveLoyalties(request);
+        assertNotNull(response);
+        assertEquals("Bonus", response.getCardBrand());
+        assertNotNull(response.getLoyalties());
+        assertTrue(response.getLoyalties().size() > 0);
+        assertEquals(LoyaltyType.REWARD_MONEY, response.getLoyalties().get(0).getType());
+        assertNotNull(response.getLoyalties().get(0).getReward());
+        assertEquals(new BigDecimal("12.35"), response.getLoyalties().get(0).getReward().getCardRewardMoney());
+        assertEquals(new BigDecimal("5.20"), response.getLoyalties().get(0).getReward().getFirmRewardMoney());
     }
 
     @Test
