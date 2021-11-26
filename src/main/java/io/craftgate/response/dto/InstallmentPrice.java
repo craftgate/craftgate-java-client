@@ -11,4 +11,5 @@ public class InstallmentPrice {
     private Integer installmentNumber;
     private BigDecimal installmentPrice;
     private BigDecimal totalPrice;
+    private String installmentLabel;
 }
