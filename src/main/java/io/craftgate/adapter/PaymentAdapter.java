@@ -70,6 +70,12 @@ public class PaymentAdapter extends BaseAdapter {
                 completeThreeDSPaymentRequest, DepositPaymentResponse.class);
     }
 
+    public InitGarantiPayPaymentResponse initGarantiPayPayment(InitGarantiPayPaymentRequest initGarantiPayPaymentRequest) {
+        String path = "/payment/v1/garanti-pay-payments";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initGarantiPayPaymentRequest, path, requestOptions),
+                initGarantiPayPaymentRequest, InitGarantiPayPaymentResponse.class);
+    }
+
     public RetrieveLoyaltiesResponse retrieveLoyalties(RetrieveLoyaltiesRequest retrieveLoyaltiesRequest) {
         String path = "/payment/v1/card-loyalties/retrieve";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(retrieveLoyaltiesRequest, path, requestOptions),
