@@ -22,6 +22,7 @@ public class BasePaymentResponse {
     private String conversationId;
     private String externalId;
     private PaymentType paymentType;
+    private PaymentProvider paymentProvider;
     private PaymentSource paymentSource;
     private PaymentGroup paymentGroup;
     private PaymentStatus paymentStatus;
