@@ -4,5 +4,6 @@ public enum Currency {
 
     TRY,
     USD,
-    EUR
+    EUR,
+    GBP
 }
