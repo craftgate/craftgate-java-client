@@ -10,9 +10,11 @@ import java.util.UUID;
 public abstract class BaseAdapter {
 
     private static final String API_VERSION_HEADER_VALUE = "v1";
+    private static final String CLIENT_VERSION_HEADER_VALUE = "craftgate-java-client";
     private static final String API_KEY_HEADER_NAME = "x-api-key";
     private static final String RANDOM_HEADER_NAME = "x-rnd-key";
     private static final String AUTH_VERSION_HEADER_NAME = "x-auth-version";
+    private static final String CLIENT_VERSION_HEADER_NAME = "x-client-version";
     private static final String SIGNATURE_HEADER_NAME = "x-signature";
 
     protected final RequestOptions requestOptions;
@@ -36,6 +38,7 @@ public abstract class BaseAdapter {
         headers.put(API_KEY_HEADER_NAME, options.getApiKey());
         headers.put(RANDOM_HEADER_NAME, randomString);
         headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
+        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.17");
         headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, options));
         return headers;
     }
