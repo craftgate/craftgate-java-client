@@ -2,5 +2,8 @@ package io.craftgate.model;
 
 public enum Currency {
 
-    TRY
+    TRY,
+    USD,
+    EUR,
+    GBP
 }

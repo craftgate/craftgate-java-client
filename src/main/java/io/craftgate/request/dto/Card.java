@@ -16,6 +16,9 @@ public class Card {
     private String cardAlias;
     private String cardUserKey;
     private String cardToken;
+    private String binNumber;
+    private String lastFourDigits;
+    private String cardHolderIdentityNumber;
     private Loyalty loyalty;
 
     @Builder.Default
