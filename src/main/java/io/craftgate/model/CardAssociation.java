@@ -5,5 +5,10 @@ public enum CardAssociation {
     VISA,
     MASTER_CARD,
     AMEX,
-    TROY
+    TROY,
+    JCB,
+    UNION_PAY,
+    MAESTRO,
+    DISCOVER,
+    DINERS_CLUB
 }

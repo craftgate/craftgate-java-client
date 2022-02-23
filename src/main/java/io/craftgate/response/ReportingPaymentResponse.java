@@ -19,4 +19,5 @@ public class ReportingPaymentResponse extends BasePaymentResponse {
     private Integer mdStatus;
     private MemberResponse buyerMember;
     private List<ReportingPaymentRefundResponse> refunds;
+    private List<ReportingPaymentTransactionRefundResponse> paymentTransactionRefunds;
 }
