@@ -3,6 +3,6 @@ package io.craftgate.model;
 public enum PaymentSource {
 
     API,
-    MASTERPASS,
-    CHECKOUT_FORM
+    CHECKOUT_FORM,
+    PAY_BY_LINK,
 }

@@ -2,8 +2,7 @@ package io.craftgate.request;
 
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
-import io.craftgate.model.PaymentMethod;
-import io.craftgate.model.PaymentPhase;
+import io.craftgate.request.dto.GarantiPayInstallment;
 import io.craftgate.request.dto.PaymentItem;
 import lombok.Builder;
 import lombok.Data;
@@ -13,32 +12,20 @@ import java.util.List;
 
 @Data
 @Builder
-public class InitCheckoutPaymentRequest {
+public class InitGarantiPayPaymentRequest {
 
     protected BigDecimal price;
     protected BigDecimal paidPrice;
     protected Currency currency;
+    protected String posAlias;
     protected PaymentGroup paymentGroup;
     protected String conversationId;
     protected String externalId;
     protected String callbackUrl;
     protected String clientIp;
-
-    @Builder.Default
-    protected PaymentPhase paymentPhase = PaymentPhase.AUTH;
     protected String paymentChannel;
-
-    protected List<PaymentMethod> enabledPaymentMethods;
-    protected String masterpassGsmNumber;
-    protected String masterpassUserId;
-
-    protected String cardUserKey;
-
     protected Long buyerMemberId;
-    protected List<Integer> enabledInstallments;
-    protected boolean alwaysStoreCardAfterPayment;
-    protected boolean allowOnlyStoredCards;
-    protected boolean allowOnlyCreditCard;
-    protected boolean forceThreeDS;
+    protected String bankOrderId;
     protected List<PaymentItem> items;
+    protected List<GarantiPayInstallment> installments;
 }

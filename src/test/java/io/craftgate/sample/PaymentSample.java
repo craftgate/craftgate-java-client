@@ -5,6 +5,7 @@ import io.craftgate.model.Currency;
 import io.craftgate.model.*;
 import io.craftgate.request.*;
 import io.craftgate.request.dto.Card;
+import io.craftgate.request.dto.GarantiPayInstallment;
 import io.craftgate.request.dto.PaymentItem;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
@@ -797,6 +798,60 @@ public class PaymentSample {
         assertEquals(BigDecimal.valueOf(100), response.getPrice());
         assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
         assertEquals(PaymentType.DEPOSIT_PAYMENT, response.getPaymentType());
+    }
+
+    @Test
+    void init_garanti_pay_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+
+        List<GarantiPayInstallment> installments = new ArrayList<>();
+
+        installments.add(GarantiPayInstallment.builder()
+                .number(2)
+                .totalPrice(BigDecimal.valueOf(120))
+                .build()
+        );
+        installments.add(GarantiPayInstallment.builder()
+                .number(3)
+                .totalPrice(BigDecimal.valueOf(125))
+                .build()
+        );
+
+        InitGarantiPayPaymentRequest request = InitGarantiPayPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .callbackUrl("https://www.your-website.com/craftgate-garantipay-callback")
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .items(items)
+                .installments(installments)
+                .build();
+
+        InitGarantiPayPaymentResponse response = craftgate.payment().initGarantiPayPayment(request);
+
+        assertNotNull(response);
+        assertNotNull(response.getHtmlContent());
+        assertNotNull(response.getDecodedHtmlContent());
     }
 
     @Test
