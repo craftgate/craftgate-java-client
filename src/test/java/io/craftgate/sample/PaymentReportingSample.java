@@ -1,7 +1,10 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
-import io.craftgate.model.*;
+import io.craftgate.model.Currency;
+import io.craftgate.model.PaymentStatus;
+import io.craftgate.model.PaymentType;
+import io.craftgate.model.RefundStatus;
 import io.craftgate.request.SearchPaymentRefundsRequest;
 import io.craftgate.request.SearchPaymentTransactionRefundsRequest;
 import io.craftgate.request.SearchPaymentsRequest;
