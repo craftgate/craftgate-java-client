@@ -21,6 +21,7 @@ public class InitCheckoutPaymentRequest {
     protected PaymentGroup paymentGroup;
     protected String conversationId;
     protected String externalId;
+    protected String bankOrderId;
     protected String callbackUrl;
     protected String clientIp;
 
