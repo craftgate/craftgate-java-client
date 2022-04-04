@@ -5,6 +5,8 @@ import io.craftgate.model.SettlementEarningsDestination;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 public class UpdateMemberRequest {
@@ -22,6 +24,7 @@ public class UpdateMemberRequest {
     private String taxNumber;
     private String iban;
     private SettlementEarningsDestination settlementEarningsDestination;
+    private BigDecimal walletLowerLimit;
     private Boolean isBuyer;
     private Boolean isSubMerchant;
 }
