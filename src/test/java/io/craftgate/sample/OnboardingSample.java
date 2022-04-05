@@ -39,7 +39,6 @@ public class OnboardingSample {
                 .taxNumber("1111111114")
                 .taxOffice("Erenköy")
                 .address("Suadiye Mah. Örnek Cd. No:23, 34740 Kadıköy/İstanbul")
-                .walletLowerLimit(BigDecimal.valueOf(-50))
                 .build();
 
         MemberResponse response = craftgate.onboarding().createMember(request);
@@ -57,7 +56,6 @@ public class OnboardingSample {
         assertEquals(request.getTaxNumber(), response.getTaxNumber());
         assertEquals(request.getTaxOffice(), response.getTaxOffice());
         assertEquals(request.getAddress(), response.getAddress());
-        assertEquals(request.getWalletLowerLimit(), response.getWalletLowerLimit());
     }
 
     @Test
@@ -80,7 +78,6 @@ public class OnboardingSample {
                 .address("Suadiye Mah. Örnek Cd. No:23, 34740 Kadıköy/İstanbul")
                 .iban("TR930006701000000001111111")
                 .settlementEarningsDestination(SettlementEarningsDestination.IBAN)
-                .walletLowerLimit(BigDecimal.valueOf(-50))
                 .build();
 
         MemberResponse response = craftgate.onboarding().updateMember(memberId, request);
@@ -96,7 +93,6 @@ public class OnboardingSample {
         assertEquals(request.getTaxNumber(), response.getTaxNumber());
         assertEquals(request.getTaxOffice(), response.getTaxOffice());
         assertEquals(request.getAddress(), response.getAddress());
-        assertEquals(request.getWalletLowerLimit(), response.getWalletLowerLimit());
     }
 
     @Test
@@ -117,6 +113,7 @@ public class OnboardingSample {
                 .address("Suadiye Mah. Örnek Cd. No:23, 34740 Kadıköy/İstanbul")
                 .contactName("Haluk")
                 .contactSurname("Demir")
+                .walletLowerLimit(BigDecimal.valueOf(-50))
                 .build();
 
         MemberResponse response = craftgate.onboarding().createMember(request);
@@ -127,6 +124,7 @@ public class OnboardingSample {
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
         assertEquals(request.getName(), response.getName());
         assertEquals(request.getIdentityNumber(), response.getIdentityNumber());
+        assertEquals(request.getWalletLowerLimit(), response.getWalletLowerLimit());
     }
 
     @Test
@@ -140,6 +138,7 @@ public class OnboardingSample {
                 .address("Suadiye Mah. Örnek Cd. No:23, 34740 Kadıköy/İstanbul")
                 .contactName("Haluk")
                 .contactSurname("Demir")
+                .walletLowerLimit(BigDecimal.valueOf(-50))
                 .build();
 
         MemberResponse response = craftgate.onboarding().updateMember(memberId, request);
@@ -148,6 +147,7 @@ public class OnboardingSample {
         assertEquals(request.getEmail(), response.getEmail());
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
         assertEquals(request.getName(), response.getName());
+        assertEquals(request.getWalletLowerLimit(), response.getWalletLowerLimit());
     }
 
     @Test

@@ -70,6 +70,12 @@ public class PaymentAdapter extends BaseAdapter {
                 completeThreeDSPaymentRequest, DepositPaymentResponse.class);
     }
 
+    public void createFundTransferDepositPayment(CreateFundTransferDepositPaymentRequest createFundTransferDepositPaymentRequest) {
+        String path = "/payment/v1/deposits/fund-transfer";
+        HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createFundTransferDepositPaymentRequest, path, requestOptions),
+                createFundTransferDepositPaymentRequest, Void.class);
+    }
+
     public InitGarantiPayPaymentResponse initGarantiPayPayment(InitGarantiPayPaymentRequest initGarantiPayPaymentRequest) {
         String path = "/payment/v1/garanti-pay-payments";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initGarantiPayPaymentRequest, path, requestOptions),
