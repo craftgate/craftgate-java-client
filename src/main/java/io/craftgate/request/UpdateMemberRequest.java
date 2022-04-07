@@ -24,7 +24,7 @@ public class UpdateMemberRequest {
     private String taxNumber;
     private String iban;
     private SettlementEarningsDestination settlementEarningsDestination;
-    private BigDecimal walletLowerLimit;
+    private BigDecimal negativeWalletAmountLimit;
     private Boolean isBuyer;
     private Boolean isSubMerchant;
 }

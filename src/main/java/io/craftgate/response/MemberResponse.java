@@ -30,6 +30,6 @@ public class MemberResponse {
     private String taxOffice;
     private String taxNumber;
     private SettlementEarningsDestination settlementEarningsDestination;
-    private BigDecimal walletLowerLimit;
+    private BigDecimal negativeWalletAmountLimit;
     private String iban;
 }
