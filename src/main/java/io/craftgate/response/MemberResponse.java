@@ -5,6 +5,7 @@ import io.craftgate.model.SettlementEarningsDestination;
 import io.craftgate.model.Status;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -29,5 +30,6 @@ public class MemberResponse {
     private String taxOffice;
     private String taxNumber;
     private SettlementEarningsDestination settlementEarningsDestination;
+    private BigDecimal negativeWalletAmountLimit;
     private String iban;
 }

@@ -745,7 +745,6 @@ public class PaymentSample {
         CreateDepositPaymentRequest request = CreateDepositPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
                 .buyerMemberId(1L)
-                .currency(Currency.TRY)
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .card(Card.builder()
                         .cardHolderName("Haluk Demir")
@@ -769,7 +768,6 @@ public class PaymentSample {
         CreateDepositPaymentRequest request = CreateDepositPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
                 .buyerMemberId(1L)
-                .currency(Currency.TRY)
                 .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .card(Card.builder()
@@ -798,6 +796,17 @@ public class PaymentSample {
         assertEquals(BigDecimal.valueOf(100), response.getPrice());
         assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
         assertEquals(PaymentType.DEPOSIT_PAYMENT, response.getPaymentType());
+    }
+
+    @Test
+    void create_fund_transfer_deposit_payment() {
+        CreateFundTransferDepositPaymentRequest request = CreateFundTransferDepositPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .buyerMemberId(1L)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .build();
+
+        craftgate.payment().createFundTransferDepositPayment(request);
     }
 
     @Test
