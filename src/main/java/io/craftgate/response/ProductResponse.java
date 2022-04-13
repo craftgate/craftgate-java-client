@@ -20,7 +20,6 @@ public class ProductResponse {
     private String token;
     private String enabledInstallments;
     private String url;
-    private String imageUrl;
     private String qrCodeUrl;
     private String channel;
 }
