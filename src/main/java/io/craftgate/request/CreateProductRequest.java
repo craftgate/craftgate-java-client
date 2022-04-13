@@ -19,6 +19,6 @@ public class CreateProductRequest {
     private String channel;
     private BigDecimal price;
     private Currency currency;
-    protected String description;
+    private String description;
     private String enabledInstallments;
 }
