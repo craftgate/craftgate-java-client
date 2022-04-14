@@ -10,6 +10,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -20,5 +21,5 @@ public class CreateProductRequest {
     private BigDecimal price;
     private Currency currency;
     private String description;
-    private String enabledInstallments;
+    private Set<Integer> enabledInstallments;
 }

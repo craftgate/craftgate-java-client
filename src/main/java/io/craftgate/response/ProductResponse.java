@@ -5,6 +5,7 @@ import io.craftgate.model.Status;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Data
 public class ProductResponse {
@@ -18,7 +19,7 @@ public class ProductResponse {
     private Integer stock;
     private Integer soldCount;
     private String token;
-    private String enabledInstallments;
+    private Set<Integer> enabledInstallments;
     private String url;
     private String qrCodeUrl;
     private String channel;

@@ -21,12 +21,19 @@ public class PayByLinkSample {
 
     @Test
     void create_product() {
+        HashSet<Integer> enabledInstallments = new HashSet<Integer>() {{
+            add(1);
+            add(2);
+            add(3);
+            add(6);
+        }};
+
         CreateProductRequest request = CreateProductRequest.builder()
                 .name("A new Product")
                 .channel("API")
                 .price(BigDecimal.TEN)
                 .currency(Currency.TRY)
-                .enabledInstallments("1,2,3,6")
+                .enabledInstallments(enabledInstallments)
                 .build();
 
         ProductResponse response = craftgate.payByLink().createProduct(request);
@@ -45,13 +52,19 @@ public class PayByLinkSample {
     @Test
     void update_product() {
         Long productId = 1L;
+        HashSet<Integer> enabledInstallments = new HashSet<Integer>() {{
+            add(1);
+            add(2);
+            add(3);
+            add(6);
+        }};
         UpdateProductRequest request = UpdateProductRequest.builder()
                 .status(Status.ACTIVE)
                 .name("A new Product - version 2")
                 .channel("API")
                 .price(BigDecimal.TEN)
                 .currency(Currency.TRY)
-                .enabledInstallments("1,2,3")
+                .enabledInstallments(enabledInstallments)
                 .build();
 
         ProductResponse response = craftgate.payByLink().updateProduct(productId, request);
