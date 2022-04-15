@@ -40,6 +40,7 @@ public class InitCheckoutPaymentRequest {
     protected boolean alwaysStoreCardAfterPayment;
     protected boolean allowOnlyStoredCards;
     protected boolean allowOnlyCreditCard;
+    protected boolean allowInstallmentOnlyCommercialCards;
     protected boolean forceThreeDS;
     protected List<PaymentItem> items;
 }
