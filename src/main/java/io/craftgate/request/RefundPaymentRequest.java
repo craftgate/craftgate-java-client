@@ -12,7 +12,7 @@ public class RefundPaymentRequest {
     private String conversationId;
 
     @Builder.Default
-    private RefundDestinationType refundDestinationType = RefundDestinationType.CARD;
+    private RefundDestinationType refundDestinationType = RefundDestinationType.PROVIDER;
 
     @Builder.Default
     private Boolean chargeFromMe = false;
