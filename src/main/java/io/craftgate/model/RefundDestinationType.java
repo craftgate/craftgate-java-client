@@ -2,6 +2,7 @@ package io.craftgate.model;
 
 public enum RefundDestinationType {
 
-    CARD,
+    @Deprecated CARD,
+    PROVIDER,
     WALLET
 }

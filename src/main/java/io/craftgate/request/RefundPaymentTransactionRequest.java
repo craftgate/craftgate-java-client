@@ -15,7 +15,7 @@ public class RefundPaymentTransactionRequest {
     private BigDecimal refundPrice;
 
     @Builder.Default
-    private RefundDestinationType refundDestinationType = RefundDestinationType.CARD;
+    private RefundDestinationType refundDestinationType = RefundDestinationType.PROVIDER;
 
     @Builder.Default
     private Boolean chargeFromMe = false;
