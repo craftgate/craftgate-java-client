@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -24,6 +25,8 @@ public class InitApmPaymentRequest {
     private String externalId;
     private String callbackUrl;
     private String apmOrderId;
+    private String apmUserIdentity;
+    private Map<String, String> additionalParams;
     private String clientIp;
     private List<PaymentItem> items;
 }
