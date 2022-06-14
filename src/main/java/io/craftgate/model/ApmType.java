@@ -1,5 +1,7 @@
 package io.craftgate.model;
 
 public enum ApmType {
-    PAPARA
+    PAPARA,
+    PAYONEER,
+    SODEXO
 }
