@@ -1264,7 +1264,7 @@ public class PaymentSample {
     @Test
     void update_payment_transaction() {
         UpdatePaymentTransactionRequest request = UpdatePaymentTransactionRequest.builder()
-                .paymentTransactionId(1L)
+                .paymentTransactionId(10L)
                 .subMerchantMemberId(1L)
                 .subMerchantMemberPrice(BigDecimal.TEN)
                 .build();
