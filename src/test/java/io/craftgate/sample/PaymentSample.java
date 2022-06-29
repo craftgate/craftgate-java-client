@@ -1260,4 +1260,17 @@ public class PaymentSample {
         assertNull(response.getCardToken());
         assertNull(response.getPaymentError());
     }
+
+    @Test
+    void update_payment_transaction() {
+        UpdatePaymentTransactionRequest request = UpdatePaymentTransactionRequest.builder()
+                .paymentTransactionId(1L)
+                .subMerchantMemberId(1L)
+                .subMerchantMemberPrice(BigDecimal.TEN)
+                .build();
+
+        PaymentTransactionResponse response = craftgate.payment().updatePaymentTransaction(request);
+        assertEquals(request.getSubMerchantMemberId(), response.getSubMerchantMemberId());
+        assertEquals(request.getSubMerchantMemberPrice().doubleValue(), response.getSubMerchantMemberPrice().doubleValue());
+    }
 }
