@@ -18,7 +18,6 @@ import java.util.Objects;
 
 public class HttpClient {
 
-    private static final String DEFAULT_CHARSET = "UTF-8";
     private static final String APPLICATION_JSON = "application/json";
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String ACCEPT = "Accept";
@@ -52,7 +51,7 @@ public class HttpClient {
     private static <T> T exchange(String url, HttpMethod httpMethod, Map<String, String> headers, Object request, Class<T> responseType) {
         try {
             String body = gson.toJson(request);
-            InputStream content = request == null ? null : new ByteArrayInputStream(body.getBytes(DEFAULT_CHARSET));
+            InputStream content = request == null ? null : new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
             final HttpResponse httpResponse = send(url, httpMethod, content, headers);
 
             return handleResponse(httpResponse, responseType, isResponseJson(headers));
@@ -71,7 +70,7 @@ public class HttpClient {
         Response response;
 
         if (httpResponse.getStatusCode() >= HttpURLConnection.HTTP_BAD_REQUEST) {
-            response = gson.fromJson(httpResponse.getBody(), Response.class);
+            response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
             if (response != null && response.getErrors() != null) {
                 ErrorResponse errors = response.getErrors();
                 throw new CraftgateException(errors.getErrorCode(), errors.getErrorDescription(), errors.getErrorGroup());
@@ -86,7 +85,7 @@ public class HttpClient {
         }
 
         if (isResponseJson) {
-            response = gson.fromJson(httpResponse.getBody(), Response.class);
+            response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
             return gson.fromJson(response.getData(), responseType);
         }
         return (T) httpResponse.getBody();
@@ -111,8 +110,7 @@ public class HttpClient {
             }
 
             final int responseCode = conn.getResponseCode();
-            final String responseBody = new String(body(conn), StandardCharsets.UTF_8);
-            return new HttpResponse(responseCode, responseBody);
+            return new HttpResponse(responseCode, body(conn));
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -186,9 +184,9 @@ public class HttpClient {
 class HttpResponse {
 
     int statusCode;
-    String body;
+    byte[] body;
 
-    public HttpResponse(int statusCode, String body) {
+    public HttpResponse(int statusCode, byte[] body) {
         this.statusCode = statusCode;
         this.body = body;
     }
@@ -197,7 +195,7 @@ class HttpResponse {
         return statusCode;
     }
 
-    public String getBody() {
+    public byte[] getBody() {
         return body;
     }
 }
