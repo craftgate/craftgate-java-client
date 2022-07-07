@@ -53,10 +53,9 @@ public class HttpClient {
             String body = gson.toJson(request);
             InputStream content = request == null ? null : new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
             final HttpResponse httpResponse = send(url, httpMethod, content, headers);
-
-            return isResponseJson(headers) ?
-                    handleJsonResponse(httpResponse, responseType) :
-                    handleByteArrayResponse(httpResponse, responseType);
+            return responseType.equals(byte[].class) ?
+                    handleByteArrayResponse(httpResponse, responseType) :
+                    handleJsonResponse(httpResponse, responseType);
         } catch (CraftgateException e) {
             throw e;
         } catch (Exception e) {
@@ -182,10 +181,6 @@ public class HttpClient {
         return new GsonBuilder()
                 .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) -> LocalDateTime.parse(json.getAsString()))
                 .create();
-    }
-
-    private static boolean isResponseJson(Map<String, String> headers) {
-        return Objects.isNull(headers.get(CONTENT_TYPE)) || headers.get(CONTENT_TYPE).equals(APPLICATION_JSON);
     }
 }
 
