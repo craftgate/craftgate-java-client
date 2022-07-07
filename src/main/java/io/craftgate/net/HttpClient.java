@@ -54,7 +54,9 @@ public class HttpClient {
             InputStream content = request == null ? null : new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
             final HttpResponse httpResponse = send(url, httpMethod, content, headers);
 
-            return handleResponse(httpResponse, responseType, isResponseJson(headers));
+            return isResponseJson(headers) ?
+                    handleJsonResponse(httpResponse, responseType) :
+                    handleByteArrayResponse(httpResponse, responseType);
         } catch (CraftgateException e) {
             throw e;
         } catch (Exception e) {
@@ -62,13 +64,23 @@ public class HttpClient {
         }
     }
 
-    private static boolean isResponseJson(Map<String, String> headers) {
-        return Objects.isNull(headers.get(CONTENT_TYPE)) || headers.get(CONTENT_TYPE).equals(APPLICATION_JSON);
+    private static <T> T handleByteArrayResponse(HttpResponse httpResponse, Class<T> responseType) {
+        requireSuccess(httpResponse, responseType);
+        if (responseType == Void.class) return null;
+
+        return (T) httpResponse.getBody();
     }
 
-    private static <T> T handleResponse(HttpResponse httpResponse, Class<T> responseType, boolean isResponseJson) {
-        Response response;
+    private static <T> T handleJsonResponse(HttpResponse httpResponse, Class<T> responseType) {
+        requireSuccess(httpResponse, responseType);
+        if (responseType == Void.class) return null;
 
+        Response response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
+        return gson.fromJson(response.getData(), responseType);
+    }
+
+    private static <T> void requireSuccess(HttpResponse httpResponse, Class<T> responseType) {
+        Response response;
         if (httpResponse.getStatusCode() >= HttpURLConnection.HTTP_BAD_REQUEST) {
             response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
             if (response != null && response.getErrors() != null) {
@@ -77,18 +89,9 @@ public class HttpClient {
             }
             throw new CraftgateException();
         }
-
-        if (responseType == Void.class) {
-            return null;
-        } else if (httpResponse.getBody() == null) {
+        if (responseType != Void.class && httpResponse.getBody() == null) {
             throw new CraftgateException("1", "Empty response", "Unknown");
         }
-
-        if (isResponseJson) {
-            response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
-            return gson.fromJson(response.getData(), responseType);
-        }
-        return (T) httpResponse.getBody();
     }
 
     private static HttpResponse send(String url, HttpMethod httpMethod, InputStream content, Map<String, String> headers) throws IOException {
@@ -123,7 +126,8 @@ public class HttpClient {
             conn.addRequestProperty(header.getKey(), header.getValue());
         }
 
-        if (Objects.isNull(conn.getRequestProperty(CONTENT_TYPE))) conn.addRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
+        if (Objects.isNull(conn.getRequestProperty(CONTENT_TYPE)))
+            conn.addRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
         if (Objects.isNull(conn.getRequestProperty(ACCEPT))) conn.addRequestProperty(ACCEPT, APPLICATION_JSON);
     }
 
@@ -178,6 +182,10 @@ public class HttpClient {
         return new GsonBuilder()
                 .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) -> LocalDateTime.parse(json.getAsString()))
                 .create();
+    }
+
+    private static boolean isResponseJson(Map<String, String> headers) {
+        return Objects.isNull(headers.get(CONTENT_TYPE)) || headers.get(CONTENT_TYPE).equals(APPLICATION_JSON);
     }
 }
 

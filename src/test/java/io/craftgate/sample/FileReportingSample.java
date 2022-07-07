@@ -60,17 +60,4 @@ public class FileReportingSample {
             assertEquals("Rapor bulunamadı", e.getErrorDescription());
         }
     }
-
-    private String readFile(File file) {
-        Charset charset = StandardCharsets.UTF_8;
-        try (InputStream in = new FileInputStream(file)) {
-            byte[] bytes = new byte[(int) file.length()];
-            in.read(bytes);
-
-            return new String(bytes, charset);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
