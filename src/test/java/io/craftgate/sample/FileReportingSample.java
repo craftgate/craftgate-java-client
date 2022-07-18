@@ -9,6 +9,7 @@ import io.craftgate.response.common.ErrorResponse;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -29,35 +30,6 @@ public class FileReportingSample {
                 .build();
 
         String response = new String(craftgate.fileReporting().retrieveDailyTransactionReport(retrieveRequest));
-        assertEquals("a,b,c\n10.00000000,username,0.00000000", response);
-    }
-
-    @Test
-    void retrieve_daily_transaction_report_xlsx() throws IOException {
-        RetrieveDailyTransactionReportRequest retrieveRequest = RetrieveDailyTransactionReportRequest.builder()
-                .reportDate(LocalDate.now())
-                .fileType(ReportFileType.XLSX)
-                .build();
-
-        byte[] response = craftgate.fileReporting().retrieveDailyTransactionReport(retrieveRequest);
-        try (FileOutputStream stream = new FileOutputStream("/tmp/report-real.xlsx")) {
-            stream.write(response);
-        }
-        assertTrue(Arrays.equals(Files.readAllBytes(new File(this.getClass().getResource("/report.xlsx").getPath()).toPath()), response));
-    }
-
-    @Test
-    void retrieve_missing_daily_transaction_report() {
-        RetrieveDailyTransactionReportRequest retrieveRequest = RetrieveDailyTransactionReportRequest.builder()
-                .reportDate(LocalDate.now().minusDays(5))
-                .fileType(ReportFileType.CSV)
-                .build();
-
-        try {
-            craftgate.fileReporting().retrieveDailyTransactionReport(retrieveRequest);
-        } catch (CraftgateException e) {
-            assertEquals("5010", e.getErrorCode());
-            assertEquals("Rapor bulunamadı", e.getErrorDescription());
-        }
+        assertNotNull(response);
     }
 }
