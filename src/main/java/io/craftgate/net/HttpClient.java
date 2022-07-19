@@ -14,10 +14,10 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Objects;
 
 public class HttpClient {
 
-    private static final String DEFAULT_CHARSET = "UTF-8";
     private static final String APPLICATION_JSON = "application/json";
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String ACCEPT = "Accept";
@@ -51,9 +51,11 @@ public class HttpClient {
     private static <T> T exchange(String url, HttpMethod httpMethod, Map<String, String> headers, Object request, Class<T> responseType) {
         try {
             String body = gson.toJson(request);
-            InputStream content = request == null ? null : new ByteArrayInputStream(body.getBytes(DEFAULT_CHARSET));
+            InputStream content = request == null ? null : new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
             final HttpResponse httpResponse = send(url, httpMethod, content, headers);
-            return handleResponse(httpResponse, responseType);
+            return responseType.equals(byte[].class) ?
+                    handleByteArrayResponse(httpResponse, responseType) :
+                    handleJsonResponse(httpResponse, responseType);
         } catch (CraftgateException e) {
             throw e;
         } catch (Exception e) {
@@ -61,24 +63,34 @@ public class HttpClient {
         }
     }
 
-    private static <T> T handleResponse(HttpResponse httpResponse, Class<T> responseType) {
-        Response response = gson.fromJson(httpResponse.getBody(), Response.class);
+    private static <T> T handleByteArrayResponse(HttpResponse httpResponse, Class<T> responseType) {
+        requireSuccess(httpResponse, responseType);
+        if (responseType == Void.class) return null;
 
+        return (T) httpResponse.getBody();
+    }
+
+    private static <T> T handleJsonResponse(HttpResponse httpResponse, Class<T> responseType) {
+        requireSuccess(httpResponse, responseType);
+        if (responseType == Void.class) return null;
+
+        Response response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
+        return gson.fromJson(response.getData(), responseType);
+    }
+
+    private static <T> void requireSuccess(HttpResponse httpResponse, Class<T> responseType) {
+        Response response;
         if (httpResponse.getStatusCode() >= HttpURLConnection.HTTP_BAD_REQUEST) {
+            response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
             if (response != null && response.getErrors() != null) {
                 ErrorResponse errors = response.getErrors();
                 throw new CraftgateException(errors.getErrorCode(), errors.getErrorDescription(), errors.getErrorGroup());
             }
             throw new CraftgateException();
         }
-
-        if (responseType == Void.class) {
-            return null;
-        } else if (response == null) {
+        if (responseType != Void.class && httpResponse.getBody() == null) {
             throw new CraftgateException("1", "Empty response", "Unknown");
         }
-
-        return gson.fromJson(response.getData(), responseType);
     }
 
     private static HttpResponse send(String url, HttpMethod httpMethod, InputStream content, Map<String, String> headers) throws IOException {
@@ -100,8 +112,7 @@ public class HttpClient {
             }
 
             final int responseCode = conn.getResponseCode();
-            final String responseBody = new String(body(conn), StandardCharsets.UTF_8);
-            return new HttpResponse(responseCode, responseBody);
+            return new HttpResponse(responseCode, body(conn));
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -114,8 +125,9 @@ public class HttpClient {
             conn.addRequestProperty(header.getKey(), header.getValue());
         }
 
-        conn.addRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
-        conn.addRequestProperty(ACCEPT, APPLICATION_JSON);
+        if (Objects.isNull(conn.getRequestProperty(CONTENT_TYPE)))
+            conn.addRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
+        if (Objects.isNull(conn.getRequestProperty(ACCEPT))) conn.addRequestProperty(ACCEPT, APPLICATION_JSON);
     }
 
     private static void prepareRequestBody(HttpMethod httpMethod, InputStream content, HttpURLConnection conn) throws IOException {
@@ -175,9 +187,9 @@ public class HttpClient {
 class HttpResponse {
 
     int statusCode;
-    String body;
+    byte[] body;
 
-    public HttpResponse(int statusCode, String body) {
+    public HttpResponse(int statusCode, byte[] body) {
         this.statusCode = statusCode;
         this.body = body;
     }
@@ -186,7 +198,7 @@ class HttpResponse {
         return statusCode;
     }
 
-    public String getBody() {
+    public byte[] getBody() {
         return body;
     }
 }
