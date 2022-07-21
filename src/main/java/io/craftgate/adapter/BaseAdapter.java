@@ -38,7 +38,7 @@ public abstract class BaseAdapter {
         headers.put(API_KEY_HEADER_NAME, options.getApiKey());
         headers.put(RANDOM_HEADER_NAME, randomString);
         headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
-        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.25");
+        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.26");
         headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, options));
         return headers;
     }
