@@ -7,5 +7,5 @@ import lombok.Data;
 public class ApmPaymentCompleteResponse {
 
     private Long paymentId;
-    private PaymentStatus status;
+    private PaymentStatus paymentStatus;
 }

@@ -984,7 +984,7 @@ public class PaymentSample {
 
         ApmPaymentCompleteResponse response = craftgate.payment().completeApmPayment(request);
         assertNotNull(response.getPaymentId());
-        assertEquals(PaymentStatus.SUCCESS, response.getStatus());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
     }
     @Test
     void retrieve_payment() {
