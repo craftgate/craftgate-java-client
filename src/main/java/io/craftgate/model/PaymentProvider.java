@@ -6,4 +6,8 @@ public enum PaymentProvider {
     CG_WALLET,
     MASTERPASS,
     GARANTI_PAY,
+    PAPARA,
+    PAYONEER,
+    SODEXO,
+    EDENRED
 }
