@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 @Data
 public class Payout {
 
-    private BigDecimal paidPrice;
     private Currency currency;
+    private BigDecimal parity;
+    private BigDecimal paidPrice;
     private BigDecimal merchantPayoutAmount;
     private BigDecimal subMerchantMemberPayoutAmount;
 }
