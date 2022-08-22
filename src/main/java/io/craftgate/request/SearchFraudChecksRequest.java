@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class SearchFraudCheckRequest {
+public class SearchFraudChecksRequest {
     private Integer page;
     private Integer size;
     private FraudAction action;

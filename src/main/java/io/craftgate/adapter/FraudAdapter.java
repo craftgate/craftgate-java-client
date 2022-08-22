@@ -3,7 +3,7 @@ package io.craftgate.adapter;
 import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.FraudValueListRequest;
-import io.craftgate.request.SearchFraudCheckRequest;
+import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.request.UpdateFraudCheckRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
@@ -17,8 +17,8 @@ public class FraudAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public FraudCheckListResponse searchFraudChecks(SearchFraudCheckRequest searchFraudCheckRequest) {
-        String query = RequestQueryParamsBuilder.buildQueryParam(searchFraudCheckRequest);
+    public FraudCheckListResponse searchFraudChecks(SearchFraudChecksRequest searchFraudChecksRequest) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(searchFraudChecksRequest);
         String path = "/fraud/v1/fraud-checks" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudCheckListResponse.class);
     }

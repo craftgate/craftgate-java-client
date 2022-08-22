@@ -3,7 +3,7 @@ package io.craftgate.sample;
 import io.craftgate.Craftgate;
 import io.craftgate.model.FraudAction;
 import io.craftgate.model.FraudCheckStatus;
-import io.craftgate.request.SearchFraudCheckRequest;
+import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.response.FraudAllValueListsResponse;
 import io.craftgate.response.FraudCheckListResponse;
 import io.craftgate.response.FraudValueListResponse;
@@ -20,7 +20,7 @@ public class FraudSample {
 
     @Test
     void search_fraud_checks() {
-        SearchFraudCheckRequest request = SearchFraudCheckRequest.builder()
+        SearchFraudChecksRequest request = SearchFraudChecksRequest.builder()
                 .minCreatedDate(LocalDateTime.now().minusDays(1))
                 .maxCreatedDate(LocalDateTime.now())
                 .action(FraudAction.REVIEW)
@@ -34,7 +34,7 @@ public class FraudSample {
     @Test
     void search_fraud_checks_with_payment_id() {
         Long paymentId = 5L;
-        SearchFraudCheckRequest request = SearchFraudCheckRequest.builder()
+        SearchFraudChecksRequest request = SearchFraudChecksRequest.builder()
                 .paymentId(paymentId)
                 .build();
 
