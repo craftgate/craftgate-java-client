@@ -16,6 +16,7 @@ public abstract class BaseAdapter {
     private static final String AUTH_VERSION_HEADER_NAME = "x-auth-version";
     private static final String CLIENT_VERSION_HEADER_NAME = "x-client-version";
     private static final String SIGNATURE_HEADER_NAME = "x-signature";
+    private static final String LANGUAGE_HEADER_NAME = "lang";
 
     protected final RequestOptions requestOptions;
 
@@ -40,6 +41,7 @@ public abstract class BaseAdapter {
         headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
         headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.26");
         headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, options));
+        headers.put(LANGUAGE_HEADER_NAME, options.getLang());
         return headers;
     }
 

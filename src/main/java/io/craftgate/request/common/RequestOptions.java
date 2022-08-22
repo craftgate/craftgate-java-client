@@ -10,4 +10,5 @@ public class RequestOptions {
     private String apiKey;
     private String secretKey;
     private String baseUrl;
+    private String lang;
 }

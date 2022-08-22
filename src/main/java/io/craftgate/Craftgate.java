@@ -39,6 +39,25 @@ public class Craftgate {
         this.payByLinkAdapter = new PayByLinkAdapter(requestOptions);
     }
 
+    public Craftgate(String apiKey, String secretKey, String baseUrl, String lang) {
+        RequestOptions requestOptions = RequestOptions.builder()
+                .apiKey(apiKey)
+                .secretKey(secretKey)
+                .baseUrl(baseUrl)
+                .lang(lang)
+                .build();
+
+        this.payment = new PaymentAdapter(requestOptions);
+        this.installmentAdapter = new InstallmentAdapter(requestOptions);
+        this.onboardingAdapter = new OnboardingAdapter(requestOptions);
+        this.walletAdapter = new WalletAdapter(requestOptions);
+        this.settlementReportingAdapter = new SettlementReportingAdapter(requestOptions);
+        this.settlementAdapter = new SettlementAdapter(requestOptions);
+        this.paymentReportingAdapter = new PaymentReportingAdapter(requestOptions);
+        this.fileReportingAdapter = new FileReportingAdapter(requestOptions);
+        this.payByLinkAdapter = new PayByLinkAdapter(requestOptions);
+    }
+
     public PaymentAdapter payment() {
         return payment;
     }
