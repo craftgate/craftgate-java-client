@@ -82,6 +82,8 @@ public class PaymentSample {
         assertEquals(3, response.getPaymentTransactions().size());
         assertNull(response.getCardUserKey());
         assertNull(response.getCardToken());
+        assertNull(response.getFraudId());
+        assertNull(response.getFraudAction());
         assertNull(response.getPaymentError());
     }
 
