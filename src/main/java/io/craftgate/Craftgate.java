@@ -19,14 +19,18 @@ public class Craftgate {
     private final FraudAdapter fraudAdapter;
 
     public Craftgate(String apiKey, String secretKey) {
-        this(apiKey, secretKey, BASE_URL);
+        this(apiKey, secretKey, BASE_URL, null);
+    }
+    public Craftgate(String apiKey, String secretKey, String baseUrl) {
+        this(apiKey, secretKey, baseUrl, null);
     }
 
-    public Craftgate(String apiKey, String secretKey, String baseUrl) {
+    public Craftgate(String apiKey, String secretKey, String baseUrl, String language) {
         RequestOptions requestOptions = RequestOptions.builder()
                 .apiKey(apiKey)
                 .secretKey(secretKey)
                 .baseUrl(baseUrl)
+                .language(language)
                 .build();
 
         this.payment = new PaymentAdapter(requestOptions);
@@ -39,25 +43,6 @@ public class Craftgate {
         this.fileReportingAdapter = new FileReportingAdapter(requestOptions);
         this.payByLinkAdapter = new PayByLinkAdapter(requestOptions);
         this.fraudAdapter = new FraudAdapter(requestOptions);
-    }
-
-    public Craftgate(String apiKey, String secretKey, String baseUrl, String lang) {
-        RequestOptions requestOptions = RequestOptions.builder()
-                .apiKey(apiKey)
-                .secretKey(secretKey)
-                .baseUrl(baseUrl)
-                .lang(lang)
-                .build();
-
-        this.payment = new PaymentAdapter(requestOptions);
-        this.installmentAdapter = new InstallmentAdapter(requestOptions);
-        this.onboardingAdapter = new OnboardingAdapter(requestOptions);
-        this.walletAdapter = new WalletAdapter(requestOptions);
-        this.settlementReportingAdapter = new SettlementReportingAdapter(requestOptions);
-        this.settlementAdapter = new SettlementAdapter(requestOptions);
-        this.paymentReportingAdapter = new PaymentReportingAdapter(requestOptions);
-        this.fileReportingAdapter = new FileReportingAdapter(requestOptions);
-        this.payByLinkAdapter = new PayByLinkAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
