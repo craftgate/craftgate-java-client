@@ -16,6 +16,7 @@ public class Craftgate {
     private final PaymentReportingAdapter paymentReportingAdapter;
     private final FileReportingAdapter fileReportingAdapter;
     private final PayByLinkAdapter payByLinkAdapter;
+    private final FraudAdapter fraudAdapter;
 
     public Craftgate(String apiKey, String secretKey) {
         this(apiKey, secretKey, BASE_URL);
@@ -37,6 +38,7 @@ public class Craftgate {
         this.paymentReportingAdapter = new PaymentReportingAdapter(requestOptions);
         this.fileReportingAdapter = new FileReportingAdapter(requestOptions);
         this.payByLinkAdapter = new PayByLinkAdapter(requestOptions);
+        this.fraudAdapter = new FraudAdapter(requestOptions);
     }
 
     public Craftgate(String apiKey, String secretKey, String baseUrl, String lang) {
@@ -92,5 +94,9 @@ public class Craftgate {
 
     public PayByLinkAdapter payByLink() {
         return payByLinkAdapter;
+    }
+
+    public FraudAdapter fraud() {
+        return fraudAdapter;
     }
 }
