@@ -5,6 +5,7 @@ import io.craftgate.request.common.RequestOptions;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class BaseAdapter {
@@ -16,6 +17,7 @@ public abstract class BaseAdapter {
     private static final String AUTH_VERSION_HEADER_NAME = "x-auth-version";
     private static final String CLIENT_VERSION_HEADER_NAME = "x-client-version";
     private static final String SIGNATURE_HEADER_NAME = "x-signature";
+    private static final String LANGUAGE_HEADER_NAME = "lang";
 
     protected final RequestOptions requestOptions;
 
@@ -40,6 +42,9 @@ public abstract class BaseAdapter {
         headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
         headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.27");
         headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, options));
+        if (Objects.nonNull(options.getLanguage())) {
+            headers.put(LANGUAGE_HEADER_NAME, options.getLanguage());
+        }
         return headers;
     }
 

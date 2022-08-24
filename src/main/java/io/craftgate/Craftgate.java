@@ -19,14 +19,18 @@ public class Craftgate {
     private final FraudAdapter fraudAdapter;
 
     public Craftgate(String apiKey, String secretKey) {
-        this(apiKey, secretKey, BASE_URL);
+        this(apiKey, secretKey, BASE_URL, null);
+    }
+    public Craftgate(String apiKey, String secretKey, String baseUrl) {
+        this(apiKey, secretKey, baseUrl, null);
     }
 
-    public Craftgate(String apiKey, String secretKey, String baseUrl) {
+    public Craftgate(String apiKey, String secretKey, String baseUrl, String language) {
         RequestOptions requestOptions = RequestOptions.builder()
                 .apiKey(apiKey)
                 .secretKey(secretKey)
                 .baseUrl(baseUrl)
+                .language(language)
                 .build();
 
         this.payment = new PaymentAdapter(requestOptions);
