@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -16,5 +17,6 @@ public class PaymentResponse extends BasePaymentResponse {
     private String cardToken;
     private Long fraudId;
     private FraudAction fraudAction;
+    private Map<String,Object> additionalData;
     private List<PaymentTransaction> paymentTransactions;
 }
