@@ -1,6 +1,7 @@
 package io.craftgate.request;
 
 import io.craftgate.model.CardAssociation;
+import io.craftgate.model.CardExpiryStatus;
 import io.craftgate.model.CardType;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class SearchStoredCardsRequest {
     private String cardToken;
     private String cardBankName;
     private CardAssociation cardAssociation;
+    private CardExpiryStatus cardExpiryStatus;
 
     @Builder.Default
     private Integer page = 0;
