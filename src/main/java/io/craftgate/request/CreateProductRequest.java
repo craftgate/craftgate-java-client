@@ -18,6 +18,7 @@ public class CreateProductRequest {
 
     private String name;
     private String channel;
+    private String orderId;
     private Integer stock;
     private BigDecimal price;
     private Currency currency;
