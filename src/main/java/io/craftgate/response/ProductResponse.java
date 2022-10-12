@@ -13,6 +13,7 @@ public class ProductResponse {
     private Long id;
     private String name;
     private String description;
+    private String orderId;
     private Status status;
     private BigDecimal price;
     private Currency currency;
