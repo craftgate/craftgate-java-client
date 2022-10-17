@@ -988,6 +988,42 @@ public class PaymentSample {
         assertNotNull(response.getPaymentId());
         assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
     }
+
+    @Test
+    void init_paypal_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.60))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.40))
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.PAYPAL)
+                .price(BigDecimal.valueOf(1))
+                .paidPrice(BigDecimal.valueOf(1))
+                .currency(Currency.USD)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("optional-externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertNull(response.getRedirectUrl());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.REDIRECT_TO_URL, response.getAdditionalAction());
+    }
+
     @Test
     void retrieve_payment() {
         Long paymentId = 1L;
