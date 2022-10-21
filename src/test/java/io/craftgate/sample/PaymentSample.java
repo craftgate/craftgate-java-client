@@ -833,7 +833,6 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(20))
                 .build());
 
-
         List<GarantiPayInstallment> installments = new ArrayList<>();
 
         installments.add(GarantiPayInstallment.builder()
@@ -1022,6 +1021,78 @@ public class PaymentSample {
         assertNull(response.getRedirectUrl());
         assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
         assertEquals(ApmAdditionalAction.REDIRECT_TO_URL, response.getAdditionalAction());
+    }
+
+    @Test
+    void create_cash_on_delivery_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(60))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(40))
+                .build());
+
+        CreateApmPaymentRequest request = CreateApmPaymentRequest.builder()
+                .apmType(ApmType.CASH_ON_DELIVERY)
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("241cf73c-7ef1-4e29-a6cc-f37905f2fc3d")
+                .externalId("optional-externalId")
+                .items(items)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createApmPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(new BigDecimal("100.00000000"), response.getPrice());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+        assertEquals(PaymentType.APM, response.getPaymentType());
+        assertEquals("241cf73c-7ef1-4e29-a6cc-f37905f2fc3d", response.getConversationId());
+        assertEquals(2, response.getPaymentTransactions().size());
+    }
+
+    @Test
+    void create_fund_transfer_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(60))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(40))
+                .build());
+
+        CreateApmPaymentRequest request = CreateApmPaymentRequest.builder()
+                .apmType(ApmType.FUND_TRANSFER)
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("2bc39889-b34f-40b0-abb0-4ab344360705")
+                .externalId("optional-externalId")
+                .items(items)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createApmPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(new BigDecimal("100.00000000"), response.getPrice());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+        assertEquals(PaymentType.APM, response.getPaymentType());
+        assertEquals("2bc39889-b34f-40b0-abb0-4ab344360705", response.getConversationId());
+        assertEquals(2, response.getPaymentTransactions().size());
     }
 
     @Test

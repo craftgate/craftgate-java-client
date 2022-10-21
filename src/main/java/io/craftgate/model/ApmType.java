@@ -5,5 +5,7 @@ public enum ApmType {
     PAYONEER,
     SODEXO,
     EDENRED,
-    PAYPAL
+    PAYPAL,
+    FUND_TRANSFER,
+    CASH_ON_DELIVERY
 }
