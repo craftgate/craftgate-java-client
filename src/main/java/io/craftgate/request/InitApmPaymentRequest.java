@@ -18,6 +18,7 @@ public class InitApmPaymentRequest {
     private ApmType apmType;
     private BigDecimal price;
     private BigDecimal paidPrice;
+    private Long buyerMemberId;
     private Currency currency;
     private PaymentGroup paymentGroup;
     private String paymentChannel;
