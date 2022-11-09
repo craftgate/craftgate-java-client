@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentSample {
 
-    private final Craftgate craftgate = new Craftgate("sandbox-YEhueLgomBjqsnvBlWVVuFsVhlvJlMHE", "sandbox-tBdcdKVGmGupzfaWcULcwDLMoglZZvTz", "https://sandbox-api.craftgate.io");
+    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void create_payment() {
