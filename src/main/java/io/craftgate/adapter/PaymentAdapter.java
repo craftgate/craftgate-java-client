@@ -147,9 +147,9 @@ public class PaymentAdapter extends BaseAdapter {
     }
 
     public void deleteStoredCard(DeleteStoredCardRequest deleteStoredCardRequest) {
-        String query = RequestQueryParamsBuilder.buildQueryParam(deleteStoredCardRequest);
-        String path = "/payment/v1/cards" + query;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+        String path = "/payment/v1/cards/delete";
+        HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(deleteStoredCardRequest, path, requestOptions),
+                deleteStoredCardRequest, Void.class);
     }
 
     public PaymentTransactionApprovalListResponse approvePaymentTransactions(ApprovePaymentTransactionsRequest approvePaymentTransactionsRequest) {
