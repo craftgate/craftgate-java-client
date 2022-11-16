@@ -808,7 +808,13 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .build();
 
-        craftgate.payment().createFundTransferDepositPayment(request);
+        FundTransferDepositPaymentResponse response = craftgate.payment().createFundTransferDepositPayment(request);
+
+        assertEquals(request.getBuyerMemberId(), response.getBuyerMemberId());
+        assertEquals(new BigDecimal("100.00000000"), response.getPrice());
+        assertEquals(request.getConversationId(), response.getConversationId());
+        assertNotNull(response.getWalletTransaction());
+        assertEquals(WalletTransactionType.DEPOSIT_FROM_FUND_TRANSFER, response.getWalletTransaction().getWalletTransactionType());
     }
 
     @Test
@@ -1128,7 +1134,7 @@ public class PaymentSample {
     void refund_payment() {
         RefundPaymentRequest request = RefundPaymentRequest.builder()
                 .paymentId(1L)
-                .refundDestinationType(RefundDestinationType.CARD)
+                .refundDestinationType(RefundDestinationType.PROVIDER)
                 .build();
 
         PaymentRefundResponse response = craftgate.payment().refundPayment(request);
@@ -1151,7 +1157,7 @@ public class PaymentSample {
         RefundPaymentTransactionRequest request = RefundPaymentTransactionRequest.builder()
                 .paymentTransactionId(1L)
                 .refundPrice(BigDecimal.valueOf(20))
-                .refundDestinationType(RefundDestinationType.CARD)
+                .refundDestinationType(RefundDestinationType.PROVIDER)
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .build();
 

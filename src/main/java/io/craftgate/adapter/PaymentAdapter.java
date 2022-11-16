@@ -70,10 +70,10 @@ public class PaymentAdapter extends BaseAdapter {
                 completeThreeDSPaymentRequest, DepositPaymentResponse.class);
     }
 
-    public void createFundTransferDepositPayment(CreateFundTransferDepositPaymentRequest createFundTransferDepositPaymentRequest) {
+    public FundTransferDepositPaymentResponse createFundTransferDepositPayment(CreateFundTransferDepositPaymentRequest createFundTransferDepositPaymentRequest) {
         String path = "/payment/v1/deposits/fund-transfer";
-        HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createFundTransferDepositPaymentRequest, path, requestOptions),
-                createFundTransferDepositPaymentRequest, Void.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createFundTransferDepositPaymentRequest, path, requestOptions),
+                createFundTransferDepositPaymentRequest, FundTransferDepositPaymentResponse.class);
     }
 
     public InitGarantiPayPaymentResponse initGarantiPayPayment(InitGarantiPayPaymentRequest initGarantiPayPaymentRequest) {
