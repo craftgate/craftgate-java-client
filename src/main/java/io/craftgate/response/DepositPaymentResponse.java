@@ -2,6 +2,7 @@ package io.craftgate.response;
 
 import io.craftgate.model.PaymentStatus;
 import io.craftgate.model.PaymentType;
+import io.craftgate.response.dto.WalletTransaction;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -26,4 +27,5 @@ public class DepositPaymentResponse {
     private PaymentStatus paymentStatus;
     private String cardUserKey;
     private String cardToken;
+    private WalletTransaction walletTransaction;
 }
