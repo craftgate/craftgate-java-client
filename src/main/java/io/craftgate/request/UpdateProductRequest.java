@@ -15,6 +15,8 @@ public class UpdateProductRequest {
     private String name;
     private String channel;
     private String orderId;
+    private String conversationId;
+    private String externalId;
     private Status status;
     private Integer stock;
     private BigDecimal price;
