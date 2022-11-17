@@ -2,18 +2,19 @@ package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
 import io.craftgate.model.Currency;
-import io.craftgate.model.*;
-import io.craftgate.request.*;
-import io.craftgate.request.dto.Card;
-import io.craftgate.request.dto.GarantiPayInstallment;
-import io.craftgate.request.dto.PaymentItem;
-import io.craftgate.response.*;
+import io.craftgate.model.Status;
+import io.craftgate.request.CreateProductRequest;
+import io.craftgate.request.SearchProductsRequest;
+import io.craftgate.request.UpdateProductRequest;
+import io.craftgate.response.ProductListResponse;
+import io.craftgate.response.ProductResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class PayByLinkSample {
 
@@ -33,6 +34,8 @@ public class PayByLinkSample {
                 .channel("API")
                 .price(BigDecimal.TEN)
                 .currency(Currency.TRY)
+                .conversationId("my-conversationId")
+                .externalId("my-externalId")
                 .enabledInstallments(enabledInstallments)
                 .build();
 

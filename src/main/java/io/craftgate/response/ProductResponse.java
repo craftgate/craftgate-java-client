@@ -14,6 +14,8 @@ public class ProductResponse {
     private String name;
     private String description;
     private String orderId;
+    private String conversationId;
+    private String externalId;
     private Status status;
     private BigDecimal price;
     private Currency currency;

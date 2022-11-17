@@ -19,6 +19,8 @@ public class CreateProductRequest {
     private String name;
     private String channel;
     private String orderId;
+    private String conversationId;
+    private String externalId;
     private Integer stock;
     private BigDecimal price;
     private Currency currency;
