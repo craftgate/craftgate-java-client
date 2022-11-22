@@ -8,4 +8,5 @@ import lombok.Data;
 public class Loyalty {
     private LoyaltyType type;
     private Reward reward;
+    private String message;
 }
