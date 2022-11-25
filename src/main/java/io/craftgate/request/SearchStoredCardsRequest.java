@@ -6,6 +6,8 @@ import io.craftgate.model.CardType;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 public class SearchStoredCardsRequest {
@@ -18,6 +20,8 @@ public class SearchStoredCardsRequest {
     private String cardBankName;
     private CardAssociation cardAssociation;
     private CardExpiryStatus cardExpiryStatus;
+    private LocalDateTime minCreatedDate;
+    private LocalDateTime maxCreatedDate;
 
     @Builder.Default
     private Integer page = 0;
