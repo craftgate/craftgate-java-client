@@ -7,5 +7,6 @@ public enum Currency {
     EUR,
     GBP,
     ARS,
-    BRL
+    BRL,
+    CNY
 }
