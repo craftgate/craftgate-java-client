@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CraftgateTest {
@@ -49,5 +50,25 @@ public class CraftgateTest {
 
         //then
         assertTrue(isVerified);
+    }
+
+    @Test
+    void should_not_validate_3D_secure_callback_when_hashes_are_not_equal() {
+        //given
+        String merchantThreeDsCallbackKey = "merchantThreeDsCallbackKeySndbox";
+        Map<String, String> params = new HashMap<String, String>() {{
+            put("hash", "39427942bcaasjaduqabzhdancaASasdhbcxjancakjscace82");
+            put("paymentId", "5");
+            put("conversationData", "conversation-data");
+            put("conversationId", "conversation-id");
+            put("status", "SUCCESS");
+            put("completeStatus", "WAITING");
+        }};
+
+        //when
+        boolean isVerified = craftgate.is3DSecureCallbackVerified(merchantThreeDsCallbackKey, params);
+
+        //then
+        assertFalse(isVerified);
     }
 }
