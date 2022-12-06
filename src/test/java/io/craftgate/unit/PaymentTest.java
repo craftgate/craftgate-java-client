@@ -9,7 +9,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CraftgateTest {
+public class PaymentTest {
 
     private final Craftgate craftgate = new Craftgate("api-key", "secret-key");
 
@@ -27,7 +27,7 @@ public class CraftgateTest {
         }};
 
         //when
-        boolean isVerified = craftgate.is3DSecureCallbackVerified(merchantThreeDsCallbackKey, params);
+        boolean isVerified = craftgate.payment().is3DSecureCallbackVerified(merchantThreeDsCallbackKey, params);
 
         //then
         assertTrue(isVerified);
@@ -46,7 +46,7 @@ public class CraftgateTest {
         }};
 
         //when
-        boolean isVerified = craftgate.is3DSecureCallbackVerified(merchantThreeDsCallbackKey, params);
+        boolean isVerified = craftgate.payment().is3DSecureCallbackVerified(merchantThreeDsCallbackKey, params);
 
         //then
         assertTrue(isVerified);
@@ -66,7 +66,7 @@ public class CraftgateTest {
         }};
 
         //when
-        boolean isVerified = craftgate.is3DSecureCallbackVerified(merchantThreeDsCallbackKey, params);
+        boolean isVerified = craftgate.payment().is3DSecureCallbackVerified(merchantThreeDsCallbackKey, params);
 
         //then
         assertFalse(isVerified);

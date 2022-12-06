@@ -2,9 +2,12 @@ package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.*;
+import io.craftgate.request.common.HashGenerator;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.*;
+
+import java.util.Map;
 
 public class PaymentAdapter extends BaseAdapter {
 
@@ -174,5 +177,26 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/payment-transactions/" + updatePaymentTransactionRequest.getPaymentTransactionId();
         return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updatePaymentTransactionRequest, path, requestOptions),
                 updatePaymentTransactionRequest, PaymentTransactionResponse.class);
+    }
+
+    public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
+        String hash = params.get("hash");
+        String hashString = new StringBuilder(threeDSecureCallbackKey)
+                .append("###")
+                .append(params.getOrDefault("status", ""))
+                .append("###")
+                .append(params.getOrDefault("completeStatus", ""))
+                .append("###")
+                .append(params.getOrDefault("paymentId", ""))
+                .append("###")
+                .append(params.getOrDefault("conversationData", ""))
+                .append("###")
+                .append(params.getOrDefault("conversationId", ""))
+                .append("###")
+                .append(params.getOrDefault("callbackStatus", ""))
+                .toString();
+
+        String hashedParams = HashGenerator.generateHash(hashString);
+        return hash.equals(hashedParams);
     }
 }

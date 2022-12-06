@@ -88,25 +88,4 @@ public class Craftgate {
     public FraudAdapter fraud() {
         return fraudAdapter;
     }
-
-    public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
-        String hash = params.get("hash");
-        String hashString = new StringBuilder(threeDSecureCallbackKey)
-                .append("###")
-                .append(params.getOrDefault("status", ""))
-                .append("###")
-                .append(params.getOrDefault("completeStatus", ""))
-                .append("###")
-                .append(params.getOrDefault("paymentId", ""))
-                .append("###")
-                .append(params.getOrDefault("conversationData", ""))
-                .append("###")
-                .append(params.getOrDefault("conversationId", ""))
-                .append("###")
-                .append(params.getOrDefault("callbackStatus", ""))
-                .toString();
-
-        String hashedParams = HashGenerator.generateHash(hashString);
-        return hash.equals(hashedParams);
-    }
 }
