@@ -1,7 +1,10 @@
 package io.craftgate;
 
 import io.craftgate.adapter.*;
+import io.craftgate.request.common.HashGenerator;
 import io.craftgate.request.common.RequestOptions;
+
+import java.util.Map;
 
 public class Craftgate {
 
@@ -21,6 +24,7 @@ public class Craftgate {
     public Craftgate(String apiKey, String secretKey) {
         this(apiKey, secretKey, BASE_URL, null);
     }
+
     public Craftgate(String apiKey, String secretKey, String baseUrl) {
         this(apiKey, secretKey, baseUrl, null);
     }
@@ -83,5 +87,26 @@ public class Craftgate {
 
     public FraudAdapter fraud() {
         return fraudAdapter;
+    }
+
+    public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
+        String hash = params.get("hash");
+        String hashString = new StringBuilder(threeDSecureCallbackKey)
+                .append("###")
+                .append(params.getOrDefault("status", ""))
+                .append("###")
+                .append(params.getOrDefault("completeStatus", ""))
+                .append("###")
+                .append(params.getOrDefault("paymentId", ""))
+                .append("###")
+                .append(params.getOrDefault("conversationData", ""))
+                .append("###")
+                .append(params.getOrDefault("conversationId", ""))
+                .append("###")
+                .append(params.getOrDefault("callbackStatus", ""))
+                .toString();
+
+        String hashedParams = HashGenerator.generateHash(hashString);
+        return hash.equals(hashedParams);
     }
 }
