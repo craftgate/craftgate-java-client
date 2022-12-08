@@ -18,8 +18,8 @@ public class HookSample {
     @Test
     void should_verify_webhook_signature() {
         //given
-        String secretKey = "Aoh7tReTybO6wOjBmOJFFsOR53SBojEp";
-        String signature = "0wRB5XqWJxwwPbn5Z9TcbHh8EGYFufSYTsRMB74N094=";
+        String merchantHookKey = "Aoh7tReTybO6wOjBmOJFFsOR53SBojEp";
+        String incomingSignature = "0wRB5XqWJxwwPbn5Z9TcbHh8EGYFufSYTsRMB74N094=";
 
         LocalDateTime eventTime = LocalDateTime.of(2022, 8, 26, 16, 40, 21, 395655000);
         WebhookData webhookData = WebhookData.builder()
@@ -31,7 +31,7 @@ public class HookSample {
                 .build();
 
         //when
-        boolean isWebhookVerified = craftgate.hook().isWebhookVerified(secretKey, signature, webhookData);
+        boolean isWebhookVerified = craftgate.hook().isWebhookVerified(merchantHookKey, incomingSignature, webhookData);
 
         //then
         assertTrue(isWebhookVerified);
@@ -40,8 +40,8 @@ public class HookSample {
     @Test
     void should_not_verify_webhook_signature() {
         //given
-        String secretKey = "Aoh7tReTybO6wOjBmOJFFsOR53SBojEp";
-        String signature = "Bsa498wcnaasd4bhx8anxıxcsdnxanalkdjcahxhd";
+        String merchantHookKey = "Aoh7tReTybO6wOjBmOJFFsOR53SBojEp";
+        String incomingSignature = "Bsa498wcnaasd4bhx8anxıxcsdnxanalkdjcahxhd";
 
         LocalDateTime eventTime = LocalDateTime.of(2022, 8, 26, 16, 40, 21, 395655000);
         WebhookData webhookData = WebhookData.builder()
@@ -53,7 +53,7 @@ public class HookSample {
                 .build();
 
         //when
-        boolean isWebhookVerified = craftgate.hook().isWebhookVerified(secretKey, signature, webhookData);
+        boolean isWebhookVerified = craftgate.hook().isWebhookVerified(merchantHookKey, incomingSignature, webhookData);
 
         //then
         assertFalse(isWebhookVerified);
