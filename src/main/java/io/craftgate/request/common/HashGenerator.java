@@ -31,4 +31,12 @@ public final class HashGenerator {
             throw new CraftgateException(e);
         }
     }
+
+    public static String generateHash(String hashString) {
+        try {
+            return DigestUtils.sha256Hex(hashString);
+        } catch (Exception e) {
+            throw new CraftgateException(e);
+        }
+    }
 }
