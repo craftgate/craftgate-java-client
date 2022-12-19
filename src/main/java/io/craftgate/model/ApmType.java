@@ -6,6 +6,7 @@ public enum ApmType {
     SODEXO,
     EDENRED,
     PAYPAL,
+    KLARNA,
     AFTERPAY,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
