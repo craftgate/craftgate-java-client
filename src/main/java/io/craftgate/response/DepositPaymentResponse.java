@@ -1,5 +1,6 @@
 package io.craftgate.response;
 
+import io.craftgate.model.FraudAction;
 import io.craftgate.model.PaymentStatus;
 import io.craftgate.model.PaymentType;
 import io.craftgate.response.dto.WalletTransaction;
@@ -28,4 +29,6 @@ public class DepositPaymentResponse {
     private String cardUserKey;
     private String cardToken;
     private WalletTransaction walletTransaction;
+    private Long fraudId;
+    private FraudAction fraudAction;
 }
