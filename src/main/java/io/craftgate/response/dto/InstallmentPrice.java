@@ -10,6 +10,8 @@ public class InstallmentPrice {
     private String posAlias;
     private Integer installmentNumber;
     private BigDecimal installmentPrice;
+    private BigDecimal bankCommissionRate;
+    private BigDecimal merchantCommissionRate;
     private BigDecimal totalPrice;
     private String installmentLabel;
     private Boolean loyaltySupported;
