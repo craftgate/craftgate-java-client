@@ -10,4 +10,5 @@ import java.math.BigDecimal;
 public class Reward {
     private BigDecimal cardRewardMoney;
     private BigDecimal firmRewardMoney;
+    private BigDecimal totalRewardMoney;
 }
