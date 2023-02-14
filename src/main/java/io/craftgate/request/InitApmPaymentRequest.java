@@ -16,6 +16,7 @@ import java.util.Map;
 public class InitApmPaymentRequest {
 
     private ApmType apmType;
+    private Long merchantApmId;
     private BigDecimal price;
     private BigDecimal paidPrice;
     private Long buyerMemberId;
