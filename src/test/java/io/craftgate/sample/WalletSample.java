@@ -221,7 +221,7 @@ public class WalletSample {
     }
 
     @Test
-    void createMemberWallet() {
+    void create_member_wallet() {
         Long memberId = 1L;
         CreateWalletRequest createWalletRequest = CreateWalletRequest.builder()
                 .currency(Currency.TRY)
