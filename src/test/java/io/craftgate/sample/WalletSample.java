@@ -219,4 +219,18 @@ public class WalletSample {
         assertNotNull(response.getTotalSize());
         assertTrue(response.getItems().size() > 0);
     }
+
+    @Test
+    void createMemberWallet() {
+        Long memberId = 1L;
+        CreateWalletRequest createWalletRequest = CreateWalletRequest.builder()
+                .currency(Currency.TRY)
+                .negativeAmountLimit(BigDecimal.ZERO)
+                .build();
+
+        WalletResponse response = craftgate.wallet().createWallet(memberId, createWalletRequest);
+
+        assertNotNull(response.getId());
+        assertEquals(Currency.TRY, response.getCurrency());
+    }
 }
