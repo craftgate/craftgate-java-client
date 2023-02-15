@@ -12,6 +12,11 @@ public class WalletAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
+    public WalletResponse createWallet(Long memberId, CreateWalletRequest request) {
+        String path = "/wallet/v1/members/" + memberId + "/wallets";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions), request, WalletResponse.class);
+    }
+
     public WalletResponse retrieveMemberWallet(Long memberId) {
         String path = "/wallet/v1/members/" + memberId + "/wallet";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletResponse.class);
