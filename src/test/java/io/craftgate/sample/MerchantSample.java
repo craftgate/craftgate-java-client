@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MerchantSample {
 
-    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "http://localhost:8000");
+    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void create_merchant_pos() {
@@ -143,7 +143,7 @@ public class MerchantSample {
 
     @Test
     void update_merchant_pos_commissions() {
-        Long merchantPosId = 48L;
+        Long merchantPosId = 1L;
 
         UpdateMerchantPosCommission installment1 = UpdateMerchantPosCommission.builder()
                 .installment(1)

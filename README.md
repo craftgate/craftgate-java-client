@@ -114,14 +114,20 @@ In reality, the `Craftgate` class serves as a collection of adapters that integr
 
 For all adapters in the `Craftgate`, their purposes, accessors, as well as direct import paths, refer to the list below:
 
-| Adapter Name | Purpose | Accessor |
-|--------------|---------|----------|
-| `InstallmentAdapter` | Retrieving per-installment pricing information based on installment count or BIN number | `installment()` |
-| `OnboardingAdapter` | Conducting CRUD operations on buyers and submerchants | `onboarding()` |
-| `PaymentAdapter` | Conducting payments, retrieving payment information, managing stored cards | `payment()` |
-| `WalletAdapter` | Wallet operations like send, receive remittance and search wallets or wallet transactions of member's | `wallet()` |
-| `SettlementReportingAdapter` | Settlement operations like search payout completed transactions, search bounced payout transactions | `settlementReporting()` |
-| `SettlementAdapter` | Settlement operations like create instant wallet settlement | `settlement()` |
+| Adapter Name                 | Purpose                                                                                               | Accessor                |
+|------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------|
+| `FileReportingAdapter`       | Reporting operations like retrieve report                                                             | `fileReporting()`       |
+| `FraudAdapter`               | Fraud operations like search fraud checks, create values etc.                                         | `fraud()`               |
+| `HookAdapter`                | Webhook operations like verify incoming hook                                                          | `hook()`                |
+| `InstallmentAdapter`         | Retrieving per-installment pricing information based on installment count or BIN number               | `installment()`         |
+| `MerchantAdapter`            | Merchant creation, POS & POS Commission operations                                                    | `merchant()`            |
+| `OnboardingAdapter`          | Conducting CRUD operations on buyers and submerchants                                                 | `onboarding()`          |
+| `PayByLinkAdapter`           | Product/Link operation like create a product, delete product                                          | `payByLink()`           |
+| `PaymentAdapter`             | Conducting payments, retrieving payment information, managing stored cards                            | `payment()`             |
+| `PaymentReportingAdapter`    | Payment operations like search payments, refunds                                                      | `paymentReporting()`    |
+| `SettlementAdapter`          | Settlement operations like create instant wallet settlement                                           | `settlement()`          |
+| `SettlementReportingAdapter` | Settlement operations like search payout completed transactions, search bounced payout transactions   | `settlementReporting()` |
+| `WalletAdapter`              | Wallet operations like send, receive remittance and search wallets or wallet transactions of member's | `wallet()`              |
 
 ### Contributions
 
