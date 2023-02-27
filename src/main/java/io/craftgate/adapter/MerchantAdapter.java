@@ -46,14 +46,19 @@ public class MerchantAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantPosResponse.class);
     }
 
+    public void deleteMerchantPos(Long merchantPosId) {
+        String path = "/merchant/v1/merchant-poses/" + merchantPosId;
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    }
+
     public MerchantPosCommissionListResponse retrieveMerchantPosCommissions(Long merchantPosId) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId + "/commissions";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantPosCommissionListResponse.class);
     }
-
     /*
-    * This endpoint using for creating and updating merchant pos commissions. The HTTP method is POST due to this requirement.
-    * */
+     * This endpoint using for creating and updating merchant pos commissions. The HTTP method is POST due to this requirement.
+     * */
+
     public MerchantPosCommissionListResponse updateMerchantPosCommissions(Long merchantPosId, UpdateMerchantPosCommissionsRequest updateMerchantPosCommissionsRequest) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId + "/commissions";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(updateMerchantPosCommissionsRequest, path, requestOptions), updateMerchantPosCommissionsRequest, MerchantPosCommissionListResponse.class);

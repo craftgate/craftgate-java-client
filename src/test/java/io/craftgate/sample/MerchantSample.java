@@ -118,6 +118,13 @@ public class MerchantSample {
     }
 
     @Test
+    void delete_merchant_pos() {
+        Long merchantPosId = 48L;
+
+        craftgate.merchant().deleteMerchantPos(merchantPosId);
+    }
+
+    @Test
     void search_merchant_poses() {
         SearchMerchantPosRequest request = SearchMerchantPosRequest.builder()
                 .currency(Currency.TRY)
