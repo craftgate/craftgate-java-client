@@ -10,9 +10,6 @@ import java.math.BigDecimal;
 @Builder
 public class UpdateMerchantPosCommission {
 
-    /*
-    * Supported card brand names -> "Bonus", "Axess", "Maximum", "World", "Paraf", "CardFinans", "Bankkart Combo", "Advantage", "Sağlam Kart"
-    * */
     private String cardBrandName;
 
     private Integer installment;

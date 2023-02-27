@@ -1,15 +1,15 @@
 package io.craftgate.model;
 
 public enum CardBrand {
-    Bonus("Bonus"),
-    Axess("Axess"),
-    Maximum("Maximum"),
-    World("World"),
-    Paraf("Paraf"),
-    CardFinans("CardFinans"),
-    BankkartCombo("Bankkart Combo"),
-    Advantage("Advantage"),
-    SaglamKart("Sağlam Kart");
+    BONUS("Bonus"),
+    AXESS("Axess"),
+    MAXIMUM("Maximum"),
+    WORLD("World"),
+    PARAF("Paraf"),
+    CARD_FINANS("CardFinans"),
+    BANKKART_COMBO("Bankkart Combo"),
+    ADVANTAGE("Advantage"),
+    SAGLAM_KART("Sağlam Kart");
 
     private final String cardBrandName;
 
