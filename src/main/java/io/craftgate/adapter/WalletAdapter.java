@@ -60,14 +60,14 @@ public class WalletAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletTransactionRefundableAmountResponse.class);
     }
 
-    public RefundWalletTransactionToCardResponse refundWalletTransactionToCard(Long walletTransactionId, RefundWalletTransactionToCardRequest request) {
+    public RefundWalletTransactionResponse refundWalletTransaction(Long walletTransactionId, RefundWalletTransactionToCardRequest request) {
         String path = "/payment/v1/wallet-transactions/" + walletTransactionId + "/refunds";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions), request, RefundWalletTransactionToCardResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions), request, RefundWalletTransactionResponse.class);
     }
 
-    public RefundWalletTransactionToCardListResponse retrieveRefundWalletTransactionsToCard(Long walletTransactionId) {
+    public RefundWalletTransactionListResponse retrieveRefundWalletTransactions(Long walletTransactionId) {
         String path = "/payment/v1/wallet-transactions/" + walletTransactionId + "/refunds";
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), RefundWalletTransactionToCardListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), RefundWalletTransactionListResponse.class);
     }
 
     public WithdrawResponse createWithdraw(CreateWithdrawRequest request) {

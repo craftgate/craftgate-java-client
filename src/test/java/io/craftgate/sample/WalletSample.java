@@ -137,7 +137,7 @@ public class WalletSample {
                 .refundPrice(BigDecimal.TEN)
                 .build();
 
-        RefundWalletTransactionToCardResponse response = craftgate.wallet().refundWalletTransactionToCard(walletTransactionId, request);
+        RefundWalletTransactionResponse response = craftgate.wallet().refundWalletTransaction(walletTransactionId, request);
 
         assertNotNull(response.getId());
         assertNull(response.getPaymentError());
@@ -151,7 +151,7 @@ public class WalletSample {
     void retrieve_refund_wallet_transactions_to_card() {
         long walletTransactionId = 1;
 
-        RefundWalletTransactionToCardListResponse response = craftgate.wallet().retrieveRefundWalletTransactionsToCard(walletTransactionId);
+        RefundWalletTransactionListResponse response = craftgate.wallet().retrieveRefundWalletTransactions(walletTransactionId);
 
         assertNotNull(response.getItems());
         assertTrue(response.getItems().size() > 0);
