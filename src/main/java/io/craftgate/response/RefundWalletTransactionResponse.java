@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class RefundWalletTransactionToCardResponse {
+public class RefundWalletTransactionResponse {
 
     private Long id;
     private LocalDateTime createdDate;
