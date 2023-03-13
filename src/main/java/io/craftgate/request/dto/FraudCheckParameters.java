@@ -6,6 +6,6 @@ import lombok.Data;
 public class FraudCheckParameters {
 
     private String buyerExternalId;
-    private String buyerGsmNumber;
+    private String buyerPhoneNumber;
     private String buyerEmail;
 }
