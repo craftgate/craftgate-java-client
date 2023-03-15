@@ -9,5 +9,6 @@ public enum Currency {
     ARS,
     BRL,
     CNY,
-    AED
+    AED,
+    IQD
 }
