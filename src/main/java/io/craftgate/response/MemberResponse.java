@@ -3,6 +3,7 @@ package io.craftgate.response;
 import io.craftgate.model.MemberType;
 import io.craftgate.model.SettlementEarningsDestination;
 import io.craftgate.model.Status;
+import io.craftgate.request.CreateWalletRequest;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -30,6 +31,10 @@ public class MemberResponse {
     private String taxOffice;
     private String taxNumber;
     private SettlementEarningsDestination settlementEarningsDestination;
+    /**
+     * @deprecated use @{@link CreateWalletRequest#setNegativeAmountLimit(BigDecimal)} instead.
+     */
+    @Deprecated
     private BigDecimal negativeWalletAmountLimit;
     private String iban;
 }

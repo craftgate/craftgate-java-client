@@ -79,6 +79,12 @@ public class PaymentAdapter extends BaseAdapter {
                 createFundTransferDepositPaymentRequest, FundTransferDepositPaymentResponse.class);
     }
 
+    public ApmDepositPaymentResponse initApmDepositPayment(InitApmDepositPaymentRequest initApmDepositPaymentRequest) {
+        String path = "/payment/v1/deposits/apm-init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initApmDepositPaymentRequest, path, requestOptions),
+                initApmDepositPaymentRequest, ApmDepositPaymentResponse.class);
+    }
+
     public InitGarantiPayPaymentResponse initGarantiPayPayment(InitGarantiPayPaymentRequest initGarantiPayPaymentRequest) {
         String path = "/payment/v1/garanti-pay-payments";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initGarantiPayPaymentRequest, path, requestOptions),
