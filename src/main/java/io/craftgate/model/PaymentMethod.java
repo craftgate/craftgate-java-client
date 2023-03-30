@@ -3,5 +3,14 @@ package io.craftgate.model;
 public enum PaymentMethod {
 
     CARD,
-    MASTERPASS
+    MASTERPASS,
+    PAPARA,
+    PAYONEER,
+    SODEXO,
+    EDENRED,
+    EDENRED_GIFT,
+    ALIPAY,
+    PAYPAL,
+    KLARNA,
+    AFTERPAY
 }
