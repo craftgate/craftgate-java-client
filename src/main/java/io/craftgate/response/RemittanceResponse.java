@@ -1,5 +1,6 @@
 package io.craftgate.response;
 
+import io.craftgate.model.Currency;
 import io.craftgate.model.RemittanceReasonType;
 import io.craftgate.model.RemittanceType;
 import io.craftgate.model.Status;
@@ -15,6 +16,7 @@ public class RemittanceResponse {
     private LocalDateTime createdDate;
     private Status status;
     private BigDecimal price;
+    private Currency currency;
     private Long memberId;
     private RemittanceType remittanceType;
     private RemittanceReasonType remittanceReasonType;

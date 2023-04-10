@@ -818,6 +818,26 @@ public class PaymentSample {
     }
 
     @Test
+    void init_apm_deposit_payment() {
+        InitApmDepositPaymentRequest request = InitApmDepositPaymentRequest.builder()
+                .apmType(ApmType.PAPARA)
+                .price(BigDecimal.valueOf(1))
+                .currency(Currency.TRY)
+                .buyerMemberId(1L)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("optional-externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .clientIp("127.0.0.1")
+                .build();
+
+        ApmDepositPaymentResponse response = craftgate.payment().initApmDepositPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertNotNull(response.getRedirectUrl());
+        assertEquals(response.getPaymentStatus(), PaymentStatus.WAITING);
+        assertEquals(response.getAdditionalAction(), ApmAdditionalAction.REDIRECT_TO_URL);
+    }
+
+    @Test
     void init_garanti_pay_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
