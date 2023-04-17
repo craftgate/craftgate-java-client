@@ -1,11 +1,14 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
+import io.craftgate.model.FileStatus;
 import io.craftgate.request.CreateInstantWalletSettlementRequest;
+import io.craftgate.request.SearchSettlementRowsRequest;
 import io.craftgate.response.SettlementResponse;
+import io.craftgate.response.SettlementRowListResponse;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SettlementSample {
 
@@ -18,5 +21,17 @@ public class SettlementSample {
 
         SettlementResponse response = craftgate.settlement().createInstantWalletSettlement(request);
         assertNotNull(response.getSettlementResultStatus());
+    }
+
+    @Test
+    void search_settlement_rows() {
+        SearchSettlementRowsRequest request = SearchSettlementRowsRequest.builder()
+                .fileStatus(FileStatus.CREATED)
+                .page(0)
+                .size(10)
+                .build();
+
+        SettlementRowListResponse response = craftgate.settlement().searchSettlementRows(request);
+        assertFalse(response.getItems().isEmpty());
     }
 }
