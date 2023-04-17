@@ -7,7 +7,6 @@ import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.SettlementResponse;
 import io.craftgate.response.SettlementRowListResponse;
-import io.craftgate.response.StoredCardListResponse;
 
 public class SettlementAdapter extends BaseAdapter {
 
