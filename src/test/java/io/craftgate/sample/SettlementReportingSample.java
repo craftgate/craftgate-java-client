@@ -64,7 +64,7 @@ public class SettlementReportingSample {
     }
 
     @Test
-    void search_settlement_rows() {
+    void search_payout_rows() {
         SearchPayoutRowsRequest request = SearchPayoutRowsRequest.builder()
                 .fileStatus(FileStatus.CREATED)
                 .startDate(LocalDateTime.now().minusDays(10))
