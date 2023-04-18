@@ -18,4 +18,7 @@ public class SearchSettlementRowsRequest {
     @Builder.Default
     private Integer size = 10;
     private FileStatus fileStatus;
+
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 }
