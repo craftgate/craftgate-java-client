@@ -233,4 +233,18 @@ public class WalletSample {
         assertNotNull(response.getId());
         assertEquals(Currency.TRY, response.getCurrency());
     }
+
+    @Test
+    void update_member_wallet() {
+        Long memberId = 1L;
+        Long walletId = 1L;
+        UpdateWalletRequest updateWalletRequest = UpdateWalletRequest.builder()
+                .negativeAmountLimit(BigDecimal.TEN.negate())
+                .build();
+
+        WalletResponse response = craftgate.wallet().updateWallet(memberId, walletId, updateWalletRequest);
+
+        assertNotNull(response.getId());
+        assertEquals(BigDecimal.TEN.negate(), response.getNegativeAmountLimit());
+    }
 }
