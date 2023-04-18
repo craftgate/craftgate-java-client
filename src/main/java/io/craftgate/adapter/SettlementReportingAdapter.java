@@ -36,7 +36,7 @@ public class SettlementReportingAdapter extends BaseAdapter {
 
     public PayoutRowListResponse searchPayoutRows(SearchPayoutRowsRequest request) {
         String queryParam = RequestQueryParamsBuilder.buildQueryParam(request);
-        String path = "/settlement/v1/settlements/rows" + queryParam;
+        String path = "/settlement-reporting/v1/settlement-file-rows" + queryParam;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutRowListResponse.class);
     }
 }

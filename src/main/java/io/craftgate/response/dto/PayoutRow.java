@@ -5,13 +5,16 @@ import io.craftgate.model.MerchantType;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 public class PayoutRow {
 
-    private Long id;
+    private String name;
+    private String iban;
+    private Long payoutId;
     private Long merchantId;
-    private MerchantType merchantType;
+    private String merchantType;
     private BigDecimal payoutAmount;
-    private FileStatus fileStatus;
+    private LocalDateTime payoutDate;
 }
