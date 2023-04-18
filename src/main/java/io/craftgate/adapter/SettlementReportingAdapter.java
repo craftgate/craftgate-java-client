@@ -3,13 +3,13 @@ package io.craftgate.adapter;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.SearchPayoutBouncedTransactionsRequest;
 import io.craftgate.request.SearchPayoutCompletedTransactionsRequest;
-import io.craftgate.request.SearchSettlementRowsRequest;
+import io.craftgate.request.SearchPayoutRowsRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.PayoutBouncedTransactionListResponse;
 import io.craftgate.response.PayoutCompletedTransactionListResponse;
 import io.craftgate.response.PayoutDetailResponse;
-import io.craftgate.response.SettlementRowListResponse;
+import io.craftgate.response.PayoutRowListResponse;
 
 public class SettlementReportingAdapter extends BaseAdapter {
 
@@ -34,9 +34,9 @@ public class SettlementReportingAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutDetailResponse.class);
     }
 
-    public SettlementRowListResponse searchSettlementRows(SearchSettlementRowsRequest request) {
+    public PayoutRowListResponse searchPayoutRows(SearchPayoutRowsRequest request) {
         String queryParam = RequestQueryParamsBuilder.buildQueryParam(request);
         String path = "/settlement/v1/settlements/rows" + queryParam;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), SettlementRowListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutRowListResponse.class);
     }
 }

@@ -1,14 +1,9 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
-import io.craftgate.model.FileStatus;
 import io.craftgate.request.CreateInstantWalletSettlementRequest;
-import io.craftgate.request.SearchSettlementRowsRequest;
 import io.craftgate.response.SettlementResponse;
-import io.craftgate.response.SettlementRowListResponse;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 

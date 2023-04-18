@@ -7,7 +7,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class SettlementRow {
+public class PayoutRow {
 
     private Long id;
     private Long merchantId;

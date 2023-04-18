@@ -1,16 +1,14 @@
 package io.craftgate.request;
 
 import io.craftgate.model.FileStatus;
-import io.craftgate.model.WalletTransactionType;
 import lombok.Builder;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class SearchSettlementRowsRequest {
+public class SearchPayoutRowsRequest {
 
     @Builder.Default
     private Integer page = 0;
