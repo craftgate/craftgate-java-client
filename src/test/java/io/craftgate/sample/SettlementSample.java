@@ -5,7 +5,7 @@ import io.craftgate.request.CreateInstantWalletSettlementRequest;
 import io.craftgate.response.SettlementResponse;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SettlementSample {
 

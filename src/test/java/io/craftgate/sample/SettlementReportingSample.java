@@ -1,18 +1,20 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
+import io.craftgate.model.FileStatus;
 import io.craftgate.model.SettlementType;
 import io.craftgate.request.SearchPayoutBouncedTransactionsRequest;
 import io.craftgate.request.SearchPayoutCompletedTransactionsRequest;
+import io.craftgate.request.SearchPayoutRowsRequest;
 import io.craftgate.response.PayoutBouncedTransactionListResponse;
 import io.craftgate.response.PayoutCompletedTransactionListResponse;
 import io.craftgate.response.PayoutDetailResponse;
+import io.craftgate.response.PayoutRowListResponse;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SettlementReportingSample {
 
@@ -59,5 +61,19 @@ public class SettlementReportingSample {
 
         PayoutDetailResponse response = craftgate.settlementReporting().retrievePayoutDetails(payoutId);
         assertNotNull(response);
+    }
+
+    @Test
+    void search_payout_rows() {
+        SearchPayoutRowsRequest request = SearchPayoutRowsRequest.builder()
+                .fileStatus(FileStatus.CREATED)
+                .startDate(LocalDateTime.now().minusDays(10))
+                .endDate(LocalDateTime.now())
+                .page(0)
+                .size(10)
+                .build();
+
+        PayoutRowListResponse response = craftgate.settlementReporting().searchPayoutRows(request);
+        assertFalse(response.getItems().isEmpty());
     }
 }
