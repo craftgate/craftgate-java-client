@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Builder
@@ -16,7 +17,7 @@ public class SearchWalletTransactionsRequest {
 
     @Builder.Default
     private Integer size = 10;
-    private WalletTransactionType walletTransactionType;
+    private Set<WalletTransactionType> walletTransactionTypes;
     private LocalDateTime minCreatedDate;
     private LocalDateTime maxCreatedDate;
     private BigDecimal minAmount;
