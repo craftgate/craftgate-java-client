@@ -76,7 +76,6 @@ public class OnboardingSample {
                 .taxOffice("Erenköy")
                 .address("Suadiye Mah. Örnek Cd. No:23, 34740 Kadıköy/İstanbul")
                 .iban("TR930006701000000001111111")
-                .settlementEarningsDestination(SettlementEarningsDestination.IBAN)
                 .build();
 
         MemberResponse response = craftgate.onboarding().updateMember(memberId, request);
