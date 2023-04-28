@@ -1,6 +1,7 @@
 package io.craftgate.request;
 
 import io.craftgate.model.MemberType;
+import io.craftgate.model.SettlementEarningsDestination;
 import lombok.Builder;
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class UpdateMemberRequest {
     private String taxOffice;
     private String taxNumber;
     private String iban;
+    private SettlementEarningsDestination settlementEarningsDestination;
     /**
      * @deprecated use @{@link CreateWalletRequest#setNegativeAmountLimit(BigDecimal)} instead.
      */
