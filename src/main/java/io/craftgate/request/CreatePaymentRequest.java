@@ -42,4 +42,7 @@ public class CreatePaymentRequest {
     protected FraudCheckParameters fraudParams;
     protected List<PaymentItem> items;
     protected Map<String, Map<String, Object>> additionalParams;
+
+    @Builder.Default
+    protected boolean retry = true;
 }
