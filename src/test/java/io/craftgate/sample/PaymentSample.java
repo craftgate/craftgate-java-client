@@ -309,11 +309,10 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(20))
                 .build());
 
-        Map<String, Map<String, Object>> additionalParams = new HashMap<>();
-        Map<String, Object> paymentProviderParams = new HashMap<String, Object>() {{
-            put("cardUserKey", "test-cardUserKey");
-            put("cardToken", "tuz8imxv30");
-        }};
+        Map<String, Object> additionalParams = new HashMap<>();
+        Map<String, Object> paymentProviderParams = new HashMap<>();
+        paymentProviderParams.put("cardUserKey", "test-cardUserKey");
+        paymentProviderParams.put("cardToken", "tuz8imxv30");
         additionalParams.put("paymentProvider", paymentProviderParams);
 
         CreatePaymentRequest request = CreatePaymentRequest.builder()
