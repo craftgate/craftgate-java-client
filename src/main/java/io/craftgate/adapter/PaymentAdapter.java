@@ -109,6 +109,18 @@ public class PaymentAdapter extends BaseAdapter {
                 request, PaymentResponse.class);
     }
 
+    public InitPosApmPaymentResponse initPosApmPayment(InitPosApmPaymentRequest request) {
+        String path = "/payment/v1/pos-apm-payments/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions),
+                request, InitPosApmPaymentResponse.class);
+    }
+
+    public CompletePosApmPaymentResponse completePosApmPayment(CompletePosApmPaymentRequest request) {
+        String path = "/payment/v1/pos-apm-payments/complete";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions),
+                request, CompletePosApmPaymentResponse.class);
+    }
+
     public RetrieveLoyaltiesResponse retrieveLoyalties(RetrieveLoyaltiesRequest retrieveLoyaltiesRequest) {
         String path = "/payment/v1/card-loyalties/retrieve";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(retrieveLoyaltiesRequest, path, requestOptions),
