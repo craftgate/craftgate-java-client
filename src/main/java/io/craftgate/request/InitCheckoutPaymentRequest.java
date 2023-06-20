@@ -4,6 +4,7 @@ import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.model.PaymentMethod;
 import io.craftgate.model.PaymentPhase;
+import io.craftgate.request.dto.CustomInstallment;
 import io.craftgate.request.dto.PaymentItem;
 import lombok.Builder;
 import lombok.Data;
@@ -43,5 +44,6 @@ public class InitCheckoutPaymentRequest {
     protected boolean allowInstallmentOnlyCommercialCards;
     protected boolean forceThreeDS;
     protected boolean forceAuthForNonCreditCards;
+    protected List<CustomInstallment> customInstallments;
     protected List<PaymentItem> items;
 }
