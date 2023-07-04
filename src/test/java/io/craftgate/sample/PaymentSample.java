@@ -1124,6 +1124,43 @@ public class PaymentSample {
     }
 
     @Test
+    void init_ykb_world_pay_pos_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        InitPosApmPaymentRequest request = InitPosApmPaymentRequest.builder()
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentProvider(PosApmPaymentProvider.YKB_WORLD_PAY)
+                .additionalParams(new HashMap() {{
+                    put("sourceCode", "WEB2QR");
+                }})
+                .callbackUrl("https://www.your-website.com/craftgate-pos-apm-callback")
+                .items(items)
+                .build();
+
+        InitPosApmPaymentResponse response = craftgate.payment().initPosApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertNotNull(response.getHtmlContent());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(AdditionalAction.SHOW_HTML_CONTENT, response.getAdditionalAction());
+    }
+
+    @Test
     void create_cash_on_delivery_payment() {
         List<PaymentItem> items = new ArrayList<>();
 

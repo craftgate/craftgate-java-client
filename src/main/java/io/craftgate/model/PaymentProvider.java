@@ -9,5 +9,8 @@ public enum PaymentProvider {
     PAPARA,
     PAYONEER,
     SODEXO,
-    EDENRED
+    EDENRED,
+    YKB_WORLD_PAY,
+    APPLEPAY,
+    GOOGLEPAY
 }
