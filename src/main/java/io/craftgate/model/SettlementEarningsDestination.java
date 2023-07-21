@@ -3,5 +3,6 @@ package io.craftgate.model;
 public enum SettlementEarningsDestination {
 
     IBAN,
-    WALLET
+    WALLET,
+    CROSS_BORDER
 }
