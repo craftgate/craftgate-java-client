@@ -1,10 +1,7 @@
 package io.craftgate;
 
 import io.craftgate.adapter.*;
-import io.craftgate.request.common.HashGenerator;
 import io.craftgate.request.common.RequestOptions;
-
-import java.util.Map;
 
 public class Craftgate {
 
@@ -21,6 +18,8 @@ public class Craftgate {
     private final PayByLinkAdapter payByLinkAdapter;
     private final FraudAdapter fraudAdapter;
     private final HookAdapter hookAdapter;
+    private final BankAccountTrackingAdapter bankAccountTrackingAdapter;
+
 
     public Craftgate(String apiKey, String secretKey) {
         this(apiKey, secretKey, BASE_URL, null);
@@ -49,6 +48,7 @@ public class Craftgate {
         this.payByLinkAdapter = new PayByLinkAdapter(requestOptions);
         this.fraudAdapter = new FraudAdapter(requestOptions);
         this.hookAdapter = new HookAdapter(requestOptions);
+        this.bankAccountTrackingAdapter = new BankAccountTrackingAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
@@ -93,5 +93,9 @@ public class Craftgate {
 
     public HookAdapter hook() {
         return hookAdapter;
+    }
+
+    public BankAccountTrackingAdapter bankAccountTracking() {
+        return bankAccountTrackingAdapter;
     }
 }
