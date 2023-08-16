@@ -24,6 +24,7 @@ public class CreateMemberRequest {
     private String taxOffice;
     private String taxNumber;
     private String iban;
+    private SettlementEarningsDestination settlementEarningsDestination;
     /**
      * @deprecated use @{@link CreateWalletRequest#setNegativeAmountLimit(BigDecimal)} instead.
      */
