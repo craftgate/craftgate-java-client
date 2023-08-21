@@ -30,6 +30,8 @@ public class CreateMemberRequest {
      */
     @Deprecated
     private BigDecimal negativeWalletAmountLimit;
+
+    private BigDecimal subMerchantMaximumAllowedNegativeBalance;
     private Boolean isBuyer;
     private Boolean isSubMerchant;
 }
