@@ -730,6 +730,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getPageUrl());
         assertNotNull(response.getToken());
+        assertNotNull(response.getTokenExpireDate());
     }
 
     @Test
