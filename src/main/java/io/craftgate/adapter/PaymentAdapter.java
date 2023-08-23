@@ -57,7 +57,7 @@ public class PaymentAdapter extends BaseAdapter {
 
     public void expireCheckoutPayment(String token) {
         String path = "/payment/v1/checkout-payments/" + token;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
     }
 
     public DepositPaymentResponse createDepositPayment(CreateDepositPaymentRequest createDepositPaymentRequest) {
