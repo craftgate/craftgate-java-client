@@ -1,7 +1,5 @@
 package io.craftgate.response.dto;
 
-import io.craftgate.model.FileStatus;
-import io.craftgate.model.MerchantType;
 import lombok.Data;
 
 import java.math.BigDecimal;

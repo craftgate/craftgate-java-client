@@ -1489,16 +1489,6 @@ public class PaymentSample {
     }
 
     @Test
-    void check_masterpass_user() {
-        CheckMasterpassUserRequest request = CheckMasterpassUserRequest.builder()
-                .masterpassGsmNumber("903000000000")
-                .build();
-
-        CheckMasterpassUserResponse response = craftgate.payment().checkMasterpassUser(request);
-        assertNotNull(response);
-    }
-
-    @Test
     void create_multi_currency_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
