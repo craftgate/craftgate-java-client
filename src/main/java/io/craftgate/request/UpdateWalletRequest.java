@@ -1,6 +1,5 @@
 package io.craftgate.request;
 
-import io.craftgate.model.Currency;
 import lombok.Builder;
 import lombok.Data;
 
