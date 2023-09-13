@@ -17,6 +17,7 @@ public class Craftgate {
     private final SettlementReportingAdapter settlementReportingAdapter;
     private final SettlementAdapter settlementAdapter;
     private final PaymentReportingAdapter paymentReportingAdapter;
+    private final PaymentTokenAdapter paymentTokenAdapter;
     private final FileReportingAdapter fileReportingAdapter;
     private final PayByLinkAdapter payByLinkAdapter;
     private final FraudAdapter fraudAdapter;
@@ -45,6 +46,7 @@ public class Craftgate {
         this.settlementReportingAdapter = new SettlementReportingAdapter(requestOptions);
         this.settlementAdapter = new SettlementAdapter(requestOptions);
         this.paymentReportingAdapter = new PaymentReportingAdapter(requestOptions);
+        this.paymentTokenAdapter = new PaymentTokenAdapter(requestOptions);
         this.fileReportingAdapter = new FileReportingAdapter(requestOptions);
         this.payByLinkAdapter = new PayByLinkAdapter(requestOptions);
         this.fraudAdapter = new FraudAdapter(requestOptions);
@@ -69,6 +71,10 @@ public class Craftgate {
 
     public PaymentReportingAdapter paymentReporting() {
         return paymentReportingAdapter;
+    }
+
+    public PaymentTokenAdapter paymentTokenAdapter() {
+        return paymentTokenAdapter;
     }
 
     public FileReportingAdapter fileReporting() {
