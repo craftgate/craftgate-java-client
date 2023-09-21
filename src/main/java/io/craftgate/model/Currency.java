@@ -10,7 +10,7 @@ public enum Currency {
     BRL,
     CNY,
     AED,
-    KZT,
     IQD,
-    AZN
+    AZN,
+    KZT
 }
