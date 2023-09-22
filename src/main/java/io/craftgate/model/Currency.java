@@ -11,5 +11,6 @@ public enum Currency {
     CNY,
     AED,
     IQD,
-    AZN
+    AZN,
+    KZT
 }
