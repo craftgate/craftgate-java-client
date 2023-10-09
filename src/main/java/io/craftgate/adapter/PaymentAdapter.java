@@ -120,10 +120,10 @@ public class PaymentAdapter extends BaseAdapter {
                 request, InitPosApmPaymentResponse.class);
     }
 
-    public CompletePosApmPaymentResponse completePosApmPayment(CompletePosApmPaymentRequest request) {
+    public PaymentResponse completePosApmPayment(CompletePosApmPaymentRequest request) {
         String path = "/payment/v1/pos-apm-payments/complete";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions),
-                request, CompletePosApmPaymentResponse.class);
+                request, PaymentResponse.class);
     }
 
     public RetrieveLoyaltiesResponse retrieveLoyalties(RetrieveLoyaltiesRequest retrieveLoyaltiesRequest) {

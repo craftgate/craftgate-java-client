@@ -1210,6 +1210,16 @@ public class PaymentSample {
     }
 
     @Test
+    void complete_pos_apm_payment() {
+        CompletePosApmPaymentRequest request = CompletePosApmPaymentRequest.builder()
+                .paymentId(1L)
+                .build();
+
+        PaymentResponse response = craftgate.payment().completePosApmPayment(request);
+        assertNotNull(response);
+    }
+
+    @Test
     void create_cash_on_delivery_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
