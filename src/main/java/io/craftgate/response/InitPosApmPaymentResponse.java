@@ -15,5 +15,5 @@ public class InitPosApmPaymentResponse {
     private PaymentStatus paymentStatus;
     private AdditionalAction additionalAction;
     private PaymentError paymentError;
-    private Map<String,Object> additionalData;
+    private Map<String, Object> additionalData;
 }
