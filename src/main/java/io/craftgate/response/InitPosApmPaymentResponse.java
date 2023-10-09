@@ -5,6 +5,8 @@ import io.craftgate.model.PaymentStatus;
 import io.craftgate.response.dto.PaymentError;
 import lombok.Data;
 
+import java.util.Map;
+
 @Data
 public class InitPosApmPaymentResponse {
 
@@ -13,4 +15,5 @@ public class InitPosApmPaymentResponse {
     private PaymentStatus paymentStatus;
     private AdditionalAction additionalAction;
     private PaymentError paymentError;
+    private Map<String,Object> additionalData;
 }
