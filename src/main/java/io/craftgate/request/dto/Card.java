@@ -20,6 +20,7 @@ public class Card {
     private String lastFourDigits;
     private String cardHolderIdentityNumber;
     private Loyalty loyalty;
+    private TokenizedCard tokenizedCard;
 
     @Builder.Default
     private Boolean storeCardAfterSuccessPayment = false;

@@ -196,6 +196,12 @@ public class PaymentAdapter extends BaseAdapter {
                 updatePaymentTransactionRequest, PaymentTransactionResponse.class);
     }
 
+    public Object createApplePayMerchantSession(ApplePayMerchantSessionCreateRequest applePayMerchantSessionCreateRequest) {
+        String path = "/payment/v1/apple-pay/merchant-sessions";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(applePayMerchantSessionCreateRequest, path, requestOptions),
+                applePayMerchantSessionCreateRequest, Object.class);
+    }
+
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
         String hash = params.get("hash");
         String hashString = new StringBuilder(threeDSecureCallbackKey)
