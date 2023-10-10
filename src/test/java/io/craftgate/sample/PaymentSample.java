@@ -530,6 +530,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -584,6 +585,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -634,6 +636,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -679,6 +682,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -792,6 +796,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -894,6 +899,7 @@ public class PaymentSample {
 
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
+        assertNotNull(response.getPaymentId());
         assertNotNull(response.getDecodedHtmlContent());
     }
 
