@@ -120,10 +120,10 @@ public class PaymentAdapter extends BaseAdapter {
                 request, InitPosApmPaymentResponse.class);
     }
 
-    public CompletePosApmPaymentResponse completePosApmPayment(CompletePosApmPaymentRequest request) {
+    public PaymentResponse completePosApmPayment(CompletePosApmPaymentRequest request) {
         String path = "/payment/v1/pos-apm-payments/complete";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions),
-                request, CompletePosApmPaymentResponse.class);
+                request, PaymentResponse.class);
     }
 
     public RetrieveLoyaltiesResponse retrieveLoyalties(RetrieveLoyaltiesRequest retrieveLoyaltiesRequest) {
@@ -194,6 +194,12 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/payment-transactions/" + updatePaymentTransactionRequest.getPaymentTransactionId();
         return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updatePaymentTransactionRequest, path, requestOptions),
                 updatePaymentTransactionRequest, PaymentTransactionResponse.class);
+    }
+
+    public Object createApplePayMerchantSession(ApplePayMerchantSessionCreateRequest applePayMerchantSessionCreateRequest) {
+        String path = "/payment/v1/apple-pay/merchant-sessions";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(applePayMerchantSessionCreateRequest, path, requestOptions),
+                applePayMerchantSessionCreateRequest, Object.class);
     }
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
