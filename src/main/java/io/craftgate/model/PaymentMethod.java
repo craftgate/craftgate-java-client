@@ -14,5 +14,6 @@ public enum PaymentMethod {
     KLARNA,
     AFTERPAY,
     KASPI,
+    TOMPAY,
     STRIPE
 }
