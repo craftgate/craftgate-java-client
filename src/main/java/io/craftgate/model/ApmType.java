@@ -11,6 +11,7 @@ public enum ApmType {
     AFTERPAY,
     KASPI,
     STRIPE,
+    TOMPAY,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
 }

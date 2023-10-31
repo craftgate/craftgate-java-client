@@ -14,5 +14,6 @@ public enum PaymentProvider {
     YKB_WORLD_PAY,
     APPLEPAY,
     GOOGLEPAY,
-    STRIPE
+    STRIPE,
+    TOMPAY
 }
