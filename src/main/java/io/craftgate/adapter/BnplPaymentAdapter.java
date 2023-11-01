@@ -4,9 +4,11 @@ import io.craftgate.net.HttpClient;
 import io.craftgate.request.BnplPaymentOfferRequest;
 import io.craftgate.request.MasterpassPaymentTokenGenerateRequest;
 import io.craftgate.request.common.RequestOptions;
+import io.craftgate.request.dto.BnplPaymentInitRequest;
 import io.craftgate.response.BnplPaymentOfferResponse;
-import io.craftgate.response.MasterpassPaymentTokenGenerateResponse;
 import io.craftgate.response.PaymentResponse;
+import io.craftgate.response.dto.ApmPaymentResponse;
+import io.craftgate.response.dto.BnplPaymentInitResponse;
 
 public class BnplPaymentAdapter extends BaseAdapter {
 
@@ -20,14 +22,14 @@ public class BnplPaymentAdapter extends BaseAdapter {
                 bnplPaymentOfferRequest, BnplPaymentOfferResponse.class);
     }
 
-    public MasterpassPaymentTokenGenerateResponse init(MasterpassPaymentTokenGenerateRequest masterpassPaymentTokenGenerateRequest) {
+    public BnplPaymentInitResponse init(BnplPaymentInitRequest bnplPaymentInitRequest) {
         String path = "/payment/v1/bnpl-payments/init";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(masterpassPaymentTokenGenerateRequest, path, requestOptions),
-                masterpassPaymentTokenGenerateRequest, MasterpassPaymentTokenGenerateResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplPaymentInitRequest, path, requestOptions),
+                bnplPaymentInitRequest, BnplPaymentInitResponse.class);
     }
 
-    public PaymentResponse approve(Long paymentId) {
+    public ApmPaymentResponse approve(Long paymentId) {
         String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ApmPaymentResponse.class);
     }
 }
