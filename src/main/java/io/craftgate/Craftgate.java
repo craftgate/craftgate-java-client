@@ -20,6 +20,7 @@ public class Craftgate {
     private final FraudAdapter fraudAdapter;
     private final HookAdapter hookAdapter;
     private final MasterpassPaymentAdapter masterpassPaymentAdapter;
+    private final BnplPaymentAdapter bnplPaymentAdapter;
 
     public Craftgate(String apiKey, String secretKey) {
         this(apiKey, secretKey, BASE_URL, null);
@@ -50,6 +51,7 @@ public class Craftgate {
         this.fraudAdapter = new FraudAdapter(requestOptions);
         this.hookAdapter = new HookAdapter(requestOptions);
         this.masterpassPaymentAdapter = new MasterpassPaymentAdapter(requestOptions);
+        this.bnplPaymentAdapter = new BnplPaymentAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
@@ -102,5 +104,9 @@ public class Craftgate {
 
     public MasterpassPaymentAdapter masterpass() {
         return masterpassPaymentAdapter;
+    }
+
+    public BnplPaymentAdapter bnplPayment() {
+        return bnplPaymentAdapter;
     }
 }
