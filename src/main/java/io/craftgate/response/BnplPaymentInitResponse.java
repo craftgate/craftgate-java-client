@@ -1,11 +1,9 @@
-package io.craftgate.response.dto;
+package io.craftgate.response;
 
 import io.craftgate.model.ApmAdditionalAction;
 import io.craftgate.model.PaymentStatus;
+import io.craftgate.response.dto.PaymentError;
 import lombok.Data;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 public class BnplPaymentInitResponse {

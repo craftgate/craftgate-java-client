@@ -1,4 +1,4 @@
-package io.craftgate.response.dto;
+package io.craftgate.response;
 
 import io.craftgate.model.TransactionStatus;
 import io.craftgate.request.dto.ConvertedPaymentTxPayout;

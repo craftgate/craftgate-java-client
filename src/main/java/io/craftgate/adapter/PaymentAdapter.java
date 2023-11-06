@@ -202,6 +202,24 @@ public class PaymentAdapter extends BaseAdapter {
                 applePayMerchantSessionCreateRequest, Object.class);
     }
 
+    public BnplPaymentOfferResponse offerBnplPayment(BnplPaymentOfferRequest bnplPaymentOfferRequest) {
+        String path = "/payment/v1/bnpl-payments/offers";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplPaymentOfferRequest, path, requestOptions),
+                bnplPaymentOfferRequest, BnplPaymentOfferResponse.class);
+    }
+
+    public BnplPaymentInitResponse initBnplPayment(BnplPaymentInitRequest bnplPaymentInitRequest) {
+        String path = "/payment/v1/bnpl-payments/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplPaymentInitRequest, path, requestOptions),
+                bnplPaymentInitRequest, BnplPaymentInitResponse.class);
+    }
+
+    public ApmPaymentResponse approveBnplPayment(Long paymentId) {
+        String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ApmPaymentResponse.class);
+    }
+
+
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
         String hash = params.get("hash");
         String hashString = new StringBuilder(threeDSecureCallbackKey)

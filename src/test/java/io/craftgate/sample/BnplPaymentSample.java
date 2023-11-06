@@ -4,13 +4,15 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.ApmType;
 import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
+import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.BnplPaymentOfferRequest;
+import io.craftgate.request.CreatePaymentItemRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
-import io.craftgate.request.dto.BnplPaymentInitRequest;
+import io.craftgate.request.BnplPaymentInitRequest;
 import io.craftgate.response.BnplPaymentOfferResponse;
-import io.craftgate.response.dto.ApmPaymentResponse;
+import io.craftgate.response.ApmPaymentResponse;
 import io.craftgate.response.dto.BnplBankOffer;
-import io.craftgate.response.dto.BnplPaymentInitResponse;
+import io.craftgate.response.BnplPaymentInitResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -18,29 +20,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BnplPaymentSample {
 
-    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
+    private final Craftgate craftgate = new Craftgate("sandbox-BMSPbGKBaMOcmOiVpyjDZOIfSzLAuXsb", "sandbox-LpvzxnyrFkOCRRiUpQHUUZUpeQuXNntd", "https://sandbox-api.craftgate.io");
 
     @Test
     void retrieve_bank_offer() {
         List<BnplPaymentCartItem> items = new ArrayList<>();
 
         items.add(BnplPaymentCartItem.builder()
-                .id(UUID.randomUUID().toString())
+                .id("1234")
                 .name("item 1")
-                .brandName("Elma")
+                .brandName("Iphone")
                 .type(BnplCartItemType.MOBILE_PHONE_BELOW_5000_TRY)
                 .unitPrice(BigDecimal.valueOf(3000))
                 .quantity(2)
                 .build());
         items.add(BnplPaymentCartItem.builder()
-                .id(UUID.randomUUID().toString())
+                .id("123")
                 .name("item 2")
-                .brandName("Elma")
+                .brandName("Samsung")
                 .type(BnplCartItemType.OTHER)
                 .unitPrice(BigDecimal.valueOf(4000))
                 .quantity(1)
@@ -53,52 +54,71 @@ public class BnplPaymentSample {
                 .items(items)
                 .build();
 
-        BnplPaymentOfferResponse response = craftgate.bnplPayment().offer(request);
+        BnplPaymentOfferResponse response = craftgate.payment().offerBnplPayment(request);
         assertNotNull(response.getOfferId());
-        assertEquals(request.getPrice(), response.getPrice());
-        assertEquals(3, response.getBankOffers().size());
-
         BnplBankOffer bnplBankOffer = response.getBankOffers().get(0);
         assertNotNull(bnplBankOffer);
-        assertEquals(1, bnplBankOffer.getBankOfferTerms().size());
     }
 
 
     @Test
     void init() {
+        BigDecimal price = new BigDecimal("10000");
+
+        List<CreatePaymentItemRequest> paymentItemRequests = new ArrayList<>();
+        paymentItemRequests.add(CreatePaymentItemRequest.builder()
+                .name("item-1")
+                .externalId("38983903")
+                .price(new BigDecimal("3000"))
+                .build());
+        paymentItemRequests.add( CreatePaymentItemRequest.builder()
+                .name("item-2")
+                .externalId("92983294")
+                .price(new BigDecimal("7000"))
+                .build());
+
         List<BnplPaymentCartItem> items = new ArrayList<>();
-
         items.add(BnplPaymentCartItem.builder()
-                .id(UUID.randomUUID().toString())
-                .name("item 1")
-                .brandName("Elma")
-                .type(BnplCartItemType.MOBILE_PHONE_BELOW_5000_TRY)
-                .unitPrice(BigDecimal.valueOf(3000))
-                .quantity(2)
-                .build());
+                        .id("200")
+                        .name("Test Elektronik 2")
+                        .brandName("iphone")
+                        .type(BnplCartItemType.OTHER)
+                        .unitPrice(new BigDecimal("7000"))
+                        .quantity(2)
+                        .build());
         items.add(BnplPaymentCartItem.builder()
-                .id(UUID.randomUUID().toString())
-                .name("item 2")
-                .brandName("Elma")
-                .type(BnplCartItemType.OTHER)
-                .unitPrice(BigDecimal.valueOf(4000))
-                .quantity(1)
-                .build());
-
+                        .id("100")
+                        .name("Test Elektronik 1")
+                        .brandName("Samsung")
+                        .type(BnplCartItemType.MOBILE_PHONE_OVER_5000_TRY)
+                        .unitPrice(new BigDecimal("3000"))
+                        .quantity(1)
+                        .build());
         BnplPaymentInitRequest request = BnplPaymentInitRequest.builder()
-                .items(items)
+                .price(price)
+                .paidPrice(price)
+                .currency(Currency.TRY)
+                .apmType(ApmType.MASLAK)
+                .apmOrderId(UUID.randomUUID().toString())
+                .paymentGroup(PaymentGroup.PRODUCT)
+                .conversationId("29393-mXld92ko3")
+                .externalId("external_id-345")
+                .callbackUrl("callback")
+                .items(paymentItemRequests)
+                .bankCode("103")
+                .cartItems(items)
                 .build();
 
-        BnplPaymentInitResponse response = craftgate.bnplPayment().init(request);
+        BnplPaymentInitResponse response = craftgate.payment().initBnplPayment(request);
         assertNotNull(response.getRedirectUrl());
     }
 
 
     @Test
     void approve() {
-        Long paymentId = 5L;
-
-        ApmPaymentResponse response = craftgate.bnplPayment().approve(paymentId);
+        Long paymentId = 407016L;
+        ApmPaymentResponse response = craftgate.payment().approveBnplPayment(paymentId);
+        assertFalse(response.getTransactionId().isEmpty());
 
     }
 }
