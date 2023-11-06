@@ -10,7 +10,6 @@ import io.craftgate.request.CreatePaymentItemRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.BnplPaymentInitRequest;
 import io.craftgate.response.BnplPaymentOfferResponse;
-import io.craftgate.response.ApmPaymentResponse;
 import io.craftgate.response.dto.BnplBankOffer;
 import io.craftgate.response.BnplPaymentInitResponse;
 import org.junit.jupiter.api.Test;
@@ -117,8 +116,6 @@ public class BnplPaymentSample {
     @Test
     void approve() {
         Long paymentId = 407016L;
-        ApmPaymentResponse response = craftgate.payment().approveBnplPayment(paymentId);
-        assertFalse(response.getTransactionId().isEmpty());
-
+        craftgate.payment().approveBnplPayment(paymentId);
     }
 }

@@ -214,9 +214,9 @@ public class PaymentAdapter extends BaseAdapter {
                 bnplPaymentInitRequest, BnplPaymentInitResponse.class);
     }
 
-    public ApmPaymentResponse approveBnplPayment(Long paymentId) {
+    public void approveBnplPayment(Long paymentId) {
         String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ApmPaymentResponse.class);
+         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
     }
 
 
