@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BnplPaymentSample {
 
-    private final Craftgate craftgate = new Craftgate("sandbox-BMSPbGKBaMOcmOiVpyjDZOIfSzLAuXsb", "sandbox-LpvzxnyrFkOCRRiUpQHUUZUpeQuXNntd", "https://sandbox-api.craftgate.io");
+    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void retrieve_bank_offer() {
