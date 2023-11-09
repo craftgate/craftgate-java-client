@@ -216,9 +216,8 @@ public class PaymentAdapter extends BaseAdapter {
 
     public void approveBnplPayment(Long paymentId) {
         String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
-         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
+        HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
     }
-
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
         String hash = params.get("hash");

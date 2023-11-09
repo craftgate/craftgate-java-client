@@ -103,5 +103,4 @@ public class Craftgate {
     public MasterpassPaymentAdapter masterpass() {
         return masterpassPaymentAdapter;
     }
-
 }
