@@ -4,10 +4,10 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.Currency;
 import io.craftgate.request.SearchBankAccountTrackingRecordsRequest;
 import io.craftgate.response.BankAccountTrackingRecordListResponse;
+import io.craftgate.response.BankAccountTrackingRecordResponse;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BankAccountTrackingSample {
 
@@ -23,6 +23,14 @@ public class BankAccountTrackingSample {
 
         BankAccountTrackingRecordListResponse response = craftgate.bankAccountTracking().searchRecords(request);
         assertNotNull(response);
-        assertTrue(response.getItems().size() > 0);
+        assertFalse(response.getItems().isEmpty());
+    }
+
+    @Test
+    void retrieve_bank_account_tracking_record() {
+        Long recordId = 326L;
+        BankAccountTrackingRecordResponse response = craftgate.bankAccountTracking().retrieveRecord(recordId);
+        assertNotNull(response);
+        assertEquals(response.getId(), recordId);
     }
 }
