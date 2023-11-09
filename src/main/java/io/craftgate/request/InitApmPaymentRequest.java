@@ -4,15 +4,15 @@ import io.craftgate.model.ApmType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.dto.PaymentItem;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 @Data
-@Builder
+@SuperBuilder
 public class InitApmPaymentRequest {
 
     private ApmType apmType;

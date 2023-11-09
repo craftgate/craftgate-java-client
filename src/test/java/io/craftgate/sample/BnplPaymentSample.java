@@ -5,13 +5,13 @@ import io.craftgate.model.ApmType;
 import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
-import io.craftgate.request.BnplPaymentOfferRequest;
-import io.craftgate.request.CreatePaymentItemRequest;
+import io.craftgate.request.OfferBnplPaymentRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
-import io.craftgate.request.BnplPaymentInitRequest;
-import io.craftgate.response.BnplPaymentOfferResponse;
+import io.craftgate.request.InitBnplPaymentRequest;
+import io.craftgate.request.dto.PaymentItem;
+import io.craftgate.response.OfferBnplPaymentResponse;
 import io.craftgate.response.dto.BnplBankOffer;
-import io.craftgate.response.BnplPaymentInitResponse;
+import io.craftgate.response.InitBnplPaymentResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -46,14 +46,14 @@ public class BnplPaymentSample {
                 .quantity(1)
                 .build());
 
-        BnplPaymentOfferRequest request = BnplPaymentOfferRequest.builder()
+        OfferBnplPaymentRequest request = OfferBnplPaymentRequest.builder()
                 .apmType(ApmType.MASLAK)
                 .price(BigDecimal.valueOf(10000))
                 .currency(Currency.TRY)
                 .items(items)
                 .build();
 
-        BnplPaymentOfferResponse response = craftgate.payment().offerBnplPayment(request);
+        OfferBnplPaymentResponse response = craftgate.payment().retrieveBnplOffers(request);
         assertNotNull(response.getOfferId());
         BnplBankOffer bnplBankOffer = response.getBankOffers().get(0);
         assertNotNull(bnplBankOffer);
@@ -61,16 +61,16 @@ public class BnplPaymentSample {
 
 
     @Test
-    void init() {
+    void init_bnpl_payment() {
         BigDecimal price = new BigDecimal("10000");
 
-        List<CreatePaymentItemRequest> paymentItemRequests = new ArrayList<>();
-        paymentItemRequests.add(CreatePaymentItemRequest.builder()
+        List<PaymentItem> paymentItemRequests = new ArrayList<>();
+        paymentItemRequests.add(PaymentItem.builder()
                 .name("item-1")
                 .externalId("38983903")
                 .price(new BigDecimal("3000"))
                 .build());
-        paymentItemRequests.add( CreatePaymentItemRequest.builder()
+        paymentItemRequests.add(PaymentItem.builder()
                 .name("item-2")
                 .externalId("92983294")
                 .price(new BigDecimal("7000"))
@@ -93,7 +93,7 @@ public class BnplPaymentSample {
                         .unitPrice(new BigDecimal("3000"))
                         .quantity(1)
                         .build());
-        BnplPaymentInitRequest request = BnplPaymentInitRequest.builder()
+        InitBnplPaymentRequest request = InitBnplPaymentRequest.builder()
                 .price(price)
                 .paidPrice(price)
                 .currency(Currency.TRY)
@@ -108,14 +108,14 @@ public class BnplPaymentSample {
                 .cartItems(items)
                 .build();
 
-        BnplPaymentInitResponse response = craftgate.payment().initBnplPayment(request);
+        InitBnplPaymentResponse response = craftgate.payment().initBnplPayment(request);
         assertNotNull(response.getRedirectUrl());
     }
 
 
     @Test
-    void approve() {
-        Long paymentId = 407016L;
+    void approve_bnpl_payment() {
+        Long paymentId = 1L;
         craftgate.payment().approveBnplPayment(paymentId);
     }
 }

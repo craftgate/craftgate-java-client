@@ -6,7 +6,7 @@ import io.craftgate.response.dto.PaymentError;
 import lombok.Data;
 
 @Data
-public class BnplPaymentInitResponse {
+public class InitBnplPaymentResponse {
 
     private Long paymentId;
     private String redirectUrl;

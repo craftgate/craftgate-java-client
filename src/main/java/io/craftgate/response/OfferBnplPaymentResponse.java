@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class BnplPaymentOfferResponse {
+public class OfferBnplPaymentResponse {
 
     private String offerId;
     private BigDecimal price;

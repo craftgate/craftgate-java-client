@@ -202,16 +202,16 @@ public class PaymentAdapter extends BaseAdapter {
                 applePayMerchantSessionCreateRequest, Object.class);
     }
 
-    public BnplPaymentOfferResponse offerBnplPayment(BnplPaymentOfferRequest bnplPaymentOfferRequest) {
+    public OfferBnplPaymentResponse retrieveBnplOffers(OfferBnplPaymentRequest offerBnplPaymentRequest) {
         String path = "/payment/v1/bnpl-payments/offers";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplPaymentOfferRequest, path, requestOptions),
-                bnplPaymentOfferRequest, BnplPaymentOfferResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(offerBnplPaymentRequest, path, requestOptions),
+                offerBnplPaymentRequest, OfferBnplPaymentResponse.class);
     }
 
-    public BnplPaymentInitResponse initBnplPayment(BnplPaymentInitRequest bnplPaymentInitRequest) {
+    public InitBnplPaymentResponse initBnplPayment(InitBnplPaymentRequest initBnplPaymentRequest) {
         String path = "/payment/v1/bnpl-payments/init";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplPaymentInitRequest, path, requestOptions),
-                bnplPaymentInitRequest, BnplPaymentInitResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initBnplPaymentRequest, path, requestOptions),
+                initBnplPaymentRequest, InitBnplPaymentResponse.class);
     }
 
     public void approveBnplPayment(Long paymentId) {

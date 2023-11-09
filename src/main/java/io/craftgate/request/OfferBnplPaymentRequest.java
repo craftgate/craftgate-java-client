@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class BnplPaymentOfferRequest {
+public class OfferBnplPaymentRequest {
 
     private ApmType apmType;
     private Long merchantApmId;
