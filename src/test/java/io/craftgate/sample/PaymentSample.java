@@ -530,6 +530,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -584,6 +585,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -634,6 +636,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -679,6 +682,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -730,6 +734,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getPageUrl());
         assertNotNull(response.getToken());
+        assertNotNull(response.getTokenExpireDate());
     }
 
     @Test
@@ -739,6 +744,13 @@ public class PaymentSample {
         PaymentResponse response = craftgate.payment().retrieveCheckoutPayment(token);
 
         assertNotNull(response);
+    }
+
+    @Test
+    void expire_checkout_payment() {
+        String token = "456d1297-908e-4bd6-a13b-4be31a6e47d5";
+
+        craftgate.payment().expireCheckoutPayment(token);
     }
 
     @Test
@@ -784,6 +796,7 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
+        assertNotNull(response.getPaymentId());
     }
 
     @Test
@@ -886,6 +899,7 @@ public class PaymentSample {
 
         assertNotNull(response);
         assertNotNull(response.getHtmlContent());
+        assertNotNull(response.getPaymentId());
         assertNotNull(response.getDecodedHtmlContent());
     }
 
@@ -1124,6 +1138,79 @@ public class PaymentSample {
     }
 
     @Test
+    void init_kaspi_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.KASPI)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.KZT)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("optional-externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertNotNull(response.getRedirectUrl());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.REDIRECT_TO_URL, response.getAdditionalAction());
+    }
+
+    @Test
+    void init_tompay_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.TOMPAY)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .items(items)
+                .additionalParams(new HashMap() {{
+                    put("channel", "channel");
+                    put("phone", "5001112233");
+                }})
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.WAIT_FOR_WEBHOOK, response.getAdditionalAction());
+    }
+
+    @Test
     void init_ykb_world_pay_pos_apm_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
@@ -1158,6 +1245,16 @@ public class PaymentSample {
         assertNotNull(response.getHtmlContent());
         assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
         assertEquals(AdditionalAction.SHOW_HTML_CONTENT, response.getAdditionalAction());
+    }
+
+    @Test
+    void complete_pos_apm_payment() {
+        CompletePosApmPaymentRequest request = CompletePosApmPaymentRequest.builder()
+                .paymentId(1L)
+                .build();
+
+        PaymentResponse response = craftgate.payment().completePosApmPayment(request);
+        assertNotNull(response);
     }
 
     @Test
@@ -1478,16 +1575,6 @@ public class PaymentSample {
         PaymentResponse response = craftgate.payment().postAuthPayment(paymentId, request);
         assertEquals(paymentId, response.getId());
         assertEquals(PaymentPhase.POST_AUTH, response.getPaymentPhase());
-    }
-
-    @Test
-    void check_masterpass_user() {
-        CheckMasterpassUserRequest request = CheckMasterpassUserRequest.builder()
-                .masterpassGsmNumber("903000000000")
-                .build();
-
-        CheckMasterpassUserResponse response = craftgate.payment().checkMasterpassUser(request);
-        assertNotNull(response);
     }
 
     @Test

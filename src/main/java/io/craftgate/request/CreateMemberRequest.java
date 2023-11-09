@@ -24,11 +24,14 @@ public class CreateMemberRequest {
     private String taxOffice;
     private String taxNumber;
     private String iban;
+    private SettlementEarningsDestination settlementEarningsDestination;
     /**
      * @deprecated use @{@link CreateWalletRequest#setNegativeAmountLimit(BigDecimal)} instead.
      */
     @Deprecated
     private BigDecimal negativeWalletAmountLimit;
+
+    private BigDecimal subMerchantMaximumAllowedNegativeBalance;
     private Boolean isBuyer;
     private Boolean isSubMerchant;
 }

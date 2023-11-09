@@ -29,6 +29,8 @@ public class UpdateMemberRequest {
      */
     @Deprecated
     private BigDecimal negativeWalletAmountLimit;
+
+    private BigDecimal subMerchantMaximumAllowedNegativeBalance;
     private Boolean isBuyer;
     private Boolean isSubMerchant;
 }

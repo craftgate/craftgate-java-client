@@ -55,6 +55,11 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
 
+    public void expireCheckoutPayment(String token) {
+        String path = "/payment/v1/checkout-payments/" + token;
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    }
+
     public DepositPaymentResponse createDepositPayment(CreateDepositPaymentRequest createDepositPaymentRequest) {
         String path = "/payment/v1/deposits";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createDepositPaymentRequest, path, requestOptions),
@@ -115,10 +120,10 @@ public class PaymentAdapter extends BaseAdapter {
                 request, InitPosApmPaymentResponse.class);
     }
 
-    public CompletePosApmPaymentResponse completePosApmPayment(CompletePosApmPaymentRequest request) {
+    public PaymentResponse completePosApmPayment(CompletePosApmPaymentRequest request) {
         String path = "/payment/v1/pos-apm-payments/complete";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions),
-                request, CompletePosApmPaymentResponse.class);
+                request, PaymentResponse.class);
     }
 
     public RetrieveLoyaltiesResponse retrieveLoyalties(RetrieveLoyaltiesRequest retrieveLoyaltiesRequest) {
@@ -185,16 +190,16 @@ public class PaymentAdapter extends BaseAdapter {
                 disapprovePaymentTransactionsRequest, PaymentTransactionApprovalListResponse.class);
     }
 
-    public CheckMasterpassUserResponse checkMasterpassUser(CheckMasterpassUserRequest checkMasterpassUserRequest) {
-        String path = "/payment/v1/masterpass-payments/check-user";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(checkMasterpassUserRequest, path, requestOptions),
-                checkMasterpassUserRequest, CheckMasterpassUserResponse.class);
-    }
-
     public PaymentTransactionResponse updatePaymentTransaction(UpdatePaymentTransactionRequest updatePaymentTransactionRequest) {
         String path = "/payment/v1/payment-transactions/" + updatePaymentTransactionRequest.getPaymentTransactionId();
         return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updatePaymentTransactionRequest, path, requestOptions),
                 updatePaymentTransactionRequest, PaymentTransactionResponse.class);
+    }
+
+    public Object createApplePayMerchantSession(ApplePayMerchantSessionCreateRequest applePayMerchantSessionCreateRequest) {
+        String path = "/payment/v1/apple-pay/merchant-sessions";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(applePayMerchantSessionCreateRequest, path, requestOptions),
+                applePayMerchantSessionCreateRequest, Object.class);
     }
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {

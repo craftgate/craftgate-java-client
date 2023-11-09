@@ -6,6 +6,7 @@ import io.craftgate.model.SettlementSource;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 public class PayoutCompletedTransaction {
@@ -14,6 +15,7 @@ public class PayoutCompletedTransaction {
     private Long transactionId;
     private String transactionType;
     private BigDecimal payoutAmount;
+    private LocalDateTime payoutDate;
     private String currency;
     private Long merchantId;
     private MerchantType merchantType;

@@ -1,22 +1,13 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
-import io.craftgate.exception.CraftgateException;
-import io.craftgate.model.*;
+import io.craftgate.model.ReportFileType;
 import io.craftgate.request.RetrieveDailyTransactionReportRequest;
-import io.craftgate.response.*;
-import io.craftgate.response.common.ErrorResponse;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.math.BigDecimal;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.time.LocalDate;
-import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FileReportingSample {
 

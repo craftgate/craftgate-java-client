@@ -1,10 +1,13 @@
 package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
-import io.craftgate.request.*;
+import io.craftgate.request.CreateProductRequest;
+import io.craftgate.request.SearchProductsRequest;
+import io.craftgate.request.UpdateProductRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
-import io.craftgate.response.*;
+import io.craftgate.response.ProductListResponse;
+import io.craftgate.response.ProductResponse;
 
 public class PayByLinkAdapter extends BaseAdapter {
 

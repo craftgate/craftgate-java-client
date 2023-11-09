@@ -9,6 +9,9 @@ public enum ApmType {
     PAYPAL,
     KLARNA,
     AFTERPAY,
+    KASPI,
+    STRIPE,
+    TOMPAY,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
 }
