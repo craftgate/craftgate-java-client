@@ -5,11 +5,11 @@ import io.craftgate.model.ApmType;
 import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
-import io.craftgate.request.OfferBnplPaymentRequest;
+import io.craftgate.request.BnplPaymentOfferRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.InitBnplPaymentRequest;
 import io.craftgate.request.dto.PaymentItem;
-import io.craftgate.response.OfferBnplPaymentResponse;
+import io.craftgate.response.BnplPaymentOfferResponse;
 import io.craftgate.response.dto.BnplBankOffer;
 import io.craftgate.response.InitBnplPaymentResponse;
 import org.junit.jupiter.api.Test;
@@ -46,14 +46,14 @@ public class BnplPaymentSample {
                 .quantity(1)
                 .build());
 
-        OfferBnplPaymentRequest request = OfferBnplPaymentRequest.builder()
+        BnplPaymentOfferRequest request = BnplPaymentOfferRequest.builder()
                 .apmType(ApmType.MASLAK)
                 .price(BigDecimal.valueOf(10000))
                 .currency(Currency.TRY)
                 .items(items)
                 .build();
 
-        OfferBnplPaymentResponse response = craftgate.payment().retrieveBnplOffers(request);
+        BnplPaymentOfferResponse response = craftgate.payment().retrieveBnplOffers(request);
         assertNotNull(response.getOfferId());
         BnplBankOffer bnplBankOffer = response.getBankOffers().get(0);
         assertNotNull(bnplBankOffer);
