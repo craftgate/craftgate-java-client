@@ -2,7 +2,7 @@ package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
 import io.craftgate.model.ApmType;
-import io.craftgate.model.BnplCartItemType;
+import io.craftgate.model.BnplCardItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.BnplPaymentOfferRequest;
@@ -33,7 +33,7 @@ public class BnplPaymentSample {
                 .id("1234")
                 .name("item 1")
                 .brandName("Iphone")
-                .type(BnplCartItemType.MOBILE_PHONE_BELOW_5000_TRY)
+                .type(BnplCardItemType.MOBILE_PHONE_BELOW_5000_TRY)
                 .unitPrice(BigDecimal.valueOf(3000))
                 .quantity(2)
                 .build());
@@ -41,7 +41,7 @@ public class BnplPaymentSample {
                 .id("123")
                 .name("item 2")
                 .brandName("Samsung")
-                .type(BnplCartItemType.OTHER)
+                .type(BnplCardItemType.OTHER)
                 .unitPrice(BigDecimal.valueOf(4000))
                 .quantity(1)
                 .build());
@@ -81,7 +81,7 @@ public class BnplPaymentSample {
                         .id("200")
                         .name("Test Elektronik 2")
                         .brandName("iphone")
-                        .type(BnplCartItemType.OTHER)
+                        .type(BnplCardItemType.OTHER)
                         .unitPrice(new BigDecimal("7000"))
                         .quantity(2)
                         .build());
@@ -89,7 +89,7 @@ public class BnplPaymentSample {
                         .id("100")
                         .name("Test Elektronik 1")
                         .brandName("Samsung")
-                        .type(BnplCartItemType.MOBILE_PHONE_OVER_5000_TRY)
+                        .type(BnplCardItemType.MOBILE_PHONE_OVER_5000_TRY)
                         .unitPrice(new BigDecimal("3000"))
                         .quantity(1)
                         .build());
