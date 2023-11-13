@@ -107,24 +107,8 @@ PaymentResponse response = craftgate.payment().createPayment(request);
 System.out.println(String.format("Create Payment Result: %s", response));
 ```
 
-### Advanced Usage: Adapters
-In reality, the `Craftgate` class serves as a collection of adapters that integrates with different parts of the API. While the intended usage for most use-cases is to instantiate a `Craftgate` instance (as illustrated in the examples above) and use its adapter accessors (e.g. `payment()`), you can also manually import a certain adapter class and instantiate it.
-
-**Note:** When instantiating an adapter, you can use the same options as you would when instantiating a `Craftgate`
-
-For all adapters in the `Craftgate`, their purposes, accessors, as well as direct import paths, refer to the list below:
-
-| Adapter Name | Purpose | Accessor |
-|--------------|---------|----------|
-| `InstallmentAdapter` | Retrieving per-installment pricing information based on installment count or BIN number | `installment()` |
-| `OnboardingAdapter` | Conducting CRUD operations on buyers and submerchants | `onboarding()` |
-| `PaymentAdapter` | Conducting payments, retrieving payment information, managing stored cards | `payment()` |
-| `WalletAdapter` | Wallet operations like send, receive remittance and search wallets or wallet transactions of member's | `wallet()` |
-| `SettlementReportingAdapter` | Settlement operations like search payout completed transactions, search bounced payout transactions | `settlementReporting()` |
-| `SettlementAdapter` | Settlement operations like create instant wallet settlement | `settlement()` |
-
 ### Contributions
-
 For all contributions to this client please see the contribution guide [here](CONTRIBUTING.md).
+
 ## License
 MIT
