@@ -1,6 +1,6 @@
 package io.craftgate.model;
 
-public enum BnplCardItemType {
+public enum BnplCartItemType {
 
     MOBILE_PHONE_OVER_5000_TRY,
     MOBILE_PHONE_BELOW_5000_TRY,

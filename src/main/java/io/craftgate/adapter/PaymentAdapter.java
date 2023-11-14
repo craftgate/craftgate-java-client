@@ -202,7 +202,7 @@ public class PaymentAdapter extends BaseAdapter {
                 applePayMerchantSessionCreateRequest, Object.class);
     }
 
-    public BnplPaymentOfferResponse retrieveBnplOffers(BnplPaymentOfferRequest bnplPaymentOfferRequest) {
+    public BnplPaymentOfferResponse retrieveBnplPaymentOffers(BnplPaymentOfferRequest bnplPaymentOfferRequest) {
         String path = "/payment/v1/bnpl-payments/offers";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplPaymentOfferRequest, path, requestOptions),
                 bnplPaymentOfferRequest, BnplPaymentOfferResponse.class);

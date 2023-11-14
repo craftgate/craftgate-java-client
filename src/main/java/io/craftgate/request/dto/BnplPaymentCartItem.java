@@ -1,6 +1,6 @@
 package io.craftgate.request.dto;
 
-import io.craftgate.model.BnplCardItemType;
+import io.craftgate.model.BnplCartItemType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class BnplPaymentCartItem {
     private String id;
     private String name;
     private String brandName;
-    private BnplCardItemType type;
+    private BnplCartItemType type;
     private BigDecimal unitPrice;
     private Integer quantity;
 }

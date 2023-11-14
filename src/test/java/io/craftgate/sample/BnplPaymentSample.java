@@ -2,7 +2,7 @@ package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
 import io.craftgate.model.ApmType;
-import io.craftgate.model.BnplCardItemType;
+import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.BnplPaymentOfferRequest;
@@ -33,7 +33,7 @@ public class BnplPaymentSample {
                 .id("1234")
                 .name("item 1")
                 .brandName("Iphone")
-                .type(BnplCardItemType.MOBILE_PHONE_BELOW_5000_TRY)
+                .type(BnplCartItemType.MOBILE_PHONE_BELOW_5000_TRY)
                 .unitPrice(BigDecimal.valueOf(3000))
                 .quantity(2)
                 .build());
@@ -41,7 +41,7 @@ public class BnplPaymentSample {
                 .id("123")
                 .name("item 2")
                 .brandName("Samsung")
-                .type(BnplCardItemType.OTHER)
+                .type(BnplCartItemType.OTHER)
                 .unitPrice(BigDecimal.valueOf(4000))
                 .quantity(1)
                 .build());
@@ -53,7 +53,7 @@ public class BnplPaymentSample {
                 .items(items)
                 .build();
 
-        BnplPaymentOfferResponse response = craftgate.payment().retrieveBnplOffers(request);
+        BnplPaymentOfferResponse response = craftgate.payment().retrieveBnplPaymentOffers(request);
         assertNotNull(response.getOfferId());
         BnplBankOffer bnplBankOffer = response.getBankOffers().get(0);
         assertNotNull(bnplBankOffer);
@@ -81,7 +81,7 @@ public class BnplPaymentSample {
                         .id("200")
                         .name("Test Elektronik 2")
                         .brandName("iphone")
-                        .type(BnplCardItemType.OTHER)
+                        .type(BnplCartItemType.OTHER)
                         .unitPrice(new BigDecimal("7000"))
                         .quantity(2)
                         .build());
@@ -89,7 +89,7 @@ public class BnplPaymentSample {
                         .id("100")
                         .name("Test Elektronik 1")
                         .brandName("Samsung")
-                        .type(BnplCardItemType.MOBILE_PHONE_OVER_5000_TRY)
+                        .type(BnplCartItemType.MOBILE_PHONE_OVER_5000_TRY)
                         .unitPrice(new BigDecimal("3000"))
                         .quantity(1)
                         .build());
