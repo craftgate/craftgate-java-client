@@ -202,22 +202,38 @@ public class PaymentAdapter extends BaseAdapter {
                 applePayMerchantSessionCreateRequest, Object.class);
     }
 
+    public BnplPaymentOfferResponse retrieveBnplPaymentOffers(BnplPaymentOfferRequest bnplPaymentOfferRequest) {
+        String path = "/payment/v1/bnpl-payments/offers";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplPaymentOfferRequest, path, requestOptions),
+                bnplPaymentOfferRequest, BnplPaymentOfferResponse.class);
+    }
+
+    public InitBnplPaymentResponse initBnplPayment(InitBnplPaymentRequest initBnplPaymentRequest) {
+        String path = "/payment/v1/bnpl-payments/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initBnplPaymentRequest, path, requestOptions),
+                initBnplPaymentRequest, InitBnplPaymentResponse.class);
+    }
+
+    public void approveBnplPayment(Long paymentId) {
+        String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
+        HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
+    }
+
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
         String hash = params.get("hash");
-        String hashString = new StringBuilder(threeDSecureCallbackKey)
-                .append("###")
-                .append(params.getOrDefault("status", ""))
-                .append("###")
-                .append(params.getOrDefault("completeStatus", ""))
-                .append("###")
-                .append(params.getOrDefault("paymentId", ""))
-                .append("###")
-                .append(params.getOrDefault("conversationData", ""))
-                .append("###")
-                .append(params.getOrDefault("conversationId", ""))
-                .append("###")
-                .append(params.getOrDefault("callbackStatus", ""))
-                .toString();
+        String hashString = threeDSecureCallbackKey +
+                "###" +
+                params.getOrDefault("status", "") +
+                "###" +
+                params.getOrDefault("completeStatus", "") +
+                "###" +
+                params.getOrDefault("paymentId", "") +
+                "###" +
+                params.getOrDefault("conversationData", "") +
+                "###" +
+                params.getOrDefault("conversationId", "") +
+                "###" +
+                params.getOrDefault("callbackStatus", "");
 
         String hashedParams = HashGenerator.generateHash(hashString);
         return hash.equals(hashedParams);

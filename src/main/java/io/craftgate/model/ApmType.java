@@ -12,6 +12,8 @@ public enum ApmType {
     KASPI,
     STRIPE,
     TOMPAY,
+    MASLAK,
+    ALFABANK,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
 }

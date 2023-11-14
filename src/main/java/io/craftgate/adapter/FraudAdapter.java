@@ -36,7 +36,7 @@ public class FraudAdapter extends BaseAdapter {
     }
 
     public FraudValueListResponse retrieveValueList(String listName) {
-        String path = "/fraud/v1/value-lists/"+listName;
+        String path = "/fraud/v1/value-lists/" + listName;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudValueListResponse.class);
     }
 
