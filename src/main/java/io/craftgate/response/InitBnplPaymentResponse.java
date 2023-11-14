@@ -13,5 +13,4 @@ public class InitBnplPaymentResponse {
     private PaymentStatus paymentStatus;
     private ApmAdditionalAction additionalAction;
     private PaymentError paymentError;
-
 }

@@ -1634,9 +1634,9 @@ public class PaymentSample {
         assertEquals(false, response.getPaidWithStoredCard());
         assertEquals("540001", response.getBinNumber());
         assertEquals("0004", response.getLastFourDigits());
-        assertEquals(null, response.getCardType());
-        assertEquals(null, response.getCardAssociation());
-        assertEquals(null, response.getCardBrand());
+        assertNull(response.getCardType());
+        assertNull(response.getCardAssociation());
+        assertNull(response.getCardBrand());
         assertEquals(3, response.getPaymentTransactions().size());
         assertNull(response.getCardUserKey());
         assertNull(response.getCardToken());

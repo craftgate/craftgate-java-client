@@ -6,12 +6,12 @@ import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.BnplPaymentOfferRequest;
-import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.InitBnplPaymentRequest;
+import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.dto.PaymentItem;
 import io.craftgate.response.BnplPaymentOfferResponse;
-import io.craftgate.response.dto.BnplBankOffer;
 import io.craftgate.response.InitBnplPaymentResponse;
+import io.craftgate.response.dto.BnplBankOffer;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class BnplPaymentSample {
 
@@ -78,21 +78,21 @@ public class BnplPaymentSample {
 
         List<BnplPaymentCartItem> items = new ArrayList<>();
         items.add(BnplPaymentCartItem.builder()
-                        .id("200")
-                        .name("Test Elektronik 2")
-                        .brandName("iphone")
-                        .type(BnplCartItemType.OTHER)
-                        .unitPrice(new BigDecimal("7000"))
-                        .quantity(2)
-                        .build());
+                .id("200")
+                .name("Test Elektronik 2")
+                .brandName("iphone")
+                .type(BnplCartItemType.OTHER)
+                .unitPrice(new BigDecimal("7000"))
+                .quantity(2)
+                .build());
         items.add(BnplPaymentCartItem.builder()
-                        .id("100")
-                        .name("Test Elektronik 1")
-                        .brandName("Samsung")
-                        .type(BnplCartItemType.MOBILE_PHONE_OVER_5000_TRY)
-                        .unitPrice(new BigDecimal("3000"))
-                        .quantity(1)
-                        .build());
+                .id("100")
+                .name("Test Elektronik 1")
+                .brandName("Samsung")
+                .type(BnplCartItemType.MOBILE_PHONE_OVER_5000_TRY)
+                .unitPrice(new BigDecimal("3000"))
+                .quantity(1)
+                .build());
         InitBnplPaymentRequest request = InitBnplPaymentRequest.builder()
                 .price(price)
                 .paidPrice(price)

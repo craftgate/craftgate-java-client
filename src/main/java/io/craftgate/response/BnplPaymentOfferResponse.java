@@ -12,5 +12,4 @@ public class BnplPaymentOfferResponse {
     private String offerId;
     private BigDecimal price;
     private List<BnplBankOffer> bankOffers;
-
 }

@@ -16,7 +16,7 @@ public class HookAdapter extends BaseAdapter {
     }
 
     public boolean isWebhookVerified(String merchantHookKey, String incomingSignature, WebhookData webhookData) {
-        if(Objects.isNull(merchantHookKey) || Objects.isNull(incomingSignature) || Objects.isNull(webhookData)){
+        if (Objects.isNull(merchantHookKey) || Objects.isNull(incomingSignature) || Objects.isNull(webhookData)) {
             return false;
         }
 
