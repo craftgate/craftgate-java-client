@@ -15,9 +15,7 @@ import io.craftgate.response.dto.BnplBankOffer;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -106,6 +104,49 @@ public class BnplPaymentSample {
                 .items(paymentItemRequests)
                 .bankCode("103")
                 .cartItems(items)
+                .build();
+
+        InitBnplPaymentResponse response = craftgate.payment().initBnplPayment(request);
+        assertNotNull(response.getRedirectUrl());
+    }
+
+    @Test
+    void init_tom_finance_bnpl_payment() {
+        BigDecimal price = new BigDecimal("100");
+
+        Map<String, String> additionalParams = new HashMap<>();
+        additionalParams.put("buyerName", "John Doe");
+        additionalParams.put("buyerPhoneNumber", "5551112233");
+
+        List<PaymentItem> paymentItemRequests = new ArrayList<>();
+        paymentItemRequests.add(PaymentItem.builder()
+                .name("item-1")
+                .externalId("externalId")
+                .price(new BigDecimal("100"))
+                .build());
+
+        List<BnplPaymentCartItem> items = new ArrayList<>();
+        items.add(BnplPaymentCartItem.builder()
+                .id("26020874")
+                .name("Item 1")
+                .brandName("26010303")
+                .type(BnplCartItemType.OTHER)
+                .unitPrice(new BigDecimal("100"))
+                .quantity(1)
+                .build());
+        InitBnplPaymentRequest request = InitBnplPaymentRequest.builder()
+                .price(price)
+                .paidPrice(price)
+                .currency(Currency.TRY)
+                .apmType(ApmType.TOM_FINANCE)
+                .apmOrderId(UUID.randomUUID().toString())
+                .paymentGroup(PaymentGroup.PRODUCT)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .callbackUrl("https://www.your-website.com/bnpl-callback")
+                .items(paymentItemRequests)
+                .cartItems(items)
+                .additionalParams(additionalParams)
                 .build();
 
         InitBnplPaymentResponse response = craftgate.payment().initBnplPayment(request);
