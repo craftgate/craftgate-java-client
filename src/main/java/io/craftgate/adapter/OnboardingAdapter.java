@@ -2,10 +2,12 @@ package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreateMemberRequest;
+import io.craftgate.request.CreateMerchantRequest;
 import io.craftgate.request.SearchMembersRequest;
 import io.craftgate.request.UpdateMemberRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
+import io.craftgate.response.CreateMerchantResponse;
 import io.craftgate.response.MemberListResponse;
 import io.craftgate.response.MemberResponse;
 
@@ -36,5 +38,10 @@ public class OnboardingAdapter extends BaseAdapter {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchMembersRequest);
         String path = "/onboarding/v1/members" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MemberListResponse.class);
+    }
+
+    public CreateMerchantResponse createMerchant(CreateMerchantRequest createMerchantRequest) {
+        String path = "/onboarding/v1/merchants";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMerchantRequest, path, requestOptions), createMerchantRequest, CreateMerchantResponse.class);
     }
 }

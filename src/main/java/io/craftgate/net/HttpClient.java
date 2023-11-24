@@ -44,6 +44,10 @@ public class HttpClient {
         return exchange(url, HttpMethod.PUT, headers, request, responseType);
     }
 
+    public static <T> T put(String url, Map<String, String> headers, Class<T> responseType) {
+        return exchange(url, HttpMethod.PUT, headers, null, responseType);
+    }
+
     public static void delete(String url, Map<String, String> headers) {
         exchange(url, HttpMethod.DELETE, headers, null, Void.class);
     }
