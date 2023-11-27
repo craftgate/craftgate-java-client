@@ -12,7 +12,6 @@ import io.craftgate.request.dto.UpdateMerchantPosUser;
 import io.craftgate.response.MerchantPosCommissionListResponse;
 import io.craftgate.response.MerchantPosListResponse;
 import io.craftgate.response.MerchantPosResponse;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -24,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MerchantSample {
 
-    private final Craftgate craftgate = new Craftgate("sandbox-tadAxrZXzcViKtengXPzjqGOYvEmBpSw", "sandbox-fQpyGgWeYaSTsjGmbxujoutUHEomdQmK", "https://sandbox-api.craftgate.io");
+    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void create_merchant_pos() {
