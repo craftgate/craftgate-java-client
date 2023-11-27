@@ -8,12 +8,13 @@ public enum PosIntegrator {
     AKBANK,
     ZIRAATBANK,
     ZIRAATBANK_INNOVA,
+    ZIRAATKATILIM,
     KUVEYTTURK,
     HALKBANK,
     DENIZBANK,
     VAKIFBANK,
+    VAKIFKATILIM,
     FINANSBANK,
-    FINANSBANK_ASSECO,
     FIBABANK,
     FIBABANK_ASSECO,
     ANADOLUBANK,
@@ -30,5 +31,9 @@ public enum PosIntegrator {
     OZAN,
     BRAINTREE,
     NKOLAY,
-    FAKE
+    PAYTABS,
+    PAYBULL,
+    ELEKSE,
+    ALGORITMA,
+    PAYCELL
 }
