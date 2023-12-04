@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class OnboardingSample {
 
-    private final Craftgate craftgate = new Craftgate("sandbox-tadAxrZXzcViKtengXPzjqGOYvEmBpSw", "sandbox-fQpyGgWeYaSTsjGmbxujoutUHEomdQmK", "https://sandbox-api.craftgate.io");
+    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void create_sub_merchant() {
