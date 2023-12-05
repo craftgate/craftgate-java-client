@@ -21,6 +21,7 @@ public class Craftgate {
     private final HookAdapter hookAdapter;
     private final MasterpassPaymentAdapter masterpassPaymentAdapter;
     private final BankAccountTrackingAdapter bankAccountTrackingAdapter;
+    private final MerchantAdapter merchantAdapter;
 
 
     public Craftgate(String apiKey, String secretKey) {
@@ -53,6 +54,7 @@ public class Craftgate {
         this.hookAdapter = new HookAdapter(requestOptions);
         this.masterpassPaymentAdapter = new MasterpassPaymentAdapter(requestOptions);
         this.bankAccountTrackingAdapter = new BankAccountTrackingAdapter(requestOptions);
+        this.merchantAdapter = new MerchantAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
@@ -109,5 +111,9 @@ public class Craftgate {
 
     public BankAccountTrackingAdapter bankAccountTracking() {
         return bankAccountTrackingAdapter;
+    }
+
+    public MerchantAdapter merchant() {
+        return merchantAdapter;
     }
 }

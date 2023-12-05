@@ -4,8 +4,10 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.MemberType;
 import io.craftgate.model.SettlementEarningsDestination;
 import io.craftgate.request.CreateMemberRequest;
+import io.craftgate.request.CreateMerchantRequest;
 import io.craftgate.request.SearchMembersRequest;
 import io.craftgate.request.UpdateMemberRequest;
+import io.craftgate.response.CreateMerchantResponse;
 import io.craftgate.response.MemberListResponse;
 import io.craftgate.response.MemberResponse;
 import org.junit.jupiter.api.Test;
@@ -204,5 +206,26 @@ public class OnboardingSample {
         assertEquals(request.getTaxNumber(), response.getTaxNumber());
         assertEquals(request.getTaxOffice(), response.getTaxOffice());
         assertEquals(request.getAddress(), response.getAddress());
+    }
+
+    @Test
+    void create_merchant() {
+        CreateMerchantRequest request = CreateMerchantRequest.builder()
+                .name("newMerchant")
+                .legalCompanyTitle("legalCompanyTitle")
+                .email("new_merchant@merchant.com")
+                .website("www.merchant.com")
+                .contactName("newName")
+                .contactSurname("newSurname")
+                .contactPhoneNumber("905555555566")
+                .build();
+
+        //when
+        CreateMerchantResponse response = craftgate.onboarding().createMerchant(request);
+
+        //then
+        assertNotNull(response.getId());
+        assertEquals(request.getName(), response.getName());
+        assertEquals(response.getMerchantApiCredentials().size(), 1);
     }
 }
