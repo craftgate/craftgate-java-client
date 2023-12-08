@@ -15,6 +15,7 @@ public enum ApmType {
     MASLAK,
     ALFABANK,
     TOM_FINANCE,
+    PAYCELL,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
 }
