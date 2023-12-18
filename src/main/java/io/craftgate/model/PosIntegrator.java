@@ -35,5 +35,7 @@ public enum PosIntegrator {
     PAYBULL,
     ELEKSE,
     ALGORITMA,
-    PAYCELL
+    PAYCELL,
+    TAMI,
+    QNB_PAY,
 }
