@@ -3,6 +3,8 @@ package io.craftgate.sample;
 import io.craftgate.Craftgate;
 import io.craftgate.model.FraudAction;
 import io.craftgate.model.FraudCheckStatus;
+import io.craftgate.model.FraudValueType;
+import io.craftgate.request.FraudValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.response.FraudAllValueListsResponse;
 import io.craftgate.response.FraudCheckListResponse;
@@ -12,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class FraudSample {
 
@@ -28,7 +30,7 @@ public class FraudSample {
                 .build();
 
         FraudCheckListResponse response = craftgate.fraud().searchFraudChecks(request);
-        assertTrue(response.getItems().size() > 0);
+        assertFalse(response.getItems().isEmpty());
     }
 
     @Test
@@ -39,7 +41,7 @@ public class FraudSample {
                 .build();
 
         FraudCheckListResponse response = craftgate.fraud().searchFraudChecks(request);
-        assertTrue(response.getItems().size() > 0);
+        assertFalse(response.getItems().isEmpty());
     }
 
     @Test
@@ -57,27 +59,51 @@ public class FraudSample {
     @Test
     void retrieve_all_fraud_value_lists() {
         FraudAllValueListsResponse allValueLists = craftgate.fraud().retrieveAllValueLists();
-        assertTrue(allValueLists.getItems().size() > 0);
+        assertFalse(allValueLists.getItems().isEmpty());
     }
 
     @Test
     void create_fraud_value_list() {
-        craftgate.fraud().createValueList("ipList");
+        craftgate.fraud().createValueList("ipList", FraudValueType.IP);
     }
 
     @Test
     void add_value_to_fraud_value_list() {
-        craftgate.fraud().addValueToValueList("ipList", "127.0.0.1", null);
+        FraudValueListRequest request = FraudValueListRequest.builder()
+                .label("local ip")
+                .type(FraudValueType.IP)
+                .listName("ipList")
+                .value("127.0.0.1")
+                .build();
+        craftgate.fraud().addValueToValueList(request);
     }
 
     @Test
     void add_temporary_value_to_fraud_value_list() {
-        craftgate.fraud().addValueToValueList("ipList", "127.0.0.2", 60);
+        FraudValueListRequest fraudValueListRequest = FraudValueListRequest.builder()
+                .label("local ip 2")
+                .type(FraudValueType.IP)
+                .listName("ipList")
+                .value("127.0.0.2")
+                .durationInSeconds(60)
+                .build();
+        craftgate.fraud().addValueToValueList(fraudValueListRequest);
     }
 
     @Test
-    void remove_value_to_fraud_value_list() {
-        craftgate.fraud().removeValueFromValueList("ipList", "127.0.0.1");
+    void add_card_fingerprint_to_fraud_value_list() {
+        FraudValueListRequest fraudValueListRequest = FraudValueListRequest.builder()
+                .label("John Doe Card")
+                .type(FraudValueType.CARD)
+                .listName("cardList")
+                .paymentId(11675L)
+                .build();
+        craftgate.fraud().addValueToValueList(fraudValueListRequest);
+    }
+
+    @Test
+    void remove_value_from_fraud_value_list() {
+        craftgate.fraud().removeValueFromValueList("ipList", "da0150ff-10be-4cb3-b66e-efcdaaff8233");
     }
 
     @Test

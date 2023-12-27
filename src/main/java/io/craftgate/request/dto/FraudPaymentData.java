@@ -11,8 +11,6 @@ public class FraudPaymentData {
     private String conversationId;
     private BigDecimal paidPrice;
     private String currency;
-    private String cardFingerprintId;
-    private LocalDateTime cardFingerprintExpirationDate;
     private Long buyerId;
     private String clientIp;
 }
