@@ -38,4 +38,6 @@ public enum PosIntegrator {
     PAYCELL,
     TAMI,
     QNB_PAY,
+    AKBANK_VPOS,
+    TAP,
 }
