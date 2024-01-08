@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class FraudValue {
+    private String id;
+    private String label;
     private String value;
     private Integer expireInSeconds;
 }
