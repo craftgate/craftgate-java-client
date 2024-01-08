@@ -12,5 +12,10 @@ public enum Currency {
     AED,
     IQD,
     AZN,
-    KZT
+    KZT,
+    KWD,
+    SAR,
+    BHD,
+    RUB,
+    JPY
 }
