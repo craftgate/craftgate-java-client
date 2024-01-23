@@ -15,5 +15,6 @@ public enum PaymentProvider {
     APPLEPAY,
     GOOGLEPAY,
     STRIPE,
-    TOMPAY
+    TOMPAY,
+    HASO
 }
