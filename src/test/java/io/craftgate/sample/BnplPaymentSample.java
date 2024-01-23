@@ -31,7 +31,7 @@ public class BnplPaymentSample {
                 .id("1234")
                 .name("item 1")
                 .brandName("Iphone")
-                .type(BnplCartItemType.MOBILE_PHONE_BELOW_5000_TRY)
+                .type(BnplCartItemType.MOBILE_PHONE_PRICE_BELOW_REGULATION_LIMIT)
                 .unitPrice(BigDecimal.valueOf(3000))
                 .quantity(2)
                 .build());
@@ -87,7 +87,7 @@ public class BnplPaymentSample {
                 .id("100")
                 .name("Test Elektronik 1")
                 .brandName("Samsung")
-                .type(BnplCartItemType.MOBILE_PHONE_OVER_5000_TRY)
+                .type(BnplCartItemType.MOBILE_PHONE_PRICE_ABOVE_REGULATION_LIMIT)
                 .unitPrice(new BigDecimal("3000"))
                 .quantity(1)
                 .build());
