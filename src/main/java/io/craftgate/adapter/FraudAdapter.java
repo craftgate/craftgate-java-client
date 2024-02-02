@@ -1,6 +1,7 @@
 package io.craftgate.adapter;
 
 import io.craftgate.model.FraudCheckStatus;
+import io.craftgate.model.FraudValueType;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.FraudValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
@@ -40,8 +41,9 @@ public class FraudAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudValueListResponse.class);
     }
 
-    public void createValueList(String listName) {
-        addValueToValueList(listName, null, null);
+    public void createValueList(String listName, FraudValueType type) {
+        FraudValueListRequest createRequest = FraudValueListRequest.builder().type(type).listName(listName).value(null).durationInSeconds(null).build();
+        addValueToValueList(createRequest);
     }
 
     public void deleteValueList(String listName) {
@@ -50,15 +52,14 @@ public class FraudAdapter extends BaseAdapter {
         HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
     }
 
-    public void addValueToValueList(String listName, String value, Integer expireInSeconds) {
+    public void addValueToValueList(FraudValueListRequest fraudValueListRequest) {
         String path = "/fraud/v1/value-lists";
-        FraudValueListRequest fraudValueListRequest = FraudValueListRequest.builder().listName(listName).value(value).durationInSeconds(expireInSeconds).build();
         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(fraudValueListRequest, path, requestOptions),
                 fraudValueListRequest, Void.class);
     }
 
-    public void removeValueFromValueList(String listName, String value) {
-        String path = "/fraud/v1/value-lists/" + listName + "/values/" + value;
+    public void removeValueFromValueList(String listName, String valueId) {
+        String path = "/fraud/v1/value-lists/" + listName + "/values/" + valueId;
         HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
     }
 }
