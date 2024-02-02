@@ -40,4 +40,5 @@ public enum PosIntegrator {
     QNB_PAY,
     AKBANK_VPOS,
     TAP,
+    RUBIK,
 }
