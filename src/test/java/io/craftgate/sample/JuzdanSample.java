@@ -2,8 +2,8 @@ package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
 import io.craftgate.model.*;
-import io.craftgate.request.CreatePaymentItemRequest;
 import io.craftgate.request.InitJuzdanPaymentRequest;
+import io.craftgate.request.dto.PaymentItem;
 import io.craftgate.response.InitJuzdanPaymentResponse;
 import io.craftgate.response.PaymentResponse;
 import org.junit.jupiter.api.Test;
@@ -20,15 +20,15 @@ public class JuzdanSample {
 
     @Test
     void init() {
-        List<CreatePaymentItemRequest> items = new LinkedList<>();
+        List<PaymentItem> items = new LinkedList<>();
 
-        CreatePaymentItemRequest createPaymentItem = CreatePaymentItemRequest.builder()
+        PaymentItem paymentItem = PaymentItem.builder()
                 .price(BigDecimal.ONE)
                 .name("test123")
                 .externalId("test2")
                 .build();
 
-        items.add(createPaymentItem);
+        items.add(paymentItem);
 
         InitJuzdanPaymentRequest initJuzdanPaymentRequest = InitJuzdanPaymentRequest.builder()
                 .price(BigDecimal.ONE)
@@ -38,7 +38,7 @@ public class JuzdanSample {
                 .conversationId("testConversationId")
                 .externalId("testExternalId")
                 .callbackUrl("www.testCallbackUrl.com")
-                .clientType(ClientType.W)
+                .clientType(InitJuzdanPaymentRequest.ClientType.W)
                 .items(items)
                 .paymentPhase(PaymentPhase.AUTH)
                 .paymentChannel("testPaymentChannel")

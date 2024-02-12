@@ -1,9 +1,9 @@
 package io.craftgate.request;
 
-import io.craftgate.model.ClientType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.model.PaymentPhase;
+import io.craftgate.request.dto.PaymentItem;
 import lombok.Builder;
 import lombok.Data;
 
@@ -26,7 +26,12 @@ public class InitJuzdanPaymentRequest {
     private String paymentChannel;
     private Long buyerMemberId;
     private String bankOrderId;
-    private List<CreatePaymentItemRequest> items;
+    private List<PaymentItem> items;
     private ClientType clientType;
     private Long loanCampaignId;
+
+    public enum ClientType {
+        M,
+        W
+    }
 }
