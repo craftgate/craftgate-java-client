@@ -56,11 +56,11 @@ public class JuzdanSample {
 
         String referenceId = "5493c7a7-4d8b-4517-887d-f8b8f826a3d0";
 
-        PaymentResponse initResponse = assertDoesNotThrow(() -> craftgate.juzdan().retrieve(referenceId));
+        PaymentResponse paymentResponse = assertDoesNotThrow(() -> craftgate.juzdan().retrieve(referenceId));
 
-        assertNotNull(initResponse);
-        assertEquals(PaymentSource.JUZDAN, initResponse.getPaymentSource());
-        assertEquals(PaymentType.CARD_PAYMENT, initResponse.getPaymentType());
+        assertNotNull(paymentResponse);
+        assertEquals(PaymentSource.JUZDAN, paymentResponse.getPaymentSource());
+        assertEquals(PaymentType.CARD_PAYMENT, paymentResponse.getPaymentType());
     }
 
 }
