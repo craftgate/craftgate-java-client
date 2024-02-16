@@ -25,5 +25,7 @@ public enum PaymentProvider {
     TOM_FINANCE,
     ALFABANK,
     PAYCELL,
+    TOMPAY,
+    HASO,
     OFFLINE
 }
