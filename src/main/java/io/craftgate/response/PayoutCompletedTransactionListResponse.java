@@ -9,4 +9,7 @@ import java.util.List;
 public class PayoutCompletedTransactionListResponse {
 
     private List<PayoutCompletedTransaction> items;
+    private Integer page;
+    private Integer size;
+    private Integer totalSize;
 }
