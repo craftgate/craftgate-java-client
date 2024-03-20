@@ -14,4 +14,6 @@ public class SearchPayoutCompletedTransactionsRequest {
     private SettlementType settlementType;
     private LocalDateTime endDate;
     private LocalDateTime startDate;
+    private Integer page;
+    private Integer size;
 }
