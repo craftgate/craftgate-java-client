@@ -26,6 +26,8 @@ public class SettlementReportingSample {
                 .settlementType(SettlementType.SETTLEMENT)
                 .startDate(LocalDateTime.now().minusDays(1).withHour(0).withMinute(0).withSecond(0))
                 .endDate(LocalDateTime.now().minusDays(1).withHour(23).withMinute(59).withSecond(59))
+                .page(0)
+                .size(10)
                 .build();
 
         PayoutCompletedTransactionListResponse response = craftgate.settlementReporting().searchPayoutCompletedTransactions(request);
