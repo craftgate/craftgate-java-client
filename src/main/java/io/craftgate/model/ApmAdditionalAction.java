@@ -4,6 +4,7 @@ public enum ApmAdditionalAction {
     REDIRECT_TO_URL,
 
     OTP_REQUIRED,
+    SHOW_HTML_CONTENT,
     WAIT_FOR_WEBHOOK,
     APPROVAL_REQUIRED,
     NONE

@@ -10,6 +10,7 @@ public class ApmPaymentInitResponse {
 
     private Long paymentId;
     private String redirectUrl;
+    private String htmlContent;
     private PaymentStatus paymentStatus;
     private ApmAdditionalAction additionalAction;
     private PaymentError paymentError;
