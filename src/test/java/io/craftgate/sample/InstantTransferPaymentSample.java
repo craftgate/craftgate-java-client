@@ -30,7 +30,7 @@ public class InstantTransferPaymentSample {
     }
 
     @Test
-    void init_compay_apm_payment() {
+    void init_instant_transfer_apm_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
         items.add(PaymentItem.builder()
@@ -46,7 +46,7 @@ public class InstantTransferPaymentSample {
                 .build());
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
-                .apmType(ApmType.COMPAY)
+                .apmType(ApmType.INSTANT_TRANSFER)
                 .price(BigDecimal.valueOf(1))
                 .paidPrice(BigDecimal.valueOf(1))
                 .currency(Currency.TRY)

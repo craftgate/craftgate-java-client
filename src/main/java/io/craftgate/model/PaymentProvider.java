@@ -11,7 +11,7 @@ public enum PaymentProvider {
     SODEXO,
     EDENRED,
     KASPI,
-    COMPAY,
+    INSTANT_TRANSFER,
     YKB_WORLD_PAY,
     APPLEPAY,
     GOOGLEPAY,
