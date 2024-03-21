@@ -10,6 +10,7 @@ public enum ApmType {
     KLARNA,
     AFTERPAY,
     KASPI,
+    INSTANT_TRANSFER,
     STRIPE,
     TOMPAY,
     MASLAK,
