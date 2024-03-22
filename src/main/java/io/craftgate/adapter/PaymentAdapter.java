@@ -219,6 +219,12 @@ public class PaymentAdapter extends BaseAdapter {
         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
     }
 
+    public InstantTransferBanksResponse retrieveActiveBanks() {
+        String path = "/payment/v1/instant-transfer-banks";
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
+                InstantTransferBanksResponse.class);
+    }
+
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
         String hash = params.get("hash");
         String hashString = threeDSecureCallbackKey +

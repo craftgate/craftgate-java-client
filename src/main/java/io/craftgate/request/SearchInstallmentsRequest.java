@@ -14,4 +14,5 @@ public class SearchInstallmentsRequest {
     private BigDecimal price;
     private Currency currency;
     private boolean distinctCardBrandsWithLowestCommissions;
+    private boolean loyaltyExists;
 }

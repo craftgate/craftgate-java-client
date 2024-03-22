@@ -10,11 +10,13 @@ public enum ApmType {
     KLARNA,
     AFTERPAY,
     KASPI,
+    INSTANT_TRANSFER,
     STRIPE,
     TOMPAY,
     MASLAK,
     ALFABANK,
     TOM_FINANCE,
+    PAYCELL,
     HASO,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
