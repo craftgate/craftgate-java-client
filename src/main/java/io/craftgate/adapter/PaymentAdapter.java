@@ -166,6 +166,12 @@ public class PaymentAdapter extends BaseAdapter {
                 updateCardRequest, StoredCardResponse.class);
     }
 
+    public StoredCardResponse cloneCard(CloneCardRequest cloneCardRequest) {
+        String path = "/payment/v1/cards/clone";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(cloneCardRequest, path, requestOptions),
+                cloneCardRequest, StoredCardResponse.class);
+    }
+
     public StoredCardListResponse searchStoredCards(SearchStoredCardsRequest searchStoredCardsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchStoredCardsRequest);
         String path = "/payment/v1/cards" + query;
