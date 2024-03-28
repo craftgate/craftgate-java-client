@@ -1481,6 +1481,21 @@ public class PaymentSample {
     }
 
     @Test
+    void clone_stored_card() {
+        final CloneCardRequest cloneCardRequest = CloneCardRequest.builder()
+                .sourceCardUserKey("fac377f2-ab15-4696-88d2-5e71b27ec378")
+                .sourceCardToken("11a078c4-3c32-4796-90b1-51ee5517a212")
+                .targetMerchantId(1L)
+                .build();
+
+        StoredCardResponse response = craftgate.payment().cloneCard(cloneCardRequest);
+
+        assertNotNull(response);
+        assertNotNull(response.getCardToken());
+        assertNotNull(response.getCardUserKey());
+    }
+
+    @Test
     void search_stored_cards() {
         SearchStoredCardsRequest request = SearchStoredCardsRequest.builder()
                 .cardAlias("My YKB Card")
