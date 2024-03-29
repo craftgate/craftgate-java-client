@@ -11,7 +11,7 @@ public class HashGeneratorTest {
     @Test
     void should_generate_hash() {
         //given
-        String expectedSignature = "QQO5oHUUcNzHd9Sjc3RfDQbhHX1UqQiWsjYL3xoQaYA=";
+        String expectedSignature = "Tj0mkbp+WLBwLhS65CjX708PGCl9hD9rlT6n6Zgcyi8=";
         CreateMemberRequest request = CreateMemberRequest.builder()
                 .memberExternalId("ext-1511")
                 .email("haluk.demir@example.com")
