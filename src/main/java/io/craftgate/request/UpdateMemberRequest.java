@@ -15,7 +15,6 @@ public class UpdateMemberRequest {
     private String address;
     private String email;
     private String phoneNumber;
-    private String identityNumber;
     private String contactName;
     private String contactSurname;
     private MemberType memberType;

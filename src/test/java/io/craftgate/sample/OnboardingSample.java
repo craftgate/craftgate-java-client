@@ -32,7 +32,6 @@ public class OnboardingSample {
                 .email("haluk.demir@example.com")
                 .phoneNumber("905551111111")
                 .iban("TR930006701000000001111111")
-                .identityNumber("11111111110")
                 .legalCompanyTitle("Dem Zeytinyağı Üretim Ltd. Şti.")
                 .name("Dem Zeytinyağı Üretim Ltd. Şti.")
                 .memberType(MemberType.LIMITED_OR_JOINT_STOCK_COMPANY)
@@ -49,7 +48,6 @@ public class OnboardingSample {
         assertEquals(request.getEmail(), response.getEmail());
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
         assertEquals(request.getIban(), response.getIban());
-        assertEquals(request.getIdentityNumber(), response.getIdentityNumber());
         assertEquals(request.getLegalCompanyTitle(), response.getLegalCompanyTitle());
         assertEquals(request.getName(), response.getName());
         assertEquals(request.getMemberType(), response.getMemberType());
@@ -70,7 +68,6 @@ public class OnboardingSample {
                 .contactSurname("Demir")
                 .email("haluk.demir@example.com")
                 .phoneNumber("905551111111")
-                .identityNumber("11111111110")
                 .legalCompanyTitle("Dem Zeytinyağı Üretim Ltd. Şti.")
                 .name("Dem Zeytinyağı Üretim Ltd. Şti.")
                 .memberType(MemberType.LIMITED_OR_JOINT_STOCK_COMPANY)
@@ -88,7 +85,6 @@ public class OnboardingSample {
         assertEquals(request.getEmail(), response.getEmail());
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
         assertEquals(request.getIban(), response.getIban());
-        assertEquals(request.getIdentityNumber(), response.getIdentityNumber());
         assertEquals(request.getLegalCompanyTitle(), response.getLegalCompanyTitle());
         assertEquals(request.getName(), response.getName());
         assertEquals(request.getTaxNumber(), response.getTaxNumber());
@@ -123,7 +119,6 @@ public class OnboardingSample {
         assertEquals(request.getEmail(), response.getEmail());
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
         assertEquals(request.getName(), response.getName());
-        assertEquals(request.getIdentityNumber(), response.getIdentityNumber());
     }
 
     @Test
@@ -181,7 +176,6 @@ public class OnboardingSample {
                 .email("haluk.demir@example.com")
                 .phoneNumber("905551111111")
                 .iban("TR930006701000000001111111")
-                .identityNumber("11111111110")
                 .legalCompanyTitle("Dem Zeytinyağı Üretim Ltd. Şti.")
                 .name("Dem Zeytinyağı Üretim Ltd. Şti.")
                 .memberType(MemberType.LIMITED_OR_JOINT_STOCK_COMPANY)
@@ -198,7 +192,6 @@ public class OnboardingSample {
         assertEquals(request.getEmail(), response.getEmail());
         assertEquals(request.getPhoneNumber(), response.getPhoneNumber());
         assertEquals(request.getIban(), response.getIban());
-        assertEquals(request.getIdentityNumber(), response.getIdentityNumber());
         assertEquals(request.getLegalCompanyTitle(), response.getLegalCompanyTitle());
         assertEquals(request.getName(), response.getName());
         assertEquals(request.getMemberType(), response.getMemberType());

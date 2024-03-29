@@ -17,7 +17,6 @@ public class HashGeneratorTest {
                 .email("haluk.demir@example.com")
                 .phoneNumber("905551111111")
                 .name("Haluk Demir")
-                .identityNumber("11111111110")
                 .build();
 
         //when
