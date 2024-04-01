@@ -24,7 +24,6 @@ public class MemberResponse {
     private String email;
     private String address;
     private String phoneNumber;
-    private String identityNumber;
     private String contactName;
     private String contactSurname;
     private String legalCompanyTitle;
