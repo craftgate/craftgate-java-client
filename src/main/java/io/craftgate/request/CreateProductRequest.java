@@ -20,5 +20,6 @@ public class CreateProductRequest {
     private BigDecimal price;
     private Currency currency;
     private String description;
+    protected boolean multiPayment;
     private Set<Integer> enabledInstallments;
 }
