@@ -1709,6 +1709,15 @@ public class PaymentSample {
     }
 
     @Test
+    void retrieve_multi_payment() {
+        String token = "6d7e66b5-9b1c-4c1d-879a-2557b651096e";
+
+        MultiPaymentResponse response = craftgate.payment().retrieveMultiPayment(token);
+
+        assertNotNull(response);
+    }
+
+    @Test
     void should_validate_3D_secure_callback_verified() {
         //given
         String merchantThreeDsCallbackKey = "merchantThreeDsCallbackKeySndbox";

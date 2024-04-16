@@ -54,7 +54,6 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/checkout-payments/" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
-
     public void expireCheckoutPayment(String token) {
         String path = "/payment/v1/checkout-payments/" + token;
         HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
@@ -229,6 +228,11 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/instant-transfer-banks";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
                 InstantTransferBanksResponse.class);
+    }
+
+    public MultiPaymentResponse retrieveMultiPayment(String token) {
+        String path = "/payment/v1/multi-payments/" + token;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MultiPaymentResponse.class);
     }
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
