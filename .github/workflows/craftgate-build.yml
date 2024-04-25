@@ -7,11 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Collect Workflow Telemetry
-        uses: runforesight/foresight-workflow-kit-action@v1
-        with:
-          api_key: 90b23594-1167-4b71-bf24-874821363456
-          
       - uses: actions/checkout@v2
 
       - name: Set up JDK 1.8
