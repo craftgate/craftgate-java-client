@@ -3,10 +3,7 @@ package io.craftgate.adapter;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.*;
 import io.craftgate.request.common.RequestOptions;
-import io.craftgate.response.CheckMasterpassUserResponse;
-import io.craftgate.response.MasterpassPaymentThreeDSInitResponse;
-import io.craftgate.response.MasterpassPaymentTokenGenerateResponse;
-import io.craftgate.response.PaymentResponse;
+import io.craftgate.response.*;
 
 public class MasterpassPaymentAdapter extends BaseAdapter {
 
@@ -43,4 +40,11 @@ public class MasterpassPaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(masterpassPaymentThreeDSCompleteRequest, path, requestOptions),
                 masterpassPaymentThreeDSCompleteRequest, PaymentResponse.class);
     }
+
+    public RetrieveLoyaltiesResponse retrieveLoyalties(MasterpassRetrieveLoyaltiesRequest masterpassRetrieveLoyaltiesRequest) {
+        String path = "/payment/v2/masterpass-payments/loyalties/retrieve";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(masterpassRetrieveLoyaltiesRequest, path, requestOptions),
+                masterpassRetrieveLoyaltiesRequest, RetrieveLoyaltiesResponse.class);
+    }
+
 }
