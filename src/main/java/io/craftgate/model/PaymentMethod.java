@@ -16,5 +16,6 @@ public enum PaymentMethod {
     KASPI,
     INSTANT_TRANSFER,
     TOMPAY,
-    STRIPE
+    STRIPE,
+    METROPOL
 }
