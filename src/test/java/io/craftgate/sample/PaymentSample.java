@@ -1138,6 +1138,53 @@ public class PaymentSample {
     }
 
     @Test
+    void init_metropol_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(1.00))
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.METROPOL)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("myConversationId")
+                .externalId("optional-externalId")
+                .items(items)
+                .additionalParams(new HashMap() {{
+                    put("apmUserIdentity", "6375780115068760");
+                }})
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertNotNull(response.getAdditionalData());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.OTP_REQUIRED, response.getAdditionalAction());
+    }
+
+    @Test
+    void complete_metropol_apm_payment() {
+        CompleteApmPaymentRequest request = CompleteApmPaymentRequest.builder()
+                .paymentId(1L)
+                .additionalParams(new HashMap() {{
+                    put("otpCode", "00000");
+                    put("productId", "1");
+                    put("walletId", "1");
+                }})
+                .build();
+
+        ApmPaymentCompleteResponse response = craftgate.payment().completeApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+    }
+
+    @Test
     void init_kaspi_apm_payment() {
         List<PaymentItem> items = new ArrayList<>();
 

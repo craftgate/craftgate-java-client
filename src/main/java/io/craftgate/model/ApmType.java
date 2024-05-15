@@ -19,5 +19,6 @@ public enum ApmType {
     PAYCELL,
     HASO,
     FUND_TRANSFER,
-    CASH_ON_DELIVERY
+    CASH_ON_DELIVERY,
+    METROPOL
 }
