@@ -1157,7 +1157,7 @@ public class PaymentSample {
                 .externalId("optional-externalId")
                 .items(items)
                 .additionalParams(new HashMap() {{
-                    put("apmUserIdentity", "6375780115068760");
+                    put("cardNumber", "6375780115068760");
                 }})
                 .build();
 
