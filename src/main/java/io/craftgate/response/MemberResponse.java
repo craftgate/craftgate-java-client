@@ -36,4 +36,5 @@ public class MemberResponse {
     @Deprecated
     private BigDecimal negativeWalletAmountLimit;
     private String iban;
+    private Integer settlementDelayCount;
 }

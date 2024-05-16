@@ -33,4 +33,5 @@ public class CreateMemberRequest {
     private BigDecimal subMerchantMaximumAllowedNegativeBalance;
     private Boolean isBuyer;
     private Boolean isSubMerchant;
+    private Integer settlementDelayCount;
 }
