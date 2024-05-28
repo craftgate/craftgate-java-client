@@ -14,5 +14,7 @@ public enum PaymentMethod {
     KLARNA,
     AFTERPAY,
     INSTANT_TRANSFER,
-    STRIPE
+    STRIPE,
+    MULTINET,
+    MULTINET_GIFT
 }

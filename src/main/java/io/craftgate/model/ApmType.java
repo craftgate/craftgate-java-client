@@ -20,5 +20,7 @@ public enum ApmType {
     HASO,
     FUND_TRANSFER,
     CASH_ON_DELIVERY,
-    METROPOL
+    METROPOL,
+    MULTINET,
+    MULTINET_GIFT
 }

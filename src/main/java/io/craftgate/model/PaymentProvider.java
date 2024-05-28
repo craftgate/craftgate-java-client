@@ -27,6 +27,7 @@ public enum PaymentProvider {
     ALFABANK,
     PAYCELL,
     HASO,
+    METROPOL,
+    MULTINET,
     OFFLINE,
-    METROPOL
 }
