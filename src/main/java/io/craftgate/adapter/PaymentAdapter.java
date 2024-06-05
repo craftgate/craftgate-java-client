@@ -235,10 +235,10 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MultiPaymentResponse.class);
     }
 
-    public CardResponse retrieveProviderCard(RetrieveProviderCardRequest retrieveProviderCardRequest) {
+    public StoredCardResponse retrieveProviderCard(RetrieveProviderCardRequest retrieveProviderCardRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveProviderCardRequest);
         String path = "/payment/v1/cards/provider-card-mappings" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), CardResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardResponse.class);
     }
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
