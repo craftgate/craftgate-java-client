@@ -23,6 +23,7 @@ public class Craftgate {
     private final BankAccountTrackingAdapter bankAccountTrackingAdapter;
     private final MerchantAdapter merchantAdapter;
     private final JuzdanPaymentAdapter juzdanPaymentAdapter;
+    private final BkmExpressPaymentAdapter bkmExpressPaymentAdapter;
 
 
     public Craftgate(String apiKey, String secretKey) {
@@ -57,6 +58,7 @@ public class Craftgate {
         this.bankAccountTrackingAdapter = new BankAccountTrackingAdapter(requestOptions);
         this.merchantAdapter = new MerchantAdapter(requestOptions);
         this.juzdanPaymentAdapter = new JuzdanPaymentAdapter(requestOptions);
+        this.bkmExpressPaymentAdapter = new BkmExpressPaymentAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
@@ -121,5 +123,9 @@ public class Craftgate {
 
     public JuzdanPaymentAdapter juzdan() {
         return juzdanPaymentAdapter;
+    }
+
+    public BkmExpressPaymentAdapter bkmExpressPaymentAdapter() {
+        return bkmExpressPaymentAdapter;
     }
 }
