@@ -29,5 +29,6 @@ public enum PaymentProvider {
     HASO,
     METROPOL,
     MULTINET,
+    ISPAY,
     OFFLINE,
 }

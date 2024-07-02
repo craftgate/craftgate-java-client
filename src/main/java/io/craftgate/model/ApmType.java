@@ -22,5 +22,6 @@ public enum ApmType {
     CASH_ON_DELIVERY,
     METROPOL,
     MULTINET,
-    MULTINET_GIFT
+    MULTINET_GIFT,
+    ISPAY
 }
