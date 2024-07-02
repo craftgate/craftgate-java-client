@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BkmExpressSample {
 
-    private final Craftgate craftgate = new Craftgate("sandbox-IeULlxuyHsKnnARbiosyqVVUrgKDHTcP", "sandbox-wFcKoYviHJDhQyTuBzkvrGvwEayQPGuM", "https://sandbox-api.craftgate.io");
+    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void init_bkm_express() {
