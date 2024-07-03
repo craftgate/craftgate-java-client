@@ -19,7 +19,7 @@ public class SettlementReportingAdapter extends BaseAdapter {
 
     public PayoutCompletedTransactionListResponse searchPayoutCompletedTransactions(SearchPayoutCompletedTransactionsRequest searchPayoutCompletedTransactionsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPayoutCompletedTransactionsRequest);
-        String path = "/settlement-reporting/v1/settlement-file/payout-completed-transactions" + query;
+        String path = "/settlement-reporting/v2/settlement-file/payout-completed-transactions" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutCompletedTransactionListResponse.class);
     }
 

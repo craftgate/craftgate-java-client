@@ -54,7 +54,6 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/checkout-payments/" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
-
     public void expireCheckoutPayment(String token) {
         String path = "/payment/v1/checkout-payments/" + token;
         HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
@@ -166,6 +165,12 @@ public class PaymentAdapter extends BaseAdapter {
                 updateCardRequest, StoredCardResponse.class);
     }
 
+    public StoredCardResponse cloneCard(CloneCardRequest cloneCardRequest) {
+        String path = "/payment/v1/cards/clone";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(cloneCardRequest, path, requestOptions),
+                cloneCardRequest, StoredCardResponse.class);
+    }
+
     public StoredCardListResponse searchStoredCards(SearchStoredCardsRequest searchStoredCardsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchStoredCardsRequest);
         String path = "/payment/v1/cards" + query;
@@ -217,6 +222,23 @@ public class PaymentAdapter extends BaseAdapter {
     public void approveBnplPayment(Long paymentId) {
         String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
+    }
+
+    public InstantTransferBanksResponse retrieveActiveBanks() {
+        String path = "/payment/v1/instant-transfer-banks";
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
+                InstantTransferBanksResponse.class);
+    }
+
+    public MultiPaymentResponse retrieveMultiPayment(String token) {
+        String path = "/payment/v1/multi-payments/" + token;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MultiPaymentResponse.class);
+    }
+
+    public StoredCardResponse retrieveProviderCard(RetrieveProviderCardRequest retrieveProviderCardRequest) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(retrieveProviderCardRequest);
+        String path = "/payment/v1/cards/provider-card-mappings" + query;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardResponse.class);
     }
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {

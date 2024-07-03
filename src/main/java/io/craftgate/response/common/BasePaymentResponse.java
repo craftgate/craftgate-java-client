@@ -39,6 +39,7 @@ public class BasePaymentResponse {
     private String authCode;
     private String hostReference;
     private String transId;
+    private Integer mdStatus;
     private String orderId;
     private String cardHolderName;
     private String bankCardHolderName;

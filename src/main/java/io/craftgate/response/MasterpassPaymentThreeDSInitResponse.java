@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class MasterpassPaymentThreeDSInitResponse {
 
+    private Long paymentId;
     private String returnUrl;
 }

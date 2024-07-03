@@ -16,7 +16,6 @@ public class CreateMemberRequest {
     private String address;
     private String email;
     private String phoneNumber;
-    private String identityNumber;
     private String contactName;
     private String contactSurname;
     private MemberType memberType;
@@ -34,4 +33,5 @@ public class CreateMemberRequest {
     private BigDecimal subMerchantMaximumAllowedNegativeBalance;
     private Boolean isBuyer;
     private Boolean isSubMerchant;
+    private Integer settlementDelayCount;
 }
