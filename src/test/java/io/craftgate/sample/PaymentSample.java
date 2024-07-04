@@ -738,6 +738,28 @@ public class PaymentSample {
     }
 
     @Test
+    void init_checkout_payment_for_deposit() {
+        InitCheckoutPaymentRequest request = InitCheckoutPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .buyerMemberId(1L)
+                .callbackUrl("https://www.your-website.com/craftgate-checkout-callback")
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.PRODUCT)
+                .paymentPhase(PaymentPhase.AUTH)
+                .depositPayment(true)
+                .build();
+
+        InitCheckoutPaymentResponse response = craftgate.payment().initCheckoutPayment(request);
+
+        assertNotNull(response);
+        assertNotNull(response.getPageUrl());
+        assertNotNull(response.getToken());
+        assertNotNull(response.getTokenExpireDate());
+    }
+
+    @Test
     void retrieve_checkout_payment() {
         String token = "456d1297-908e-4bd6-a13b-4be31a6e47d5";
 

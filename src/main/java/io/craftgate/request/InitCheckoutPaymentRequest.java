@@ -44,6 +44,7 @@ public class InitCheckoutPaymentRequest {
     protected boolean allowInstallmentOnlyCommercialCards;
     protected boolean forceThreeDS;
     protected boolean forceAuthForNonCreditCards;
+    protected boolean depositPayment;
     protected Long ttl;
     protected List<CustomInstallment> customInstallments;
     protected List<PaymentItem> items;
