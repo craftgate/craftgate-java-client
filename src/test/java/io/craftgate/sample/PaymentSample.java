@@ -1526,9 +1526,11 @@ public class PaymentSample {
         assertNotNull(response);
         assertNotNull(response.getCardToken());
         assertNotNull(response.getCardUserKey());
+        assertNotNull(response.getCreatedAt());
         assertEquals("525864", response.getBinNumber());
         assertEquals("0001", response.getLastFourDigits());
         assertEquals("My Other Cards", response.getCardAlias());
+        assertEquals("Haluk Demir", response.getCardHolderName());
     }
 
     @Test
