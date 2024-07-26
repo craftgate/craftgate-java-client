@@ -5,6 +5,8 @@ import io.craftgate.model.CardExpiryStatus;
 import io.craftgate.model.CardType;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class StoredCardResponse {
 
@@ -12,6 +14,7 @@ public class StoredCardResponse {
     private String lastFourDigits;
     private String cardUserKey;
     private String cardToken;
+    private String cardHolderName;
     private String cardAlias;
     private CardType cardType;
     private CardAssociation cardAssociation;
@@ -19,4 +22,5 @@ public class StoredCardResponse {
     private String cardBankName;
     private Long cardBankId;
     private CardExpiryStatus cardExpiryStatus;
+    private LocalDateTime createdAt;
 }
