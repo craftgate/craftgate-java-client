@@ -8,4 +8,5 @@ public class FraudCheckParameters {
     private String buyerExternalId;
     private String buyerPhoneNumber;
     private String buyerEmail;
+    private String customFraudVariable;
 }
