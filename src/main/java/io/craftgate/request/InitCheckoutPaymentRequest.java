@@ -5,6 +5,7 @@ import io.craftgate.model.PaymentGroup;
 import io.craftgate.model.PaymentMethod;
 import io.craftgate.model.PaymentPhase;
 import io.craftgate.request.dto.CustomInstallment;
+import io.craftgate.request.dto.FraudCheckParameters;
 import io.craftgate.request.dto.PaymentItem;
 import lombok.Builder;
 import lombok.Data;
@@ -48,4 +49,5 @@ public class InitCheckoutPaymentRequest {
     protected Long ttl;
     protected List<CustomInstallment> customInstallments;
     protected List<PaymentItem> items;
+    protected FraudCheckParameters fraudParams;
 }
