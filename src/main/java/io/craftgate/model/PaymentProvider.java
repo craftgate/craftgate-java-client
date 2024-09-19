@@ -30,5 +30,6 @@ public enum PaymentProvider {
     METROPOL,
     MULTINET,
     ISPAY,
+    VODAFONE,
     OFFLINE,
 }
