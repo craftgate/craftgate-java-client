@@ -12,6 +12,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -50,4 +51,5 @@ public class InitCheckoutPaymentRequest {
     protected List<CustomInstallment> customInstallments;
     protected List<PaymentItem> items;
     protected FraudCheckParameters fraudParams;
+    protected Map<String, Object> additionalParams;
 }
