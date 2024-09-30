@@ -23,5 +23,6 @@ public enum ApmType {
     METROPOL,
     MULTINET,
     MULTINET_GIFT,
-    ISPAY
+    ISPAY,
+    VODAFONE_DCB
 }
