@@ -4,7 +4,5 @@ public enum ApmStatus {
 
     DELETED,
     PASSIVE,
-    ACTIVE,
-    REFUND_ONLY,
-    AUTOPILOT;
+    ACTIVE
 }
