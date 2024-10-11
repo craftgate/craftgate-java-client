@@ -915,6 +915,7 @@ public class PaymentSample {
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .items(items)
                 .installments(installments)
+                .enabledInstallments(Arrays.asList(2,3))
                 .build();
 
         InitGarantiPayPaymentResponse response = craftgate.payment().initGarantiPayPayment(request);
