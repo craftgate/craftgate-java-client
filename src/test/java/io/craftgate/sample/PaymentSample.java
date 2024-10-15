@@ -1315,6 +1315,38 @@ public class PaymentSample {
         assertEquals(ApmAdditionalAction.WAIT_FOR_WEBHOOK, response.getAdditionalAction());
     }
 
+
+    @Test
+    void init_paymob_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.TEN)
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.PAYMOB)
+                .price(BigDecimal.TEN)
+                .paidPrice(BigDecimal.TEN)
+                .currency(Currency.EGP)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .items(items)
+                .additionalParams(new HashMap() {{
+                    put("integrationId", "11223344");
+                }})
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.REDIRECT_TO_URL, response.getAdditionalAction());
+    }
+
     @Test
     void init_ykb_world_pay_pos_apm_payment() {
         List<PaymentItem> items = new ArrayList<>();
