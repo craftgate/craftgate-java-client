@@ -32,5 +32,6 @@ public enum PaymentProvider {
     ISPAY,
     CHIPPIN,
     PAYMOB,
+    BIZUM,
     OFFLINE,
 }
