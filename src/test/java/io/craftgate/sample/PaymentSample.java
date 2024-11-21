@@ -1586,7 +1586,7 @@ public class PaymentSample {
                 .description("marked as refunded")
                 .build();
 
-        PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionManual(request);
+        PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionMarkAsRefunded(request);
         assertNotNull(response);
         assertEquals(RefundStatus.SUCCESS, response.getStatus());
     }
