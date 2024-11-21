@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class RefundPaymentTransactionManualRequest {
+public class RefundPaymentTransactionMarkAsRefundedRequest {
 
     private Long paymentTransactionRefundId;
     private String conversationId;

@@ -1580,10 +1580,10 @@ public class PaymentSample {
     }
 
     @Test
-    void refund_payment_transaction_manual() {
-        RefundPaymentTransactionManualRequest request = RefundPaymentTransactionManualRequest.builder()
+    void refund_payment_transaction_mark_as_refunded() {
+        RefundPaymentTransactionMarkAsRefundedRequest request = RefundPaymentTransactionMarkAsRefundedRequest.builder()
                 .paymentTransactionRefundId(1L)
-                .description("refunded manually")
+                .description("marked as refunded")
                 .build();
 
         PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionManual(request);
