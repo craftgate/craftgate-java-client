@@ -1583,6 +1583,7 @@ public class PaymentSample {
     void refund_payment_transaction_manual() {
         RefundPaymentTransactionManualRequest request = RefundPaymentTransactionManualRequest.builder()
                 .paymentTransactionRefundId(1L)
+                .description("refunded manually")
                 .build();
 
         PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionManual(request);
