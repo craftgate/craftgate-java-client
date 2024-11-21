@@ -915,7 +915,7 @@ public class PaymentSample {
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .items(items)
                 .installments(installments)
-                .enabledInstallments(Arrays.asList(2,3))
+                .enabledInstallments(Arrays.asList(2, 3))
                 .build();
 
         InitGarantiPayPaymentResponse response = craftgate.payment().initGarantiPayPayment(request);
@@ -1576,6 +1576,17 @@ public class PaymentSample {
         PaymentTransactionRefundResponse response = craftgate.payment().retrievePaymentTransactionRefund(paymentTransactionRefundId);
         assertNotNull(response);
         assertEquals(paymentTransactionRefundId, response.getId());
+        assertEquals(RefundStatus.SUCCESS, response.getStatus());
+    }
+
+    @Test
+    void refund_payment_transaction_manual() {
+        RefundPaymentTransactionManualRequest request = RefundPaymentTransactionManualRequest.builder()
+                .paymentTransactionRefundId(1L)
+                .build();
+
+        PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionManual(request);
+        assertNotNull(response);
         assertEquals(RefundStatus.SUCCESS, response.getStatus());
     }
 
