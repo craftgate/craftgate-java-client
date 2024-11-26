@@ -1342,7 +1342,6 @@ public class PaymentSample {
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .conversationId("conversationId")
                 .externalId("externalId")
-                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .additionalParams(additionalParams)
                 .items(items)
                 .build();
