@@ -15,4 +15,6 @@ public class InstallmentPrice {
     private BigDecimal totalPrice;
     private String installmentLabel;
     private Boolean loyaltySupported;
+    private Boolean force3ds;
+    private Boolean cvcRequired;
 }
