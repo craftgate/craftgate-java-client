@@ -21,7 +21,7 @@ public abstract class BaseAdapter {
 
     protected final RequestOptions requestOptions;
 
-    public BaseAdapter(RequestOptions requestOptions) {
+    protected BaseAdapter(RequestOptions requestOptions) {
         this.requestOptions = requestOptions;
     }
 
