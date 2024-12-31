@@ -1619,8 +1619,8 @@ public class PaymentSample {
     @Test
     void refund_payment_transaction_mark_as_refunded() {
         RefundPaymentTransactionMarkAsRefundedRequest request = RefundPaymentTransactionMarkAsRefundedRequest.builder()
-                .paymentTransactionRefundId(1L)
-                .description("marked as refunded")
+                .paymentTransactionId(1L)
+                .refundPrice(BigDecimal.valueOf(20))
                 .build();
 
         PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionMarkAsRefunded(request);
