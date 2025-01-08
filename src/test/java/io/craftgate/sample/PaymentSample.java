@@ -1086,6 +1086,91 @@ public class PaymentSample {
     }
 
     @Test
+    void init_iwallet_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.60))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.40))
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.IWALLET)
+                .price(BigDecimal.valueOf(1))
+                .paidPrice(BigDecimal.valueOf(1))
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("optional-externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .apmUserIdentity("1111222233334444")
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertNull(response.getRedirectUrl());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.OTP_REQUIRED, response.getAdditionalAction());
+    }
+
+    @Test
+    void init_iwallet_apm_payment_with_card_password() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.60))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.40))
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.IWALLET)
+                .price(BigDecimal.valueOf(1))
+                .paidPrice(BigDecimal.valueOf(1))
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("optional-externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .apmUserIdentity("1111222233334444")
+                .additionalParams(Map.of("otpCode", "1234"))
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertNull(response.getRedirectUrl());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.NONE, response.getAdditionalAction());
+    }
+
+    @Test
+    void complete_iwallet_apm_payment() {
+        CompleteApmPaymentRequest request = CompleteApmPaymentRequest.builder()
+                .paymentId(1L)
+                .additionalParams(Map.of("otpCode", "0000"))
+                .build();
+
+        ApmPaymentCompleteResponse response = craftgate.payment().completeApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+    }
+
+    @Test
     void init_klarna_apm_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
@@ -1552,7 +1637,7 @@ public class PaymentSample {
     @Test
     void retrieve_loyalties() {
         RetrieveLoyaltiesRequest request = RetrieveLoyaltiesRequest.builder()
-                .cardNumber("4043080000000003")
+                .cardNumber("5188961939192544")
                 .expireYear("2044")
                 .expireMonth("07")
                 .cvc("000")
