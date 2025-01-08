@@ -987,10 +987,10 @@ public class PaymentSample {
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .apmUserIdentity("5555555555")
-                .additionalParams(new HashMap<>() {{
+                .items(items)
+                .additionalParams(new HashMap() {{
                     put("sodexoCode", "843195");
                 }})
-                .items(items)
                 .build();
 
         ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
@@ -1147,10 +1147,10 @@ public class PaymentSample {
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .apmUserIdentity("1111222233334444")
-                .additionalParams(new HashMap<>() {{
-                    put("otpCode", "1122");
-                }})
                 .items(items)
+                .additionalParams(new HashMap() {{
+                    put("otpCode", "1234");
+                }})
                 .build();
 
         ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
@@ -1164,7 +1164,7 @@ public class PaymentSample {
     void complete_iwallet_apm_payment() {
         CompleteApmPaymentRequest request = CompleteApmPaymentRequest.builder()
                 .paymentId(1L)
-                .additionalParams(new HashMap<>() {{
+                .additionalParams(new HashMap() {{
                     put("otpCode", "1122");
                 }})
                 .build();
