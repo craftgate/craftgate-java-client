@@ -25,6 +25,7 @@ public enum ApmType {
     CHIPPIN,
     PAYMOB,
     BIZUM,
+    PAYCELL_DCB,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
 }
