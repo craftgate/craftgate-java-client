@@ -8,6 +8,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -17,6 +18,7 @@ public class BnplPaymentOfferRequest {
     private Long merchantApmId;
     private BigDecimal price;
     private Currency currency;
+    private Map<String, Object> additionalParams;
     private List<BnplPaymentCartItem> items;
 
 }
