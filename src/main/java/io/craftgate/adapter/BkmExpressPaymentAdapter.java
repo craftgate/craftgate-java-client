@@ -27,4 +27,9 @@ public class BkmExpressPaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/bkm-express/payments/" + ticketId;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
+
+    public PaymentResponse retrievePaymentByToken(String token) {
+        String path = "/payment/v1/bkm-express/" + token;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
+    }
 }

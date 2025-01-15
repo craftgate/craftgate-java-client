@@ -74,11 +74,35 @@ public class BkmExpressSample {
     }
 
     @Test
+    void complete_bkm_express_by_token() {
+
+        CompleteBkmExpressRequest completeBkmExpressRequest = CompleteBkmExpressRequest.builder()
+                .message("İşlem Başarılı")
+                .status(true)
+                .ticketId("7c0f7c89-e954-46d5-ad37-2a5c0b5f0356")
+                .bkmExpressPaymentToken("23f4e147-2c4e-4a2c-8a67-9c783d813b79")
+                .build();
+
+        PaymentResponse response = craftgate.bkmExpressPaymentAdapter().complete(completeBkmExpressRequest);
+        assertNotNull(response);
+        assertNotNull(response.getOrderId());
+    }
+
+    @Test
     void retrieve_bkm_express_payment() {
 
         String ticketId = "b9bd7b93-662f-4460-9ef3-8fc735853cf1";
 
         PaymentResponse response = craftgate.bkmExpressPaymentAdapter().retrievePayment(ticketId);
+        assertNotNull(response);
+    }
+
+    @Test
+    void retrieve_bkm_express_payment_by_token() {
+
+        String bkmExpressPaymentToken = "23f4e147-2c4e-4a2c-8a67-9c783d813b79";
+
+        PaymentResponse response = craftgate.bkmExpressPaymentAdapter().retrievePaymentByToken(bkmExpressPaymentToken);
         assertNotNull(response);
     }
 }
