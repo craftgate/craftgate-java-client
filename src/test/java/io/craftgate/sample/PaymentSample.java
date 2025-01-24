@@ -1731,13 +1731,25 @@ public class PaymentSample {
     @Test
     void refund_payment_transaction_mark_as_refunded() {
         RefundPaymentTransactionMarkAsRefundedRequest request = RefundPaymentTransactionMarkAsRefundedRequest.builder()
-                .paymentTransactionRefundId(1L)
-                .description("marked as refunded")
+                .paymentTransactionId(1L)
+                .refundPrice(BigDecimal.valueOf(20))
                 .build();
 
         PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionMarkAsRefunded(request);
         assertNotNull(response);
         assertEquals(RefundStatus.SUCCESS, response.getStatus());
+    }
+
+    @Test
+    void refund_payment_mark_as_refunded() {
+        RefundPaymentRequest request = RefundPaymentRequest.builder()
+                .paymentId(1024L)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .build();
+
+        PaymentTransactionRefundListResponse response = craftgate.payment().refundPaymentMarkAsRefunded(request);
+        assertNotNull(response);
+        assertFalse(response.getItems().isEmpty());
     }
 
     @Test
