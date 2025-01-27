@@ -33,5 +33,6 @@ public enum PaymentProvider {
     CHIPPIN,
     PAYMOB,
     BIZUM,
+    PAYCELL_DCB,
     OFFLINE,
 }
