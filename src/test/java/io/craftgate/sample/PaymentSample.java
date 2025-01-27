@@ -434,6 +434,80 @@ public class PaymentSample {
     }
 
     @Test
+    void create_payment_with_postponing_payment_loyalty() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("9792675000000002")
+                        .expireYear("2025")
+                        .expireMonth("06")
+                        .cvc("000")
+                        .loyalty(Loyalty.builder()
+                                .type(LoyaltyType.POSTPONING_PAYMENT)
+                                .loyaltyParams(LoyaltyParams.builder()
+                                        .postponingPaymentCount(90)
+                                        .build())
+                                .build())
+                        .build())
+                .items(items)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(request.getPrice(), response.getPrice());
+        assertEquals(request.getPaidPrice(), response.getPaidPrice());
+        assertEquals(request.getWalletPrice(), response.getWalletPrice());
+        assertEquals(request.getCurrency(), response.getCurrency());
+        assertEquals(request.getInstallment(), response.getInstallment());
+        assertEquals(PaymentSource.API, response.getPaymentSource());
+        assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
+        assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
+        assertEquals(false, response.getIsThreeDS());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
+        assertEquals(false, response.getPaidWithStoredCard());
+        assertEquals("97926750", response.getBinNumber());
+        assertEquals("0002", response.getLastFourDigits());
+        assertEquals(CardType.CREDIT_CARD, response.getCardType());
+        assertEquals(CardAssociation.TROY, response.getCardAssociation());
+        assertEquals("KuveytTürk CC", response.getCardBrand());
+        assertEquals(3, response.getPaymentTransactions().size());
+        assertNull(response.getCardUserKey());
+        assertNull(response.getCardToken());
+        assertNull(response.getPaymentError());
+        assertNotNull(response.getLoyalty());
+        assertEquals(LoyaltyType.POSTPONING_PAYMENT, response.getLoyalty().getType());
+    }
+
+    @Test
     void create_payment_with_first6_last4_and_identityNumber() {
         List<PaymentItem> items = new ArrayList<>();
         items.add(PaymentItem.builder()
@@ -1441,6 +1515,44 @@ public class PaymentSample {
         assertEquals(ApmAdditionalAction.WAIT_FOR_WEBHOOK, response.getAdditionalAction());
     }
 
+    @Test
+    void init_paycell_dcb_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        Map<String, String> additionalParams = new HashMap<>();
+        additionalParams.put("paycellGsmNumber", "5305289290");
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.PAYCELL_DCB)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .callbackUrl("callback")
+                .additionalParams(additionalParams)
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.OTP_REQUIRED, response.getAdditionalAction());
+    }
+
 
     @Test
     void init_paymob_apm_payment() {
@@ -1708,13 +1820,25 @@ public class PaymentSample {
     @Test
     void refund_payment_transaction_mark_as_refunded() {
         RefundPaymentTransactionMarkAsRefundedRequest request = RefundPaymentTransactionMarkAsRefundedRequest.builder()
-                .paymentTransactionRefundId(1L)
-                .description("marked as refunded")
+                .paymentTransactionId(1L)
+                .refundPrice(BigDecimal.valueOf(20))
                 .build();
 
         PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionMarkAsRefunded(request);
         assertNotNull(response);
         assertEquals(RefundStatus.SUCCESS, response.getStatus());
+    }
+
+    @Test
+    void refund_payment_mark_as_refunded() {
+        RefundPaymentRequest request = RefundPaymentRequest.builder()
+                .paymentId(1024L)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .build();
+
+        PaymentTransactionRefundListResponse response = craftgate.payment().refundPaymentMarkAsRefunded(request);
+        assertNotNull(response);
+        assertFalse(response.getItems().isEmpty());
     }
 
     @Test
