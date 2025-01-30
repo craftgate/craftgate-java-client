@@ -28,4 +28,5 @@ public class InitGarantiPayPaymentRequest {
     protected String bankOrderId;
     protected List<PaymentItem> items;
     protected List<GarantiPayInstallment> installments;
+    private List<Integer> enabledInstallments;
 }

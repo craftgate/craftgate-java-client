@@ -31,5 +31,9 @@ public enum PaymentProvider {
     MULTINET,
     ISPAY,
     VODAFONE,
+    CHIPPIN,
+    PAYMOB,
+    BIZUM,
+    PAYCELL_DCB,
     OFFLINE,
 }

@@ -434,6 +434,80 @@ public class PaymentSample {
     }
 
     @Test
+    void create_payment_with_postponing_payment_loyalty() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(50))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 3")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(20))
+                .build());
+
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .walletPrice(BigDecimal.ZERO)
+                .installment(1)
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("9792675000000002")
+                        .expireYear("2025")
+                        .expireMonth("06")
+                        .cvc("000")
+                        .loyalty(Loyalty.builder()
+                                .type(LoyaltyType.POSTPONING_PAYMENT)
+                                .loyaltyParams(LoyaltyParams.builder()
+                                        .postponingPaymentCount(90)
+                                        .build())
+                                .build())
+                        .build())
+                .items(items)
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+        assertEquals(request.getPrice(), response.getPrice());
+        assertEquals(request.getPaidPrice(), response.getPaidPrice());
+        assertEquals(request.getWalletPrice(), response.getWalletPrice());
+        assertEquals(request.getCurrency(), response.getCurrency());
+        assertEquals(request.getInstallment(), response.getInstallment());
+        assertEquals(PaymentSource.API, response.getPaymentSource());
+        assertEquals(request.getPaymentGroup(), response.getPaymentGroup());
+        assertEquals(request.getPaymentPhase(), response.getPaymentPhase());
+        assertEquals(false, response.getIsThreeDS());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRate());
+        assertEquals(BigDecimal.ZERO, response.getMerchantCommissionRateAmount());
+        assertEquals(false, response.getPaidWithStoredCard());
+        assertEquals("97926750", response.getBinNumber());
+        assertEquals("0002", response.getLastFourDigits());
+        assertEquals(CardType.CREDIT_CARD, response.getCardType());
+        assertEquals(CardAssociation.TROY, response.getCardAssociation());
+        assertEquals("KuveytTürk CC", response.getCardBrand());
+        assertEquals(3, response.getPaymentTransactions().size());
+        assertNull(response.getCardUserKey());
+        assertNull(response.getCardToken());
+        assertNull(response.getPaymentError());
+        assertNotNull(response.getLoyalty());
+        assertEquals(LoyaltyType.POSTPONING_PAYMENT, response.getLoyalty().getType());
+    }
+
+    @Test
     void create_payment_with_first6_last4_and_identityNumber() {
         List<PaymentItem> items = new ArrayList<>();
         items.add(PaymentItem.builder()
@@ -915,6 +989,7 @@ public class PaymentSample {
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .items(items)
                 .installments(installments)
+                .enabledInstallments(Arrays.asList(2, 3))
                 .build();
 
         InitGarantiPayPaymentResponse response = craftgate.payment().initGarantiPayPayment(request);
@@ -1280,6 +1355,148 @@ public class PaymentSample {
     }
 
     @Test
+    void init_chippin_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.CHIPPIN)
+                .apmUserIdentity("1000000")  // Chippin Kullanıcı numarası
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.WAIT_FOR_WEBHOOK, response.getAdditionalAction());
+    }
+
+    @Test
+    void init_bizum_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        Map<String, String> additionalParams = new HashMap<>();
+        additionalParams.put("buyerPhoneNumber", "34700000000");
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.BIZUM)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.EUR)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .additionalParams(additionalParams)
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.WAIT_FOR_WEBHOOK, response.getAdditionalAction());
+    }
+
+    @Test
+    void init_paycell_dcb_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        Map<String, String> additionalParams = new HashMap<>();
+        additionalParams.put("paycellGsmNumber", "5305289290");
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.PAYCELL_DCB)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .callbackUrl("callback")
+                .additionalParams(additionalParams)
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.OTP_REQUIRED, response.getAdditionalAction());
+    }
+
+
+    @Test
+    void init_paymob_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.TEN)
+                .build());
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.PAYMOB)
+                .price(BigDecimal.TEN)
+                .paidPrice(BigDecimal.TEN)
+                .currency(Currency.EGP)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
+                .items(items)
+                .additionalParams(new HashMap() {{
+                    put("integrationId", "11223344");
+                }})
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.REDIRECT_TO_URL, response.getAdditionalAction());
+    }
+
+    @Test
     void init_ykb_world_pay_pos_apm_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
@@ -1509,6 +1726,30 @@ public class PaymentSample {
         assertNotNull(response);
         assertEquals(paymentTransactionRefundId, response.getId());
         assertEquals(RefundStatus.SUCCESS, response.getStatus());
+    }
+
+    @Test
+    void refund_payment_transaction_mark_as_refunded() {
+        RefundPaymentTransactionMarkAsRefundedRequest request = RefundPaymentTransactionMarkAsRefundedRequest.builder()
+                .paymentTransactionId(1L)
+                .refundPrice(BigDecimal.valueOf(20))
+                .build();
+
+        PaymentTransactionRefundResponse response = craftgate.payment().refundPaymentTransactionMarkAsRefunded(request);
+        assertNotNull(response);
+        assertEquals(RefundStatus.SUCCESS, response.getStatus());
+    }
+
+    @Test
+    void refund_payment_mark_as_refunded() {
+        RefundPaymentRequest request = RefundPaymentRequest.builder()
+                .paymentId(1024L)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .build();
+
+        PaymentTransactionRefundListResponse response = craftgate.payment().refundPaymentMarkAsRefunded(request);
+        assertNotNull(response);
+        assertFalse(response.getItems().isEmpty());
     }
 
     @Test
