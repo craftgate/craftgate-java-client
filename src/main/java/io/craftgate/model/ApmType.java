@@ -22,6 +22,7 @@ public enum ApmType {
     MULTINET,
     MULTINET_GIFT,
     ISPAY,
+    VODAFONE_DCB,
     CHIPPIN,
     PAYMOB,
     BIZUM,
