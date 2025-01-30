@@ -27,6 +27,7 @@ public enum ApmType {
     PAYMOB,
     BIZUM,
     PAYCELL_DCB,
+    IWALLET,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
 }

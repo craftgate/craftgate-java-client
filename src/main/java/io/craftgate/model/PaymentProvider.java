@@ -35,5 +35,6 @@ public enum PaymentProvider {
     PAYMOB,
     BIZUM,
     PAYCELL_DCB,
+    IWALLET,
     OFFLINE,
 }
