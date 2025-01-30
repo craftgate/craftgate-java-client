@@ -2090,7 +2090,7 @@ public class PaymentSample {
                 .externalId("1001")
                 .build();
 
-        StoredCardResponse response = craftgate.payment().retrieveProviderCard(retrieveProviderCardRequest);
+        StoredCardListResponse response = craftgate.payment().retrieveProviderCard(retrieveProviderCardRequest);
 
         assertNotNull(response);
     }
