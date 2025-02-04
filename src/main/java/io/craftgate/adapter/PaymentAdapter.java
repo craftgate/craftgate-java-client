@@ -143,9 +143,15 @@ public class PaymentAdapter extends BaseAdapter {
     }
 
     public PaymentTransactionRefundResponse refundPaymentTransactionMarkAsRefunded(RefundPaymentTransactionMarkAsRefundedRequest refundPaymentTransactionMarkAsRefundedRequest) {
-        String path = "/payment/v1/refund-transactions/manual";
+        String path = "/payment/v1/refund-transactions/mark-as-refunded";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(refundPaymentTransactionMarkAsRefundedRequest, path, requestOptions),
                 refundPaymentTransactionMarkAsRefundedRequest, PaymentTransactionRefundResponse.class);
+    }
+
+    public PaymentTransactionRefundListResponse refundPaymentMarkAsRefunded(RefundPaymentRequest refundPaymentRequest) {
+        String path = "/payment/v1/refunds/mark-as-refunded";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(refundPaymentRequest, path, requestOptions),
+                refundPaymentRequest, PaymentTransactionRefundListResponse.class);
     }
 
     public PaymentRefundResponse refundPayment(RefundPaymentRequest refundPaymentRequest) {
@@ -241,10 +247,10 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MultiPaymentResponse.class);
     }
 
-    public StoredCardResponse retrieveProviderCard(RetrieveProviderCardRequest retrieveProviderCardRequest) {
+    public StoredCardListResponse retrieveProviderCards(RetrieveProviderCardRequest retrieveProviderCardRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveProviderCardRequest);
         String path = "/payment/v1/cards/provider-card-mappings" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardListResponse.class);
     }
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
