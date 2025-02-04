@@ -9,4 +9,5 @@ public class CompleteBkmExpressRequest {
     private boolean status;
     private String message;
     private String ticketId;
+    private String bkmExpressPaymentToken;
 }
