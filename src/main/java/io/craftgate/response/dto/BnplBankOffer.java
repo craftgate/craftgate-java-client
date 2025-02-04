@@ -12,6 +12,7 @@ public class BnplBankOffer {
     private String bankIconUrl;
     private String bankTableBannerMessage;
     private String bankSmallBannerMessage;
+    private String preApprovedApplicationId;
     private Boolean isSupportNonCustomer;
     private Boolean isPaymentPlanCalculatedByBank;
     private List<BnplBankOfferTerm> bankOfferTerms;
