@@ -22,9 +22,12 @@ public enum ApmType {
     MULTINET,
     MULTINET_GIFT,
     ISPAY,
+    VODAFONE_DCB,
     CHIPPIN,
     PAYMOB,
     BIZUM,
+    PAYCELL_DCB,
+    IWALLET,
     FUND_TRANSFER,
     CASH_ON_DELIVERY
 }
