@@ -247,7 +247,7 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MultiPaymentResponse.class);
     }
 
-    public StoredCardListResponse retrieveProviderCard(RetrieveProviderCardRequest retrieveProviderCardRequest) {
+    public StoredCardListResponse retrieveProviderCards(RetrieveProviderCardRequest retrieveProviderCardRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveProviderCardRequest);
         String path = "/payment/v1/cards/provider-card-mappings" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardListResponse.class);
