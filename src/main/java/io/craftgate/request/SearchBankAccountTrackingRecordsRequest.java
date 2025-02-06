@@ -1,8 +1,5 @@
 package io.craftgate.request;
 
-import io.craftgate.model.CardAssociation;
-import io.craftgate.model.CardExpiryStatus;
-import io.craftgate.model.CardType;
 import io.craftgate.model.Currency;
 import lombok.Builder;
 import lombok.Data;
