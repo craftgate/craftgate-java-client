@@ -2091,7 +2091,7 @@ public class PaymentSample {
                 .cardMigrationProvider(CardMigrationProvider.MEX)
                 .build();
 
-        StoredCardResponse response = craftgate.payment().retrieveProviderCard(retrieveProviderCardRequest);
+        StoredCardListResponse response = craftgate.payment().retrieveProviderCards(retrieveProviderCardRequest);
 
         assertNotNull(response);
     }
