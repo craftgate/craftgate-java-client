@@ -2088,7 +2088,7 @@ public class PaymentSample {
                 .providerCardToken("45f12c74-3000-465c-96dc-876850e7dd7a")
                 .providerCardUserId("0309ac2d-c5a5-4b4f-a91f-5c444ba07b24")
                 .externalId("1001")
-                .cardMigrationProvider(CardMigrationProvider.MEX)
+                .cardProvider(CardProvider.MEX)
                 .build();
 
         StoredCardListResponse response = craftgate.payment().retrieveProviderCards(retrieveProviderCardRequest);

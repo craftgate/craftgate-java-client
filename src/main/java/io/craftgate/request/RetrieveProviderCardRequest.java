@@ -1,6 +1,7 @@
 package io.craftgate.request;
 
-import io.craftgate.model.CardMigrationProvider;
+
+import io.craftgate.model.CardProvider;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,5 +12,5 @@ public class RetrieveProviderCardRequest {
     private String providerCardToken;
     private String externalId;
     private String providerCardUserId;
-    private CardMigrationProvider cardMigrationProvider;
+    private CardProvider cardProvider;
 }
