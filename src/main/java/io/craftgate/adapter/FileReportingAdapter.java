@@ -1,6 +1,7 @@
 package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
+import io.craftgate.request.RetrieveDailyPaymentReportRequest;
 import io.craftgate.request.RetrieveDailyTransactionReportRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
@@ -19,6 +20,14 @@ public class FileReportingAdapter extends BaseAdapter {
     public byte[] retrieveDailyTransactionReport(RetrieveDailyTransactionReportRequest retrieveDailyTransactionReportRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveDailyTransactionReportRequest);
         String path = "/file-reporting/v1/transaction-reports" + query;
+        Map<String, String> headers = createHeaders(path, requestOptions);
+        headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
+    }
+
+    public byte[] retrieveDailyPaymentReport(RetrieveDailyPaymentReportRequest retrieveDailyPaymentReportRequest) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(retrieveDailyPaymentReportRequest);
+        String path = "/file-reporting/v1/payment-reports" + query;
         Map<String, String> headers = createHeaders(path, requestOptions);
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
