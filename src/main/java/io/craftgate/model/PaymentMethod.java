@@ -13,8 +13,10 @@ public enum PaymentMethod {
     PAYPAL,
     KLARNA,
     AFTERPAY,
-    KASPI,
     INSTANT_TRANSFER,
-    TOMPAY,
-    STRIPE
+    STRIPE,
+    MULTINET,
+    MULTINET_GIFT,
+    BIZUM,
+    PAYCELL_DCB
 }

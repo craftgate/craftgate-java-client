@@ -17,5 +17,6 @@ public enum Currency {
     SAR,
     BHD,
     RUB,
-    JPY
+    JPY,
+    EGP
 }

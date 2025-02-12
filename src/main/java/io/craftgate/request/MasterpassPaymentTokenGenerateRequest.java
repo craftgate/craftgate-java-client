@@ -12,6 +12,8 @@ public class MasterpassPaymentTokenGenerateRequest {
     private String userId;
     private String binNumber;
     private Boolean forceThreeDS;
+    private Boolean isMsisdnValidated;
     private MasterpassCreatePayment createPayment;
+    private Integer masterpassIntegrationVersion;
     private Loyalty loyalty;
 }

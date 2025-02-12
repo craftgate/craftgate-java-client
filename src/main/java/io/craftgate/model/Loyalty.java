@@ -9,4 +9,6 @@ public class Loyalty {
     private LoyaltyType type;
     private Reward reward;
     private String message;
+    private LoyaltyParams loyaltyParams;
+    private LoyaltyData loyaltyData;
 }

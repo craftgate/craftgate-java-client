@@ -27,5 +27,14 @@ public enum PaymentProvider {
     ALFABANK,
     PAYCELL,
     HASO,
-    OFFLINE
+    METROPOL,
+    MULTINET,
+    ISPAY,
+    VODAFONE,
+    CHIPPIN,
+    PAYMOB,
+    BIZUM,
+    PAYCELL_DCB,
+    IWALLET,
+    OFFLINE,
 }
