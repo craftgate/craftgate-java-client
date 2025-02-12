@@ -8,10 +8,7 @@ import io.craftgate.model.PaymentProvider;
 import io.craftgate.request.*;
 import io.craftgate.request.dto.MasterpassCreatePayment;
 import io.craftgate.request.dto.PaymentItem;
-import io.craftgate.response.CheckMasterpassUserResponse;
-import io.craftgate.response.MasterpassPaymentThreeDSInitResponse;
-import io.craftgate.response.MasterpassPaymentTokenGenerateResponse;
-import io.craftgate.response.PaymentResponse;
+import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -122,5 +119,17 @@ public class MasterpassSample {
         assertNull(response.getFraudId());
         assertNull(response.getFraudAction());
         assertNull(response.getPaymentError());
+    }
+
+    @Test
+    void retrieve_loyalties() {
+        MasterpassRetrieveLoyaltiesRequest request = MasterpassRetrieveLoyaltiesRequest.builder()
+                .cardName("YKB Test Kart")
+                .msisdn("900000000000")
+                .binNumber("404809")
+                .build();
+
+        RetrieveLoyaltiesResponse response = craftgate.masterpass().retrieveLoyalties(request);
+        assertNotNull(response);
     }
 }
