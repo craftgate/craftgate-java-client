@@ -21,6 +21,7 @@ public class PaymentTransactionResponse {
     private BigDecimal merchantPayoutAmount;
     private Long subMerchantMemberId;
     private BigDecimal subMerchantMemberPrice;
+    private BigDecimal subMerchantMemberTaxPrice;
     private BigDecimal subMerchantMemberPayoutRate;
     private BigDecimal subMerchantMemberPayoutAmount;
     private TransactionStatus transactionStatus;

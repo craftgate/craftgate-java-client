@@ -12,4 +12,5 @@ public class UpdatePaymentTransactionRequest {
     private Long paymentTransactionId;
     private Long subMerchantMemberId;
     private BigDecimal subMerchantMemberPrice;
+    private BigDecimal subMerchantMemberTaxPrice;
 }
