@@ -6,5 +6,6 @@ public enum PaymentType {
     WALLET_PAYMENT,
     CARD_AND_WALLET_PAYMENT,
     DEPOSIT_PAYMENT,
+    HEPSIPAY_DEPOSIT_PAYMENT,
     APM
 }
