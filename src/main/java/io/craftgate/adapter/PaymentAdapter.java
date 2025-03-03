@@ -231,9 +231,9 @@ public class PaymentAdapter extends BaseAdapter {
                 initBnplPaymentRequest, InitBnplPaymentResponse.class);
     }
 
-    public void approveBnplPayment(Long paymentId) {
+    public PaymentResponse approveBnplPayment(Long paymentId) {
         String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
-        HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
 
     public InstantTransferBanksResponse retrieveActiveBanks() {
