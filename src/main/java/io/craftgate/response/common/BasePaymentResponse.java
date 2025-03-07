@@ -47,6 +47,8 @@ public class BasePaymentResponse {
     private CardAssociation cardAssociation;
     private String cardBrand;
     private String requestedPosAlias;
+    private Long fraudId;
+    private FraudAction fraudAction;
     private MerchantPos pos;
     private Loyalty loyalty;
     private PaymentError paymentError;
