@@ -1,6 +1,7 @@
 package io.craftgate.request;
 
 import io.craftgate.model.Loyalty;
+import io.craftgate.model.MasterpassValidationType;
 import io.craftgate.request.dto.MasterpassCreatePayment;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class MasterpassPaymentTokenGenerateRequest {
     private MasterpassCreatePayment createPayment;
     private Integer masterpassIntegrationVersion;
     private Loyalty loyalty;
+    private MasterpassValidationType validationType;
 }
