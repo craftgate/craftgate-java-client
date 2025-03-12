@@ -30,6 +30,7 @@ public enum PaymentProvider {
     METROPOL,
     MULTINET,
     ISPAY,
+    ZIP,
     VODAFONE,
     CHIPPIN,
     PAYMOB,
