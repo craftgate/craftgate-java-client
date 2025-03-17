@@ -236,6 +236,11 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
 
+    public BnplPaymentVerifyResponse verifyBnplPayment(Long paymentId) {
+        String path = "/payment/v1/bnpl-payments/" + paymentId + "/verify";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BnplPaymentVerifyResponse.class);
+    }
+
     public InstantTransferBanksResponse retrieveActiveBanks() {
         String path = "/payment/v1/instant-transfer-banks";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
