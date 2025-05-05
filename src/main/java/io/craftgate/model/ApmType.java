@@ -31,5 +31,6 @@ public enum ApmType {
     PAYCELL_DCB,
     IWALLET,
     FUND_TRANSFER,
+    SETCARD,
     CASH_ON_DELIVERY
 }
