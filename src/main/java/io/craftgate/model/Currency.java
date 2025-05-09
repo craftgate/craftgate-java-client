@@ -18,5 +18,6 @@ public enum Currency {
     BHD,
     RUB,
     JPY,
-    EGP
+    EGP,
+    MXN
 }
