@@ -21,6 +21,7 @@ public enum ApmType {
     METROPOL,
     MULTINET,
     MULTINET_GIFT,
+    MULTINET_NEO_GIFT,
     ISPAY,
     ZIP,
     VODAFONE_DCB,
@@ -31,5 +32,6 @@ public enum ApmType {
     PAYCELL_DCB,
     IWALLET,
     FUND_TRANSFER,
+    SETCARD,
     CASH_ON_DELIVERY
 }

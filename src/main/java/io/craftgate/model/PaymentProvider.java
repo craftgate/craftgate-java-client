@@ -38,5 +38,6 @@ public enum PaymentProvider {
     PAYLANDS_MB_WAY,
     PAYCELL_DCB,
     IWALLET,
+    SETCARD,
     OFFLINE,
 }
