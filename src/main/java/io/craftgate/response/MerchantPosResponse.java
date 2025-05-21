@@ -29,6 +29,7 @@ public class MerchantPosResponse {
     private Boolean enableForeignCard;
     private Boolean enableInstallment;
     private Boolean enablePaymentWithoutCvc;
+    private Boolean enableLoyalty;
     private Boolean newIntegration;
     private Integer orderNumber;
     private AutopilotState autopilotState;
