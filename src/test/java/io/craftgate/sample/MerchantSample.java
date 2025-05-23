@@ -61,6 +61,42 @@ public class MerchantSample {
     }
 
     @Test
+    void create_merchant_pos_with_enable_loyalty_flag() {
+        CreateMerchantPosUser createMerchantPosUser = CreateMerchantPosUser.builder()
+                .posOperationType(PosOperationType.STANDARD)
+                .posUserType(PosUserType.API)
+                .posUsername("username")
+                .posPassword("password")
+                .build();
+
+        CreateMerchantPosRequest request = CreateMerchantPosRequest.builder()
+                .name("my test pos")
+                .clientId("client id")
+                .terminalId("terminal id")
+                .threedsKey("3d secure key")
+                .status(PosStatus.AUTOPILOT)
+                .currency(Currency.TRY)
+                .orderNumber(1)
+                .enableInstallment(true)
+                .enableForeignCard(true)
+                .enablePaymentWithoutCvc(true)
+                .enableLoyalty(true)
+                .posIntegrator(PosIntegrator.AKBANK_VPOS)
+                .enabledPaymentAuthenticationTypes(Arrays.asList(PaymentAuthenticationType.THREE_DS, PaymentAuthenticationType.NON_THREE_DS))
+                .merchantPosUsers(Collections.singletonList(createMerchantPosUser))
+                .build();
+
+        MerchantPosResponse response = craftgate.merchant().createMerchantPos(request);
+        assertNotNull(response.getId());
+        assertNotNull(response.getHostname());
+        assertNotNull(response.getAlias());
+        assertNotNull(response.getPath());
+        assertNotNull(response.getThreedsPath());
+        assertEquals(response.getBankName(), "AKBANK T.A.Ş.");
+        assertEquals(response.getPosIntegrator(), PosIntegrator.AKBANK_VPOS);
+    }
+
+    @Test
     void update_merchant_pos() {
         Long merchantPosId = 10L;
         UpdateMerchantPosUser merchantPosUser = UpdateMerchantPosUser.builder()
