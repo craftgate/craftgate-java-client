@@ -17,6 +17,7 @@ public enum PaymentMethod {
     STRIPE,
     MULTINET,
     MULTINET_GIFT,
+    MULTINET_NEO_GIFT,
     BIZUM,
     PAYCELL_DCB
 }
