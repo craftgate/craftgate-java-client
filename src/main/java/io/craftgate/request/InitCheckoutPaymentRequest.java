@@ -52,4 +52,5 @@ public class InitCheckoutPaymentRequest {
     protected List<PaymentItem> items;
     protected FraudCheckParameters fraudParams;
     protected Map<String, Object> additionalParams;
+    protected Map<String, List<CustomInstallment>> cardBrandInstallments;
 }
