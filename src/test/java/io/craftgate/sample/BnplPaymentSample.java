@@ -50,6 +50,7 @@ public class BnplPaymentSample {
                 .apmType(ApmType.MASLAK)
                 .price(BigDecimal.valueOf(10000))
                 .currency(Currency.TRY)
+                .apmOrderId(UUID.randomUUID().toString())
                 .items(items)
                 .build();
 
