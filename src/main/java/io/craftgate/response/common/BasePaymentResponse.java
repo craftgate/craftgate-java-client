@@ -43,6 +43,8 @@ public class BasePaymentResponse {
     private String orderId;
     private String cardHolderName;
     private String bankCardHolderName;
+    private String cardIssuerBankName;
+    private Long cardIssuerBankId;
     private CardType cardType;
     private CardAssociation cardAssociation;
     private String cardBrand;
