@@ -22,6 +22,7 @@ public class Craftgate {
     private final MasterpassPaymentAdapter masterpassPaymentAdapter;
     private final BankAccountTrackingAdapter bankAccountTrackingAdapter;
     private final MerchantAdapter merchantAdapter;
+    private final MerchantApmAdapter merchantApmAdapter;
     private final JuzdanPaymentAdapter juzdanPaymentAdapter;
     private final BkmExpressPaymentAdapter bkmExpressPaymentAdapter;
 
@@ -57,6 +58,7 @@ public class Craftgate {
         this.masterpassPaymentAdapter = new MasterpassPaymentAdapter(requestOptions);
         this.bankAccountTrackingAdapter = new BankAccountTrackingAdapter(requestOptions);
         this.merchantAdapter = new MerchantAdapter(requestOptions);
+        this.merchantApmAdapter = new MerchantApmAdapter(requestOptions);
         this.juzdanPaymentAdapter = new JuzdanPaymentAdapter(requestOptions);
         this.bkmExpressPaymentAdapter = new BkmExpressPaymentAdapter(requestOptions);
     }
@@ -119,6 +121,10 @@ public class Craftgate {
 
     public MerchantAdapter merchant() {
         return merchantAdapter;
+    }
+
+    public MerchantApmAdapter merchantApm() {
+        return merchantApmAdapter;
     }
 
     public JuzdanPaymentAdapter juzdan() {
