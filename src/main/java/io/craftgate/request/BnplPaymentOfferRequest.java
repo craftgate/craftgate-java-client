@@ -18,6 +18,7 @@ public class BnplPaymentOfferRequest {
     private Long merchantApmId;
     private BigDecimal price;
     private Currency currency;
+    private String apmOrderId;
     private Map<String, Object> additionalParams;
     private List<BnplPaymentCartItem> items;
 
