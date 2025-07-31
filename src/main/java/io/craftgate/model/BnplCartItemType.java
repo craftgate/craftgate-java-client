@@ -25,5 +25,6 @@ public enum BnplCartItemType {
     FURNITURE,
     HOME_LIVING,
     AUTOMOBILE_MOTORCYCLE,
+    MOBILE_PHONE_REFURBISHED,
     OTHER
 }
