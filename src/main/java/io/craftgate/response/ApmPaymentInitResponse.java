@@ -16,5 +16,5 @@ public class ApmPaymentInitResponse {
     private PaymentStatus paymentStatus;
     private ApmAdditionalAction additionalAction;
     private PaymentError paymentError;
-    private Map<String,Object> additionalData;
+    private Map<String, Object> additionalData;
 }
