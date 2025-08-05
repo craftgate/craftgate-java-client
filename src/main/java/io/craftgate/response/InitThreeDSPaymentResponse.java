@@ -10,6 +10,7 @@ public class InitThreeDSPaymentResponse {
 
     private String htmlContent;
     private Long paymentId;
+    private String redirectUrl;
     private PaymentStatus paymentStatus;
     private AdditionalAction additionalAction;
 
