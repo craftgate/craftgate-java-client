@@ -13,6 +13,7 @@ public class ApmPaymentInitResponse {
     private Long paymentId;
     private String redirectUrl;
     private String htmlContent;
+    private String qrCode;
     private PaymentStatus paymentStatus;
     private ApmAdditionalAction additionalAction;
     private PaymentError paymentError;
