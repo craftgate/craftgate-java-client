@@ -605,6 +605,7 @@ public class PaymentSample {
         assertNotNull(response.getHtmlContent());
         assertNotNull(response.getDecodedHtmlContent());
         assertNotNull(response.getPaymentId());
+        assertNotNull(response.getRedirectUrl());
     }
 
     @Test
