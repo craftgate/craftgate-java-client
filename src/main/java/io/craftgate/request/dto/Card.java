@@ -15,6 +15,7 @@ public class Card {
     private String cvc;
     private String cardAlias;
     private String cardUserKey;
+    private String secureFieldsToken;
     private String cardToken;
     private String binNumber;
     private String lastFourDigits;
