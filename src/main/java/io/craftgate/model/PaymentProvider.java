@@ -39,5 +39,6 @@ public enum PaymentProvider {
     PAYCELL_DCB,
     IWALLET,
     SETCARD,
+    PAPEL,
     OFFLINE,
 }
