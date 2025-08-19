@@ -12,6 +12,8 @@ public class StoredCardResponse {
 
     private String binNumber;
     private String lastFourDigits;
+    private String expireYear;
+    private String expireMonth;
     private String cardUserKey;
     private String cardToken;
     private String cardHolderName;
