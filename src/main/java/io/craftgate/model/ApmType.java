@@ -34,5 +34,6 @@ public enum ApmType {
     IWALLET,
     FUND_TRANSFER,
     SETCARD,
+    PAPEL,
     CASH_ON_DELIVERY
 }
