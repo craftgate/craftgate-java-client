@@ -11,4 +11,5 @@ public class UpdateCardRequest {
     private String cardToken;
     private String expireYear;
     private String expireMonth;
+    private String cardAlias;
 }
