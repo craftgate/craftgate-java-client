@@ -4,6 +4,7 @@ public enum ApmType {
     PAPARA,
     PAYONEER,
     SODEXO,
+    SODEXO_GIFT,
     EDENRED,
     EDENRED_GIFT,
     PAYPAL,

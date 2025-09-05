@@ -7,6 +7,7 @@ public enum PaymentMethod {
     PAPARA,
     PAYONEER,
     SODEXO,
+    SODEXO_GIFT,
     EDENRED,
     EDENRED_GIFT,
     ALIPAY,
