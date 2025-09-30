@@ -5,6 +5,7 @@ import io.craftgate.model.Status;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -26,4 +27,5 @@ public class ProductResponse {
     private String url;
     private String qrCodeUrl;
     private String channel;
+    private LocalDateTime expiresAt;
 }
