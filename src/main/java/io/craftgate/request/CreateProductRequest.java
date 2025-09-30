@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -19,6 +20,7 @@ public class CreateProductRequest {
     private Integer stock;
     private BigDecimal price;
     private Currency currency;
+    private LocalDateTime expiresAt;
     private String description;
     private boolean multiPayment;
     private Set<Integer> enabledInstallments;
