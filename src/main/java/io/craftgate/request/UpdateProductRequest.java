@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -22,5 +23,6 @@ public class UpdateProductRequest {
     private BigDecimal price;
     private Currency currency;
     private String description;
+    private LocalDateTime expiresAt;
     private Set<Integer> enabledInstallments;
 }
