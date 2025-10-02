@@ -8,4 +8,5 @@ public class MasterpassPaymentTokenGenerateResponse {
     private String token;
     private String referenceId;
     private String orderNo;
+    private String terminalGroupId;
 }
