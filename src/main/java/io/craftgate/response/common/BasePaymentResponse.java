@@ -51,6 +51,7 @@ public class BasePaymentResponse {
     private String requestedPosAlias;
     private Long fraudId;
     private FraudAction fraudAction;
+    private Double fraudScore;
     private MerchantPos pos;
     private Loyalty loyalty;
     private PaymentError paymentError;
