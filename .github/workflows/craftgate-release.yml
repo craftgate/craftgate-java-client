@@ -30,4 +30,6 @@ jobs:
           ./gradlew publish -Dorg.gradle.internal.http.socketTimeout=120000 -Dorg.gradle.internal.http.connectionTimeout=120000 -Pversion=${{github.event.release.tag_name}} -PrepoUser=${{secrets.CP_TOKEN_USERNAME}} -PrepoPassword=${{secrets.CP_TOKEN_PASSWORD}} -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}}
 
       - name: Trigger deployment visibility
-        run: curl -X POST https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.craftgate
+        run: curl -i -X POST https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.craftgate \
+        -H "Authorization: Bearer $(echo -n "${{secrets.CP_TOKEN_USERNAME}}:${{secrets.CP_TOKEN_PASSWORD}}" | base64)"
+
