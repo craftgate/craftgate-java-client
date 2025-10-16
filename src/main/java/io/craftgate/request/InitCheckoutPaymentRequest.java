@@ -41,7 +41,7 @@ public class InitCheckoutPaymentRequest {
     protected Long buyerMemberId;
     protected List<Integer> enabledInstallments;
     protected boolean alwaysStoreCardAfterPayment;
-    protected boolean enabledDeleteCard;
+    protected boolean allowDeleteStoredCard;
     protected boolean allowOnlyStoredCards;
     protected boolean allowOnlyCreditCard;
     protected boolean allowInstallmentOnlyCommercialCards;
