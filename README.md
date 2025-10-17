@@ -17,16 +17,16 @@ Apache Maven:
 <dependency>
   <groupId>io.craftgate</groupId>
   <artifactId>craftgate</artifactId>
-  <version>1.0.71</version>
+  <version>1.0.72</version>
 </dependency>
 ```
 Gradle Groovy DSL
 ```
-implementation 'io.craftgate:craftgate:1.0.71'
+implementation 'io.craftgate:craftgate:1.0.72'
 ```
 Gradle Kotlin DSL
 ```
-implementation("io.craftgate:craftgate:1.0.71")
+implementation("io.craftgate:craftgate:1.0.72")
 ```
 
 ## Usage
