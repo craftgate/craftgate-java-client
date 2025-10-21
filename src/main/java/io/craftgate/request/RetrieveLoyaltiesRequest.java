@@ -1,5 +1,6 @@
 package io.craftgate.request;
 
+import io.craftgate.request.dto.FraudCheckParameters;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,4 +14,8 @@ public class RetrieveLoyaltiesRequest {
 
     private String cardUserKey;
     private String cardToken;
+
+    private String clientIp;
+    private String conversationId;
+    private FraudCheckParameters fraudParams;
 }
