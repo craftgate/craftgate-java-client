@@ -22,7 +22,6 @@ public class CreateReportRequest {
     @Builder.Default
     private ReportType reportType = ReportType.TRANSACTION;
 
-    private ReportPeriod reportPeriod;
-
-    private Long merchantPosId;
+    @Builder.Default
+    private ReportPeriod reportPeriod = ReportPeriod.INSTANT;
 }

@@ -22,7 +22,7 @@ public final class HashGenerator {
             String decodedUrl = URLDecoder.decode(baseUrl + path, StandardCharsets.UTF_8.toString());
 
             if (request != null) {
-                Gson gson = buildGson();
+                Gson gson = Jsons.getGson();
                 String requestBody = gson.toJson(request);
                 hashData = decodedUrl + apiKey + secretKey + randomString + requestBody;
             } else {
@@ -41,13 +41,5 @@ public final class HashGenerator {
         } catch (Exception e) {
             throw new CraftgateException(e);
         }
-    }
-
-    private static Gson buildGson() {
-        return new GsonBuilder()
-                .registerTypeAdapter(LocalDateTime.class, (com.google.gson.JsonSerializer<LocalDateTime>) (localDateTime, typeOfSrc, context) ->
-                        context.serialize(localDateTime.toString()))
-                .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) ->
-                        LocalDateTime.parse(json.getAsString()))                .create();
     }
 }
