@@ -3,6 +3,7 @@ package io.craftgate.adapter;
 import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.model.FraudValueType;
 import io.craftgate.net.HttpClient;
+import io.craftgate.request.AddCardFingerprintFraudValueListRequest;
 import io.craftgate.request.FraudValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.request.UpdateFraudCheckRequest;
@@ -56,6 +57,12 @@ public class FraudAdapter extends BaseAdapter {
         String path = "/fraud/v1/value-lists";
         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(fraudValueListRequest, path, requestOptions),
                 fraudValueListRequest, Void.class);
+    }
+
+    public void addCardFingerprint(AddCardFingerprintFraudValueListRequest request, String listName) {
+        String path = "/fraud/v1/value-lists/"+ listName + "/card-fingerprints";
+        HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions),
+                request, Void.class);
     }
 
     public void removeValueFromValueList(String listName, String valueId) {
