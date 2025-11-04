@@ -82,17 +82,6 @@ public class FraudSample {
     }
 
     @Test
-    void add_cardFingerPrint_to_fraud_value_list() {
-            AddCardFingerprintFraudValueListRequest request = AddCardFingerprintFraudValueListRequest.builder()
-                    .operation(FraudOperation.PAYMENT)
-                    .operationId(UUID.randomUUID().toString())
-                    .durationInSeconds(60)
-                    .label("label")
-                    .build();
-        craftgate.fraud().addCardFingerprint(request, "listName");
-    }
-
-    @Test
     void add_temporary_value_to_fraud_value_list() {
         FraudValueListRequest fraudValueListRequest = FraudValueListRequest.builder()
                 .label("local ip 2")
@@ -106,13 +95,13 @@ public class FraudSample {
 
     @Test
     void add_card_fingerprint_to_fraud_value_list() {
-        FraudValueListRequest fraudValueListRequest = FraudValueListRequest.builder()
-                .label("John Doe Card")
-                .type(FraudValueType.CARD)
-                .listName("cardList")
-                .paymentId(11675L)
+        AddCardFingerprintFraudValueListRequest request = AddCardFingerprintFraudValueListRequest.builder()
+                .operation(FraudOperation.PAYMENT)
+                .operationId(UUID.randomUUID().toString())
+                .durationInSeconds(60)
+                .label("label")
                 .build();
-        craftgate.fraud().addValueToValueList(fraudValueListRequest);
+        craftgate.fraud().addCardFingerprint(request, "listName");
     }
 
     @Test
