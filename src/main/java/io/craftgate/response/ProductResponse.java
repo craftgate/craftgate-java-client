@@ -26,5 +26,6 @@ public class ProductResponse {
     private Set<Integer> enabledInstallments;
     private String url;
     private String channel;
+    private boolean multiPayment;
     private LocalDateTime expiresAt;
 }
