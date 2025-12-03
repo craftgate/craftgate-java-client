@@ -25,7 +25,6 @@ public class ProductResponse {
     private String token;
     private Set<Integer> enabledInstallments;
     private String url;
-    private String qrCodeUrl;
     private String channel;
     private LocalDateTime expiresAt;
 }
