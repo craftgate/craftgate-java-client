@@ -3,7 +3,9 @@ package io.craftgate.sample;
 import io.craftgate.Craftgate;
 import io.craftgate.model.FraudAction;
 import io.craftgate.model.FraudCheckStatus;
+import io.craftgate.model.FraudOperation;
 import io.craftgate.model.FraudValueType;
+import io.craftgate.request.AddCardFingerprintFraudValueListRequest;
 import io.craftgate.request.FraudValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.response.FraudAllValueListsResponse;
@@ -12,6 +14,7 @@ import io.craftgate.response.FraudValueListResponse;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -92,13 +95,13 @@ public class FraudSample {
 
     @Test
     void add_card_fingerprint_to_fraud_value_list() {
-        FraudValueListRequest fraudValueListRequest = FraudValueListRequest.builder()
-                .label("John Doe Card")
-                .type(FraudValueType.CARD)
-                .listName("cardList")
-                .paymentId(11675L)
+        AddCardFingerprintFraudValueListRequest request = AddCardFingerprintFraudValueListRequest.builder()
+                .operation(FraudOperation.PAYMENT)
+                .operationId(UUID.randomUUID().toString())
+                .durationInSeconds(60)
+                .label("label")
                 .build();
-        craftgate.fraud().addValueToValueList(fraudValueListRequest);
+        craftgate.fraud().addCardFingerprint(request, "listName");
     }
 
     @Test

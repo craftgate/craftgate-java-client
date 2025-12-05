@@ -1,9 +1,8 @@
 package io.craftgate.net;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
 import io.craftgate.exception.CraftgateException;
+import io.craftgate.request.common.Jsons;
 import io.craftgate.response.common.ErrorResponse;
 import io.craftgate.response.common.Response;
 
@@ -12,7 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
 
@@ -23,7 +21,7 @@ public class HttpClient {
     private static final String ACCEPT = "Accept";
     private static final int CONNECT_TIMEOUT = 10000;
     private static final int READ_TIMEOUT = 150000;
-    private static final Gson gson = buildGson();
+    private static final Gson gson = Jsons.getGson();
 
     private HttpClient() {
     }
@@ -179,12 +177,6 @@ public class HttpClient {
             }
         }
         return body;
-    }
-
-    private static Gson buildGson() {
-        return new GsonBuilder()
-                .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) -> LocalDateTime.parse(json.getAsString()))
-                .create();
     }
 }
 

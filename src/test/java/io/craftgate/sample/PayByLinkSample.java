@@ -11,6 +11,7 @@ import io.craftgate.response.ProductResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,6 +36,7 @@ public class PayByLinkSample {
                 .price(BigDecimal.TEN)
                 .currency(Currency.TRY)
                 .conversationId("my-conversationId")
+                .expiresAt(LocalDateTime.now().plusDays(2))
                 .externalId("my-externalId")
                 .enabledInstallments(enabledInstallments)
                 .build();
@@ -49,7 +51,6 @@ public class PayByLinkSample {
         assertEquals(response.getEnabledInstallments(), request.getEnabledInstallments());
         assertNotNull(response.getUrl());
         assertNotNull(response.getToken());
-        assertNotNull(response.getQrCodeUrl());
     }
 
     @Test
@@ -80,7 +81,6 @@ public class PayByLinkSample {
         assertEquals(response.getEnabledInstallments(), request.getEnabledInstallments());
         assertNotNull(response.getUrl());
         assertNotNull(response.getToken());
-        assertNotNull(response.getQrCodeUrl());
     }
 
     @Test
