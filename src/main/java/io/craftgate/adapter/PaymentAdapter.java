@@ -160,6 +160,12 @@ public class PaymentAdapter extends BaseAdapter {
                 refundPaymentRequest, PaymentRefundResponse.class);
     }
 
+    public RefundWaitingPaymentResponse refundWaitingPayment(RefundWaitingPaymentRequest refundWaitingPaymentRequest) {
+        String path = "/payment/v1/refunds/refund-waiting-payment";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(refundWaitingPaymentRequest, path, requestOptions),
+                refundWaitingPaymentRequest, RefundWaitingPaymentResponse.class);
+    }
+
     public PaymentRefundResponse retrievePaymentRefund(Long id) {
         String path = "/payment/v1/refunds/" + id;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentRefundResponse.class);
