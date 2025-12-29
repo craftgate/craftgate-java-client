@@ -14,12 +14,16 @@ public class CraftgateException extends RuntimeException {
     private final String errorCode;
     private final String errorDescription;
     private final String errorGroup;
+    private final String providerErrorCode;
+    private final String providerErrorDescription;
 
     public CraftgateException() {
         super(GENERAL_ERROR_DESCRIPTION);
         this.errorCode = GENERAL_ERROR_CODE;
         this.errorDescription = GENERAL_ERROR_DESCRIPTION;
         this.errorGroup = GENERAL_ERROR_GROUP;
+        this.providerErrorCode = null;
+        this.providerErrorDescription = null;
     }
 
     public CraftgateException(String errorCode, String errorDescription, String errorGroup) {
@@ -27,6 +31,18 @@ public class CraftgateException extends RuntimeException {
         this.errorCode = errorCode;
         this.errorDescription = errorDescription;
         this.errorGroup = errorGroup;
+        this.providerErrorCode = null;
+        this.providerErrorDescription = null;
+    }
+
+    public CraftgateException(String errorCode, String errorDescription, String errorGroup,
+            String providerErrorCode, String providerErrorDescription) {
+        super(errorDescription);
+        this.errorCode = errorCode;
+        this.errorDescription = errorDescription;
+        this.errorGroup = errorGroup;
+        this.providerErrorCode = providerErrorCode;
+        this.providerErrorDescription = providerErrorDescription;
     }
 
     public CraftgateException(Throwable cause) {
@@ -34,5 +50,7 @@ public class CraftgateException extends RuntimeException {
         this.errorCode = GENERAL_ERROR_CODE;
         this.errorDescription = GENERAL_ERROR_DESCRIPTION;
         this.errorGroup = GENERAL_ERROR_GROUP;
+        this.providerErrorCode = null;
+        this.providerErrorDescription = null;
     }
 }
