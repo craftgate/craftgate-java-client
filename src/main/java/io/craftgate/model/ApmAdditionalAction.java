@@ -7,6 +7,7 @@ public enum ApmAdditionalAction {
     SHOW_HTML_CONTENT,
     WAIT_FOR_WEBHOOK,
     APPROVAL_REQUIRED,
+    VERIFY_REQUIRED,
     SHOW_QR_CODE,
     NONE
 }
