@@ -8,8 +8,10 @@ import io.craftgate.model.FraudValueType;
 import io.craftgate.request.AddCardFingerprintFraudValueListRequest;
 import io.craftgate.request.FraudValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
+import io.craftgate.request.SearchFraudRuleRequest;
 import io.craftgate.response.FraudAllValueListsResponse;
 import io.craftgate.response.FraudCheckListResponse;
+import io.craftgate.response.FraudRuleListResponse;
 import io.craftgate.response.FraudValueListResponse;
 import org.junit.jupiter.api.Test;
 
@@ -72,13 +74,15 @@ public class FraudSample {
 
     @Test
     void add_value_to_fraud_value_list() {
-        FraudValueListRequest request = FraudValueListRequest.builder()
-                .label("local ip")
-                .type(FraudValueType.IP)
-                .listName("ipList")
-                .value("127.0.0.1")
-                .build();
-        craftgate.fraud().addValueToValueList(request);
+
+        for (int i = 0; i < 19000; i++) {
+            FraudValueListRequest request = FraudValueListRequest.builder()
+                    .type(FraudValueType.OTHER)
+                    .listName("list")
+                    .value(String.valueOf(i))
+                    .build();
+            craftgate.fraud().addValueToValueList(request);
+        }
     }
 
     @Test
@@ -112,6 +116,17 @@ public class FraudSample {
     @Test
     void delete_fraud_value_list() {
         craftgate.fraud().deleteValueList("ipList");
+    }
+
+
+    @Test
+    void search_fraud_rules() {
+        SearchFraudRuleRequest request = SearchFraudRuleRequest.builder()
+                .action(FraudAction.REVIEW)
+                .build();
+        FraudRuleListResponse response = craftgate.fraud().searchRules(request);
+
+        assertFalse(response.getItems().isEmpty());
     }
 
 }
