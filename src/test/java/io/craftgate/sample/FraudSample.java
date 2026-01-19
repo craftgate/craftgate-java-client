@@ -74,14 +74,14 @@ public class FraudSample {
 
     @Test
     void add_value_to_fraud_value_list() {
-            FraudValueListRequest request = FraudValueListRequest.builder()
+        FraudValueListRequest request = FraudValueListRequest.builder()
                 .label("local ip")
                 .type(FraudValueType.IP)
                 .listName("ipList")
                 .value("127.0.0.1")
-                    .build();
-            craftgate.fraud().addValueToValueList(request);
-        }
+                .build();
+        craftgate.fraud().addValueToValueList(request);
+    }
 
     @Test
     void add_temporary_value_to_fraud_value_list() {
