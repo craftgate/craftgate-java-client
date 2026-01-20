@@ -50,6 +50,7 @@ public class BasePaymentResponse {
     private String cardBrand;
     private String requestedPosAlias;
     private Long fraudId;
+    private Long fraudRuleId;
     private FraudAction fraudAction;
     private Double fraudScore;
     private MerchantPos pos;
