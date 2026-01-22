@@ -1837,6 +1837,17 @@ public class PaymentSample {
     }
 
     @Test
+    void refund_waiting_payment() {
+        RefundWaitingPaymentRequest request = RefundWaitingPaymentRequest.builder()
+                .paymentId(1L)
+                .build();
+
+        RefundWaitingPaymentResponse response = craftgate.payment().refundWaitingPayment(request);
+        assertNotNull(response);
+        assertEquals(RefundStatus.SUCCESS, response.getStatus());
+    }
+
+    @Test
     void retrieve_payment_refund() {
         Long paymentRefundId = 1L;
 
