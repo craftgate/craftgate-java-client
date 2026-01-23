@@ -24,4 +24,5 @@ public class CreateProductRequest {
     private String description;
     private boolean multiPayment;
     private Set<Integer> enabledInstallments;
+    private String basketIdentifier;
 }
