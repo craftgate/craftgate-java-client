@@ -1,17 +1,87 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
+import io.craftgate.model.AdditionalAction;
+import io.craftgate.model.ApmAdditionalAction;
+import io.craftgate.model.ApmType;
+import io.craftgate.model.CardAssociation;
+import io.craftgate.model.CardProvider;
+import io.craftgate.model.CardType;
 import io.craftgate.model.Currency;
-import io.craftgate.model.*;
-import io.craftgate.request.*;
+import io.craftgate.model.Loyalty;
+import io.craftgate.model.LoyaltyParams;
+import io.craftgate.model.LoyaltyType;
+import io.craftgate.model.PaymentGroup;
+import io.craftgate.model.PaymentPhase;
+import io.craftgate.model.PaymentSource;
+import io.craftgate.model.PaymentStatus;
+import io.craftgate.model.PaymentType;
+import io.craftgate.model.PosApmPaymentProvider;
+import io.craftgate.model.RefundDestinationType;
+import io.craftgate.model.RefundStatus;
+import io.craftgate.model.Reward;
+import io.craftgate.model.WalletTransactionType;
+import io.craftgate.request.ApprovePaymentTransactionsRequest;
+import io.craftgate.request.CloneCardRequest;
+import io.craftgate.request.CompleteApmPaymentRequest;
+import io.craftgate.request.CompletePosApmPaymentRequest;
+import io.craftgate.request.CompleteThreeDSPaymentRequest;
+import io.craftgate.request.CreateApmPaymentRequest;
+import io.craftgate.request.CreateDepositPaymentRequest;
+import io.craftgate.request.CreateFundTransferDepositPaymentRequest;
+import io.craftgate.request.CreatePaymentRequest;
+import io.craftgate.request.DeleteStoredCardRequest;
+import io.craftgate.request.DisapprovePaymentTransactionsRequest;
+import io.craftgate.request.InitApmDepositPaymentRequest;
+import io.craftgate.request.InitApmPaymentRequest;
+import io.craftgate.request.InitCheckoutPaymentRequest;
+import io.craftgate.request.InitGarantiPayPaymentRequest;
+import io.craftgate.request.InitPosApmPaymentRequest;
+import io.craftgate.request.InitThreeDSPaymentRequest;
+import io.craftgate.request.PostAuthPaymentRequest;
+import io.craftgate.request.RefundPaymentRequest;
+import io.craftgate.request.RefundPaymentTransactionMarkAsRefundedRequest;
+import io.craftgate.request.RefundPaymentTransactionRequest;
+import io.craftgate.request.RefundWaitingPaymentRequest;
+import io.craftgate.request.RetrieveLoyaltiesRequest;
+import io.craftgate.request.RetrieveProviderCardRequest;
+import io.craftgate.request.SearchStoredCardsRequest;
+import io.craftgate.request.StoreCardRequest;
+import io.craftgate.request.UpdateCardRequest;
+import io.craftgate.request.UpdatePaymentTransactionRequest;
 import io.craftgate.request.dto.Card;
 import io.craftgate.request.dto.GarantiPayInstallment;
 import io.craftgate.request.dto.PaymentItem;
-import io.craftgate.response.*;
+import io.craftgate.response.ApmDepositPaymentResponse;
+import io.craftgate.response.ApmPaymentCompleteResponse;
+import io.craftgate.response.ApmPaymentInitResponse;
+import io.craftgate.response.DepositPaymentResponse;
+import io.craftgate.response.FundTransferDepositPaymentResponse;
+import io.craftgate.response.InitCheckoutPaymentResponse;
+import io.craftgate.response.InitGarantiPayPaymentResponse;
+import io.craftgate.response.InitPosApmPaymentResponse;
+import io.craftgate.response.InitThreeDSPaymentResponse;
+import io.craftgate.response.MultiPaymentResponse;
+import io.craftgate.response.PaymentRefundResponse;
+import io.craftgate.response.PaymentResponse;
+import io.craftgate.response.PaymentTransactionApprovalListResponse;
+import io.craftgate.response.PaymentTransactionRefundListResponse;
+import io.craftgate.response.PaymentTransactionRefundResponse;
+import io.craftgate.response.PaymentTransactionResponse;
+import io.craftgate.response.RefundWaitingPaymentResponse;
+import io.craftgate.response.RetrieveLoyaltiesResponse;
+import io.craftgate.response.StoredCardListResponse;
+import io.craftgate.response.StoredCardResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -801,6 +871,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .paymentPhase(PaymentPhase.AUTH)
+                .guestCheckout(false)
                 .items(items)
                 .build();
 
