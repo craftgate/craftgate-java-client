@@ -2,7 +2,7 @@ package io.craftgate.request;
 
 import io.craftgate.model.CardVerificationAuthType;
 import io.craftgate.model.Currency;
-import io.craftgate.request.dto.VerifyCardDto;
+import io.craftgate.request.dto.VerifyCard;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,12 +12,11 @@ import java.math.BigDecimal;
 @Builder
 public class VerifyCardRequest {
 
-    private VerifyCardDto card;
+    private VerifyCard card;
     private CardVerificationAuthType paymentAuthenticationType;
     private BigDecimal verificationPrice;
     private Currency currency;
     private String clientIp;
     private String conversationId;
     private String callbackUrl;
-    private String checkoutCardVerifyToken;
 }

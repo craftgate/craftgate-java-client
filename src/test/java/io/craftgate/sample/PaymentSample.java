@@ -7,7 +7,7 @@ import io.craftgate.request.*;
 import io.craftgate.request.dto.Card;
 import io.craftgate.request.dto.GarantiPayInstallment;
 import io.craftgate.request.dto.PaymentItem;
-import io.craftgate.request.dto.VerifyCardDto;
+import io.craftgate.request.dto.VerifyCard;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
 
@@ -2279,7 +2279,7 @@ public class PaymentSample {
     @Test
     void verify_card_with_3ds() {
         VerifyCardRequest request = VerifyCardRequest.builder()
-                .card(VerifyCardDto.builder()
+                .card(VerifyCard.builder()
                         .cardHolderName("Haluk Demir")
                         .cardNumber("5258640000000001")
                         .expireYear("2044")

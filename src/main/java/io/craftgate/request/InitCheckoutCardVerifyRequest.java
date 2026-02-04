@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 @Builder
 public class InitCheckoutCardVerifyRequest {
 
-    protected BigDecimal verificationPrice;
-    protected Currency currency;
-    protected String conversationId;
-    protected String callbackUrl;
-    protected String cardUserKey;
-    protected CardVerificationAuthType paymentAuthenticationType;
-    protected Long ttl;
+    private BigDecimal verificationPrice;
+    private Currency currency;
+    private String conversationId;
+    private String callbackUrl;
+    private String cardUserKey;
+    private CardVerificationAuthType paymentAuthenticationType;
+    private Long ttl;
 
 }

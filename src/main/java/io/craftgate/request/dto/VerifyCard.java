@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class VerifyCardDto {
+public class VerifyCard {
     private String cardHolderName;
     private String cardNumber;
     private String expireYear;
