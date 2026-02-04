@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 public class InitCheckoutCardVerifyResponse {
 
-    protected String token;
-    protected String pageUrl;
-    protected LocalDateTime tokenExpireDate;
+    private String token;
+    private String pageUrl;
+    private LocalDateTime tokenExpireDate;
 }
