@@ -7,6 +7,7 @@ import io.craftgate.request.*;
 import io.craftgate.request.dto.Card;
 import io.craftgate.request.dto.GarantiPayInstallment;
 import io.craftgate.request.dto.PaymentItem;
+import io.craftgate.request.dto.VerifyCardDto;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
 
@@ -2255,5 +2256,50 @@ public class PaymentSample {
 
         //then
         assertFalse(isVerified);
+    }
+
+    @Test
+    void init_checkout_card_verify_with_non_3ds_auth_type() {
+        InitCheckoutCardVerifyRequest request = InitCheckoutCardVerifyRequest.builder()
+                .callbackUrl("https://www.your-website.com/craftgate-checkout-card-verify-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentAuthenticationType(CardVerificationAuthType.NON_THREE_DS)
+                .verificationPrice(BigDecimal.TEN)
+                .currency(Currency.TRY)
+                .build();
+
+        InitCheckoutCardVerifyResponse response = craftgate.payment().initCheckoutCardVerify(request);
+
+        assertNotNull(response);
+        assertNotNull(response.getPageUrl());
+        assertNotNull(response.getToken());
+        assertNotNull(response.getTokenExpireDate());
+    }
+
+    @Test
+    void verify_card_with_3ds() {
+        VerifyCardRequest request = VerifyCardRequest.builder()
+                .card(VerifyCardDto.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .cardAlias("My YKB Card")
+                        .build())
+
+                .paymentAuthenticationType(CardVerificationAuthType.THREE_DS)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-card-verify-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .verificationPrice(BigDecimal.TEN)
+                .currency(Currency.TRY)
+                .clientIp("127.0.0.1")
+                .build();
+
+        VerifyCardResponse response = craftgate.payment().verifyCard(request);
+
+        assertNotNull(response);
+        assertEquals(CardVerifyStatus.THREE_DS_PENDING, response.getCardVerifyStatus());
+        assertNotNull(response.getHtmlContent());
     }
 }

@@ -50,6 +50,12 @@ public class PaymentAdapter extends BaseAdapter {
                 initCheckoutPaymentRequest, InitCheckoutPaymentResponse.class);
     }
 
+    public InitCheckoutCardVerifyResponse initCheckoutCardVerify(InitCheckoutCardVerifyRequest initCheckoutCardVerifyRequest) {
+        String path = "/payment/v1/checkout-card-verify/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initCheckoutCardVerifyRequest, path, requestOptions),
+                initCheckoutCardVerifyRequest, InitCheckoutCardVerifyResponse.class);
+    }
+
     public PaymentResponse retrieveCheckoutPayment(String token) {
         String path = "/payment/v1/checkout-payments/" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
@@ -199,6 +205,12 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/cards/delete";
         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(deleteStoredCardRequest, path, requestOptions),
                 deleteStoredCardRequest, Void.class);
+    }
+
+    public VerifyCardResponse verifyCard(VerifyCardRequest verifyCardRequest) {
+        String path = "/payment/v1/cards/verify";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(verifyCardRequest, path, requestOptions),
+                verifyCardRequest, VerifyCardResponse.class);
     }
 
     public PaymentTransactionApprovalListResponse approvePaymentTransactions(ApprovePaymentTransactionsRequest approvePaymentTransactionsRequest) {
