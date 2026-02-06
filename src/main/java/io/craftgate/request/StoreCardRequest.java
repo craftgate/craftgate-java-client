@@ -11,6 +11,7 @@ public class StoreCardRequest {
     private String cardNumber;
     private String expireYear;
     private String expireMonth;
+    private String secureFieldsToken;
     private String cardAlias;
     private String cardUserKey;
 }
