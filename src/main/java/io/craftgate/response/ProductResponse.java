@@ -28,4 +28,5 @@ public class ProductResponse {
     private String channel;
     private boolean multiPayment;
     private LocalDateTime expiresAt;
+    private String basketIdentifier;
 }
