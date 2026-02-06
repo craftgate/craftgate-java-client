@@ -86,7 +86,16 @@ public class HttpClient {
             response = gson.fromJson(new String(httpResponse.getBody(), StandardCharsets.UTF_8), Response.class);
             if (response != null && response.getErrors() != null) {
                 ErrorResponse errors = response.getErrors();
-                throw new CraftgateException(errors.getErrorCode(), errors.getErrorDescription(), errors.getErrorGroup());
+                if (errors.getProviderError() != null) {
+                    throw new CraftgateException(
+                            errors.getErrorCode(),
+                            errors.getErrorDescription(),
+                            errors.getErrorGroup(),
+                            errors.getProviderError().getErrorCode(),
+                            errors.getProviderError().getErrorMessage());
+                }
+                throw new CraftgateException(errors.getErrorCode(), errors.getErrorDescription(),
+                        errors.getErrorGroup());
             }
             throw new CraftgateException();
         }
