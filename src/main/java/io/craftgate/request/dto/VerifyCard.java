@@ -1,19 +1,16 @@
-package io.craftgate.request;
+package io.craftgate.request.dto;
 
-import io.craftgate.request.dto.EncryptedCard;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class StoreCardRequest {
-
+public class VerifyCard {
     private String cardHolderName;
     private String cardNumber;
     private String expireYear;
     private String expireMonth;
-    private String secureFieldsToken;
+    private String cvc;
     private String cardAlias;
     private String cardUserKey;
-    private EncryptedCard encryptedCard;
 }
