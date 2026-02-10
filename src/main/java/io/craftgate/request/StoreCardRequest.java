@@ -1,5 +1,6 @@
 package io.craftgate.request;
 
+import io.craftgate.request.dto.EncryptedCard;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,4 +15,5 @@ public class StoreCardRequest {
     private String secureFieldsToken;
     private String cardAlias;
     private String cardUserKey;
+    private EncryptedCard encryptedCard;
 }
