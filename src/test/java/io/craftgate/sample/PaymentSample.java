@@ -1930,6 +1930,19 @@ public class PaymentSample {
     }
 
     @Test
+    void store_card_with_secure_fields() {
+        final StoreCardRequest storeCardRequest = StoreCardRequest.builder()
+                .secureFieldsToken("xxXXxx")
+                .build();
+
+        StoredCardResponse response = craftgate.payment().storeCard(storeCardRequest);
+        assertNotNull(response);
+        assertNotNull(response.getCardToken());
+        assertNotNull(response.getCardUserKey());
+        assertNotNull(response.getCreatedAt());
+    }
+
+    @Test
     void update_stored_card() {
         final UpdateCardRequest updateCardRequest = UpdateCardRequest.builder()
                 .cardUserKey("fac377f2-ab15-4696-88d2-5e71b27ec378")
