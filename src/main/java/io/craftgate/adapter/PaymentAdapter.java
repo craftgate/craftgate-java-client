@@ -56,6 +56,11 @@ public class PaymentAdapter extends BaseAdapter {
                 initCheckoutCardVerifyRequest, InitCheckoutCardVerifyResponse.class);
     }
 
+    public RetrieveCheckoutCardVerifyResponse retrieveCheckoutCardVerify(String token) {
+        String path = "/payment/v1/checkout-card-verify/" + token;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), RetrieveCheckoutCardVerifyResponse.class);
+    }
+
     public PaymentResponse retrieveCheckoutPayment(String token) {
         String path = "/payment/v1/checkout-payments/" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
