@@ -2315,4 +2315,14 @@ public class PaymentSample {
         assertEquals(CardVerifyStatus.THREE_DS_PENDING, response.getCardVerifyStatus());
         assertNotNull(response.getHtmlContent());
     }
+
+    @Test
+    void retrieve_checkout_card_verify() {
+        String token = "456d1297-908e-4bd6-a13b-4be31a6e47d5";
+
+        RetrieveCheckoutCardVerifyResponse response = craftgate.payment().retrieveCheckoutCardVerify(token);
+
+        assertNotNull(response);
+        assertNotNull(response.getToken());
+    }
 }
