@@ -11,6 +11,7 @@ public enum PaymentProvider {
     PAYONEER,
     SODEXO,
     EDENRED,
+    TOKENFLEX,
     INSTANT_TRANSFER,
     ALIPAY,
     PAYPAL,
