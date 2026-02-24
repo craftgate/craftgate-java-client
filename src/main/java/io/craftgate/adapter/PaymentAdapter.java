@@ -270,6 +270,12 @@ public class PaymentAdapter extends BaseAdapter {
                 InstantTransferBanksResponse.class);
     }
 
+    public InitMultiPaymentResponse initMultiPayment(InitMultiPaymentRequest initMultiPaymentRequest) {
+        String path = "/payment/v1/multi-payments/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initMultiPaymentRequest, path, requestOptions),
+                initMultiPaymentRequest, InitMultiPaymentResponse.class);
+    }
+
     public MultiPaymentResponse retrieveMultiPayment(String token) {
         String path = "/payment/v1/multi-payments/" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MultiPaymentResponse.class);

@@ -2189,6 +2189,41 @@ public class PaymentSample {
     }
 
     @Test
+    void init_multi_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(70))
+                .build());
+
+        InitMultiPaymentRequest request = InitMultiPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .buyerMemberId(7L)
+                .callbackUrl("https://www.your-website.com/craftgate-multi-payment-callback")
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("external_id-123456789")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .items(items)
+                .build();
+
+        InitMultiPaymentResponse response = craftgate.payment().initMultiPayment(request);
+
+        assertNotNull(response);
+        assertNotNull(response.getPageUrl());
+        assertNotNull(response.getToken());
+    }
+
+    @Test
     void retrieve_multi_payment() {
         String token = "6d7e66b5-9b1c-4c1d-879a-2557b651096e";
 
