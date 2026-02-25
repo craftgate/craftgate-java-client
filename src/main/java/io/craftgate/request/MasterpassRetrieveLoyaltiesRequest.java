@@ -9,4 +9,5 @@ public class MasterpassRetrieveLoyaltiesRequest {
     private String msisdn;
     private String binNumber;
     private String cardName;
+    private Integer masterpassIntegrationVersion;
 }
