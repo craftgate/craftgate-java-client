@@ -7,6 +7,7 @@ import io.craftgate.request.*;
 import io.craftgate.request.dto.Card;
 import io.craftgate.request.dto.GarantiPayInstallment;
 import io.craftgate.request.dto.PaymentItem;
+import io.craftgate.request.dto.VerifyCard;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
 
@@ -801,6 +802,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .paymentPhase(PaymentPhase.AUTH)
+                .guestCheckout(false)
                 .items(items)
                 .build();
 
@@ -1837,6 +1839,17 @@ public class PaymentSample {
     }
 
     @Test
+    void refund_waiting_payment() {
+        RefundWaitingPaymentRequest request = RefundWaitingPaymentRequest.builder()
+                .paymentId(1L)
+                .build();
+
+        RefundWaitingPaymentResponse response = craftgate.payment().refundWaitingPayment(request);
+        assertNotNull(response);
+        assertEquals(RefundStatus.SUCCESS, response.getStatus());
+    }
+
+    @Test
     void retrieve_payment_refund() {
         Long paymentRefundId = 1L;
 
@@ -1914,6 +1927,19 @@ public class PaymentSample {
         assertEquals("0001", response.getLastFourDigits());
         assertEquals("My Other Cards", response.getCardAlias());
         assertEquals("Haluk Demir", response.getCardHolderName());
+    }
+
+    @Test
+    void store_card_with_secure_fields() {
+        final StoreCardRequest storeCardRequest = StoreCardRequest.builder()
+                .secureFieldsToken("xxXXxx")
+                .build();
+
+        StoredCardResponse response = craftgate.payment().storeCard(storeCardRequest);
+        assertNotNull(response);
+        assertNotNull(response.getCardToken());
+        assertNotNull(response.getCardUserKey());
+        assertNotNull(response.getCreatedAt());
     }
 
     @Test
@@ -2163,6 +2189,41 @@ public class PaymentSample {
     }
 
     @Test
+    void init_multi_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(30))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(70))
+                .build());
+
+        InitMultiPaymentRequest request = InitMultiPaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .buyerMemberId(7L)
+                .callbackUrl("https://www.your-website.com/craftgate-multi-payment-callback")
+                .currency(Currency.TRY)
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .externalId("external_id-123456789")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .items(items)
+                .build();
+
+        InitMultiPaymentResponse response = craftgate.payment().initMultiPayment(request);
+
+        assertNotNull(response);
+        assertNotNull(response.getPageUrl());
+        assertNotNull(response.getToken());
+    }
+
+    @Test
     void retrieve_multi_payment() {
         String token = "6d7e66b5-9b1c-4c1d-879a-2557b651096e";
 
@@ -2243,5 +2304,60 @@ public class PaymentSample {
 
         //then
         assertFalse(isVerified);
+    }
+
+    @Test
+    void init_checkout_card_verify_with_non_3ds_auth_type() {
+        InitCheckoutCardVerifyRequest request = InitCheckoutCardVerifyRequest.builder()
+                .callbackUrl("https://www.your-website.com/craftgate-checkout-card-verify-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .paymentAuthenticationType(CardVerificationAuthType.NON_THREE_DS)
+                .verificationPrice(BigDecimal.TEN)
+                .currency(Currency.TRY)
+                .build();
+
+        InitCheckoutCardVerifyResponse response = craftgate.payment().initCheckoutCardVerify(request);
+
+        assertNotNull(response);
+        assertNotNull(response.getPageUrl());
+        assertNotNull(response.getToken());
+        assertNotNull(response.getTokenExpireDate());
+    }
+
+    @Test
+    void verify_card_with_3ds() {
+        VerifyCardRequest request = VerifyCardRequest.builder()
+                .card(VerifyCard.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .cardAlias("My YKB Card")
+                        .build())
+
+                .paymentAuthenticationType(CardVerificationAuthType.THREE_DS)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-card-verify-callback")
+                .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .verificationPrice(BigDecimal.TEN)
+                .currency(Currency.TRY)
+                .clientIp("127.0.0.1")
+                .build();
+
+        VerifyCardResponse response = craftgate.payment().verifyCard(request);
+
+        assertNotNull(response);
+        assertEquals(CardVerifyStatus.THREE_DS_PENDING, response.getCardVerifyStatus());
+        assertNotNull(response.getHtmlContent());
+    }
+
+    @Test
+    void retrieve_checkout_card_verify() {
+        String token = "456d1297-908e-4bd6-a13b-4be31a6e47d5";
+
+        RetrieveCheckoutCardVerifyResponse response = craftgate.payment().retrieveCheckoutCardVerify(token);
+
+        assertNotNull(response);
+        assertNotNull(response.getToken());
     }
 }

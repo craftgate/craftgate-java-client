@@ -1,7 +1,7 @@
 # Craftgate Java Client
 
-[![Build Status](https://github.com/craftgate/craftgate-java-client/workflows/Craftgate%20Java%20CI/badge.svg?branch=master)](https://github.com/craftgate/craftgate-java-client/actions)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.craftgate/craftgate/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.craftgate/craftgate)
+[![Build Status](https://github.com/craftgate/craftgate-java-client/actions/workflows/craftgate-build.yml/badge.svg?branch=master)](https://github.com/craftgate/craftgate-java-client/actions?query=branch%3Amaster)
+[![Maven Central](https://img.shields.io/maven-central/v/io.craftgate/craftgate)](https://central.sonatype.com/artifact/io.craftgate/craftgate)
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/craftgate/craftgate-java-client)
 
 This repo contains the Java client for Craftgate API.
@@ -17,16 +17,16 @@ Apache Maven:
 <dependency>
   <groupId>io.craftgate</groupId>
   <artifactId>craftgate</artifactId>
-  <version>1.0.71</version>
+  <version>1.0.77</version>
 </dependency>
 ```
 Gradle Groovy DSL
 ```
-implementation 'io.craftgate:craftgate:1.0.71'
+implementation 'io.craftgate:craftgate:1.0.77'
 ```
 Gradle Kotlin DSL
 ```
-implementation("io.craftgate:craftgate:1.0.71")
+implementation("io.craftgate:craftgate:1.0.77")
 ```
 
 ## Usage

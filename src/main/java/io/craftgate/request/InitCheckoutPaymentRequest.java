@@ -47,6 +47,9 @@ public class InitCheckoutPaymentRequest {
     protected boolean forceThreeDS;
     protected boolean forceAuthForNonCreditCards;
     protected boolean depositPayment;
+    protected boolean guestCheckout;
+    protected boolean allowDeleteStoredCard = true;
+    protected String returnBackUrl;
     protected Long ttl;
     protected List<CustomInstallment> customInstallments;
     protected List<PaymentItem> items;

@@ -50,6 +50,17 @@ public class PaymentAdapter extends BaseAdapter {
                 initCheckoutPaymentRequest, InitCheckoutPaymentResponse.class);
     }
 
+    public InitCheckoutCardVerifyResponse initCheckoutCardVerify(InitCheckoutCardVerifyRequest initCheckoutCardVerifyRequest) {
+        String path = "/payment/v1/checkout-card-verify/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initCheckoutCardVerifyRequest, path, requestOptions),
+                initCheckoutCardVerifyRequest, InitCheckoutCardVerifyResponse.class);
+    }
+
+    public RetrieveCheckoutCardVerifyResponse retrieveCheckoutCardVerify(String token) {
+        String path = "/payment/v1/checkout-card-verify/" + token;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), RetrieveCheckoutCardVerifyResponse.class);
+    }
+
     public PaymentResponse retrieveCheckoutPayment(String token) {
         String path = "/payment/v1/checkout-payments/" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
@@ -160,6 +171,12 @@ public class PaymentAdapter extends BaseAdapter {
                 refundPaymentRequest, PaymentRefundResponse.class);
     }
 
+    public RefundWaitingPaymentResponse refundWaitingPayment(RefundWaitingPaymentRequest refundWaitingPaymentRequest) {
+        String path = "/payment/v1/refunds/refund-waiting-payment";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(refundWaitingPaymentRequest, path, requestOptions),
+                refundWaitingPaymentRequest, RefundWaitingPaymentResponse.class);
+    }
+
     public PaymentRefundResponse retrievePaymentRefund(Long id) {
         String path = "/payment/v1/refunds/" + id;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentRefundResponse.class);
@@ -193,6 +210,12 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/cards/delete";
         HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(deleteStoredCardRequest, path, requestOptions),
                 deleteStoredCardRequest, Void.class);
+    }
+
+    public VerifyCardResponse verifyCard(VerifyCardRequest verifyCardRequest) {
+        String path = "/payment/v1/cards/verify";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(verifyCardRequest, path, requestOptions),
+                verifyCardRequest, VerifyCardResponse.class);
     }
 
     public PaymentTransactionApprovalListResponse approvePaymentTransactions(ApprovePaymentTransactionsRequest approvePaymentTransactionsRequest) {
@@ -245,6 +268,12 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/instant-transfer-banks";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
                 InstantTransferBanksResponse.class);
+    }
+
+    public InitMultiPaymentResponse initMultiPayment(InitMultiPaymentRequest initMultiPaymentRequest) {
+        String path = "/payment/v1/multi-payments/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initMultiPaymentRequest, path, requestOptions),
+                initMultiPaymentRequest, InitMultiPaymentResponse.class);
     }
 
     public MultiPaymentResponse retrieveMultiPayment(String token) {
