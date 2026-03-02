@@ -30,5 +30,6 @@ public class DepositPaymentResponse {
     private String cardToken;
     private WalletTransaction walletTransaction;
     private Long fraudId;
+    private Long fraudRuleId;
     private FraudAction fraudAction;
 }

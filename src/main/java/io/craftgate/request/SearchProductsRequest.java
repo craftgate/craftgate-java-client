@@ -11,7 +11,11 @@ import java.time.LocalDateTime;
 @Builder
 public class SearchProductsRequest {
 
+    private Long id;
     private String name;
+    private String orderId;
+    private String conversationId;
+    private String externalId;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private Currency currency;

@@ -24,5 +24,7 @@ public class UpdateProductRequest {
     private Currency currency;
     private String description;
     private LocalDateTime expiresAt;
+    private boolean multiPayment;
     private Set<Integer> enabledInstallments;
+    private String basketIdentifier;
 }

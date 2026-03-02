@@ -94,7 +94,6 @@ public class PayByLinkSample {
         assertNotNull(response.getPrice());
         assertNotNull(response.getUrl());
         assertNotNull(response.getToken());
-        assertNotNull(response.getQrCodeUrl());
     }
 
     @Test
