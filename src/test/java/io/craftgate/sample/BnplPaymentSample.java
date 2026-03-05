@@ -111,6 +111,7 @@ public class BnplPaymentSample {
         assertNotNull(response.getRedirectUrl());
     }
 
+    @Test
     void init_bnpl_limit_inquiry() {
         InitBnplLimitInquiryRequest request = InitBnplLimitInquiryRequest.builder()
                 .apmType(ApmType.ZIP)
@@ -125,6 +126,7 @@ public class BnplPaymentSample {
         assertNotNull(response);
     }
 
+    @Test
     void complete_bnpl_limit_inquiry() {
         InitBnplLimitInquiryRequest request = InitBnplLimitInquiryRequest.builder()
                 .apmType(ApmType.ZIP)
