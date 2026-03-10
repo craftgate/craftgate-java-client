@@ -35,5 +35,6 @@ public enum ApmType {
     FUND_TRANSFER,
     SETCARD,
     PAPEL,
+    ALBARAKA,
     CASH_ON_DELIVERY
 }

@@ -40,6 +40,7 @@ public enum PaymentProvider {
     IWALLET,
     SETCARD,
     PAPEL,
+    ALBARAKA,
     BKM_EXPRESS,
     OFFLINE,
 }
