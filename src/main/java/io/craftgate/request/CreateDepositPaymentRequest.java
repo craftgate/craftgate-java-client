@@ -2,6 +2,7 @@ package io.craftgate.request;
 
 import io.craftgate.model.Currency;
 import io.craftgate.request.dto.Card;
+import io.craftgate.request.dto.RoutingOptions;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,4 +20,5 @@ public class CreateDepositPaymentRequest {
     private String posAlias;
     private String clientIp;
     private Card card;
+    private RoutingOptions routingOptions;
 }
