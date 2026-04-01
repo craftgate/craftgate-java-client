@@ -12,7 +12,7 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class InitBnplLimitInquiryRequest {
+public class BnplLimitInquiryRequest {
 
     private ApmType apmType;
     private Long merchantApmId;

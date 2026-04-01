@@ -264,13 +264,13 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BnplPaymentVerifyResponse.class);
     }
 
-    public BnplLimitInquiryResponse initBnplLimitInquiry(InitBnplLimitInquiryRequest initBnplLimitInquiry) {
+    public BnplLimitInquiryResponse initBnplLimitInquiry(BnplLimitInquiryRequest initBnplLimitInquiry) {
         String path = "/payment/v1/bnpl-payments/limit-inquiry/init";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initBnplLimitInquiry, path, requestOptions), BnplLimitInquiryResponse.class);
     }
 
-    public BnplLimitInquiryResponse completeBnplLimitInquiry(InitBnplLimitInquiryRequest initBnplLimitInquiry) {
-        String path = "/payment/v1/bnpl-payments/limit-inquiry/complete";
+    public BnplLimitInquiryResponse completeBnplLimitInquiry(BnplLimitInquiryRequest initBnplLimitInquiry) {
+        String path = "/payment/v1/bnpl-payments/limit-inquiry";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initBnplLimitInquiry, path, requestOptions), BnplLimitInquiryResponse.class);
     }
 

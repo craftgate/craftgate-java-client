@@ -6,7 +6,7 @@ import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.BnplPaymentOfferRequest;
-import io.craftgate.request.InitBnplLimitInquiryRequest;
+import io.craftgate.request.BnplLimitInquiryRequest;
 import io.craftgate.request.InitBnplPaymentRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.dto.PaymentItem;
@@ -113,7 +113,7 @@ public class BnplPaymentSample {
 
     @Test
     void init_bnpl_limit_inquiry() {
-        InitBnplLimitInquiryRequest request = InitBnplLimitInquiryRequest.builder()
+        BnplLimitInquiryRequest request = BnplLimitInquiryRequest.builder()
                 .apmType(ApmType.ZIP)
                 .additionalParams(new HashMap<String, Object>() {{
                         put("buyerPhoneNumber", "5320000000");
@@ -128,7 +128,7 @@ public class BnplPaymentSample {
 
     @Test
     void complete_bnpl_limit_inquiry() {
-        InitBnplLimitInquiryRequest request = InitBnplLimitInquiryRequest.builder()
+        BnplLimitInquiryRequest request = BnplLimitInquiryRequest.builder()
                 .apmType(ApmType.ZIP)
                 .additionalParams(new HashMap<String, Object>() {{
                     put("buyerPhoneNumber", "5320000000");
