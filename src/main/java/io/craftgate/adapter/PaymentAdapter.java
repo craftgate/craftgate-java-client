@@ -264,14 +264,14 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BnplPaymentVerifyResponse.class);
     }
 
-    public BnplLimitInquiryResponse initBnplLimitInquiry(BnplLimitInquiryRequest initBnplLimitInquiry) {
+    public BnplLimitInquiryResponse bnplLimitInquiryInit(BnplLimitInquiryRequest bnplLimitInquiryRequest) {
         String path = "/payment/v1/bnpl-payments/limit-inquiry/init";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initBnplLimitInquiry, path, requestOptions), BnplLimitInquiryResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplLimitInquiryRequest, path, requestOptions), BnplLimitInquiryResponse.class);
     }
 
-    public BnplLimitInquiryResponse completeBnplLimitInquiry(BnplLimitInquiryRequest initBnplLimitInquiry) {
+    public BnplLimitInquiryResponse bnplLimitInquiry(BnplLimitInquiryRequest bnplLimitInquiryRequest) {
         String path = "/payment/v1/bnpl-payments/limit-inquiry";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initBnplLimitInquiry, path, requestOptions), BnplLimitInquiryResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplLimitInquiryRequest, path, requestOptions), BnplLimitInquiryResponse.class);
     }
 
     public InstantTransferBanksResponse retrieveActiveBanks() {

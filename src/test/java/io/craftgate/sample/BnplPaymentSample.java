@@ -122,7 +122,7 @@ public class BnplPaymentSample {
                 }})
                 .build();
 
-        BnplLimitInquiryResponse response = craftgate.payment().initBnplLimitInquiry(request);
+        BnplLimitInquiryResponse response = craftgate.payment().bnplLimitInquiryInit(request);
         assertNotNull(response);
     }
 
@@ -136,7 +136,7 @@ public class BnplPaymentSample {
                 }})
                 .build();
 
-        BnplLimitInquiryResponse response = craftgate.payment().completeBnplLimitInquiry(request);
+        BnplLimitInquiryResponse response = craftgate.payment().bnplLimitInquiry(request);
         assertNotNull(response);
     }
 
