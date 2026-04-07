@@ -6,6 +6,7 @@ import io.craftgate.model.PaymentPhase;
 import io.craftgate.request.dto.Card;
 import io.craftgate.request.dto.FraudCheckParameters;
 import io.craftgate.request.dto.PaymentItem;
+import io.craftgate.request.dto.RoutingOptions;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
@@ -39,6 +40,7 @@ public class CreatePaymentRequest {
     protected Long buyerMemberId;
     protected String bankOrderId;
     protected Card card;
+    protected RoutingOptions routingOptions;
     protected FraudCheckParameters fraudParams;
     protected List<PaymentItem> items;
     protected Map<String, Object> additionalParams;
