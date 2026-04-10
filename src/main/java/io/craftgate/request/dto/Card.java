@@ -22,6 +22,7 @@ public class Card {
     private String cardHolderIdentityNumber;
     private Loyalty loyalty;
     private TokenizedCard tokenizedCard;
+    private EncryptedCard encryptedCard;
 
     @Builder.Default
     private Boolean storeCardAfterSuccessPayment = false;

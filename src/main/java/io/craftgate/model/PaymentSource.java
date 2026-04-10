@@ -6,7 +6,6 @@ public enum PaymentSource {
     CHECKOUT_FORM,
     PAY_BY_LINK,
     JUZDAN,
-    BKM_EXPRESS,
     HEPSIPAY,
     MONO,
 }

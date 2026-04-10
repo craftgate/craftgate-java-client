@@ -7,6 +7,7 @@ import io.craftgate.model.PaymentPhase;
 import io.craftgate.request.dto.CustomInstallment;
 import io.craftgate.request.dto.FraudCheckParameters;
 import io.craftgate.request.dto.PaymentItem;
+import io.craftgate.request.dto.RoutingOptions;
 import lombok.Builder;
 import lombok.Data;
 
@@ -48,9 +49,13 @@ public class InitCheckoutPaymentRequest {
     protected boolean forceThreeDS;
     protected boolean forceAuthForNonCreditCards;
     protected boolean depositPayment;
+    protected boolean guestCheckout;
+    protected boolean allowDeleteStoredCard = true;
+    protected String returnBackUrl;
     protected Long ttl;
     protected List<CustomInstallment> customInstallments;
     protected List<PaymentItem> items;
+    protected RoutingOptions routingOptions;
     protected FraudCheckParameters fraudParams;
     protected Map<String, Object> additionalParams;
     protected Map<String, List<CustomInstallment>> cardBrandInstallments;

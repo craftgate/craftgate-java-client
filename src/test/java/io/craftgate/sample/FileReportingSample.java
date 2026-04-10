@@ -2,11 +2,15 @@ package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
 import io.craftgate.model.ReportFileType;
+import io.craftgate.request.CreateReportRequest;
 import io.craftgate.request.RetrieveDailyPaymentReportRequest;
 import io.craftgate.request.RetrieveDailyTransactionReportRequest;
+import io.craftgate.request.RetrieveReportRequest;
+import io.craftgate.response.ReportDemandResponse;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -33,6 +37,28 @@ public class FileReportingSample {
                 .build();
 
         String response = new String(craftgate.fileReporting().retrieveDailyPaymentReport(retrieveRequest));
+        assertNotNull(response);
+    }
+
+    @Test
+    void create_report_demand() {
+        CreateReportRequest request = CreateReportRequest.builder()
+                .startDate(LocalDateTime.now().minusDays(2))
+                .endDate(LocalDateTime.now())
+                .build();
+
+        ReportDemandResponse response = craftgate.fileReporting().createReport(request);
+        assertNotNull(response);
+        assertNotNull(response.getId());
+    }
+
+    @Test
+    void retrieve_report() {
+        RetrieveReportRequest retrieveReportRequest = RetrieveReportRequest.builder()
+                .fileType(ReportFileType.CSV)
+                .build();
+
+        String response = new String(craftgate.fileReporting().retrieveReport(retrieveReportRequest, 49L));
         assertNotNull(response);
     }
 }
