@@ -43,5 +43,6 @@ public enum ApmType {
     PAYCELL_DCB,
     TOM_FINANCE,
     VODAFONE_DCB,
+    ALBARAKA,
     ZIP
 }
