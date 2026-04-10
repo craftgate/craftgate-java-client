@@ -264,6 +264,16 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BnplPaymentVerifyResponse.class);
     }
 
+    public BnplLimitInquiryResponse bnplLimitInquiryInit(BnplLimitInquiryRequest bnplLimitInquiryRequest) {
+        String path = "/payment/v1/bnpl-payments/limit-inquiry/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplLimitInquiryRequest, path, requestOptions), BnplLimitInquiryResponse.class);
+    }
+
+    public BnplLimitInquiryResponse bnplLimitInquiry(BnplLimitInquiryRequest bnplLimitInquiryRequest) {
+        String path = "/payment/v1/bnpl-payments/limit-inquiry";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplLimitInquiryRequest, path, requestOptions), BnplLimitInquiryResponse.class);
+    }
+
     public InstantTransferBanksResponse retrieveActiveBanks() {
         String path = "/payment/v1/instant-transfer-banks";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
@@ -285,6 +295,12 @@ public class PaymentAdapter extends BaseAdapter {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveProviderCardRequest);
         String path = "/payment/v1/cards/provider-card-mappings" + query;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardListResponse.class);
+    }
+
+    public CreateDepositToCardPaymentResponse depositToCard(CreateDepositToCardRequest createDepositToCardRequest) {
+        String path = "/payment/v1/card-payments/deposit-to-card";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createDepositToCardRequest, path, requestOptions),
+                createDepositToCardRequest, CreateDepositToCardPaymentResponse.class);
     }
 
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
