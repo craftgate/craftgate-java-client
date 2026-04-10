@@ -2,6 +2,7 @@ package io.craftgate.model;
 
 public enum ApmType {
     // APM
+    ALIPAY,
     AFTERPAY,
     CHIPPIN,
     KASPI,
@@ -16,6 +17,8 @@ public enum ApmType {
     PAYPAL,
     STRIPE,
     TOMPAY,
+    APPLEPAY,
+    GOOGLEPAY,
     CASH_ON_DELIVERY,
     FUND_TRANSFER,
     INSTANT_TRANSFER,
