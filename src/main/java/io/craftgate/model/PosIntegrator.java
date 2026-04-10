@@ -42,4 +42,5 @@ public enum PosIntegrator {
     BIN_PAY,
     TAP,
     RUBIK,
+    TURKONAY,
 }
