@@ -1,13 +1,10 @@
 package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
-import io.craftgate.model.Currency;
 import io.craftgate.model.*;
+import io.craftgate.model.Currency;
 import io.craftgate.request.*;
-import io.craftgate.request.dto.Card;
-import io.craftgate.request.dto.GarantiPayInstallment;
-import io.craftgate.request.dto.PaymentItem;
-import io.craftgate.request.dto.VerifyCard;
+import io.craftgate.request.dto.*;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
 
@@ -2359,5 +2356,35 @@ public class PaymentSample {
 
         assertNotNull(response);
         assertNotNull(response.getToken());
+    }
+
+    @Test
+    void should_deposit_to_card() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", "encrypted-username");
+        data.put("password", "encrypted-password");
+        data.put("companyCode", "test-companyCode");
+        data.put("sourceAccountNo", "test-sourceAccountNo");
+
+        CreateDepositToCardRequest createDepositToCardRequest = CreateDepositToCardRequest.builder()
+                .price(BigDecimal.TEN)
+                .currency(Currency.TRY)
+                .orderId("myorderid-123")
+                .description("test deposit to card")
+                .card(Card.builder()
+                        .cardUserKey("b7372206-311f-47f2-aef9-8cf7c12f7655")
+                        .cardToken("53e9fe72-bbd5-4e6b-917a-abd0aee80306")
+                        .build())
+                .integrator(DepositToCardPaymentIntegratorDto.builder()
+                        .name(PosIntegrator.VAKIFBANK)
+                        .data(data)
+                        .build())
+                .build();
+
+        CreateDepositToCardPaymentResponse createDepositToCardPaymentResponse = craftgate.payment().depositToCard(createDepositToCardRequest);
+
+        assertNotNull(createDepositToCardPaymentResponse);
+        assertNotNull(createDepositToCardPaymentResponse.getId());
+        assertEquals(PaymentStatus.SUCCESS, createDepositToCardPaymentResponse.getPaymentStatus());
     }
 }

@@ -297,6 +297,12 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardListResponse.class);
     }
 
+    public CreateDepositToCardPaymentResponse depositToCard(CreateDepositToCardRequest createDepositToCardRequest) {
+        String path = "/payment/v1/card-payments/deposit-to-card";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createDepositToCardRequest, path, requestOptions),
+                createDepositToCardRequest, CreateDepositToCardPaymentResponse.class);
+    }
+
     public boolean is3DSecureCallbackVerified(String threeDSecureCallbackKey, Map<String, String> params) {
         String hash = params.get("hash");
         String hashString = threeDSecureCallbackKey +
