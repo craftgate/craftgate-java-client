@@ -2,6 +2,7 @@ package io.craftgate.response;
 
 import io.craftgate.model.PaymentRefundStatus;
 import io.craftgate.response.common.BasePaymentResponse;
+import io.craftgate.response.dto.ReportingPaymentTransaction;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,4 +18,5 @@ public class ReportingPaymentResponse extends BasePaymentResponse {
     private PaymentRefundStatus refundStatus;
     private MemberResponse buyerMember;
     private List<ReportingPaymentRefundResponse> refunds;
+    private List<ReportingPaymentTransaction> paymentTransactions;
 }

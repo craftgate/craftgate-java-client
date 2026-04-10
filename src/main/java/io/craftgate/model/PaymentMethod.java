@@ -10,6 +10,8 @@ public enum PaymentMethod {
     SODEXO_GIFT,
     EDENRED,
     EDENRED_GIFT,
+    TOKENFLEX,
+    TOKENFLEX_GIFT,
     ALIPAY,
     PAYPAL,
     KLARNA,

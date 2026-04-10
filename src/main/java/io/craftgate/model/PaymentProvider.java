@@ -12,6 +12,7 @@ public enum PaymentProvider {
     PAYONEER,
     SODEXO,
     EDENRED,
+    TOKENFLEX,
     METROPOL,
     IWALLET,
     ALIPAY,
@@ -41,6 +42,7 @@ public enum PaymentProvider {
     PAYLANDS_MB_WAY,
     SETCARD,
     PAPEL,
+    ALBARAKA,
     BKM_EXPRESS,
     OFFLINE
 }

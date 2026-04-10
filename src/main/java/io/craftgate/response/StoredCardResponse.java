@@ -21,6 +21,8 @@ public class StoredCardResponse {
     private String cardBrand;
     private String cardBankName;
     private Long cardBankId;
+    private String expireYear;
+    private String expireMonth;
     private Boolean isCommercial;
     private CardExpiryStatus cardExpiryStatus;
     private LocalDateTime createdAt;

@@ -6,13 +6,11 @@ import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.BnplPaymentOfferRequest;
+import io.craftgate.request.BnplLimitInquiryRequest;
 import io.craftgate.request.InitBnplPaymentRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.dto.PaymentItem;
-import io.craftgate.response.BnplPaymentOfferResponse;
-import io.craftgate.response.BnplPaymentVerifyResponse;
-import io.craftgate.response.InitBnplPaymentResponse;
-import io.craftgate.response.PaymentResponse;
+import io.craftgate.response.*;
 import io.craftgate.response.dto.BnplBankOffer;
 import org.junit.jupiter.api.Test;
 
@@ -111,6 +109,35 @@ public class BnplPaymentSample {
 
         InitBnplPaymentResponse response = craftgate.payment().initBnplPayment(request);
         assertNotNull(response.getRedirectUrl());
+    }
+
+    @Test
+    void init_bnpl_limit_inquiry() {
+        BnplLimitInquiryRequest request = BnplLimitInquiryRequest.builder()
+                .apmType(ApmType.ZIP)
+                .additionalParams(new HashMap<String, Object>() {{
+                        put("buyerPhoneNumber", "5320000000");
+                        put("buyerIdentityNumber", "11111111110");
+                        put("buyerBirthdate", "1990-01-01");
+                }})
+                .build();
+
+        BnplLimitInquiryResponse response = craftgate.payment().bnplLimitInquiryInit(request);
+        assertNotNull(response);
+    }
+
+    @Test
+    void complete_bnpl_limit_inquiry() {
+        BnplLimitInquiryRequest request = BnplLimitInquiryRequest.builder()
+                .apmType(ApmType.ZIP)
+                .additionalParams(new HashMap<String, Object>() {{
+                    put("buyerPhoneNumber", "5320000000");
+                    put("otpCode", "123456");
+                }})
+                .build();
+
+        BnplLimitInquiryResponse response = craftgate.payment().bnplLimitInquiry(request);
+        assertNotNull(response);
     }
 
     @Test

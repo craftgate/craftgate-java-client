@@ -3,14 +3,12 @@ package io.craftgate.adapter;
 import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.model.FraudValueType;
 import io.craftgate.net.HttpClient;
-import io.craftgate.request.AddCardFingerprintFraudValueListRequest;
-import io.craftgate.request.FraudValueListRequest;
-import io.craftgate.request.SearchFraudChecksRequest;
-import io.craftgate.request.UpdateFraudCheckRequest;
+import io.craftgate.request.*;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.FraudAllValueListsResponse;
 import io.craftgate.response.FraudCheckListResponse;
+import io.craftgate.response.FraudRuleListResponse;
 import io.craftgate.response.FraudValueListResponse;
 
 public class FraudAdapter extends BaseAdapter {
@@ -68,5 +66,11 @@ public class FraudAdapter extends BaseAdapter {
     public void removeValueFromValueList(String listName, String valueId) {
         String path = "/fraud/v1/value-lists/" + listName + "/values/" + valueId;
         HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    }
+
+    public FraudRuleListResponse searchRules(SearchFraudRuleRequest searchFraudRuleRequest) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(searchFraudRuleRequest);
+        String path = "/fraud/v1/rules" + query;
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudRuleListResponse.class);
     }
 }
