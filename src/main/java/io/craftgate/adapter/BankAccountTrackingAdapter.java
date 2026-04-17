@@ -16,11 +16,11 @@ public class BankAccountTrackingAdapter extends BaseAdapter {
     public BankAccountTrackingRecordListResponse searchRecords(SearchBankAccountTrackingRecordsRequest request) {
         String query = RequestQueryParamsBuilder.buildQueryParam(request);
         String path = "/bank-account-tracking/v1/merchant-bank-account-trackings/records" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BankAccountTrackingRecordListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), BankAccountTrackingRecordListResponse.class);
     }
 
     public BankAccountTrackingRecordResponse retrieveRecord(Long id) {
         String path = "/bank-account-tracking/v1/merchant-bank-account-trackings/records/" + id;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BankAccountTrackingRecordResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), BankAccountTrackingRecordResponse.class);
     }
 }

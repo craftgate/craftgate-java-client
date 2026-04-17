@@ -5,6 +5,7 @@ import io.craftgate.request.CreateMemberRequest;
 import io.craftgate.request.CreateMerchantRequest;
 import io.craftgate.request.SearchMembersRequest;
 import io.craftgate.request.UpdateMemberRequest;
+import io.craftgate.request.common.RequestContext;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.CreateMerchantResponse;
@@ -18,30 +19,38 @@ public class OnboardingAdapter extends BaseAdapter {
     }
 
     public MemberResponse createMember(CreateMemberRequest createMemberRequest) {
+        return createMember(createMemberRequest, null);
+    }
+
+    public MemberResponse createMember(CreateMemberRequest createMemberRequest, RequestContext requestContext) {
         String path = "/onboarding/v1/members";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMemberRequest, path, requestOptions),
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMemberRequest, path, requestContext),
                 createMemberRequest, MemberResponse.class);
     }
 
     public MemberResponse updateMember(Long id, UpdateMemberRequest updateMemberRequest) {
         String path = "/onboarding/v1/members/" + id;
-        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateMemberRequest, path, requestOptions),
+        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateMemberRequest, path),
                 updateMemberRequest, MemberResponse.class);
     }
 
     public MemberResponse retrieveMember(Long id) {
         String path = "/onboarding/v1/members/" + id;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MemberResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), MemberResponse.class);
     }
 
     public MemberListResponse searchMembers(SearchMembersRequest searchMembersRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchMembersRequest);
         String path = "/onboarding/v1/members" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MemberListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), MemberListResponse.class);
     }
 
     public CreateMerchantResponse createMerchant(CreateMerchantRequest createMerchantRequest) {
+        return createMerchant(createMerchantRequest, null);
+    }
+
+    public CreateMerchantResponse createMerchant(CreateMerchantRequest createMerchantRequest, RequestContext requestContext) {
         String path = "/onboarding/v1/merchants";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMerchantRequest, path, requestOptions), createMerchantRequest, CreateMerchantResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMerchantRequest, path, requestContext), createMerchantRequest, CreateMerchantResponse.class);
     }
 }

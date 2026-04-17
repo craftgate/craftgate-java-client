@@ -5,6 +5,7 @@ import io.craftgate.request.CreateReportRequest;
 import io.craftgate.request.RetrieveDailyPaymentReportRequest;
 import io.craftgate.request.RetrieveDailyTransactionReportRequest;
 import io.craftgate.request.RetrieveReportRequest;
+import io.craftgate.request.common.RequestContext;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.ReportDemandResponse;
@@ -23,7 +24,7 @@ public class FileReportingAdapter extends BaseAdapter {
     public byte[] retrieveDailyTransactionReport(RetrieveDailyTransactionReportRequest retrieveDailyTransactionReportRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveDailyTransactionReportRequest);
         String path = "/file-reporting/v1/transaction-reports" + query;
-        Map<String, String> headers = createHeaders(path, requestOptions);
+        Map<String, String> headers = createHeaders(path);
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
     }
@@ -31,14 +32,18 @@ public class FileReportingAdapter extends BaseAdapter {
     public byte[] retrieveDailyPaymentReport(RetrieveDailyPaymentReportRequest retrieveDailyPaymentReportRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveDailyPaymentReportRequest);
         String path = "/file-reporting/v1/payment-reports" + query;
-        Map<String, String> headers = createHeaders(path, requestOptions);
+        Map<String, String> headers = createHeaders(path);
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
     }
 
     public ReportDemandResponse createReport(CreateReportRequest request) {
+        return createReport(request, null);
+    }
+
+    public ReportDemandResponse createReport(CreateReportRequest request, RequestContext requestContext) {
         String path = "/file-reporting/v1/report-demands";
-        Map<String, String> headers = createHeaders(request, path, requestOptions);
+        Map<String, String> headers = createHeaders(request, path, requestContext);
         return HttpClient.post(requestOptions.getBaseUrl() + path,
                 headers,
                 request,
@@ -48,7 +53,7 @@ public class FileReportingAdapter extends BaseAdapter {
     public byte[] retrieveReport(RetrieveReportRequest retrieveReportRequest, Long reportId) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveReportRequest);
         String path = "/file-reporting/v1/reports/" + reportId + query;
-        Map<String, String> headers = createHeaders(path, requestOptions);
+        Map<String, String> headers = createHeaders(path);
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
     }
