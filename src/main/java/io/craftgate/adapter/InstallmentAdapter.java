@@ -16,11 +16,11 @@ public class InstallmentAdapter extends BaseAdapter {
     public InstallmentListResponse searchInstallments(SearchInstallmentsRequest searchInstallmentsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchInstallmentsRequest);
         String path = "/installment/v1/installments" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), InstallmentListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), InstallmentListResponse.class);
     }
 
     public BinNumberResponse retrieveBinNumber(String binNumber) {
         String path = "/installment/v1/bins/" + binNumber;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BinNumberResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), BinNumberResponse.class);
     }
 }

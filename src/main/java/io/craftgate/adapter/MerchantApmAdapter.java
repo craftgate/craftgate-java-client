@@ -12,7 +12,7 @@ public class MerchantApmAdapter extends BaseAdapter {
 
     public MerchantApmListResponse retrieveApms() {
         String path = "/merchant/v1/merchant-apms";
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantApmListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), MerchantApmListResponse.class);
     }
 
 }
