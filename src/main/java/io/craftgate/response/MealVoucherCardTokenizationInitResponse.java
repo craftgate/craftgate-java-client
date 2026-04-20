@@ -1,11 +1,7 @@
 package io.craftgate.response;
 
-import io.craftgate.model.AdditionalAction;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.craftgate.model.ApmAdditionalAction;
+import lombok.*;
 
 @Getter
 @Setter
@@ -14,7 +10,7 @@ import lombok.Setter;
 @Builder
 public class MealVoucherCardTokenizationInitResponse {
 
-    private AdditionalAction additionalAction;
+    private ApmAdditionalAction additionalAction;
     private String sessionId;
     private String htmlContent;
     private String redirectUrl;
