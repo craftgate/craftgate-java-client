@@ -1105,7 +1105,7 @@ public class PaymentSample {
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .apmUserIdentity("5555555555")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("sodexoCode", "843195");
                 }})
                 .build();
@@ -1192,7 +1192,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("paymentCode", "123456");
                 }})
                 .items(items)
@@ -1244,7 +1244,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("paymentCode", "123456");
                 }})
                 .items(items)
@@ -1331,7 +1331,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("cardNumber", "1111222233334444");
                 }})
                 .items(items)
@@ -1374,7 +1374,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.40))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("country", "de");
         additionalParams.put("locale", "en-DE");
 
@@ -1452,7 +1452,7 @@ public class PaymentSample {
                 .conversationId("myConversationId")
                 .externalId("optional-externalId")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("cardNumber", "6375780115068760");
                 }})
                 .build();
@@ -1541,7 +1541,7 @@ public class PaymentSample {
                 .externalId("externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("channel", "channel");
                     put("phone", "5001112233");
                 }})
@@ -1604,7 +1604,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("buyerPhoneNumber", "34700000000");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
@@ -1641,7 +1641,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("buyerPhoneNumber", "34700000000");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
@@ -1678,7 +1678,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("paycellGsmNumber", "5305289290");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
@@ -1721,7 +1721,7 @@ public class PaymentSample {
                 .externalId("externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("integrationId", "11223344");
                 }})
                 .build();
@@ -1822,7 +1822,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("cardNumber", "7599640961180814");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
