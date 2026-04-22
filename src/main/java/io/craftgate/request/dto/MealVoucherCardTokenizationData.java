@@ -31,10 +31,11 @@ public class MealVoucherCardTokenizationData {
                 .build();
     }
 
-    public static MealVoucherCardTokenizationData buildForMetropol(String userReferenceNumber, String cardNumber ){
+    public static MealVoucherCardTokenizationData buildForMetropol(String userReferenceNumber, String cardNumber, String gsmNumber){
         return MealVoucherCardTokenizationData.builder()
                 .userReferenceNumber(userReferenceNumber)
                 .cardNumber(cardNumber)
+                .gsmNumber(gsmNumber)
                 .build();
     }
 
