@@ -9,5 +9,6 @@ public class MealVoucherCardTokenizationCompleteResponse {
 
     private String sessionId;
     private String maskedCardNumber;
+    private String fingerprint;
     private BigDecimal balance;
 }
