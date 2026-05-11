@@ -5,8 +5,8 @@ import io.craftgate.model.ApmType;
 import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
-import io.craftgate.request.BnplPaymentOfferRequest;
 import io.craftgate.request.BnplLimitInquiryRequest;
+import io.craftgate.request.BnplPaymentOfferRequest;
 import io.craftgate.request.InitBnplPaymentRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.dto.PaymentItem;
@@ -144,7 +144,7 @@ public class BnplPaymentSample {
     void init_tom_finance_bnpl_payment() {
         BigDecimal price = new BigDecimal("100");
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("buyerName", "John Doe");
         additionalParams.put("buyerPhoneNumber", "5551112233");
 
