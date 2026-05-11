@@ -28,7 +28,7 @@ public class InitApmPaymentRequest {
     private String callbackUrl;
     private String apmOrderId;
     private String apmUserIdentity;
-    private Map<String, String> additionalParams;
+    private Map<String, Object> additionalParams;
     private String clientIp;
     private List<PaymentItem> items;
 }
