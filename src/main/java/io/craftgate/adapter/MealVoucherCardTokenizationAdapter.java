@@ -4,9 +4,11 @@ import io.craftgate.net.HttpClient;
 import io.craftgate.request.MealVoucherCardTokenizationCompleteRequest;
 import io.craftgate.request.MealVoucherCardTokenizationCompleteResponse;
 import io.craftgate.request.MealVoucherCardTokenizationInitRequest;
+import io.craftgate.request.MealVoucherCardTokenizationRegenerateRequest;
 import io.craftgate.request.common.RequestContext;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.response.MealVoucherCardTokenizationInitResponse;
+import io.craftgate.response.MealVoucherCardTokenizationRegenerateResponse;
 
 public class MealVoucherCardTokenizationAdapter extends BaseAdapter {
 
@@ -24,6 +26,15 @@ public class MealVoucherCardTokenizationAdapter extends BaseAdapter {
                 mealVoucherCardTokenizationInitRequest, MealVoucherCardTokenizationInitResponse.class);
     }
 
+    public MealVoucherCardTokenizationRegenerateResponse cardTokenizationRegenerate(MealVoucherCardTokenizationRegenerateRequest mealVoucherCardTokenizationRegenerateRequest) {
+        return cardTokenizationRegenerate(mealVoucherCardTokenizationRegenerateRequest, null);
+    }
+
+    public MealVoucherCardTokenizationRegenerateResponse cardTokenizationRegenerate(MealVoucherCardTokenizationRegenerateRequest mealVoucherCardTokenizationRegenerateRequest, RequestContext requestContext) {
+        String path = "/payment/v1/meal-voucher/card-tokenizations/" + mealVoucherCardTokenizationRegenerateRequest.getSessionId() + "/init";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(mealVoucherCardTokenizationRegenerateRequest, path, requestContext),
+                mealVoucherCardTokenizationRegenerateRequest, MealVoucherCardTokenizationRegenerateResponse.class);
+    }
 
     public MealVoucherCardTokenizationCompleteResponse cardTokenizationComplete(MealVoucherCardTokenizationCompleteRequest request) {
         return cardTokenizationComplete(request, null);
