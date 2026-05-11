@@ -31,7 +31,7 @@ public class MealVoucherCardTokenizationAdapter extends BaseAdapter {
     }
 
     public MealVoucherCardTokenizationRegenerateResponse cardTokenizationRegenerate(MealVoucherCardTokenizationRegenerateRequest mealVoucherCardTokenizationRegenerateRequest, RequestContext requestContext) {
-        String path = "/payment/v1/meal-voucher/card-tokenizations/" + mealVoucherCardTokenizationRegenerateRequest.getSessionId() + "/init";
+        String path = "/payment/v1/meal-voucher/card-tokenizations/" + mealVoucherCardTokenizationRegenerateRequest.getSessionId() + "/regenerate";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(mealVoucherCardTokenizationRegenerateRequest, path, requestContext),
                 mealVoucherCardTokenizationRegenerateRequest, MealVoucherCardTokenizationRegenerateResponse.class);
     }
