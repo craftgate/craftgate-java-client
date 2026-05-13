@@ -62,6 +62,6 @@ public abstract class BaseAdapter {
     }
 
     private String prepareAuthorizationString(Object request, String path, String randomString) {
-        return HashGenerator.generateHash(requestOptions.getBaseUrl(), requestOptions.getApiKey(), requestOptions.getSecretKey(), randomString, request, path);
+        return HashGenerator.generateHash(requestOptions.getSignatureBaseUrl(), requestOptions.getApiKey(), requestOptions.getSecretKey(), randomString, request, path);
     }
 }
