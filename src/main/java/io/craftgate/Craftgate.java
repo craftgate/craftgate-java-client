@@ -29,19 +29,25 @@ public class Craftgate {
 
 
     public Craftgate(String apiKey, String secretKey) {
-        this(apiKey, secretKey, BASE_URL, null);
+        this(apiKey, secretKey, BASE_URL, null, BASE_URL);
     }
 
     public Craftgate(String apiKey, String secretKey, String baseUrl) {
-        this(apiKey, secretKey, baseUrl, null);
+        this(apiKey, secretKey, baseUrl, null, baseUrl);
     }
 
-    public Craftgate(String apiKey, String secretKey, String baseUrl, String language) {
+
+    public Craftgate(String apiKey, String secretKey, String baseUrl, String language){
+        this(apiKey, secretKey, baseUrl, language, baseUrl);
+    }
+
+    public Craftgate(String apiKey, String secretKey, String baseUrl, String language, String signatureBaseUrl) {
         RequestOptions requestOptions = RequestOptions.builder()
                 .apiKey(apiKey)
                 .secretKey(secretKey)
                 .baseUrl(baseUrl)
                 .language(language)
+                .signatureBaseUrl(signatureBaseUrl)
                 .build();
 
         this.payment = new PaymentAdapter(requestOptions);

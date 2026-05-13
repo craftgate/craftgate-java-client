@@ -26,10 +26,13 @@ public class BaseRequestFoundationTest {
     private static final String RANDOM_HEADER_NAME = "x-rnd-key";
     private static final String SIGNATURE_HEADER_NAME = "x-signature";
 
+    private static final String BASE_URL = "https://sandbox-api.craftgate.io";
+
     private final RequestOptions requestOptions = RequestOptions.builder()
             .apiKey("api-key")
             .secretKey("secret-key")
-            .baseUrl("https://sandbox-api.craftgate.io")
+            .baseUrl(BASE_URL)
+            .signatureBaseUrl(BASE_URL)
             .build();
 
     private final PaymentTokenAdapter bodyAdapter = new PaymentTokenAdapter(requestOptions);
@@ -154,7 +157,7 @@ public class BaseRequestFoundationTest {
         assertFalse(path.contains("headerOptions"));
         assertFalse(path.contains("idempotencyKey"));
 
-        String bodyLess = HashGenerator.generateHash(requestOptions.getBaseUrl(), requestOptions.getApiKey(),
+        String bodyLess = HashGenerator.generateHash(requestOptions.getSignatureBaseUrl(), requestOptions.getApiKey(),
                 requestOptions.getSecretKey(), headers.get(RANDOM_HEADER_NAME), null, path);
         assertEquals(bodyLess, headers.get(SIGNATURE_HEADER_NAME));
     }
