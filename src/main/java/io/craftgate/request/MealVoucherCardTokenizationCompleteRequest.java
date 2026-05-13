@@ -7,7 +7,5 @@ import lombok.Data;
 @Builder
 public class MealVoucherCardTokenizationCompleteRequest {
 
-    private String sessionId;
-
     private String validationCode;
 }
