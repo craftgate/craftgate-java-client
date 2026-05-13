@@ -8,6 +8,5 @@ import lombok.Data;
 @Builder
 public class MealVoucherCardTokenizationRegenerateRequest {
 
-    private String sessionId;
     private MealVoucherCardTokenizationData mealVoucherCardTokenizationData;
 }
