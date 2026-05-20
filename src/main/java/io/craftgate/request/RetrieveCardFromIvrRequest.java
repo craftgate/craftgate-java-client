@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class RetrieveIVRCardRequest {
+public class RetrieveCardFromIvrRequest {
 
     private String callToken;
     private String cardUserKey;
