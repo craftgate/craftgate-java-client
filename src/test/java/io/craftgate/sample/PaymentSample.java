@@ -2349,6 +2349,18 @@ public class PaymentSample {
     }
 
     @Test
+    void retrieve_ivr_card() {
+        RetrieveIVRCardRequest retrieveIVRCardRequest = RetrieveIVRCardRequest.builder()
+                .cardUserKey("45f12c74-3000-465c-96dc-876850e7dd7a")
+                .callToken("0309ac2d-c5a5-4b4f-a91f-5c444ba07b24")
+                .build();
+
+        IVRCardTokenizationResponse response = craftgate.payment().retrieveCardFromIvr(retrieveIVRCardRequest);
+
+        assertNotNull(response);
+    }
+
+    @Test
     void should_validate_3D_secure_callback_verified() {
         //given
         String merchantThreeDsCallbackKey = "merchantThreeDsCallbackKeySndbox";
