@@ -56,4 +56,18 @@ public class MealVoucherCardTokenizationData {
                 .callbackUrl(callbackUrl)
                 .build();
     }
+
+
+    public static MealVoucherCardTokenizationData buildForTokenflex(String userReferenceNumber, String callbackUrl){
+        return MealVoucherCardTokenizationData.builder()
+                .userReferenceNumber(userReferenceNumber)
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+    public static MealVoucherCardTokenizationData buildForTokenflex(String callbackUrl){
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
 }
