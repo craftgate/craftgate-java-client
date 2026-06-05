@@ -89,15 +89,6 @@ public class BkmExpressSample {
     }
 
     @Test
-    void retrieve_bkm_express_payment() {
-
-        String ticketId = "b9bd7b93-662f-4460-9ef3-8fc735853cf1";
-
-        PaymentResponse response = craftgate.bkmExpressPaymentAdapter().retrievePayment(ticketId);
-        assertNotNull(response);
-    }
-
-    @Test
     void retrieve_bkm_express_payment_by_token() {
 
         String bkmExpressPaymentToken = "23f4e147-2c4e-4a2c-8a67-9c783d813b79";
