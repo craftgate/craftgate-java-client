@@ -105,4 +105,16 @@ public class BkmExpressSample {
         PaymentResponse response = craftgate.bkmExpressPaymentAdapter().retrievePaymentByToken(bkmExpressPaymentToken);
         assertNotNull(response);
     }
+
+    @Test
+    void generate_bkm_express_token() {
+
+        BkmExpressGenerateTokenRequest request = BkmExpressGenerateTokenRequest.builder()
+                .userId("userId")
+                .gsmNumber("905551111111")
+                .build();
+
+        BkmExpressGenerateTokenResponse response = craftgate.bkmExpressPaymentAdapter().generateToken(request);
+        assertNotNull(response);
+    }
 }
