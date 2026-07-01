@@ -1,6 +1,9 @@
 package io.craftgate.request;
 
-import io.craftgate.model.*;
+import io.craftgate.model.Currency;
+import io.craftgate.model.PaymentGroup;
+import io.craftgate.model.PaymentMethod;
+import io.craftgate.model.PaymentSource;
 import io.craftgate.request.dto.PaymentItem;
 import lombok.Builder;
 import lombok.Data;
@@ -22,11 +25,10 @@ public class InitMultiPaymentRequest {
     private String externalId;
     private String callbackUrl;
 
-    @Builder.Default
-    protected PaymentPhase paymentPhase = PaymentPhase.AUTH;
     private String paymentChannel;
 
     private List<PaymentMethod> enabledPaymentMethods;
+    private List<Integer> enabledInstallments;
 
     private String cardUserKey;
 
