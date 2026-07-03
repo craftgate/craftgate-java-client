@@ -50,6 +50,7 @@ public class InitCheckoutPaymentRequest {
     protected boolean depositPayment;
     protected boolean guestCheckout;
     protected boolean allowDeleteStoredCard = true;
+    protected boolean useTopRedirection;
     protected String returnBackUrl;
     protected Long ttl;
     protected List<CustomInstallment> customInstallments;

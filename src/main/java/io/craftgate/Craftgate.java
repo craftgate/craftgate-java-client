@@ -25,6 +25,7 @@ public class Craftgate {
     private final MerchantApmAdapter merchantApmAdapter;
     private final JuzdanPaymentAdapter juzdanPaymentAdapter;
     private final BkmExpressPaymentAdapter bkmExpressPaymentAdapter;
+    private final MealVoucherCardTokenizationAdapter mealVoucherCardTokenizationAdapter;
 
 
     public Craftgate(String apiKey, String secretKey) {
@@ -61,6 +62,7 @@ public class Craftgate {
         this.merchantApmAdapter = new MerchantApmAdapter(requestOptions);
         this.juzdanPaymentAdapter = new JuzdanPaymentAdapter(requestOptions);
         this.bkmExpressPaymentAdapter = new BkmExpressPaymentAdapter(requestOptions);
+        this.mealVoucherCardTokenizationAdapter = new MealVoucherCardTokenizationAdapter(requestOptions);
     }
 
     public PaymentAdapter payment() {
@@ -133,5 +135,9 @@ public class Craftgate {
 
     public BkmExpressPaymentAdapter bkmExpressPaymentAdapter() {
         return bkmExpressPaymentAdapter;
+    }
+
+    public MealVoucherCardTokenizationAdapter mealVoucherCardTokenizationAdapter() {
+        return mealVoucherCardTokenizationAdapter;
     }
 }
