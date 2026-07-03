@@ -6,5 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class LoyaltyParams {
+
     private Integer postponingPaymentCount;
+    private String code;
 }
