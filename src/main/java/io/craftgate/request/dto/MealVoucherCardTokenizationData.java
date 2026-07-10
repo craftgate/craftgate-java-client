@@ -10,33 +10,43 @@ import lombok.Getter;
 public class MealVoucherCardTokenizationData {
 
     private String cardNumber;
-
     private String userReferenceNumber;
-
     private String gsmNumber;
-
     private String callbackUrl;
 
-
-    public static MealVoucherCardTokenizationData buildForMultinet(String userReferenceNumber, String callbackUrl){
-       return MealVoucherCardTokenizationData.builder()
-               .userReferenceNumber(userReferenceNumber)
-               .callbackUrl(callbackUrl)
-               .build();
+    public static MealVoucherCardTokenizationData buildForMultinet(String userReferenceNumber, String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .userReferenceNumber(userReferenceNumber)
+                .callbackUrl(callbackUrl)
+                .build();
     }
-    public static MealVoucherCardTokenizationData buildForMultinet(String callbackUrl){
+
+    public static MealVoucherCardTokenizationData buildForMultinet(String callbackUrl) {
         return MealVoucherCardTokenizationData.builder()
                 .callbackUrl(callbackUrl)
                 .build();
     }
 
-    public static MealVoucherCardTokenizationData buildForSetcard(String callbackUrl){
+    public static MealVoucherCardTokenizationData buildForEdenred(String userReferenceNumber, String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .userReferenceNumber(userReferenceNumber)
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
+    public static MealVoucherCardTokenizationData buildForEdenred(String callbackUrl) {
         return MealVoucherCardTokenizationData.builder()
                 .callbackUrl(callbackUrl)
                 .build();
     }
 
-    public static MealVoucherCardTokenizationData buildForMetropol(String userReferenceNumber, String cardNumber, String gsmNumber){
+    public static MealVoucherCardTokenizationData buildForSetcard(String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
+    public static MealVoucherCardTokenizationData buildForMetropol(String userReferenceNumber, String cardNumber, String gsmNumber) {
         return MealVoucherCardTokenizationData.builder()
                 .userReferenceNumber(userReferenceNumber)
                 .cardNumber(cardNumber)
@@ -44,20 +54,20 @@ public class MealVoucherCardTokenizationData {
                 .build();
     }
 
-    public static MealVoucherCardTokenizationData buildForMetropol(String cardNumber, String gsmNumber){
+    public static MealVoucherCardTokenizationData buildForMetropol(String cardNumber, String gsmNumber) {
         return MealVoucherCardTokenizationData.builder()
                 .cardNumber(cardNumber)
                 .gsmNumber(gsmNumber)
                 .build();
     }
 
-    public static MealVoucherCardTokenizationData buildForPluxee(String callbackUrl){
+    public static MealVoucherCardTokenizationData buildForPluxee(String callbackUrl) {
         return MealVoucherCardTokenizationData.builder()
                 .callbackUrl(callbackUrl)
                 .build();
     }
 
-    public static MealVoucherCardTokenizationData buildForTokenflex(String callbackUrl){
+    public static MealVoucherCardTokenizationData buildForTokenflex(String callbackUrl) {
         return MealVoucherCardTokenizationData.builder()
                 .callbackUrl(callbackUrl)
                 .build();

@@ -27,39 +27,20 @@ public abstract class BaseAdapter {
         this.requestOptions = requestOptions;
     }
 
-    protected Map<String, String> createHeaders(Object request, String path, RequestOptions requestOptions) {
-        return createHttpHeaders(request, path, requestOptions);
+    protected Map<String, String> createHeaders(Object request, String path) {
+        return createHttpHeaders(request, path, null);
     }
 
     protected Map<String, String> createHeaders(Object request, String path, RequestContext requestContext) {
         return createHttpHeaders(request, path, requestContext);
     }
 
-    protected Map<String, String> createHeaders(String path, RequestOptions requestOptions) {
-        return createHttpHeaders(null, path, requestOptions);
+    protected Map<String, String> createHeaders(String path) {
+        return createHttpHeaders(null, path, null);
     }
 
     protected Map<String, String> createHeaders(String path, RequestContext requestContext) {
         return createHttpHeaders(null, path, requestContext);
-    }
-
-    private static Map<String, String> createHttpHeaders(Object request, String path, RequestOptions options) {
-        Map<String, String> headers = new HashMap<>();
-
-        String randomString = UUID.randomUUID().toString();
-        headers.put(API_KEY_HEADER_NAME, options.getApiKey());
-        headers.put(RANDOM_HEADER_NAME, randomString);
-        headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
-        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.81");
-        headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, options));
-        if (Objects.nonNull(options.getLanguage())) {
-            headers.put(LANGUAGE_HEADER_NAME, options.getLanguage());
-        }
-        return headers;
-    }
-
-    private static String prepareAuthorizationString(Object request, String path, String randomString, RequestOptions options) {
-        return HashGenerator.generateHash(options.getBaseUrl(), options.getApiKey(), options.getSecretKey(), randomString, request, path);
     }
 
     private Map<String, String> createHttpHeaders(Object request, String path, RequestContext requestContext) {
@@ -69,7 +50,7 @@ public abstract class BaseAdapter {
         headers.put(API_KEY_HEADER_NAME, requestOptions.getApiKey());
         headers.put(RANDOM_HEADER_NAME, randomString);
         headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
-        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.79");
+        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.81");
         headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString));
         if (Objects.nonNull(requestOptions.getLanguage())) {
             headers.put(LANGUAGE_HEADER_NAME, requestOptions.getLanguage());

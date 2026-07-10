@@ -458,7 +458,7 @@ public class PaymentAdapter extends BaseAdapter {
     public IVRCardTokenizationResponse retrieveCardFromIvr(RetrieveCardFromIvrRequest retrieveCardFromIvrRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveCardFromIvrRequest);
         String path = "/payment/v1/ivr-cards" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), IVRCardTokenizationResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), IVRCardTokenizationResponse.class);
     }
 
     public CreateDepositToCardPaymentResponse depositToCard(CreateDepositToCardRequest createDepositToCardRequest) {
