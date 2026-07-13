@@ -17,7 +17,6 @@ import java.util.Map;
 public class InitMultiPaymentRequest {
 
     private BigDecimal price;
-    private BigDecimal paidPrice;
     private Currency currency;
     private PaymentGroup paymentGroup;
     private PaymentSource paymentSource;
