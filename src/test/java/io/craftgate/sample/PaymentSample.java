@@ -2306,7 +2306,6 @@ public class PaymentSample {
 
         InitMultiPaymentRequest request = InitMultiPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
-                .paidPrice(BigDecimal.valueOf(100))
                 .buyerMemberId(7L)
                 .callbackUrl("https://www.your-website.com/craftgate-multi-payment-callback")
                 .currency(Currency.TRY)
