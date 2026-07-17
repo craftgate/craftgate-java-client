@@ -12,13 +12,17 @@ public class MealVoucherCardTokenizationAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public MealVoucherCardTokenizationInitResponse cardTokenizationInit(MealVoucherCardTokenizationInitRequest mealVoucherCardTokenizationInitRequest) {
-        return cardTokenizationInit(mealVoucherCardTokenizationInitRequest, null);
+    private MealVoucherCardTokenizationAdapter(RequestOptions requestOptions, RequestContext requestContext) {
+        super(requestOptions, requestContext);
     }
 
-    public MealVoucherCardTokenizationInitResponse cardTokenizationInit(MealVoucherCardTokenizationInitRequest mealVoucherCardTokenizationInitRequest, RequestContext requestContext) {
+    public MealVoucherCardTokenizationAdapter withRequestContext(RequestContext requestContext) {
+        return new MealVoucherCardTokenizationAdapter(requestOptions, requestContext);
+    }
+
+    public MealVoucherCardTokenizationInitResponse cardTokenizationInit(MealVoucherCardTokenizationInitRequest mealVoucherCardTokenizationInitRequest) {
         String path = "/payment/v1/meal-voucher/card-tokenizations/init";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(mealVoucherCardTokenizationInitRequest, path, requestContext),
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(mealVoucherCardTokenizationInitRequest, path, requestOptions),
                 mealVoucherCardTokenizationInitRequest, MealVoucherCardTokenizationInitResponse.class);
     }
 }

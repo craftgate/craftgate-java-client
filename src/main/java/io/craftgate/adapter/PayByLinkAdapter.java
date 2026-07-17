@@ -16,39 +16,39 @@ public class PayByLinkAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public ProductResponse createProduct(CreateProductRequest createProductRequest) {
-        return createProduct(createProductRequest, null);
+    private PayByLinkAdapter(RequestOptions requestOptions, RequestContext requestContext) {
+        super(requestOptions, requestContext);
     }
 
-    public ProductResponse createProduct(CreateProductRequest createProductRequest, RequestContext requestContext) {
+    public PayByLinkAdapter withRequestContext(RequestContext requestContext) {
+        return new PayByLinkAdapter(requestOptions, requestContext);
+    }
+
+    public ProductResponse createProduct(CreateProductRequest createProductRequest) {
         String path = "/craftlink/v1/products";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createProductRequest, path, requestContext),
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createProductRequest, path, requestOptions),
                 createProductRequest, ProductResponse.class);
     }
 
     public ProductResponse updateProduct(Long id, UpdateProductRequest updateProductRequest) {
         String path = "/craftlink/v1/products/" + id;
-        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateProductRequest, path),
+        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateProductRequest, path, requestOptions),
                 updateProductRequest, ProductResponse.class);
     }
 
     public ProductResponse retrieveProduct(Long id) {
         String path = "/craftlink/v1/products/" + id;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), ProductResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ProductResponse.class);
     }
 
     public void deleteProduct(Long id) {
-        deleteProduct(id, null);
-    }
-
-    public void deleteProduct(Long id, RequestContext requestContext) {
         String path = "/craftlink/v1/products/" + id;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestContext));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
     }
 
     public ProductListResponse searchProducts(SearchProductsRequest searchProductsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchProductsRequest);
         String path = "/craftlink/v1/products" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), ProductListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ProductListResponse.class);
     }
 }

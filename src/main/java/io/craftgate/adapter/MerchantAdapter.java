@@ -19,61 +19,56 @@ public class MerchantAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public MerchantPosResponse createMerchantPos(CreateMerchantPosRequest createMerchantPosRequest) {
-        return createMerchantPos(createMerchantPosRequest, null);
+    private MerchantAdapter(RequestOptions requestOptions, RequestContext requestContext) {
+        super(requestOptions, requestContext);
     }
 
-    public MerchantPosResponse createMerchantPos(CreateMerchantPosRequest createMerchantPosRequest, RequestContext requestContext) {
+    public MerchantAdapter withRequestContext(RequestContext requestContext) {
+        return new MerchantAdapter(requestOptions, requestContext);
+    }
+
+    public MerchantPosResponse createMerchantPos(CreateMerchantPosRequest createMerchantPosRequest) {
         String path = "/merchant/v1/merchant-poses";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMerchantPosRequest, path, requestContext),
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(createMerchantPosRequest, path, requestOptions),
                 createMerchantPosRequest, MerchantPosResponse.class);
     }
 
     public MerchantPosResponse updateMerchantPos(Long merchantPosId, UpdateMerchantPosRequest updateMerchantPosRequest) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId;
-        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateMerchantPosRequest, path),
+        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateMerchantPosRequest, path, requestOptions),
                 updateMerchantPosRequest, MerchantPosResponse.class);
     }
 
     public void updateMerchantPosStatus(Long merchantPosId, PosStatus posStatus) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId + "/status/" + posStatus.name();
-        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(path), Void.class);
+        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
     }
 
     public MerchantPosListResponse searchMerchantPos(SearchMerchantPosRequest searchMerchantPosRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchMerchantPosRequest);
         String path = "/merchant/v1/merchant-poses" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), MerchantPosListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantPosListResponse.class);
     }
 
     public MerchantPosResponse retrieve(Long merchantPosId) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), MerchantPosResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantPosResponse.class);
     }
 
     public void deleteMerchantPos(Long merchantPosId) {
-        deleteMerchantPos(merchantPosId, null);
-    }
-
-    public void deleteMerchantPos(Long merchantPosId, RequestContext requestContext) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestContext));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
     }
 
     public MerchantPosCommissionListResponse retrieveMerchantPosCommissions(Long merchantPosId) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId + "/commissions";
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), MerchantPosCommissionListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantPosCommissionListResponse.class);
     }
-
     /*
      * This endpoint using for creating and updating merchant pos commissions. The HTTP method is POST due to this requirement.
      * */
     public MerchantPosCommissionListResponse updateMerchantPosCommissions(Long merchantPosId, UpdateMerchantPosCommissionsRequest updateMerchantPosCommissionsRequest) {
-        return updateMerchantPosCommissions(merchantPosId, updateMerchantPosCommissionsRequest, null);
-    }
-
-    public MerchantPosCommissionListResponse updateMerchantPosCommissions(Long merchantPosId, UpdateMerchantPosCommissionsRequest updateMerchantPosCommissionsRequest, RequestContext requestContext) {
         String path = "/merchant/v1/merchant-poses/" + merchantPosId + "/commissions";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(updateMerchantPosCommissionsRequest, path, requestContext), updateMerchantPosCommissionsRequest, MerchantPosCommissionListResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(updateMerchantPosCommissionsRequest, path, requestOptions), updateMerchantPosCommissionsRequest, MerchantPosCommissionListResponse.class);
     }
 }

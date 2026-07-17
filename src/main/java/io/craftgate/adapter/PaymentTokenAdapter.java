@@ -12,24 +12,24 @@ public class PaymentTokenAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public PaymentTokenResponse createPaymentToken(CreatePaymentTokenRequest createPaymentTokenRequest) {
-        return createPaymentToken(createPaymentTokenRequest, null);
+    private PaymentTokenAdapter(RequestOptions requestOptions, RequestContext requestContext) {
+        super(requestOptions, requestContext);
     }
 
-    public PaymentTokenResponse createPaymentToken(CreatePaymentTokenRequest createPaymentTokenRequest, RequestContext requestContext) {
+    public PaymentTokenAdapter withRequestContext(RequestContext requestContext) {
+        return new PaymentTokenAdapter(requestOptions, requestContext);
+    }
+
+    public PaymentTokenResponse createPaymentToken(CreatePaymentTokenRequest createPaymentTokenRequest) {
         String path = "/payment/v1/payment-tokens";
         return HttpClient.post(requestOptions.getBaseUrl() + path,
-                createHeaders(createPaymentTokenRequest, path, requestContext),
+                createHeaders(createPaymentTokenRequest, path, requestOptions),
                 createPaymentTokenRequest,
                 PaymentTokenResponse.class);
     }
 
     public void deletePaymentToken(String token) {
-        deletePaymentToken(token, null);
-    }
-
-    public void deletePaymentToken(String token, RequestContext requestContext) {
         String path = "/payment/v1/payment-tokens/" + token;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestContext));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
     }
 }

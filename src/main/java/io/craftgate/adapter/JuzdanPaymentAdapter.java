@@ -1,11 +1,10 @@
 package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
-import io.craftgate.request.InitJuzdanPaymentRequest;
+import io.craftgate.request.*;
 import io.craftgate.request.common.RequestContext;
 import io.craftgate.request.common.RequestOptions;
-import io.craftgate.response.InitJuzdanPaymentResponse;
-import io.craftgate.response.PaymentResponse;
+import io.craftgate.response.*;
 
 public class JuzdanPaymentAdapter extends BaseAdapter {
 
@@ -13,18 +12,23 @@ public class JuzdanPaymentAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public InitJuzdanPaymentResponse init(InitJuzdanPaymentRequest initJuzdanPaymentRequest) {
-        return init(initJuzdanPaymentRequest, null);
+    private JuzdanPaymentAdapter(RequestOptions requestOptions, RequestContext requestContext) {
+        super(requestOptions, requestContext);
     }
 
-    public InitJuzdanPaymentResponse init(InitJuzdanPaymentRequest initJuzdanPaymentRequest, RequestContext requestContext) {
+    public JuzdanPaymentAdapter withRequestContext(RequestContext requestContext) {
+        return new JuzdanPaymentAdapter(requestOptions, requestContext);
+    }
+
+    public InitJuzdanPaymentResponse init(InitJuzdanPaymentRequest initJuzdanPaymentRequest) {
         String path = "/payment/v1/juzdan-payments/init";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initJuzdanPaymentRequest, path, requestContext),
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initJuzdanPaymentRequest, path, requestOptions),
                 initJuzdanPaymentRequest, InitJuzdanPaymentResponse.class);
     }
 
     public PaymentResponse retrieve(String referenceId) {
         String path = "/payment/v1/juzdan-payments/" + referenceId;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), PaymentResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
+
 }

@@ -18,42 +18,38 @@ public class SettlementAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public SettlementResponse createInstantWalletSettlement(CreateInstantWalletSettlementRequest request) {
-        return createInstantWalletSettlement(request, null);
+    private SettlementAdapter(RequestOptions requestOptions, RequestContext requestContext) {
+        super(requestOptions, requestContext);
     }
 
-    public SettlementResponse createInstantWalletSettlement(CreateInstantWalletSettlementRequest request, RequestContext requestContext) {
+    public SettlementAdapter withRequestContext(RequestContext requestContext) {
+        return new SettlementAdapter(requestOptions, requestContext);
+    }
+
+    public SettlementResponse createInstantWalletSettlement(CreateInstantWalletSettlementRequest request) {
         String path = "/settlement/v1/instant-wallet-settlements";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestContext), request, SettlementResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions), request, SettlementResponse.class);
     }
 
     public PayoutAccountResponse createPayoutAccount(CreatePayoutAccountRequest request) {
-        return createPayoutAccount(request, null);
-    }
-
-    public PayoutAccountResponse createPayoutAccount(CreatePayoutAccountRequest request, RequestContext requestContext) {
         String path = "/settlement/v1/payout-accounts";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestContext), request, PayoutAccountResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions), request, PayoutAccountResponse.class);
     }
 
     public void updatePayoutAccount(Long id, UpdatePayoutAccountRequest request) {
         String path = "/settlement/v1/payout-accounts/" + id;
-        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(request, path),
+        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions),
                 request, Void.class);
     }
 
     public void deletePayoutAccount(Long id) {
-        deletePayoutAccount(id, null);
-    }
-
-    public void deletePayoutAccount(Long id, RequestContext requestContext) {
         String path = "/settlement/v1/payout-accounts/" + id;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestContext));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
     }
 
     public PayoutAccountListResponse searchPayoutAccount(SearchPayoutAccountRequest request) {
         String query = RequestQueryParamsBuilder.buildQueryParam(request);
         String path = "/settlement/v1/payout-accounts" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path), PayoutAccountListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutAccountListResponse.class);
     }
 }
