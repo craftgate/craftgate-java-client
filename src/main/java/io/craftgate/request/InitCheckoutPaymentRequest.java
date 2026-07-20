@@ -59,4 +59,5 @@ public class InitCheckoutPaymentRequest {
     protected FraudCheckParameters fraudParams;
     protected Map<String, Object> additionalParams;
     protected Map<String, List<CustomInstallment>> cardBrandInstallments;
+    protected Boolean retry;
 }

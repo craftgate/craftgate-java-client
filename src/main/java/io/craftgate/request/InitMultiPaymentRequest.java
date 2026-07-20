@@ -49,4 +49,5 @@ public class InitMultiPaymentRequest {
     private Long ttl;
     private Integer maximumSplitPaymentCount;
     private Map<String, Object> additionalParams;
+    private Boolean retry;
 }
