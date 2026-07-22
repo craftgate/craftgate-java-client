@@ -17,7 +17,7 @@ Apache Maven:
 <dependency>
   <groupId>io.craftgate</groupId>
   <artifactId>craftgate</artifactId>
-  <version>1.0.81</version>
+  <version>1.0.82</version>
 </dependency>
 ```
 Gradle Groovy DSL
