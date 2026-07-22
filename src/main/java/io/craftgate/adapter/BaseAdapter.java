@@ -35,7 +35,7 @@ public abstract class BaseAdapter {
 
     private static Map<String, String> createHttpHeaders(Object request, String path, RequestOptions options) {
         Map<String, String> headers = new HashMap<>();
-F
+
         String randomString = UUID.randomUUID().toString();
         headers.put(API_KEY_HEADER_NAME, options.getApiKey());
         headers.put(RANDOM_HEADER_NAME, randomString);
