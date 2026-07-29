@@ -2,12 +2,15 @@ package io.craftgate.request;
 
 
 import io.craftgate.model.CardProvider;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class RetrieveProviderCardRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class RetrieveProviderCardRequest extends BaseRequest {
 
     private String providerCardToken;
     private String externalId;

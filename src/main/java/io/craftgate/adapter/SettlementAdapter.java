@@ -3,6 +3,7 @@ package io.craftgate.adapter;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreateInstantWalletSettlementRequest;
 import io.craftgate.request.CreatePayoutAccountRequest;
+import io.craftgate.request.DeletePayoutAccountRequest;
 import io.craftgate.request.SearchPayoutAccountRequest;
 import io.craftgate.request.UpdatePayoutAccountRequest;
 import io.craftgate.request.common.RequestOptions;
@@ -33,9 +34,9 @@ public class SettlementAdapter extends BaseAdapter {
                 request, Void.class);
     }
 
-    public void deletePayoutAccount(Long id) {
-        String path = "/settlement/v1/payout-accounts/" + id;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    public void deletePayoutAccount(DeletePayoutAccountRequest deletePayoutAccountRequest) {
+        String path = "/settlement/v1/payout-accounts/" + deletePayoutAccountRequest.getId();
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, deletePayoutAccountRequest));
     }
 
     public PayoutAccountListResponse searchPayoutAccount(SearchPayoutAccountRequest request) {

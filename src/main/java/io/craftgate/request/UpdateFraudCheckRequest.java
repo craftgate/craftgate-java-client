@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
 import io.craftgate.model.FraudCheckStatus;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class UpdateFraudCheckRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class UpdateFraudCheckRequest extends BaseRequest {
     private FraudCheckStatus checkStatus;
 }

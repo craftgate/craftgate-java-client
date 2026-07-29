@@ -7,10 +7,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchStoredCardsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchStoredCardsRequest extends BaseRequest {
 
     private String cardAlias;
     private String cardBrand;

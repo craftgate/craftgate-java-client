@@ -7,10 +7,14 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchWalletTransactionsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchWalletTransactionsRequest extends BaseRequest {
 
     @Builder.Default
     private Integer page = 0;

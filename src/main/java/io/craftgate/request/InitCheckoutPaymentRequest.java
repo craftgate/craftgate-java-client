@@ -14,10 +14,14 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class InitCheckoutPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitCheckoutPaymentRequest extends BaseRequest {
 
     protected BigDecimal price;
     protected BigDecimal paidPrice;

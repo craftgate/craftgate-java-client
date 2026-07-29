@@ -1,11 +1,12 @@
 package io.craftgate.adapter;
 
-import io.craftgate.model.PosStatus;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreateMerchantPosRequest;
+import io.craftgate.request.DeleteMerchantPosRequest;
 import io.craftgate.request.SearchMerchantPosRequest;
 import io.craftgate.request.UpdateMerchantPosCommissionsRequest;
 import io.craftgate.request.UpdateMerchantPosRequest;
+import io.craftgate.request.UpdateMerchantPosStatusRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.MerchantPosCommissionListResponse;
@@ -30,9 +31,10 @@ public class MerchantAdapter extends BaseAdapter {
                 updateMerchantPosRequest, MerchantPosResponse.class);
     }
 
-    public void updateMerchantPosStatus(Long merchantPosId, PosStatus posStatus) {
-        String path = "/merchant/v1/merchant-poses/" + merchantPosId + "/status/" + posStatus.name();
-        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), Void.class);
+    public void updateMerchantPosStatus(UpdateMerchantPosStatusRequest updateMerchantPosStatusRequest) {
+        String path = "/merchant/v1/merchant-poses/" + updateMerchantPosStatusRequest.getMerchantPosId()
+                + "/status/" + updateMerchantPosStatusRequest.getPosStatus().name();
+        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, updateMerchantPosStatusRequest), Void.class);
     }
 
     public MerchantPosListResponse searchMerchantPos(SearchMerchantPosRequest searchMerchantPosRequest) {
@@ -46,9 +48,9 @@ public class MerchantAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantPosResponse.class);
     }
 
-    public void deleteMerchantPos(Long merchantPosId) {
-        String path = "/merchant/v1/merchant-poses/" + merchantPosId;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    public void deleteMerchantPos(DeleteMerchantPosRequest deleteMerchantPosRequest) {
+        String path = "/merchant/v1/merchant-poses/" + deleteMerchantPosRequest.getMerchantPosId();
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, deleteMerchantPosRequest));
     }
 
     public MerchantPosCommissionListResponse retrieveMerchantPosCommissions(Long merchantPosId) {

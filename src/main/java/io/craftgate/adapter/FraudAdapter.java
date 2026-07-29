@@ -45,10 +45,10 @@ public class FraudAdapter extends BaseAdapter {
         addValueToValueList(createRequest);
     }
 
-    public void deleteValueList(String listName) {
-        String path = "/fraud/v1/value-lists/" + listName;
+    public void deleteValueList(DeleteValueListRequest deleteValueListRequest) {
+        String path = "/fraud/v1/value-lists/" + deleteValueListRequest.getListName();
 
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, deleteValueListRequest));
     }
 
     public void addValueToValueList(FraudValueListRequest fraudValueListRequest) {
@@ -63,9 +63,10 @@ public class FraudAdapter extends BaseAdapter {
                 request, Void.class);
     }
 
-    public void removeValueFromValueList(String listName, String valueId) {
-        String path = "/fraud/v1/value-lists/" + listName + "/values/" + valueId;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    public void removeValueFromValueList(RemoveValueFromValueListRequest removeValueFromValueListRequest) {
+        String path = "/fraud/v1/value-lists/" + removeValueFromValueListRequest.getListName()
+                + "/values/" + removeValueFromValueListRequest.getValueId();
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, removeValueFromValueListRequest));
     }
 
     public FraudRuleListResponse searchRules(SearchFraudRuleRequest searchFraudRuleRequest) {

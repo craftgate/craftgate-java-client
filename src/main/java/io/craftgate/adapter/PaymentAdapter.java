@@ -65,9 +65,9 @@ public class PaymentAdapter extends BaseAdapter {
         String path = "/payment/v1/checkout-payments/" + token;
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
     }
-    public void expireCheckoutPayment(String token) {
-        String path = "/payment/v1/checkout-payments/" + token;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    public void expireCheckoutPayment(ExpireCheckoutPaymentRequest expireCheckoutPaymentRequest) {
+        String path = "/payment/v1/checkout-payments/" + expireCheckoutPaymentRequest.getToken();
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, expireCheckoutPaymentRequest));
     }
 
     public DepositPaymentResponse createDepositPayment(CreateDepositPaymentRequest createDepositPaymentRequest) {
@@ -254,14 +254,14 @@ public class PaymentAdapter extends BaseAdapter {
                 initBnplPaymentRequest, InitBnplPaymentResponse.class);
     }
 
-    public PaymentResponse approveBnplPayment(Long paymentId) {
-        String path = "/payment/v1/bnpl-payments/" + paymentId + "/approve";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
+    public PaymentResponse approveBnplPayment(ApproveBnplPaymentRequest approveBnplPaymentRequest) {
+        String path = "/payment/v1/bnpl-payments/" + approveBnplPaymentRequest.getPaymentId() + "/approve";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, approveBnplPaymentRequest), PaymentResponse.class);
     }
 
-    public BnplPaymentVerifyResponse verifyBnplPayment(Long paymentId) {
-        String path = "/payment/v1/bnpl-payments/" + paymentId + "/verify";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BnplPaymentVerifyResponse.class);
+    public BnplPaymentVerifyResponse verifyBnplPayment(VerifyBnplPaymentRequest verifyBnplPaymentRequest) {
+        String path = "/payment/v1/bnpl-payments/" + verifyBnplPaymentRequest.getPaymentId() + "/verify";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, verifyBnplPaymentRequest), BnplPaymentVerifyResponse.class);
     }
 
     public BnplLimitInquiryResponse bnplLimitInquiryInit(BnplLimitInquiryRequest bnplLimitInquiryRequest) {

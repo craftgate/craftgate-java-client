@@ -183,7 +183,9 @@ public class WalletSample {
     void cancel_withdraw() {
         Long withdrawId = 1L;
 
-        WithdrawResponse response = craftgate.wallet().cancelWithdraw(withdrawId);
+        WithdrawResponse response = craftgate.wallet().cancelWithdraw(CancelWithdrawRequest.builder()
+                .withdrawId(withdrawId)
+                .build());
 
         assertNotNull(response.getId());
         assertNotNull(response.getCreatedDate());

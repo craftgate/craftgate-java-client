@@ -8,10 +8,14 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class InitBkmExpressRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitBkmExpressRequest extends BaseRequest {
 
     private BigDecimal price;
     private BigDecimal paidPrice;

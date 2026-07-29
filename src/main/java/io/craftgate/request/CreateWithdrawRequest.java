@@ -1,14 +1,17 @@
 package io.craftgate.request;
 
 import io.craftgate.model.Currency;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class CreateWithdrawRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class CreateWithdrawRequest extends BaseRequest {
 
     private BigDecimal price;
     private Long memberId;

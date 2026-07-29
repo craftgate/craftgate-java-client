@@ -80,9 +80,9 @@ public class WalletAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(request, path, requestOptions), request, WithdrawResponse.class);
     }
 
-    public WithdrawResponse cancelWithdraw(Long withdrawId) {
-        String path = "/wallet/v1/withdraws/" + withdrawId + "/cancel";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WithdrawResponse.class);
+    public WithdrawResponse cancelWithdraw(CancelWithdrawRequest cancelWithdrawRequest) {
+        String path = "/wallet/v1/withdraws/" + cancelWithdrawRequest.getWithdrawId() + "/cancel";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, cancelWithdrawRequest), WithdrawResponse.class);
     }
 
     public WithdrawResponse retrieveWithdraw(Long withdrawId) {

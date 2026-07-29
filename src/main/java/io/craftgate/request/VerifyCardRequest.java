@@ -3,14 +3,17 @@ package io.craftgate.request;
 import io.craftgate.model.CardVerificationAuthType;
 import io.craftgate.model.Currency;
 import io.craftgate.request.dto.VerifyCard;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class VerifyCardRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class VerifyCardRequest extends BaseRequest {
 
     private VerifyCard card;
     private CardVerificationAuthType paymentAuthenticationType;

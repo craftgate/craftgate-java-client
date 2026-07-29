@@ -107,6 +107,35 @@ PaymentResponse response = craftgate.payment().createPayment(request);
 System.out.println(String.format("Create Payment Result: %s", response));
 ```
 
+### Idempotency
+Mutating operations (`POST`/`PUT`/`DELETE`) accept an optional idempotency key. Set it on the request object and the client sends it as the `x-idempotency-key` header, so a request can be safely retried (e.g. after a timeout) without the operation being performed twice — the server returns the result of the first request when it sees a repeated key.
+
+Every request extends `BaseRequest`, so the key is available on any request via the builder:
+
+```java
+CreatePaymentRequest request = CreatePaymentRequest.builder()
+        .price(BigDecimal.valueOf(100))
+        .paidPrice(BigDecimal.valueOf(100))
+        .currency(Currency.TRY)
+        .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+        .idempotencyKey(UUID.randomUUID().toString())
+        // ... other fields
+        .build();
+
+PaymentResponse response = craftgate.payment().createPayment(request);
+```
+
+Operations whose parameters live in the URL path (e.g. deletes) take a request object as well, so they can carry an idempotency key too:
+
+```java
+craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
+        .token("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+        .idempotencyKey(UUID.randomUUID().toString())
+        .build());
+```
+
+> Use a fresh key per distinct operation, and reuse the same key when retrying that operation.
+
 ### Contributions
 For all contributions to this client please see the contribution guide [here](CONTRIBUTING.md). By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
 

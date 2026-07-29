@@ -6,7 +6,9 @@ import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.model.FraudOperation;
 import io.craftgate.model.FraudValueType;
 import io.craftgate.request.AddCardFingerprintFraudValueListRequest;
+import io.craftgate.request.DeleteValueListRequest;
 import io.craftgate.request.FraudValueListRequest;
+import io.craftgate.request.RemoveValueFromValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.request.SearchFraudRuleRequest;
 import io.craftgate.response.FraudAllValueListsResponse;
@@ -108,12 +110,17 @@ public class FraudSample {
 
     @Test
     void remove_value_from_fraud_value_list() {
-        craftgate.fraud().removeValueFromValueList("ipList", "da0150ff-10be-4cb3-b66e-efcdaaff8233");
+        craftgate.fraud().removeValueFromValueList(RemoveValueFromValueListRequest.builder()
+                .listName("ipList")
+                .valueId("da0150ff-10be-4cb3-b66e-efcdaaff8233")
+                .build());
     }
 
     @Test
     void delete_fraud_value_list() {
-        craftgate.fraud().deleteValueList("ipList");
+        craftgate.fraud().deleteValueList(DeleteValueListRequest.builder()
+                .listName("ipList")
+                .build());
     }
 
 
