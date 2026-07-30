@@ -1,6 +1,7 @@
 package io.craftgate.request;
 
 import io.craftgate.model.Currency;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -26,6 +27,8 @@ public class SearchProductsRequest extends BaseRequest {
     private LocalDateTime minExpiresAt;
     private LocalDateTime maxExpiresAt;
 
+    @Builder.Default
     private Integer page = 0;
+    @Builder.Default
     private Integer size = 25;
 }

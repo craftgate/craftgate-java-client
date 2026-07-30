@@ -53,6 +53,7 @@ public class InitCheckoutPaymentRequest extends BaseRequest {
     protected boolean forceAuthForNonCreditCards;
     protected boolean depositPayment;
     protected boolean guestCheckout;
+    @Builder.Default
     protected boolean allowDeleteStoredCard = true;
     protected boolean useTopRedirection;
     protected String returnBackUrl;
