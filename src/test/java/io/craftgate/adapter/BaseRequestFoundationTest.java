@@ -1,9 +1,12 @@
 package io.craftgate.adapter;
 
 import com.google.gson.Gson;
+import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.request.CreatePaymentTokenRequest;
 import io.craftgate.request.DeleteProductRequest;
 import io.craftgate.request.SearchProductsRequest;
+import io.craftgate.request.UpdateFraudCheckRequest;
+import io.craftgate.request.UpdateFraudCheckStatusRequest;
 import io.craftgate.request.common.Jsons;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
@@ -109,5 +112,33 @@ public class BaseRequestFoundationTest {
         Map<String, String> headers = wrapperAdapter.createHeaders("/craftlink/v1/products/42", requestOptions, request);
 
         assertFalse(headers.containsKey(IDEMPOTENCY_KEY_HEADER_NAME));
+    }
+
+    @Test
+    void update_fraud_check_status_wrapper_carries_path_variable_and_key() {
+        UpdateFraudCheckStatusRequest request = UpdateFraudCheckStatusRequest.builder()
+                .id(2613L)
+                .checkStatus(FraudCheckStatus.FRAUD)
+                .idempotencyKey("idempotency-key-1")
+                .build();
+
+        assertEquals(2613L, request.getId());
+        assertEquals(FraudCheckStatus.FRAUD, request.getCheckStatus());
+        assertEquals("idempotency-key-1", request.getIdempotencyKey());
+    }
+
+    @Test
+    void update_fraud_check_status_body_carries_only_the_status() {
+        Gson gson = Jsons.getGson();
+        // Mirrors what FraudAdapter#updateFraudCheckStatus builds.
+        UpdateFraudCheckRequest body = UpdateFraudCheckRequest.builder()
+                .checkStatus(FraudCheckStatus.FRAUD)
+                .idempotencyKey("idempotency-key-1")
+                .build();
+
+        String json = gson.toJson(body);
+
+        assertEquals("{\"checkStatus\":\"FRAUD\"}", json);
+        assertEquals("idempotency-key-1", body.getIdempotencyKey());
     }
 }

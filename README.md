@@ -136,6 +136,8 @@ craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
 
 > Use a fresh key per distinct operation, and reuse the same key when retrying that operation.
 
+The key is sent as a header only — it is `transient`, so it never reaches the request body, the query string, or the request signature.
+
 ### Contributions
 For all contributions to this client please see the contribution guide [here](CONTRIBUTING.md). By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
 

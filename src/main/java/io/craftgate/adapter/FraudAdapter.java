@@ -1,6 +1,5 @@
 package io.craftgate.adapter;
 
-import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.model.FraudValueType;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.*;
@@ -23,9 +22,13 @@ public class FraudAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudCheckListResponse.class);
     }
 
-    public void updateFraudCheckStatus(Long id, FraudCheckStatus fraudCheckStatus) {
-        String path = "/fraud/v1/fraud-checks/" + id + "/check-status";
-        UpdateFraudCheckRequest updateFraudCheckRequest = UpdateFraudCheckRequest.builder().checkStatus(fraudCheckStatus).build();
+    public void updateFraudCheckStatus(UpdateFraudCheckStatusRequest updateFraudCheckStatusRequest) {
+        String path = "/fraud/v1/fraud-checks/" + updateFraudCheckStatusRequest.getId() + "/check-status";
+        // The id belongs in the path, so only the status is sent as the body.
+        UpdateFraudCheckRequest updateFraudCheckRequest = UpdateFraudCheckRequest.builder()
+                .checkStatus(updateFraudCheckStatusRequest.getCheckStatus())
+                .idempotencyKey(updateFraudCheckStatusRequest.getIdempotencyKey())
+                .build();
         HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateFraudCheckRequest, path, requestOptions),
                 updateFraudCheckRequest, Void.class);
     }

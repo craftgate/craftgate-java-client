@@ -11,6 +11,7 @@ import io.craftgate.request.FraudValueListRequest;
 import io.craftgate.request.RemoveValueFromValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.request.SearchFraudRuleRequest;
+import io.craftgate.request.UpdateFraudCheckStatusRequest;
 import io.craftgate.response.FraudAllValueListsResponse;
 import io.craftgate.response.FraudCheckListResponse;
 import io.craftgate.response.FraudRuleListResponse;
@@ -54,7 +55,10 @@ public class FraudSample {
     @Test
     void update_fraud_check_status() {
         long fraudCheckId = 1L;
-        craftgate.fraud().updateFraudCheckStatus(fraudCheckId, FraudCheckStatus.FRAUD);
+        craftgate.fraud().updateFraudCheckStatus(UpdateFraudCheckStatusRequest.builder()
+                .id(fraudCheckId)
+                .checkStatus(FraudCheckStatus.FRAUD)
+                .build());
     }
 
     @Test

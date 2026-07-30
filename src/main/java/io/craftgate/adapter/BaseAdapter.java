@@ -27,25 +27,17 @@ public abstract class BaseAdapter {
         this.requestOptions = requestOptions;
     }
 
-    /**
-     * Headers for a request that carries a body. The body is hashed for the signature and its
-     * idempotency key, when present, is sent as a header.
-     */
     protected Map<String, String> createHeaders(BaseRequest request, String path, RequestOptions requestOptions) {
         return createHttpHeaders(request, path, requestOptions, request.getIdempotencyKey());
     }
 
-    /**
-     * Headers for a body-less request (e.g. GET). No body is hashed and no idempotency key is sent.
-     */
     protected Map<String, String> createHeaders(String path, RequestOptions requestOptions) {
         return createHttpHeaders(null, path, requestOptions, null);
     }
 
     /**
-     * Headers for a body-less mutating request (e.g. DELETE, or a POST/PUT whose parameters live in
-     * the path). The {@code request} wrapper is <b>not</b> hashed or sent as a body — only its
-     * idempotency key is used, so the signature stays identical to the body-less call the server expects.
+     * Headers for a body-less mutating request. Only the wrapper's idempotency key is used — it is
+     * never hashed or sent as a body, so the signature stays that of a body-less call.
      */
     protected Map<String, String> createHeaders(String path, RequestOptions requestOptions, BaseRequest request) {
         return createHttpHeaders(null, path, requestOptions, request.getIdempotencyKey());
