@@ -11,6 +11,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class UpdateFraudCheckStatusRequest extends BaseRequest {
 
-    private Long id;
+    /** Identifies the fraud check in the URL path, so it is excluded from the body. */
+    private transient Long id;
+
     private FraudCheckStatus checkStatus;
 }

@@ -36,35 +36,26 @@ public abstract class BaseAdapter {
     }
 
     /**
-     * Headers for a mutating request that sends no body. {@code options} supplies the
-     * request-scoped options and is never hashed or sent, so the signature stays that of a
-     * body-less call.
+     * Headers for a mutating request that sends no body. {@code headerOptions} is never hashed or
+     * sent, so the signature stays that of a body-less call.
      */
-    protected Map<String, String> createHeadersWithoutBody(String path, RequestOptions requestOptions, BaseRequest options) {
-        return createHttpHeaders(null, path, requestOptions, options);
+    protected Map<String, String> createHeadersWithoutBody(String path, RequestOptions requestOptions, BaseRequest headerOptions) {
+        return createHttpHeaders(null, path, requestOptions, headerOptions);
     }
 
-    /**
-     * Headers for a request whose body differs from the wrapper carrying the request-scoped
-     * options, e.g. when a path variable lives on the wrapper but not in the body.
-     */
-    protected Map<String, String> createHeadersWithOptions(BaseRequest request, String path, RequestOptions requestOptions, BaseRequest options) {
-        return createHttpHeaders(request, path, requestOptions, options);
-    }
-
-    private static Map<String, String> createHttpHeaders(Object request, String path, RequestOptions options, BaseRequest scopedOptions) {
+    private static Map<String, String> createHttpHeaders(Object request, String path, RequestOptions requestOptions, BaseRequest headerOptions) {
         Map<String, String> headers = new HashMap<>();
 
         String randomString = UUID.randomUUID().toString();
-        headers.put(API_KEY_HEADER_NAME, options.getApiKey());
+        headers.put(API_KEY_HEADER_NAME, requestOptions.getApiKey());
         headers.put(RANDOM_HEADER_NAME, randomString);
         headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
         headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.82");
-        headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, options));
-        if (Objects.nonNull(options.getLanguage())) {
-            headers.put(LANGUAGE_HEADER_NAME, options.getLanguage());
+        headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, requestOptions));
+        if (Objects.nonNull(requestOptions.getLanguage())) {
+            headers.put(LANGUAGE_HEADER_NAME, requestOptions.getLanguage());
         }
-        applyRequestScopedHeaders(headers, scopedOptions);
+        applyRequestScopedHeaders(headers, headerOptions);
         return headers;
     }
 
@@ -72,12 +63,12 @@ public abstract class BaseAdapter {
      * Applies the options that travel as headers rather than in the payload. New request-scoped
      * options are added here and nowhere else.
      */
-    private static void applyRequestScopedHeaders(Map<String, String> headers, BaseRequest options) {
-        if (Objects.isNull(options)) {
+    private static void applyRequestScopedHeaders(Map<String, String> headers, BaseRequest headerOptions) {
+        if (Objects.isNull(headerOptions)) {
             return;
         }
-        if (Objects.nonNull(options.getIdempotencyKey())) {
-            headers.put(IDEMPOTENCY_KEY_HEADER_NAME, options.getIdempotencyKey());
+        if (Objects.nonNull(headerOptions.getIdempotencyKey())) {
+            headers.put(IDEMPOTENCY_KEY_HEADER_NAME, headerOptions.getIdempotencyKey());
         }
     }
 

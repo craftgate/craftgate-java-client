@@ -5,7 +5,6 @@ import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.request.CreatePaymentTokenRequest;
 import io.craftgate.request.DeleteProductRequest;
 import io.craftgate.request.SearchProductsRequest;
-import io.craftgate.request.UpdateFraudCheckRequest;
 import io.craftgate.request.UpdateFraudCheckStatusRequest;
 import io.craftgate.request.common.Jsons;
 import io.craftgate.request.common.RequestOptions;
@@ -130,15 +129,18 @@ public class BaseRequestFoundationTest {
     @Test
     void update_fraud_check_status_body_carries_only_the_status() {
         Gson gson = Jsons.getGson();
-        // Mirrors what FraudAdapter#updateFraudCheckStatus builds.
-        UpdateFraudCheckRequest body = UpdateFraudCheckRequest.builder()
+        // The wrapper is sent as the body; id is a path variable and the key travels as a header,
+        // so both are transient and neither reaches the payload.
+        UpdateFraudCheckStatusRequest request = UpdateFraudCheckStatusRequest.builder()
+                .id(2613L)
                 .checkStatus(FraudCheckStatus.FRAUD)
                 .idempotencyKey("idempotency-key-1")
                 .build();
 
-        String json = gson.toJson(body);
+        String json = gson.toJson(request);
 
         assertEquals("{\"checkStatus\":\"FRAUD\"}", json);
-        assertEquals("idempotency-key-1", body.getIdempotencyKey());
+        assertEquals(2613L, request.getId());
+        assertEquals("idempotency-key-1", request.getIdempotencyKey());
     }
 }

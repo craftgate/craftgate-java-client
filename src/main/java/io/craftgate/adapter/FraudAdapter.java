@@ -24,13 +24,9 @@ public class FraudAdapter extends BaseAdapter {
 
     public void updateFraudCheckStatus(UpdateFraudCheckStatusRequest updateFraudCheckStatusRequest) {
         String path = "/fraud/v1/fraud-checks/" + updateFraudCheckStatusRequest.getId() + "/check-status";
-        // The id belongs in the path, so only the status is sent as the body.
-        UpdateFraudCheckRequest updateFraudCheckRequest = UpdateFraudCheckRequest.builder()
-                .checkStatus(updateFraudCheckStatusRequest.getCheckStatus())
-                .build();
         HttpClient.put(requestOptions.getBaseUrl() + path,
-                createHeadersWithOptions(updateFraudCheckRequest, path, requestOptions, updateFraudCheckStatusRequest),
-                updateFraudCheckRequest, Void.class);
+                createHeaders(updateFraudCheckStatusRequest, path, requestOptions),
+                updateFraudCheckStatusRequest, Void.class);
     }
 
     public FraudAllValueListsResponse retrieveAllValueLists() {
