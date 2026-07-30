@@ -68,7 +68,7 @@ public class PaymentAdapter extends BaseAdapter {
 
     public void expireCheckoutPayment(ExpireCheckoutPaymentRequest expireCheckoutPaymentRequest) {
         String path = "/payment/v1/checkout-payments/" + expireCheckoutPaymentRequest.getToken();
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, expireCheckoutPaymentRequest));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, expireCheckoutPaymentRequest));
     }
 
     public DepositPaymentResponse createDepositPayment(CreateDepositPaymentRequest createDepositPaymentRequest) {
@@ -257,12 +257,12 @@ public class PaymentAdapter extends BaseAdapter {
 
     public PaymentResponse approveBnplPayment(ApproveBnplPaymentRequest approveBnplPaymentRequest) {
         String path = "/payment/v1/bnpl-payments/" + approveBnplPaymentRequest.getPaymentId() + "/approve";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, approveBnplPaymentRequest), PaymentResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, approveBnplPaymentRequest), PaymentResponse.class);
     }
 
     public BnplPaymentVerifyResponse verifyBnplPayment(VerifyBnplPaymentRequest verifyBnplPaymentRequest) {
         String path = "/payment/v1/bnpl-payments/" + verifyBnplPaymentRequest.getPaymentId() + "/verify";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, verifyBnplPaymentRequest), BnplPaymentVerifyResponse.class);
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, verifyBnplPaymentRequest), BnplPaymentVerifyResponse.class);
     }
 
     public BnplLimitInquiryResponse bnplLimitInquiryInit(BnplLimitInquiryRequest bnplLimitInquiryRequest) {

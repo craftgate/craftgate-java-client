@@ -100,7 +100,7 @@ public class BaseRequestFoundationTest {
                 .idempotencyKey("idempotency-key-1")
                 .build();
 
-        Map<String, String> headers = wrapperAdapter.createHeaders("/craftlink/v1/products/42", requestOptions, request);
+        Map<String, String> headers = wrapperAdapter.createHeadersWithoutBody("/craftlink/v1/products/42", requestOptions, request);
 
         assertEquals("idempotency-key-1", headers.get(IDEMPOTENCY_KEY_HEADER_NAME));
     }
@@ -109,7 +109,7 @@ public class BaseRequestFoundationTest {
     void bodyless_wrapper_without_key_sends_no_header() {
         DeleteProductRequest request = DeleteProductRequest.builder().id(42L).build();
 
-        Map<String, String> headers = wrapperAdapter.createHeaders("/craftlink/v1/products/42", requestOptions, request);
+        Map<String, String> headers = wrapperAdapter.createHeadersWithoutBody("/craftlink/v1/products/42", requestOptions, request);
 
         assertFalse(headers.containsKey(IDEMPOTENCY_KEY_HEADER_NAME));
     }

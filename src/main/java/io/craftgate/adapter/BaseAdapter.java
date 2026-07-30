@@ -28,7 +28,7 @@ public abstract class BaseAdapter {
     }
 
     protected Map<String, String> createHeaders(BaseRequest request, String path, RequestOptions requestOptions) {
-        return createHttpHeaders(request, path, requestOptions, request.getIdempotencyKey());
+        return createHttpHeaders(request, path, requestOptions, request);
     }
 
     protected Map<String, String> createHeaders(String path, RequestOptions requestOptions) {
@@ -36,14 +36,23 @@ public abstract class BaseAdapter {
     }
 
     /**
-     * Headers for a body-less mutating request. Only the wrapper's idempotency key is used — it is
-     * never hashed or sent as a body, so the signature stays that of a body-less call.
+     * Headers for a mutating request that sends no body. {@code options} supplies the
+     * request-scoped options and is never hashed or sent, so the signature stays that of a
+     * body-less call.
      */
-    protected Map<String, String> createHeaders(String path, RequestOptions requestOptions, BaseRequest request) {
-        return createHttpHeaders(null, path, requestOptions, request.getIdempotencyKey());
+    protected Map<String, String> createHeadersWithoutBody(String path, RequestOptions requestOptions, BaseRequest options) {
+        return createHttpHeaders(null, path, requestOptions, options);
     }
 
-    private static Map<String, String> createHttpHeaders(Object request, String path, RequestOptions options, String idempotencyKey) {
+    /**
+     * Headers for a request whose body differs from the wrapper carrying the request-scoped
+     * options, e.g. when a path variable lives on the wrapper but not in the body.
+     */
+    protected Map<String, String> createHeaders(BaseRequest request, String path, RequestOptions requestOptions, BaseRequest options) {
+        return createHttpHeaders(request, path, requestOptions, options);
+    }
+
+    private static Map<String, String> createHttpHeaders(Object request, String path, RequestOptions options, BaseRequest scopedOptions) {
         Map<String, String> headers = new HashMap<>();
 
         String randomString = UUID.randomUUID().toString();
@@ -55,10 +64,21 @@ public abstract class BaseAdapter {
         if (Objects.nonNull(options.getLanguage())) {
             headers.put(LANGUAGE_HEADER_NAME, options.getLanguage());
         }
-        if (Objects.nonNull(idempotencyKey)) {
-            headers.put(IDEMPOTENCY_KEY_HEADER_NAME, idempotencyKey);
-        }
+        applyRequestScopedHeaders(headers, scopedOptions);
         return headers;
+    }
+
+    /**
+     * Applies the options that travel as headers rather than in the payload. New request-scoped
+     * options are added here and nowhere else.
+     */
+    private static void applyRequestScopedHeaders(Map<String, String> headers, BaseRequest options) {
+        if (Objects.isNull(options)) {
+            return;
+        }
+        if (Objects.nonNull(options.getIdempotencyKey())) {
+            headers.put(IDEMPOTENCY_KEY_HEADER_NAME, options.getIdempotencyKey());
+        }
     }
 
     private static String prepareAuthorizationString(Object request, String path, String randomString, RequestOptions options) {

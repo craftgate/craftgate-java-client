@@ -34,7 +34,7 @@ public class MerchantAdapter extends BaseAdapter {
     public void updateMerchantPosStatus(UpdateMerchantPosStatusRequest updateMerchantPosStatusRequest) {
         String path = "/merchant/v1/merchant-poses/" + updateMerchantPosStatusRequest.getMerchantPosId()
                 + "/status/" + updateMerchantPosStatusRequest.getPosStatus().name();
-        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, updateMerchantPosStatusRequest), Void.class);
+        HttpClient.put(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, updateMerchantPosStatusRequest), Void.class);
     }
 
     public MerchantPosListResponse searchMerchantPos(SearchMerchantPosRequest searchMerchantPosRequest) {
@@ -50,7 +50,7 @@ public class MerchantAdapter extends BaseAdapter {
 
     public void deleteMerchantPos(DeleteMerchantPosRequest deleteMerchantPosRequest) {
         String path = "/merchant/v1/merchant-poses/" + deleteMerchantPosRequest.getMerchantPosId();
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, deleteMerchantPosRequest));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, deleteMerchantPosRequest));
     }
 
     public MerchantPosCommissionListResponse retrieveMerchantPosCommissions(Long merchantPosId) {

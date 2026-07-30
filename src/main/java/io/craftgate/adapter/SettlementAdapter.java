@@ -36,7 +36,7 @@ public class SettlementAdapter extends BaseAdapter {
 
     public void deletePayoutAccount(DeletePayoutAccountRequest deletePayoutAccountRequest) {
         String path = "/settlement/v1/payout-accounts/" + deletePayoutAccountRequest.getId();
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, deletePayoutAccountRequest));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, deletePayoutAccountRequest));
     }
 
     public PayoutAccountListResponse searchPayoutAccount(SearchPayoutAccountRequest request) {

@@ -27,9 +27,9 @@ public class FraudAdapter extends BaseAdapter {
         // The id belongs in the path, so only the status is sent as the body.
         UpdateFraudCheckRequest updateFraudCheckRequest = UpdateFraudCheckRequest.builder()
                 .checkStatus(updateFraudCheckStatusRequest.getCheckStatus())
-                .idempotencyKey(updateFraudCheckStatusRequest.getIdempotencyKey())
                 .build();
-        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateFraudCheckRequest, path, requestOptions),
+        HttpClient.put(requestOptions.getBaseUrl() + path,
+                createHeaders(updateFraudCheckRequest, path, requestOptions, updateFraudCheckStatusRequest),
                 updateFraudCheckRequest, Void.class);
     }
 
@@ -51,7 +51,7 @@ public class FraudAdapter extends BaseAdapter {
     public void deleteValueList(DeleteValueListRequest deleteValueListRequest) {
         String path = "/fraud/v1/value-lists/" + deleteValueListRequest.getListName();
 
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, deleteValueListRequest));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, deleteValueListRequest));
     }
 
     public void addValueToValueList(FraudValueListRequest fraudValueListRequest) {
@@ -69,7 +69,7 @@ public class FraudAdapter extends BaseAdapter {
     public void removeValueFromValueList(RemoveValueFromValueListRequest removeValueFromValueListRequest) {
         String path = "/fraud/v1/value-lists/" + removeValueFromValueListRequest.getListName()
                 + "/values/" + removeValueFromValueListRequest.getValueId();
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions, removeValueFromValueListRequest));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, removeValueFromValueListRequest));
     }
 
     public FraudRuleListResponse searchRules(SearchFraudRuleRequest searchFraudRuleRequest) {
