@@ -29,7 +29,7 @@ public class FraudAdapter extends BaseAdapter {
                 .checkStatus(updateFraudCheckStatusRequest.getCheckStatus())
                 .build();
         HttpClient.put(requestOptions.getBaseUrl() + path,
-                createHeaders(updateFraudCheckRequest, path, requestOptions, updateFraudCheckStatusRequest),
+                createHeadersWithOptions(updateFraudCheckRequest, path, requestOptions, updateFraudCheckStatusRequest),
                 updateFraudCheckRequest, Void.class);
     }
 

@@ -48,7 +48,7 @@ public abstract class BaseAdapter {
      * Headers for a request whose body differs from the wrapper carrying the request-scoped
      * options, e.g. when a path variable lives on the wrapper but not in the body.
      */
-    protected Map<String, String> createHeaders(BaseRequest request, String path, RequestOptions requestOptions, BaseRequest options) {
+    protected Map<String, String> createHeadersWithOptions(BaseRequest request, String path, RequestOptions requestOptions, BaseRequest options) {
         return createHttpHeaders(request, path, requestOptions, options);
     }
 
