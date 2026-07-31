@@ -129,8 +129,6 @@ public class BaseRequestFoundationTest {
     @Test
     void update_fraud_check_status_body_carries_only_the_status() {
         Gson gson = Jsons.getGson();
-        // The wrapper is sent as the body; id is a path variable and the key travels as a header,
-        // so both are transient and neither reaches the payload.
         UpdateFraudCheckStatusRequest request = UpdateFraudCheckStatusRequest.builder()
                 .id(2613L)
                 .checkStatus(FraudCheckStatus.FRAUD)
