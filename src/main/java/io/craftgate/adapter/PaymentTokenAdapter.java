@@ -22,6 +22,6 @@ public class PaymentTokenAdapter extends BaseAdapter {
 
     public void deletePaymentToken(DeletePaymentTokenRequest deletePaymentTokenRequest) {
         String path = "/payment/v1/payment-tokens/" + deletePaymentTokenRequest.getToken();
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, deletePaymentTokenRequest));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, deletePaymentTokenRequest.toHeaderOptions()));
     }
 }

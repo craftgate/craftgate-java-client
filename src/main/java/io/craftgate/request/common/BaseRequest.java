@@ -20,4 +20,10 @@ public class BaseRequest {
      * retried.
      */
     private transient String idempotencyKey;
+
+    public HeaderOptions toHeaderOptions(){
+        return HeaderOptions.builder()
+                .idempotencyKey(idempotencyKey)
+                .build();
+    }
 }

@@ -2,6 +2,7 @@ package io.craftgate.adapter;
 
 import io.craftgate.request.common.BaseRequest;
 import io.craftgate.request.common.HashGenerator;
+import io.craftgate.request.common.HeaderOptions;
 import io.craftgate.request.common.RequestOptions;
 
 import java.util.HashMap;
@@ -28,22 +29,18 @@ public abstract class BaseAdapter {
     }
 
     protected Map<String, String> createHeaders(BaseRequest request, String path, RequestOptions requestOptions) {
-        return createHttpHeaders(request, path, requestOptions, request);
+        return createHttpHeaders(request, path, requestOptions, request.toHeaderOptions());
     }
 
     protected Map<String, String> createHeaders(String path, RequestOptions requestOptions) {
         return createHttpHeaders(null, path, requestOptions, null);
     }
 
-    /**
-     * Headers for a mutating request that sends no body. {@code headerOptions} is never hashed or
-     * sent, so the signature stays that of a body-less call.
-     */
-    protected Map<String, String> createHeadersWithoutBody(String path, RequestOptions requestOptions, BaseRequest headerOptions) {
+    protected Map<String, String> createHeadersWithoutBody(String path, RequestOptions requestOptions, HeaderOptions headerOptions) {
         return createHttpHeaders(null, path, requestOptions, headerOptions);
     }
 
-    private static Map<String, String> createHttpHeaders(Object request, String path, RequestOptions requestOptions, BaseRequest headerOptions) {
+    private static Map<String, String> createHttpHeaders(BaseRequest request, String path, RequestOptions requestOptions, HeaderOptions headerOptions) {
         Map<String, String> headers = new HashMap<>();
 
         String randomString = UUID.randomUUID().toString();
@@ -59,11 +56,7 @@ public abstract class BaseAdapter {
         return headers;
     }
 
-    /**
-     * Applies the options that travel as headers rather than in the payload. New request-scoped
-     * options are added here and nowhere else.
-     */
-    private static void applyRequestScopedHeaders(Map<String, String> headers, BaseRequest headerOptions) {
+    private static void applyRequestScopedHeaders(Map<String, String> headers, HeaderOptions headerOptions) {
         if (Objects.isNull(headerOptions)) {
             return;
         }
@@ -72,7 +65,7 @@ public abstract class BaseAdapter {
         }
     }
 
-    private static String prepareAuthorizationString(Object request, String path, String randomString, RequestOptions options) {
+    private static String prepareAuthorizationString(BaseRequest request, String path, String randomString, RequestOptions options) {
         return HashGenerator.generateHash(options.getBaseUrl(), options.getApiKey(), options.getSecretKey(), randomString, request, path);
     }
 }
