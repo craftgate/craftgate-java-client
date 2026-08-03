@@ -35,7 +35,7 @@ public class PayByLinkAdapter extends BaseAdapter {
 
     public void deleteProduct(DeleteProductRequest deleteProductRequest) {
         String path = "/craftlink/v1/products/" + deleteProductRequest.getId();
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, deleteProductRequest.toHeaderOptions()));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(deleteProductRequest, path, requestOptions));
     }
 
     public ProductListResponse searchProducts(SearchProductsRequest searchProductsRequest) {

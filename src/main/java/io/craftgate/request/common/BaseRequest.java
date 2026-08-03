@@ -11,11 +11,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class BaseRequest {
 
-    private transient String idempotencyKey;
-
-    public HeaderOptions toHeaderOptions(){
-        return HeaderOptions.builder()
-                .idempotencyKey(idempotencyKey)
-                .build();
-    }
+    private HeaderOptions headerOptions;
 }

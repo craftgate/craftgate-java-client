@@ -4,6 +4,7 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.*;
 import io.craftgate.model.Currency;
 import io.craftgate.request.*;
+import io.craftgate.request.common.HeaderOptions;
 import io.craftgate.request.dto.*;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,9 @@ public class PaymentSample {
                 .currency(Currency.TRY)
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
                 .paymentPhase(PaymentPhase.AUTH)
-                .idempotencyKey(UUID.randomUUID().toString())
+                .headerOptions(HeaderOptions.builder()
+                        .idempotencyKey(UUID.randomUUID().toString())
+                        .build())
                 .card(Card.builder()
                         .cardHolderName("Haluk Demir")
                         .cardNumber("5258640000000001")
@@ -49,7 +52,9 @@ public class PaymentSample {
     void expire_checkout_payment_with_idempotency_key() {
         craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
                 .token("456d1297-908e-4bd6-a13b-4be31a6e47d5")
-                .idempotencyKey(UUID.randomUUID().toString())
+                .headerOptions(HeaderOptions.builder()
+                        .idempotencyKey(UUID.randomUUID().toString())
+                        .build())
                 .build());
     }
 

@@ -1,9 +1,6 @@
 package io.craftgate.adapter;
 
-import io.craftgate.request.common.BaseRequest;
-import io.craftgate.request.common.HashGenerator;
-import io.craftgate.request.common.HeaderOptions;
-import io.craftgate.request.common.RequestOptions;
+import io.craftgate.request.common.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,15 +26,15 @@ public abstract class BaseAdapter {
     }
 
     protected Map<String, String> createHeaders(BaseRequest request, String path, RequestOptions requestOptions) {
-        return createHttpHeaders(request, path, requestOptions, request.toHeaderOptions());
+        return createHttpHeaders(request, path, requestOptions, request.getHeaderOptions());
     }
 
     protected Map<String, String> createHeaders(String path, RequestOptions requestOptions) {
         return createHttpHeaders(null, path, requestOptions, null);
     }
 
-    protected Map<String, String> createHeadersWithoutBody(String path, RequestOptions requestOptions, HeaderOptions headerOptions) {
-        return createHttpHeaders(null, path, requestOptions, headerOptions);
+    protected Map<String, String> createHeadersWithoutBody(BaseRequest request, String path, RequestOptions requestOptions) {
+        return createHttpHeaders(null, path, requestOptions, request.getHeaderOptions());
     }
 
     private static Map<String, String> createHttpHeaders(BaseRequest request, String path, RequestOptions requestOptions, HeaderOptions headerOptions) {

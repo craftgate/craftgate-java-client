@@ -47,7 +47,7 @@ public class FraudAdapter extends BaseAdapter {
     public void deleteValueList(DeleteValueListRequest deleteValueListRequest) {
         String path = "/fraud/v1/value-lists/" + deleteValueListRequest.getListName();
 
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, deleteValueListRequest.toHeaderOptions()));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(deleteValueListRequest, path, requestOptions));
     }
 
     public void addValueToValueList(FraudValueListRequest fraudValueListRequest) {
@@ -65,7 +65,7 @@ public class FraudAdapter extends BaseAdapter {
     public void removeValueFromValueList(RemoveValueFromValueListRequest removeValueFromValueListRequest) {
         String path = "/fraud/v1/value-lists/" + removeValueFromValueListRequest.getListName()
                 + "/values/" + removeValueFromValueListRequest.getValueId();
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(path, requestOptions, removeValueFromValueListRequest.toHeaderOptions()));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(removeValueFromValueListRequest, path, requestOptions));
     }
 
     public FraudRuleListResponse searchRules(SearchFraudRuleRequest searchFraudRuleRequest) {
