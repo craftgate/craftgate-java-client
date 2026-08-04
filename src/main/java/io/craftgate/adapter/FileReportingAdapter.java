@@ -23,7 +23,7 @@ public class FileReportingAdapter extends BaseAdapter {
     public byte[] retrieveDailyTransactionReport(RetrieveDailyTransactionReportRequest retrieveDailyTransactionReportRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveDailyTransactionReportRequest);
         String path = "/file-reporting/v1/transaction-reports" + query;
-        Map<String, String> headers = createHeaders(path, requestOptions);
+        Map<String, String> headers = createHeadersWithoutBody(retrieveDailyTransactionReportRequest, path, requestOptions);
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
     }
@@ -31,7 +31,7 @@ public class FileReportingAdapter extends BaseAdapter {
     public byte[] retrieveDailyPaymentReport(RetrieveDailyPaymentReportRequest retrieveDailyPaymentReportRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveDailyPaymentReportRequest);
         String path = "/file-reporting/v1/payment-reports" + query;
-        Map<String, String> headers = createHeaders(path, requestOptions);
+        Map<String, String> headers = createHeadersWithoutBody(retrieveDailyPaymentReportRequest, path, requestOptions);
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
     }
@@ -48,7 +48,7 @@ public class FileReportingAdapter extends BaseAdapter {
     public byte[] retrieveReport(RetrieveReportRequest retrieveReportRequest, Long reportId) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveReportRequest);
         String path = "/file-reporting/v1/reports/" + reportId + query;
-        Map<String, String> headers = createHeaders(path, requestOptions);
+        Map<String, String> headers = createHeadersWithoutBody(retrieveReportRequest, path, requestOptions);
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
     }

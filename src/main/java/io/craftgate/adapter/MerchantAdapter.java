@@ -40,7 +40,7 @@ public class MerchantAdapter extends BaseAdapter {
     public MerchantPosListResponse searchMerchantPos(SearchMerchantPosRequest searchMerchantPosRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchMerchantPosRequest);
         String path = "/merchant/v1/merchant-poses" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MerchantPosListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchMerchantPosRequest, path, requestOptions), MerchantPosListResponse.class);
     }
 
     public MerchantPosResponse retrieve(Long merchantPosId) {

@@ -6,6 +6,7 @@ import io.craftgate.request.CreatePaymentTokenRequest;
 import io.craftgate.request.DeleteProductRequest;
 import io.craftgate.request.SearchProductsRequest;
 import io.craftgate.request.UpdateFraudCheckStatusRequest;
+import io.craftgate.request.common.HashGenerator;
 import io.craftgate.request.common.HeaderOptions;
 import io.craftgate.request.common.Jsons;
 import io.craftgate.request.common.RequestOptions;
@@ -22,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BaseRequestFoundationTest {
 
     private static final String IDEMPOTENCY_KEY_HEADER_NAME = "x-idempotency-key";
+    private static final String RANDOM_HEADER_NAME = "x-rnd-key";
+    private static final String SIGNATURE_HEADER_NAME = "x-signature";
 
     private final RequestOptions requestOptions = RequestOptions.builder()
             .apiKey("api-key")
@@ -135,6 +138,25 @@ public class BaseRequestFoundationTest {
         Map<String, String> headers = bodyAdapter.createHeaders(request, "/payment/v1/payment-tokens", requestOptions);
 
         assertFalse(headers.containsKey(IDEMPOTENCY_KEY_HEADER_NAME));
+    }
+
+    @Test
+    void read_request_sends_idempotency_key_header_and_stays_body_less() {
+        SearchProductsRequest request = SearchProductsRequest.builder()
+                .name("A new Product")
+                .headerOptions(idempotencyKey("idempotency-key-1"))
+                .build();
+        String path = "/craftlink/v1/products" + RequestQueryParamsBuilder.buildQueryParam(request);
+
+        Map<String, String> headers = wrapperAdapter.createHeadersWithoutBody(request, path, requestOptions);
+
+        assertEquals("idempotency-key-1", headers.get(IDEMPOTENCY_KEY_HEADER_NAME));
+        assertFalse(path.contains("headerOptions"));
+        assertFalse(path.contains("idempotencyKey"));
+
+        String bodyLess = HashGenerator.generateHash(requestOptions.getBaseUrl(), requestOptions.getApiKey(),
+                requestOptions.getSecretKey(), headers.get(RANDOM_HEADER_NAME), null, path);
+        assertEquals(bodyLess, headers.get(SIGNATURE_HEADER_NAME));
     }
 
     @Test

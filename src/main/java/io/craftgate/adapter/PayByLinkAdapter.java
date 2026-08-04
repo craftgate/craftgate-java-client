@@ -41,6 +41,6 @@ public class PayByLinkAdapter extends BaseAdapter {
     public ProductListResponse searchProducts(SearchProductsRequest searchProductsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchProductsRequest);
         String path = "/craftlink/v1/products" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ProductListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchProductsRequest, path, requestOptions), ProductListResponse.class);
     }
 }

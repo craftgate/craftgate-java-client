@@ -204,7 +204,7 @@ public class PaymentAdapter extends BaseAdapter {
     public StoredCardListResponse searchStoredCards(SearchStoredCardsRequest searchStoredCardsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchStoredCardsRequest);
         String path = "/payment/v1/cards" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchStoredCardsRequest, path, requestOptions), StoredCardListResponse.class);
     }
 
     public void deleteStoredCard(DeleteStoredCardRequest deleteStoredCardRequest) {
@@ -295,13 +295,13 @@ public class PaymentAdapter extends BaseAdapter {
     public StoredCardListResponse retrieveProviderCards(RetrieveProviderCardRequest retrieveProviderCardRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveProviderCardRequest);
         String path = "/payment/v1/cards/provider-card-mappings" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), StoredCardListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(retrieveProviderCardRequest, path, requestOptions), StoredCardListResponse.class);
     }
 
     public IVRCardTokenizationResponse retrieveCardFromIvr(RetrieveCardFromIvrRequest retrieveCardFromIvrRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(retrieveCardFromIvrRequest);
         String path = "/payment/v1/ivr-cards" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), IVRCardTokenizationResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(retrieveCardFromIvrRequest, path, requestOptions), IVRCardTokenizationResponse.class);
     }
 
     public CreateDepositToCardPaymentResponse depositToCard(CreateDepositToCardRequest createDepositToCardRequest) {

@@ -25,7 +25,7 @@ public class WalletAdapter extends BaseAdapter {
     public WalletTransactionListResponse searchWalletTransactions(Long walletId, SearchWalletTransactionsRequest searchWalletTransactionsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchWalletTransactionsRequest);
         String path = "/wallet/v1/wallets/" + walletId + "/wallet-transactions" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WalletTransactionListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchWalletTransactionsRequest, path, requestOptions), WalletTransactionListResponse.class);
     }
 
     public WalletResponse updateWallet(Long memberId, Long walletId, UpdateWalletRequest request) {
@@ -93,6 +93,6 @@ public class WalletAdapter extends BaseAdapter {
     public WithdrawListResponse searchWithdraws(SearchWithdrawsRequest request) {
         String queryParam = RequestQueryParamsBuilder.buildQueryParam(request);
         String path = "/wallet/v1/withdraws" + queryParam;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), WithdrawListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(request, path, requestOptions), WithdrawListResponse.class);
     }
 }

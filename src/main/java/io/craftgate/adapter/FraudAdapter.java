@@ -19,7 +19,7 @@ public class FraudAdapter extends BaseAdapter {
     public FraudCheckListResponse searchFraudChecks(SearchFraudChecksRequest searchFraudChecksRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchFraudChecksRequest);
         String path = "/fraud/v1/fraud-checks" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudCheckListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchFraudChecksRequest, path, requestOptions), FraudCheckListResponse.class);
     }
 
     public void updateFraudCheckStatus(UpdateFraudCheckStatusRequest updateFraudCheckStatusRequest) {
@@ -71,6 +71,6 @@ public class FraudAdapter extends BaseAdapter {
     public FraudRuleListResponse searchRules(SearchFraudRuleRequest searchFraudRuleRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchFraudRuleRequest);
         String path = "/fraud/v1/rules" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudRuleListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchFraudRuleRequest, path, requestOptions), FraudRuleListResponse.class);
     }
 }

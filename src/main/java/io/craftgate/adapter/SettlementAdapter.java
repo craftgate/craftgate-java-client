@@ -42,6 +42,6 @@ public class SettlementAdapter extends BaseAdapter {
     public PayoutAccountListResponse searchPayoutAccount(SearchPayoutAccountRequest request) {
         String query = RequestQueryParamsBuilder.buildQueryParam(request);
         String path = "/settlement/v1/payout-accounts" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutAccountListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(request, path, requestOptions), PayoutAccountListResponse.class);
     }
 }
