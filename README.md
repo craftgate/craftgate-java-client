@@ -142,7 +142,7 @@ craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
 
 > The API honours the key on `POST`, `PATCH` and `DELETE` only. It is ignored on `PUT` endpoints, so retrying one of those is not de-duplicated.
 
-`HeaderOptions` is sent as headers only — the field is `transient`, so it never reaches the request body, the query string, or the request signature.
+`HeaderOptions` is sent as headers only — it is excluded from serialization, so it never reaches the request body, the query string, or the request signature.
 
 ### Contributions
 For all contributions to this client please see the contribution guide [here](CONTRIBUTING.md). By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
