@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class RefundWaitingPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class RefundWaitingPaymentRequest extends BaseRequest {
 
     private Long paymentId;
 }

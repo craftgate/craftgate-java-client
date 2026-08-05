@@ -5,10 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Set;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchMembersRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchMembersRequest extends BaseRequest {
 
     @Builder.Default
     private Integer page = 0;

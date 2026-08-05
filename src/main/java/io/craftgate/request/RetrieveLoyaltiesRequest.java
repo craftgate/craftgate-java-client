@@ -1,12 +1,15 @@
 package io.craftgate.request;
 
 import io.craftgate.request.dto.FraudCheckParameters;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class RetrieveLoyaltiesRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class RetrieveLoyaltiesRequest extends BaseRequest {
     private String cardNumber;
     private String expireYear;
     private String expireMonth;

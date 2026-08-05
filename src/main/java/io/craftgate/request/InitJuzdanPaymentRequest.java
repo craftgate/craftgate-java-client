@@ -9,10 +9,14 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class InitJuzdanPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitJuzdanPaymentRequest extends BaseRequest {
     private BigDecimal price;
     private BigDecimal paidPrice;
     private Currency currency;

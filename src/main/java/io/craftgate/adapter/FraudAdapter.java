@@ -1,6 +1,5 @@
 package io.craftgate.adapter;
 
-import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.model.FraudValueType;
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.*;
@@ -20,14 +19,14 @@ public class FraudAdapter extends BaseAdapter {
     public FraudCheckListResponse searchFraudChecks(SearchFraudChecksRequest searchFraudChecksRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchFraudChecksRequest);
         String path = "/fraud/v1/fraud-checks" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudCheckListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchFraudChecksRequest, path, requestOptions), FraudCheckListResponse.class);
     }
 
-    public void updateFraudCheckStatus(Long id, FraudCheckStatus fraudCheckStatus) {
-        String path = "/fraud/v1/fraud-checks/" + id + "/check-status";
-        UpdateFraudCheckRequest updateFraudCheckRequest = UpdateFraudCheckRequest.builder().checkStatus(fraudCheckStatus).build();
-        HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updateFraudCheckRequest, path, requestOptions),
-                updateFraudCheckRequest, Void.class);
+    public void updateFraudCheckStatus(UpdateFraudCheckStatusRequest updateFraudCheckStatusRequest) {
+        String path = "/fraud/v1/fraud-checks/" + updateFraudCheckStatusRequest.getId() + "/check-status";
+        HttpClient.put(requestOptions.getBaseUrl() + path,
+                createHeaders(updateFraudCheckStatusRequest, path, requestOptions),
+                updateFraudCheckStatusRequest, Void.class);
     }
 
     public FraudAllValueListsResponse retrieveAllValueLists() {
@@ -45,10 +44,10 @@ public class FraudAdapter extends BaseAdapter {
         addValueToValueList(createRequest);
     }
 
-    public void deleteValueList(String listName) {
-        String path = "/fraud/v1/value-lists/" + listName;
+    public void deleteValueList(DeleteValueListRequest deleteValueListRequest) {
+        String path = "/fraud/v1/value-lists/" + deleteValueListRequest.getListName();
 
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(deleteValueListRequest, path, requestOptions));
     }
 
     public void addValueToValueList(FraudValueListRequest fraudValueListRequest) {
@@ -63,14 +62,15 @@ public class FraudAdapter extends BaseAdapter {
                 request, Void.class);
     }
 
-    public void removeValueFromValueList(String listName, String valueId) {
-        String path = "/fraud/v1/value-lists/" + listName + "/values/" + valueId;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    public void removeValueFromValueList(RemoveValueFromValueListRequest removeValueFromValueListRequest) {
+        String path = "/fraud/v1/value-lists/" + removeValueFromValueListRequest.getListName()
+                + "/values/" + removeValueFromValueListRequest.getValueId();
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(removeValueFromValueListRequest, path, requestOptions));
     }
 
     public FraudRuleListResponse searchRules(SearchFraudRuleRequest searchFraudRuleRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchFraudRuleRequest);
         String path = "/fraud/v1/rules" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), FraudRuleListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchFraudRuleRequest, path, requestOptions), FraudRuleListResponse.class);
     }
 }

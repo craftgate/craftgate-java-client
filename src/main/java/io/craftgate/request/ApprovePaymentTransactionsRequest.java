@@ -4,10 +4,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Set;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class ApprovePaymentTransactionsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class ApprovePaymentTransactionsRequest extends BaseRequest {
 
     private Set<Long> paymentTransactionIds;
 

@@ -1,13 +1,16 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class UpdateWalletRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class UpdateWalletRequest extends BaseRequest {
 
     private BigDecimal negativeAmountLimit;
 }

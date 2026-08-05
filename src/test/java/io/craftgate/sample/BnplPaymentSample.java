@@ -5,9 +5,11 @@ import io.craftgate.model.ApmType;
 import io.craftgate.model.BnplCartItemType;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
+import io.craftgate.request.ApproveBnplPaymentRequest;
 import io.craftgate.request.BnplPaymentOfferRequest;
 import io.craftgate.request.BnplLimitInquiryRequest;
 import io.craftgate.request.InitBnplPaymentRequest;
+import io.craftgate.request.VerifyBnplPaymentRequest;
 import io.craftgate.request.dto.BnplPaymentCartItem;
 import io.craftgate.request.dto.PaymentItem;
 import io.craftgate.response.*;
@@ -186,14 +188,18 @@ public class BnplPaymentSample {
     @Test
     void approve_bnpl_payment() {
         Long paymentId = 1L;
-        PaymentResponse response = craftgate.payment().approveBnplPayment(paymentId);
+        PaymentResponse response = craftgate.payment().approveBnplPayment(ApproveBnplPaymentRequest.builder()
+                .paymentId(paymentId)
+                .build());
         assertNotNull(response.getId());
     }
 
     @Test
     void verify_bnpl_payment() {
         Long paymentId = 1L;
-        BnplPaymentVerifyResponse response = craftgate.payment().verifyBnplPayment(paymentId);
+        BnplPaymentVerifyResponse response = craftgate.payment().verifyBnplPayment(VerifyBnplPaymentRequest.builder()
+                .paymentId(paymentId)
+                .build());
         assertNotNull(response.getPaymentStatus());
     }
 }

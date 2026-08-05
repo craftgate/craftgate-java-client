@@ -2,15 +2,18 @@ package io.craftgate.request;
 
 import io.craftgate.model.Currency;
 import io.craftgate.model.RefundStatus;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchPaymentTransactionRefundsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchPaymentTransactionRefundsRequest extends BaseRequest {
 
     private Integer page;
     private Integer size;

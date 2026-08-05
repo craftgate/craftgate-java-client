@@ -4,6 +4,7 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.*;
 import io.craftgate.model.Currency;
 import io.craftgate.request.*;
+import io.craftgate.request.common.HeaderOptions;
 import io.craftgate.request.dto.*;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,46 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PaymentSample {
 
     private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
+
+    @Test
+    void create_payment_with_idempotency_key() {
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .installment(1)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .headerOptions(HeaderOptions.builder()
+                        .idempotencyKey(UUID.randomUUID().toString())
+                        .build())
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .build())
+                .items(Collections.singletonList(PaymentItem.builder()
+                        .name("item 1")
+                        .externalId(UUID.randomUUID().toString())
+                        .price(BigDecimal.valueOf(100))
+                        .build()))
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+    }
+
+    @Test
+    void expire_checkout_payment_with_idempotency_key() {
+        craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
+                .token("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .headerOptions(HeaderOptions.builder()
+                        .idempotencyKey(UUID.randomUUID().toString())
+                        .build())
+                .build());
+    }
 
     @Test
     void create_payment() {
@@ -846,7 +887,9 @@ public class PaymentSample {
     void expire_checkout_payment() {
         String token = "456d1297-908e-4bd6-a13b-4be31a6e47d5";
 
-        craftgate.payment().expireCheckoutPayment(token);
+        craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
+                .token(token)
+                .build());
     }
 
     @Test

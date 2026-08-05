@@ -2,6 +2,7 @@ package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreateProductRequest;
+import io.craftgate.request.DeleteProductRequest;
 import io.craftgate.request.SearchProductsRequest;
 import io.craftgate.request.UpdateProductRequest;
 import io.craftgate.request.common.RequestOptions;
@@ -32,14 +33,14 @@ public class PayByLinkAdapter extends BaseAdapter {
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ProductResponse.class);
     }
 
-    public void deleteProduct(Long id) {
-        String path = "/craftlink/v1/products/" + id;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    public void deleteProduct(DeleteProductRequest deleteProductRequest) {
+        String path = "/craftlink/v1/products/" + deleteProductRequest.getId();
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(deleteProductRequest, path, requestOptions));
     }
 
     public ProductListResponse searchProducts(SearchProductsRequest searchProductsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchProductsRequest);
         String path = "/craftlink/v1/products" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ProductListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchProductsRequest, path, requestOptions), ProductListResponse.class);
     }
 }

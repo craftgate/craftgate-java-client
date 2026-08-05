@@ -1,12 +1,15 @@
 package io.craftgate.request;
 
 import io.craftgate.model.Currency;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchMerchantPosRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchMerchantPosRequest extends BaseRequest {
     private String name;
     private String alias;
     private Currency currency;

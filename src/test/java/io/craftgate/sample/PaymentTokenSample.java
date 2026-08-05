@@ -3,6 +3,7 @@ package io.craftgate.sample;
 import io.craftgate.Craftgate;
 import io.craftgate.model.ApmType;
 import io.craftgate.request.CreatePaymentTokenRequest;
+import io.craftgate.request.DeletePaymentTokenRequest;
 import io.craftgate.response.PaymentTokenResponse;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,8 @@ public class PaymentTokenSample {
     void delete_payment_token() {
         String token = "token-to-be-deleted";
 
-        craftgate.paymentTokenAdapter().deletePaymentToken(token);
+        craftgate.paymentTokenAdapter().deletePaymentToken(DeletePaymentTokenRequest.builder()
+                .token(token)
+                .build());
     }
 }

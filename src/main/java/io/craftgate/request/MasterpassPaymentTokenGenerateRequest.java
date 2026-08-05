@@ -3,12 +3,15 @@ package io.craftgate.request;
 import io.craftgate.model.Loyalty;
 import io.craftgate.model.MasterpassValidationType;
 import io.craftgate.request.dto.MasterpassCreatePayment;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class MasterpassPaymentTokenGenerateRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class MasterpassPaymentTokenGenerateRequest extends BaseRequest {
     private String msisdn;
     private String userId;
     private String binNumber;

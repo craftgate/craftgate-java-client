@@ -10,10 +10,13 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
 @SuperBuilder
-public class InitApmPaymentRequest {
+@EqualsAndHashCode(callSuper = false)
+public class InitApmPaymentRequest extends BaseRequest {
 
     private ApmType apmType;
     private Long merchantApmId;
