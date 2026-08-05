@@ -57,7 +57,7 @@ public abstract class BaseAdapter {
         if (Objects.isNull(headerOptions)) {
             return;
         }
-        if (Objects.nonNull(headerOptions.getIdempotencyKey())) {
+        if (Objects.nonNull(headerOptions.getIdempotencyKey()) && !headerOptions.getIdempotencyKey().isEmpty()) {
             headers.put(IDEMPOTENCY_KEY_HEADER_NAME, headerOptions.getIdempotencyKey());
         }
     }
