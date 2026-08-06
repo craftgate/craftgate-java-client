@@ -25,6 +25,25 @@ public class MealVoucherCardTokenizationData {
                .build();
     }
 
+    public static MealVoucherCardTokenizationData buildForMultinet(String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
+    public static MealVoucherCardTokenizationData buildForEdenred(String userReferenceNumber, String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .userReferenceNumber(userReferenceNumber)
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
+    public static MealVoucherCardTokenizationData buildForEdenred(String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
     public static MealVoucherCardTokenizationData buildForSetcard(String callbackUrl){
         return MealVoucherCardTokenizationData.builder()
                 .callbackUrl(callbackUrl)
@@ -39,9 +58,23 @@ public class MealVoucherCardTokenizationData {
                 .build();
     }
 
+    public static MealVoucherCardTokenizationData buildForMetropol(String cardNumber, String gsmNumber) {
+        return MealVoucherCardTokenizationData.builder()
+                .cardNumber(cardNumber)
+                .gsmNumber(gsmNumber)
+                .build();
+    }
+
     public static MealVoucherCardTokenizationData buildForPluxee(String callbackUrl){
         return MealVoucherCardTokenizationData.builder()
                 .callbackUrl(callbackUrl)
                 .build();
     }
+
+    public static MealVoucherCardTokenizationData buildForTokenflex(String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
 }
