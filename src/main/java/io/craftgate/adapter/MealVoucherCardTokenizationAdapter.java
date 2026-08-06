@@ -2,10 +2,10 @@ package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.MealVoucherCardTokenizationCompleteRequest;
-import io.craftgate.request.MealVoucherCardTokenizationCompleteResponse;
 import io.craftgate.request.MealVoucherCardTokenizationInitRequest;
 import io.craftgate.request.MealVoucherCardTokenizationRegenerateRequest;
 import io.craftgate.request.common.RequestOptions;
+import io.craftgate.response.MealVoucherCardTokenizationCompleteResponse;
 import io.craftgate.response.MealVoucherCardTokenizationInitResponse;
 import io.craftgate.response.MealVoucherCardTokenizationRegenerateResponse;
 

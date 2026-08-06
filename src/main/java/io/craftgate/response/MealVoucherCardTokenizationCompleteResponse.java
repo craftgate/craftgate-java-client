@@ -1,4 +1,4 @@
-package io.craftgate.request;
+package io.craftgate.response;
 
 import lombok.Data;
 
