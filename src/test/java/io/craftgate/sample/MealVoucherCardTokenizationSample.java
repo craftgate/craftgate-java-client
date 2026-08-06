@@ -4,9 +4,9 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.ApmAdditionalAction;
 import io.craftgate.model.ApmType;
 import io.craftgate.request.MealVoucherCardTokenizationCompleteRequest;
+import io.craftgate.request.MealVoucherCardTokenizationCompleteResponse;
 import io.craftgate.request.MealVoucherCardTokenizationInitRequest;
 import io.craftgate.request.MealVoucherCardTokenizationRegenerateRequest;
-import io.craftgate.request.MealVoucherCardTokenizationCompleteResponse;
 import io.craftgate.request.dto.MealVoucherCardTokenizationData;
 import io.craftgate.response.MealVoucherCardTokenizationInitResponse;
 import io.craftgate.response.MealVoucherCardTokenizationRegenerateResponse;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class MealVoucherCardTokenizationSample {
 
-    private final Craftgate craftgate = new Craftgate("api-key-2", "secret-key", "http://localhost:8000");
+    private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void init_meal_voucher_card_tokenization() {
