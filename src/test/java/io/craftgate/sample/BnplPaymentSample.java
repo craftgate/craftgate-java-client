@@ -146,7 +146,7 @@ public class BnplPaymentSample {
     void init_tom_finance_bnpl_payment() {
         BigDecimal price = new BigDecimal("100");
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("buyerName", "John Doe");
         additionalParams.put("buyerPhoneNumber", "5551112233");
 

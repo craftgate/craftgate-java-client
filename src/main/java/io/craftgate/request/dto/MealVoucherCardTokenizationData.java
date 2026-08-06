@@ -25,16 +25,43 @@ public class MealVoucherCardTokenizationData {
                .build();
     }
 
+    public static MealVoucherCardTokenizationData buildForMultinet(String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
+    public static MealVoucherCardTokenizationData buildForEdenred(String userReferenceNumber, String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .userReferenceNumber(userReferenceNumber)
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
+    public static MealVoucherCardTokenizationData buildForEdenred(String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
     public static MealVoucherCardTokenizationData buildForSetcard(String callbackUrl){
         return MealVoucherCardTokenizationData.builder()
                 .callbackUrl(callbackUrl)
                 .build();
     }
 
-    public static MealVoucherCardTokenizationData buildForMetropol(String userReferenceNumber, String cardNumber ){
+    public static MealVoucherCardTokenizationData buildForMetropol(String userReferenceNumber, String cardNumber, String gsmNumber){
         return MealVoucherCardTokenizationData.builder()
                 .userReferenceNumber(userReferenceNumber)
                 .cardNumber(cardNumber)
+                .gsmNumber(gsmNumber)
+                .build();
+    }
+
+    public static MealVoucherCardTokenizationData buildForMetropol(String cardNumber, String gsmNumber) {
+        return MealVoucherCardTokenizationData.builder()
+                .cardNumber(cardNumber)
+                .gsmNumber(gsmNumber)
                 .build();
     }
 
@@ -43,4 +70,11 @@ public class MealVoucherCardTokenizationData {
                 .callbackUrl(callbackUrl)
                 .build();
     }
+
+    public static MealVoucherCardTokenizationData buildForTokenflex(String callbackUrl) {
+        return MealVoucherCardTokenizationData.builder()
+                .callbackUrl(callbackUrl)
+                .build();
+    }
+
 }

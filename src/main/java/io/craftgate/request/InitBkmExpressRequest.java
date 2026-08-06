@@ -3,14 +3,14 @@ package io.craftgate.request;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.model.PaymentPhase;
+import io.craftgate.request.common.BaseRequest;
 import io.craftgate.request.dto.PaymentItem;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
-import lombok.experimental.SuperBuilder;
-import lombok.EqualsAndHashCode;
-import io.craftgate.request.common.BaseRequest;
 
 @Data
 @SuperBuilder
