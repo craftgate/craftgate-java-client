@@ -2,11 +2,13 @@ package io.craftgate.request;
 
 import io.craftgate.request.common.BaseRequest;
 import io.craftgate.request.dto.MealVoucherCardTokenizationData;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@EqualsAndHashCode(callSuper = false)
+@SuperBuilder
 public class MealVoucherCardTokenizationRegenerateRequest extends BaseRequest {
 
     private MealVoucherCardTokenizationData mealVoucherCardTokenizationData;
