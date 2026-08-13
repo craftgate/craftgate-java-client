@@ -1982,7 +1982,7 @@ public class PaymentSample {
 
         RetrieveLoyaltiesResponse response = craftgate.payment().retrieveLoyalties(request);
         assertNotNull(response);
-        assertEquals("Bonus", response.getCardBrand());
+        assertEquals("Maximum", response.getCardBrand());
         assertNotNull(response.getLoyalties());
         assertFalse(response.getLoyalties().isEmpty());
         assertEquals(LoyaltyType.ADDITIONAL_INSTALLMENT, response.getLoyalties().get(0).getType());
