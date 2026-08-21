@@ -276,7 +276,7 @@ public class PaymentAdapter extends BaseAdapter {
     }
 
     public CompayBanksResponse retrieveActiveBanks() {
-        String path = "/payment/v1/compay-banks";
+        String path = "/payment/v1/compay/banks";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
                 CompayBanksResponse.class);
     }
