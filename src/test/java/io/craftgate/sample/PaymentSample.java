@@ -1970,6 +1970,27 @@ public class PaymentSample {
     }
 
     @Test
+    void retrieve_loyalties_by_installment() {
+        RetrieveLoyaltiesRequest request = RetrieveLoyaltiesRequest.builder()
+                .cardNumber("5482370000000003")
+                .expireYear("2044")
+                .expireMonth("07")
+                .cvc("000")
+                .installment(2)
+                .loyaltyType(LoyaltyType.ADDITIONAL_INSTALLMENT)
+                .build();
+
+        RetrieveLoyaltiesResponse response = craftgate.payment().retrieveLoyalties(request);
+        assertNotNull(response);
+        assertEquals("Maximum", response.getCardBrand());
+        assertNotNull(response.getLoyalties());
+        assertFalse(response.getLoyalties().isEmpty());
+        assertEquals(LoyaltyType.ADDITIONAL_INSTALLMENT, response.getLoyalties().get(0).getType());
+        assertEquals("+5 taksit", response.getLoyalties().get(0).getMessage());
+        assertEquals("installment5", response.getLoyalties().get(0).getLoyaltyData().getCode());
+    }
+
+    @Test
     void refund_payment() {
         RefundPaymentRequest request = RefundPaymentRequest.builder()
                 .paymentId(1L)
