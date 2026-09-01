@@ -1970,6 +1970,18 @@ public class PaymentSample {
     }
 
     @Test
+    void retrieve_loyalties_with_secure_fields() {
+        RetrieveLoyaltiesRequest request = RetrieveLoyaltiesRequest.builder()
+                .secureFieldsToken("xxXXxx")
+                .build();
+
+        RetrieveLoyaltiesResponse response = craftgate.payment().retrieveLoyalties(request);
+        assertNotNull(response);
+        assertNotNull(response.getCardBrand());
+        assertNotNull(response.getLoyalties());
+    }
+
+    @Test
     void refund_payment() {
         RefundPaymentRequest request = RefundPaymentRequest.builder()
                 .paymentId(1L)
