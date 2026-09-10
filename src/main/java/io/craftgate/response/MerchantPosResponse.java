@@ -24,7 +24,6 @@ public class MerchantPosResponse {
     private String terminalId;
     private String threedsPosnetId;
     private String threedsTerminalId;
-    private Boolean threedsKeyExists;
     private String threedsPath;
     private Boolean enableForeignCard;
     private Boolean enableInstallment;
