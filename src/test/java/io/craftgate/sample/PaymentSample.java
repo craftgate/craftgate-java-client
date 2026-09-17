@@ -979,6 +979,7 @@ public class PaymentSample {
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         ApmDepositPaymentResponse response = craftgate.payment().initApmDepositPayment(request);
@@ -2508,6 +2509,7 @@ public class PaymentSample {
                 .verificationPrice(BigDecimal.TEN)
                 .currency(Currency.TRY)
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         VerifyCardResponse response = craftgate.payment().verifyCard(request);

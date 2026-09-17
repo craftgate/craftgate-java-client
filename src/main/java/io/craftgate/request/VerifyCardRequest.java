@@ -20,6 +20,7 @@ public class VerifyCardRequest extends BaseRequest {
     private BigDecimal verificationPrice;
     private Currency currency;
     private String clientIp;
+    private Integer clientPort;
     private String conversationId;
     private String callbackUrl;
 }
