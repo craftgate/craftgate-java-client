@@ -275,10 +275,10 @@ public class PaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bnplLimitInquiryRequest, path, requestOptions), bnplLimitInquiryRequest, BnplLimitInquiryResponse.class);
     }
 
-    public InstantTransferBanksResponse retrieveActiveBanks() {
-        String path = "/payment/v1/instant-transfer-banks";
+    public CompayBanksResponse retrieveActiveBanks() {
+        String path = "/payment/v1/compay/banks";
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions),
-                InstantTransferBanksResponse.class);
+                CompayBanksResponse.class);
     }
 
     public InitMultiPaymentResponse initMultiPayment(InitMultiPaymentRequest initMultiPaymentRequest) {
