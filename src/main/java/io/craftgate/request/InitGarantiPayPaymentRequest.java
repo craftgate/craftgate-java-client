@@ -26,6 +26,7 @@ public class InitGarantiPayPaymentRequest extends BaseRequest {
     protected String externalId;
     protected String callbackUrl;
     protected String clientIp;
+    protected Integer clientPort;
     protected String paymentChannel;
     protected Long buyerMemberId;
     protected String bankOrderId;
