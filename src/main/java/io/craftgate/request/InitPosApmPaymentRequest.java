@@ -38,6 +38,7 @@ public class InitPosApmPaymentRequest extends BaseRequest {
     private Long buyerMemberId;
     private String bankOrderId;
     private String clientIp;
+    private Integer clientPort;
     protected List<PaymentItem> items;
     private Map<String, Object> additionalParams;
     private List<PosApmInstallment> installments;

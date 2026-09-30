@@ -979,6 +979,7 @@ public class PaymentSample {
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         ApmDepositPaymentResponse response = craftgate.payment().initApmDepositPayment(request);
@@ -2022,6 +2023,18 @@ public class PaymentSample {
     }
 
     @Test
+    void retrieve_loyalties_with_secure_fields() {
+        RetrieveLoyaltiesRequest request = RetrieveLoyaltiesRequest.builder()
+                .secureFieldsToken("xxXXxx")
+                .build();
+
+        RetrieveLoyaltiesResponse response = craftgate.payment().retrieveLoyalties(request);
+        assertNotNull(response);
+        assertNotNull(response.getCardBrand());
+        assertNotNull(response.getLoyalties());
+    }
+
+    @Test
     void refund_payment() {
         RefundPaymentRequest request = RefundPaymentRequest.builder()
                 .paymentId(1L)
@@ -2548,6 +2561,7 @@ public class PaymentSample {
                 .verificationPrice(BigDecimal.TEN)
                 .currency(Currency.TRY)
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         VerifyCardResponse response = craftgate.payment().verifyCard(request);

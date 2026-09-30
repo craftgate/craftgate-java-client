@@ -28,6 +28,7 @@ public class UpdateProductRequest extends BaseRequest {
     private String description;
     private LocalDateTime expiresAt;
     private boolean multiPayment;
+    private boolean forceThreeDS;
     private Set<Integer> enabledInstallments;
     private String basketIdentifier;
 }

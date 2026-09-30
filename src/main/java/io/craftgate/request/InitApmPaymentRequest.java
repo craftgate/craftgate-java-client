@@ -33,5 +33,6 @@ public class InitApmPaymentRequest extends BaseRequest {
     private String apmUserIdentity;
     private Map<String, Object> additionalParams;
     private String clientIp;
+    private Integer clientPort;
     private List<PaymentItem> items;
 }
