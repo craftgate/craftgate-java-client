@@ -37,6 +37,7 @@ public enum PaymentMethod {
     DKB,
     PAYCELL_DCB,
     SETCARD,
+    SETCARD_GIFT,
     IWALLET,
     PAPEL,
     BKM_EXPRESS

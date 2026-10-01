@@ -35,6 +35,7 @@ public enum ApmType {
     SODEXO,
     SODEXO_GIFT,
     SETCARD,
+    SETCARD_GIFT,
     TOKENFLEX,
     TOKENFLEX_GIFT,
 
