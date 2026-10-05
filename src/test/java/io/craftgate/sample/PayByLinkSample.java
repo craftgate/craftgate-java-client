@@ -4,6 +4,7 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.Currency;
 import io.craftgate.model.Status;
 import io.craftgate.request.CreateProductRequest;
+import io.craftgate.request.DeleteProductRequest;
 import io.craftgate.request.SearchProductsRequest;
 import io.craftgate.request.UpdateProductRequest;
 import io.craftgate.response.ProductListResponse;
@@ -100,7 +101,9 @@ public class PayByLinkSample {
     void delete_product() {
         Long productId = 1L;
 
-        craftgate.payByLink().deleteProduct(productId);
+        craftgate.payByLink().deleteProduct(DeleteProductRequest.builder()
+                .id(productId)
+                .build());
     }
 
     @Test

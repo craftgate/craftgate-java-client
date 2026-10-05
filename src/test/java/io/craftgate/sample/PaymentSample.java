@@ -4,6 +4,7 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.*;
 import io.craftgate.model.Currency;
 import io.craftgate.request.*;
+import io.craftgate.request.common.HeaderOptions;
 import io.craftgate.request.dto.*;
 import io.craftgate.response.*;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,46 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PaymentSample {
 
     private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
+
+    @Test
+    void create_payment_with_idempotency_key() {
+        CreatePaymentRequest request = CreatePaymentRequest.builder()
+                .price(BigDecimal.valueOf(100))
+                .paidPrice(BigDecimal.valueOf(100))
+                .installment(1)
+                .currency(Currency.TRY)
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .paymentPhase(PaymentPhase.AUTH)
+                .headerOptions(HeaderOptions.builder()
+                        .idempotencyKey(UUID.randomUUID().toString())
+                        .build())
+                .card(Card.builder()
+                        .cardHolderName("Haluk Demir")
+                        .cardNumber("5258640000000001")
+                        .expireYear("2044")
+                        .expireMonth("07")
+                        .cvc("000")
+                        .build())
+                .items(Collections.singletonList(PaymentItem.builder()
+                        .name("item 1")
+                        .externalId(UUID.randomUUID().toString())
+                        .price(BigDecimal.valueOf(100))
+                        .build()))
+                .build();
+
+        PaymentResponse response = craftgate.payment().createPayment(request);
+        assertNotNull(response.getId());
+    }
+
+    @Test
+    void expire_checkout_payment_with_idempotency_key() {
+        craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
+                .token("456d1297-908e-4bd6-a13b-4be31a6e47d5")
+                .headerOptions(HeaderOptions.builder()
+                        .idempotencyKey(UUID.randomUUID().toString())
+                        .build())
+                .build());
+    }
 
     @Test
     void create_payment() {
@@ -846,7 +887,9 @@ public class PaymentSample {
     void expire_checkout_payment() {
         String token = "456d1297-908e-4bd6-a13b-4be31a6e47d5";
 
-        craftgate.payment().expireCheckoutPayment(token);
+        craftgate.payment().expireCheckoutPayment(ExpireCheckoutPaymentRequest.builder()
+                .token(token)
+                .build());
     }
 
     @Test
@@ -936,6 +979,7 @@ public class PaymentSample {
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         ApmDepositPaymentResponse response = craftgate.payment().initApmDepositPayment(request);
@@ -1062,7 +1106,7 @@ public class PaymentSample {
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .apmUserIdentity("5555555555")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("sodexoCode", "843195");
                 }})
                 .build();
@@ -1149,7 +1193,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("paymentCode", "123456");
                 }})
                 .items(items)
@@ -1201,7 +1245,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("paymentCode", "123456");
                 }})
                 .items(items)
@@ -1288,7 +1332,7 @@ public class PaymentSample {
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("cardNumber", "1111222233334444");
                 }})
                 .items(items)
@@ -1331,7 +1375,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.40))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("country", "de");
         additionalParams.put("locale", "en-DE");
 
@@ -1409,7 +1453,7 @@ public class PaymentSample {
                 .conversationId("myConversationId")
                 .externalId("optional-externalId")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("cardNumber", "6375780115068760");
                 }})
                 .build();
@@ -1498,7 +1542,7 @@ public class PaymentSample {
                 .externalId("externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("channel", "channel");
                     put("phone", "5001112233");
                 }})
@@ -1561,7 +1605,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("buyerPhoneNumber", "34700000000");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
@@ -1598,7 +1642,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("buyerPhoneNumber", "34700000000");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
@@ -1635,7 +1679,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("paycellGsmNumber", "5305289290");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
@@ -1678,7 +1722,7 @@ public class PaymentSample {
                 .externalId("externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .items(items)
-                .additionalParams(new HashMap<String, String>() {{
+                .additionalParams(new HashMap<String, Object>() {{
                     put("integrationId", "11223344");
                 }})
                 .build();
@@ -1779,7 +1823,7 @@ public class PaymentSample {
                 .price(BigDecimal.valueOf(0.4))
                 .build());
 
-        Map<String, String> additionalParams = new HashMap<>();
+        Map<String, Object> additionalParams = new HashMap<>();
         additionalParams.put("cardNumber", "7599640961180814");
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
@@ -1803,6 +1847,58 @@ public class PaymentSample {
 
     @Test
     void complete_setcard_pos_apm_payment() {
+        CompleteApmPaymentRequest request = CompleteApmPaymentRequest.builder()
+                .paymentId(1L)
+                .additionalParams(new HashMap<String, String>() {{
+                    put("otpCode", "123456");
+                }})
+                .build();
+
+        ApmPaymentCompleteResponse response = craftgate.payment().completeApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+    }
+
+    @Test
+    void init_setcard_gift_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        Map<String, Object> additionalParams = new HashMap<>();
+        additionalParams.put("cardNumber", "7599640961180814");
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.SETCARD_GIFT)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .additionalParams(additionalParams)
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.OTP_REQUIRED, response.getAdditionalAction());
+    }
+
+    @Test
+    void complete_setcard_gift_pos_apm_payment() {
         CompleteApmPaymentRequest request = CompleteApmPaymentRequest.builder()
                 .paymentId(1L)
                 .additionalParams(new HashMap<String, String>() {{
@@ -1924,6 +2020,18 @@ public class PaymentSample {
         assertNotNull(response.getLoyalties().get(0).getReward());
         assertEquals(new BigDecimal("12.35"), response.getLoyalties().get(0).getReward().getCardRewardMoney());
         assertEquals(new BigDecimal("5.20"), response.getLoyalties().get(0).getReward().getFirmRewardMoney());
+    }
+
+    @Test
+    void retrieve_loyalties_with_secure_fields() {
+        RetrieveLoyaltiesRequest request = RetrieveLoyaltiesRequest.builder()
+                .secureFieldsToken("xxXXxx")
+                .build();
+
+        RetrieveLoyaltiesResponse response = craftgate.payment().retrieveLoyalties(request);
+        assertNotNull(response);
+        assertNotNull(response.getCardBrand());
+        assertNotNull(response.getLoyalties());
     }
 
     @Test
@@ -2306,14 +2414,12 @@ public class PaymentSample {
 
         InitMultiPaymentRequest request = InitMultiPaymentRequest.builder()
                 .price(BigDecimal.valueOf(100))
-                .paidPrice(BigDecimal.valueOf(100))
                 .buyerMemberId(7L)
                 .callbackUrl("https://www.your-website.com/craftgate-multi-payment-callback")
                 .currency(Currency.TRY)
                 .conversationId("456d1297-908e-4bd6-a13b-4be31a6e47d5")
                 .externalId("external_id-123456789")
                 .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
-                .paymentPhase(PaymentPhase.AUTH)
                 .items(items)
                 .build();
 
@@ -2344,6 +2450,18 @@ public class PaymentSample {
                 .build();
 
         StoredCardListResponse response = craftgate.payment().retrieveProviderCards(retrieveProviderCardRequest);
+
+        assertNotNull(response);
+    }
+
+    @Test
+    void retrieve_ivr_card() {
+        RetrieveCardFromIvrRequest retrieveCardFromIvrRequest = RetrieveCardFromIvrRequest.builder()
+                .cardUserKey("45f12c74-3000-465c-96dc-876850e7dd7a")
+                .callToken("0309ac2d-c5a5-4b4f-a91f-5c444ba07b24")
+                .build();
+
+        IVRCardTokenizationResponse response = craftgate.payment().retrieveCardFromIvr(retrieveCardFromIvrRequest);
 
         assertNotNull(response);
     }
@@ -2443,6 +2561,7 @@ public class PaymentSample {
                 .verificationPrice(BigDecimal.TEN)
                 .currency(Currency.TRY)
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         VerifyCardResponse response = craftgate.payment().verifyCard(request);

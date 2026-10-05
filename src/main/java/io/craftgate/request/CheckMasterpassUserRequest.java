@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class CheckMasterpassUserRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class CheckMasterpassUserRequest extends BaseRequest {
 
     private String masterpassGsmNumber;
 }

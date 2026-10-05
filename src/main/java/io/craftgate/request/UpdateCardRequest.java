@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class UpdateCardRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class UpdateCardRequest extends BaseRequest {
 
     private String cardUserKey;
     private String cardToken;

@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
 import io.craftgate.model.PayoutAccountType;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 @Data
-@Builder
-public class UpdatePayoutAccountRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class UpdatePayoutAccountRequest extends BaseRequest {
 
     private PayoutAccountType type;
     private String externalAccountId;

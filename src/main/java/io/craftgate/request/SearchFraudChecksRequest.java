@@ -3,14 +3,17 @@ package io.craftgate.request;
 import io.craftgate.model.FraudAction;
 import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.model.PaymentStatus;
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchFraudChecksRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchFraudChecksRequest extends BaseRequest {
     private Integer page;
     private Integer size;
     private FraudAction action;

@@ -8,12 +8,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateReportRequest {
+@EqualsAndHashCode(callSuper = false)
+public class CreateReportRequest extends BaseRequest {
 
     private LocalDateTime startDate;
 

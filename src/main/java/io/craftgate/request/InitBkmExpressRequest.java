@@ -3,15 +3,19 @@ package io.craftgate.request;
 import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.model.PaymentPhase;
+import io.craftgate.request.common.BaseRequest;
 import io.craftgate.request.dto.PaymentItem;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-@Builder
-public class InitBkmExpressRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitBkmExpressRequest extends BaseRequest {
 
     private BigDecimal price;
     private BigDecimal paidPrice;

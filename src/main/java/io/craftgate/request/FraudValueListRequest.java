@@ -1,12 +1,15 @@
 package io.craftgate.request;
 
 import io.craftgate.model.FraudValueType;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class FraudValueListRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class FraudValueListRequest extends BaseRequest {
     private String listName;
     private String label;
     private FraudValueType type;

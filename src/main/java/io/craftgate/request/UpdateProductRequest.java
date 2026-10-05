@@ -2,16 +2,19 @@ package io.craftgate.request;
 
 import io.craftgate.model.Currency;
 import io.craftgate.model.Status;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class UpdateProductRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class UpdateProductRequest extends BaseRequest {
 
     private String name;
     private String channel;
@@ -25,6 +28,7 @@ public class UpdateProductRequest {
     private String description;
     private LocalDateTime expiresAt;
     private boolean multiPayment;
+    private boolean forceThreeDS;
     private Set<Integer> enabledInstallments;
     private String basketIdentifier;
 }

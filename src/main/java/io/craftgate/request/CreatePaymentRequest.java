@@ -14,10 +14,13 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
 @SuperBuilder
-public class CreatePaymentRequest {
+@EqualsAndHashCode(callSuper = false)
+public class CreatePaymentRequest extends BaseRequest {
 
     protected BigDecimal price;
     protected BigDecimal paidPrice;
@@ -32,6 +35,7 @@ public class CreatePaymentRequest {
     protected String conversationId;
     protected String externalId;
     protected String clientIp;
+    protected Integer clientPort;
 
     @Builder.Default
     protected PaymentPhase paymentPhase = PaymentPhase.AUTH;

@@ -6,10 +6,14 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchProductsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchProductsRequest extends BaseRequest {
 
     private Long id;
     private String name;
@@ -23,6 +27,8 @@ public class SearchProductsRequest {
     private LocalDateTime minExpiresAt;
     private LocalDateTime maxExpiresAt;
 
+    @Builder.Default
     private Integer page = 0;
+    @Builder.Default
     private Integer size = 25;
 }

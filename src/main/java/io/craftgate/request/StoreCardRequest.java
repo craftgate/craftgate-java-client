@@ -1,12 +1,15 @@
 package io.craftgate.request;
 
 import io.craftgate.request.dto.EncryptedCard;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class StoreCardRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class StoreCardRequest extends BaseRequest {
 
     private String cardHolderName;
     private String cardNumber;

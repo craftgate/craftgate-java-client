@@ -3,9 +3,11 @@ package io.craftgate.sample;
 import io.craftgate.Craftgate;
 import io.craftgate.model.*;
 import io.craftgate.request.CreateMerchantPosRequest;
+import io.craftgate.request.DeleteMerchantPosRequest;
 import io.craftgate.request.SearchMerchantPosRequest;
 import io.craftgate.request.UpdateMerchantPosCommissionsRequest;
 import io.craftgate.request.UpdateMerchantPosRequest;
+import io.craftgate.request.UpdateMerchantPosStatusRequest;
 import io.craftgate.request.dto.CreateMerchantPosUser;
 import io.craftgate.request.dto.UpdateMerchantPosCommission;
 import io.craftgate.request.dto.UpdateMerchantPosUser;
@@ -141,7 +143,10 @@ public class MerchantSample {
         Long merchantPosId = 1L;
         PosStatus posStatus = PosStatus.PASSIVE;
 
-        craftgate.merchant().updateMerchantPosStatus(merchantPosId, posStatus);
+        craftgate.merchant().updateMerchantPosStatus(UpdateMerchantPosStatusRequest.builder()
+                .merchantPosId(merchantPosId)
+                .posStatus(posStatus)
+                .build());
     }
 
     @Test
@@ -157,7 +162,9 @@ public class MerchantSample {
     void delete_merchant_pos() {
         Long merchantPosId = 1L;
 
-        craftgate.merchant().deleteMerchantPos(merchantPosId);
+        craftgate.merchant().deleteMerchantPos(DeleteMerchantPosRequest.builder()
+                .merchantPosId(merchantPosId)
+                .build());
     }
 
     @Test

@@ -17,7 +17,7 @@ public class PaymentReportingAdapter extends BaseAdapter {
     public ReportingPaymentListResponse searchPayments(SearchPaymentsRequest searchPaymentsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPaymentsRequest);
         String path = "/payment-reporting/v1/payments" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingPaymentListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchPaymentsRequest, path, requestOptions), ReportingPaymentListResponse.class);
     }
 
     public ReportingPaymentResponse retrievePayment(Long paymentId) {
@@ -43,12 +43,12 @@ public class PaymentReportingAdapter extends BaseAdapter {
     public ReportingPaymentRefundListResponse searchPaymentRefunds(SearchPaymentRefundsRequest searchPaymentRefundsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPaymentRefundsRequest);
         String path = "/payment-reporting/v1/refunds" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingPaymentRefundListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchPaymentRefundsRequest, path, requestOptions), ReportingPaymentRefundListResponse.class);
     }
 
     public ReportingPaymentTransactionRefundListResponse searchPaymentTransactionRefunds(SearchPaymentTransactionRefundsRequest searchPaymentTransactionRefundsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPaymentTransactionRefundsRequest);
         String path = "/payment-reporting/v1/refund-transactions" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), ReportingPaymentTransactionRefundListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchPaymentTransactionRefundsRequest, path, requestOptions), ReportingPaymentTransactionRefundListResponse.class);
     }
 }

@@ -37,7 +37,7 @@ public class OnboardingAdapter extends BaseAdapter {
     public MemberListResponse searchMembers(SearchMembersRequest searchMembersRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchMembersRequest);
         String path = "/onboarding/v1/members" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), MemberListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchMembersRequest, path, requestOptions), MemberListResponse.class);
     }
 
     public CreateMerchantResponse createMerchant(CreateMerchantRequest createMerchantRequest) {

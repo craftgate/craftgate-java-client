@@ -48,6 +48,7 @@ public enum PosIntegrator {
     TAP,
     TEB,
     TRPOS,
+    TURKONAY,
     VAKIFBANK,
     VAKIFKATILIM,
     WORLDPAY,

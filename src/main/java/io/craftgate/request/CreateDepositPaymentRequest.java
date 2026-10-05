@@ -3,14 +3,17 @@ package io.craftgate.request;
 import io.craftgate.model.Currency;
 import io.craftgate.request.dto.Card;
 import io.craftgate.request.dto.RoutingOptions;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class CreateDepositPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class CreateDepositPaymentRequest extends BaseRequest {
 
     private Long buyerMemberId;
     private BigDecimal price;
@@ -19,6 +22,7 @@ public class CreateDepositPaymentRequest {
     private String callbackUrl;
     private String posAlias;
     private String clientIp;
+    private Integer clientPort;
     private Card card;
     private RoutingOptions routingOptions;
 }

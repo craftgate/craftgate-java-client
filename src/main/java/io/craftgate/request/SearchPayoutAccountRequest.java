@@ -4,9 +4,13 @@ import io.craftgate.model.AccountOwner;
 import io.craftgate.model.Currency;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 @Data
-@Builder
-public class SearchPayoutAccountRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchPayoutAccountRequest extends BaseRequest {
 
     private Currency currency;
     private AccountOwner accountOwner;

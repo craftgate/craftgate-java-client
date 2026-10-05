@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class ApplePayMerchantSessionCreateRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class ApplePayMerchantSessionCreateRequest extends BaseRequest {
 
     private String merchantIdentifier;
     private String displayName;
