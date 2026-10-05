@@ -8,6 +8,4 @@ import lombok.Data;
 public class BkmExpressGenerateTokenResponse {
 
     private String token;
-    private String errorCode;
-    private String errorMessage;
 }

@@ -38,5 +38,4 @@ public class BkmExpressPaymentAdapter extends BaseAdapter {
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bkmExpressGenerateTokenRequest, path, requestOptions),
                 bkmExpressGenerateTokenRequest, BkmExpressGenerateTokenResponse.class);
     }
-
 }
