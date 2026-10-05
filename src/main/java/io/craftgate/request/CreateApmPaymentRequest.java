@@ -28,5 +28,6 @@ public class CreateApmPaymentRequest extends BaseRequest {
     private Long buyerMemberId;
     private String apmOrderId;
     private String clientIp;
+    private Integer clientPort;
     private List<PaymentItem> items;
 }

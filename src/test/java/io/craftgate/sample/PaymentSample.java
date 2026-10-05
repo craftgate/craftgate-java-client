@@ -979,6 +979,7 @@ public class PaymentSample {
                 .externalId("optional-externalId")
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         ApmDepositPaymentResponse response = craftgate.payment().initApmDepositPayment(request);
@@ -1859,6 +1860,58 @@ public class PaymentSample {
     }
 
     @Test
+    void init_setcard_gift_apm_payment() {
+        List<PaymentItem> items = new ArrayList<>();
+
+        items.add(PaymentItem.builder()
+                .name("item 1")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.6))
+                .build());
+
+        items.add(PaymentItem.builder()
+                .name("item 2")
+                .externalId(UUID.randomUUID().toString())
+                .price(BigDecimal.valueOf(0.4))
+                .build());
+
+        Map<String, Object> additionalParams = new HashMap<>();
+        additionalParams.put("cardNumber", "7599640961180814");
+
+        InitApmPaymentRequest request = InitApmPaymentRequest.builder()
+                .apmType(ApmType.SETCARD_GIFT)
+                .price(BigDecimal.ONE)
+                .paidPrice(BigDecimal.ONE)
+                .currency(Currency.TRY)
+                .callbackUrl("https://www.your-website.com/craftgate-3DSecure-callback")
+                .paymentGroup(PaymentGroup.LISTING_OR_SUBSCRIPTION)
+                .conversationId("conversationId")
+                .externalId("externalId")
+                .additionalParams(additionalParams)
+                .items(items)
+                .build();
+
+        ApmPaymentInitResponse response = craftgate.payment().initApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.WAITING, response.getPaymentStatus());
+        assertEquals(ApmAdditionalAction.OTP_REQUIRED, response.getAdditionalAction());
+    }
+
+    @Test
+    void complete_setcard_gift_pos_apm_payment() {
+        CompleteApmPaymentRequest request = CompleteApmPaymentRequest.builder()
+                .paymentId(1L)
+                .additionalParams(new HashMap<String, String>() {{
+                    put("otpCode", "123456");
+                }})
+                .build();
+
+        ApmPaymentCompleteResponse response = craftgate.payment().completeApmPayment(request);
+        assertNotNull(response.getPaymentId());
+        assertEquals(PaymentStatus.SUCCESS, response.getPaymentStatus());
+    }
+
+    @Test
     void complete_pos_apm_payment() {
         CompletePosApmPaymentRequest request = CompletePosApmPaymentRequest.builder()
                 .paymentId(1L)
@@ -2508,6 +2561,7 @@ public class PaymentSample {
                 .verificationPrice(BigDecimal.TEN)
                 .currency(Currency.TRY)
                 .clientIp("127.0.0.1")
+                .clientPort(51520)
                 .build();
 
         VerifyCardResponse response = craftgate.payment().verifyCard(request);

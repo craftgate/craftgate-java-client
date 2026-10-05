@@ -28,4 +28,5 @@ public class InitApmDepositPaymentRequest extends BaseRequest {
     private String apmUserIdentity;
     private Map<String, Object> additionalParams;
     private String clientIp;
+    private Integer clientPort;
 }
