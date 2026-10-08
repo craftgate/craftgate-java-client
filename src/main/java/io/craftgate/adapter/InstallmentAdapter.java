@@ -20,7 +20,11 @@ public class InstallmentAdapter extends BaseAdapter {
     }
 
     public BinNumberResponse retrieveBinNumber(String binNumber) {
-        String path = "/installment/v1/bins/" + binNumber;
+        return retrieveBinNumber(binNumber, false);
+    }
+
+    public BinNumberResponse retrieveBinNumber(String binNumber, boolean includeGlobalBins) {
+        String path = "/installment/v1/bins/" + binNumber + (includeGlobalBins ? "?includeGlobalBins=true" : "");
         return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), BinNumberResponse.class);
     }
 }
