@@ -23,6 +23,12 @@ public class MasterpassPaymentAdapter extends BaseAdapter {
                 masterpassPaymentTokenGenerateRequest, MasterpassPaymentTokenGenerateResponse.class);
     }
 
+    public MasterpassAccountTokenGenerateResponse generateMasterpassAccountToken(MasterpassAccountTokenGenerateRequest masterpassAccountTokenGenerateRequest) {
+        String path = "/payment/v2/masterpass-accounts/generate-token";
+        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(masterpassAccountTokenGenerateRequest, path, requestOptions),
+                masterpassAccountTokenGenerateRequest, MasterpassAccountTokenGenerateResponse.class);
+    }
+
     public PaymentResponse completeMasterpassPayment(MasterpassPaymentCompleteRequest masterpassPaymentCompleteRequest) {
         String path = "/payment/v2/masterpass-payments/complete";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(masterpassPaymentCompleteRequest, path, requestOptions),
