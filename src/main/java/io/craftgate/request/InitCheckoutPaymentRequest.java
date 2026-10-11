@@ -41,6 +41,9 @@ public class InitCheckoutPaymentRequest extends BaseRequest {
     protected String masterpassGsmNumber;
     protected String masterpassUserId;
 
+    protected String bexGsmNumber;
+    protected String bexUserId;
+
     protected String cardUserKey;
 
     protected Long buyerMemberId;

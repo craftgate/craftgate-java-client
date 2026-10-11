@@ -16,4 +16,5 @@ public class CreateFundTransferDepositPaymentRequest extends BaseRequest {
     private Long buyerMemberId;
     private String conversationId;
     private String clientIp;
+    private Integer clientPort;
 }

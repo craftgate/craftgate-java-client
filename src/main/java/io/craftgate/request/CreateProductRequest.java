@@ -26,6 +26,7 @@ public class CreateProductRequest extends BaseRequest {
     private LocalDateTime expiresAt;
     private String description;
     private boolean multiPayment;
+    private boolean forceThreeDS;
     private Set<Integer> enabledInstallments;
     private String basketIdentifier;
 }

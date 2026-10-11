@@ -17,6 +17,7 @@ public class FraudCheck {
     private Long ruleId;
     private String ruleName;
     private String ruleConditions;
+    private Boolean isGlobalRule;
     private Long paymentId;
     private PaymentStatus paymentStatus;
 }
