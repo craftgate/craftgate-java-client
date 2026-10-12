@@ -30,6 +30,7 @@ public class InitCheckoutPaymentRequest extends BaseRequest {
     protected String conversationId;
     protected String externalId;
     protected String orderId;
+    protected String basketIdentifier;
     protected String callbackUrl;
     protected String clientIp;
 
