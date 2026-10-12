@@ -22,6 +22,7 @@ public class MasterpassCreatePayment {
     protected String conversationId;
     protected String externalId;
     protected String clientIp;
+    protected Integer clientPort;
 
     @Builder.Default
     protected PaymentPhase paymentPhase = PaymentPhase.AUTH;

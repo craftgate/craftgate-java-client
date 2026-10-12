@@ -22,6 +22,7 @@ public class CreateDepositPaymentRequest extends BaseRequest {
     private String callbackUrl;
     private String posAlias;
     private String clientIp;
+    private Integer clientPort;
     private Card card;
     private RoutingOptions routingOptions;
 }
