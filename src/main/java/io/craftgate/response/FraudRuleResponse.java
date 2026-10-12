@@ -15,4 +15,5 @@ public class FraudRuleResponse {
     private FraudAction action;
     private String conditions;
     private List<FraudOperation> operations;
+    private Boolean isGlobal;
 }

@@ -2,6 +2,7 @@ package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
 import io.craftgate.request.CreatePaymentTokenRequest;
+import io.craftgate.request.DeletePaymentTokenRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.response.PaymentTokenResponse;
 
@@ -19,8 +20,8 @@ public class PaymentTokenAdapter extends BaseAdapter {
                 PaymentTokenResponse.class);
     }
 
-    public void deletePaymentToken(String token) {
-        String path = "/payment/v1/payment-tokens/" + token;
-        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions));
+    public void deletePaymentToken(DeletePaymentTokenRequest deletePaymentTokenRequest) {
+        String path = "/payment/v1/payment-tokens/" + deletePaymentTokenRequest.getToken();
+        HttpClient.delete(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(deletePaymentTokenRequest, path, requestOptions));
     }
 }

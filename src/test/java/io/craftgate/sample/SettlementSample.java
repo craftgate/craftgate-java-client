@@ -6,6 +6,7 @@ import io.craftgate.model.Currency;
 import io.craftgate.model.PayoutAccountType;
 import io.craftgate.request.CreateInstantWalletSettlementRequest;
 import io.craftgate.request.CreatePayoutAccountRequest;
+import io.craftgate.request.DeletePayoutAccountRequest;
 import io.craftgate.request.SearchPayoutAccountRequest;
 import io.craftgate.request.UpdatePayoutAccountRequest;
 import io.craftgate.response.PayoutAccountListResponse;
@@ -80,6 +81,8 @@ public class SettlementSample {
 
     @Test
     void delete_payout_account() {
-        craftgate.settlement().deletePayoutAccount(10L);
+        craftgate.settlement().deletePayoutAccount(DeletePayoutAccountRequest.builder()
+                .id(10L)
+                .build());
     }
 }

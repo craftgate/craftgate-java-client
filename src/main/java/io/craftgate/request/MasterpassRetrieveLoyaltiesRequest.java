@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class MasterpassRetrieveLoyaltiesRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class MasterpassRetrieveLoyaltiesRequest extends BaseRequest {
     private String msisdn;
     private String binNumber;
     private String cardName;

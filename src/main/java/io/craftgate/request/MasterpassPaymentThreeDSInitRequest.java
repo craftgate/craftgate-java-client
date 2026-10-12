@@ -1,11 +1,14 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class MasterpassPaymentThreeDSInitRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class MasterpassPaymentThreeDSInitRequest extends BaseRequest {
     private String referenceId;
     private String callbackUrl;
 }

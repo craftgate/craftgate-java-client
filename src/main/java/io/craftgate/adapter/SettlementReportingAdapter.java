@@ -20,13 +20,13 @@ public class SettlementReportingAdapter extends BaseAdapter {
     public PayoutCompletedTransactionListResponse searchPayoutCompletedTransactions(SearchPayoutCompletedTransactionsRequest searchPayoutCompletedTransactionsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPayoutCompletedTransactionsRequest);
         String path = "/settlement-reporting/v2/settlement-file/payout-completed-transactions" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutCompletedTransactionListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchPayoutCompletedTransactionsRequest, path, requestOptions), PayoutCompletedTransactionListResponse.class);
     }
 
     public PayoutBouncedTransactionListResponse searchBouncedPayoutTransactions(SearchPayoutBouncedTransactionsRequest searchPayoutBouncedTransactionsRequest) {
         String query = RequestQueryParamsBuilder.buildQueryParam(searchPayoutBouncedTransactionsRequest);
         String path = "/settlement-reporting/v1/settlement-file/bounced-sub-merchant-rows" + query;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutBouncedTransactionListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(searchPayoutBouncedTransactionsRequest, path, requestOptions), PayoutBouncedTransactionListResponse.class);
     }
 
     public PayoutDetailResponse retrievePayoutDetails(Long id) {
@@ -37,6 +37,6 @@ public class SettlementReportingAdapter extends BaseAdapter {
     public PayoutRowListResponse searchPayoutRows(SearchPayoutRowsRequest request) {
         String queryParam = RequestQueryParamsBuilder.buildQueryParam(request);
         String path = "/settlement-reporting/v1/settlement-file-rows" + queryParam;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PayoutRowListResponse.class);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeadersWithoutBody(request, path, requestOptions), PayoutRowListResponse.class);
     }
 }

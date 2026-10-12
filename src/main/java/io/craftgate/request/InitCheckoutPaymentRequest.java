@@ -14,10 +14,14 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class InitCheckoutPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitCheckoutPaymentRequest extends BaseRequest {
 
     protected BigDecimal price;
     protected BigDecimal paidPrice;
@@ -37,6 +41,9 @@ public class InitCheckoutPaymentRequest {
     protected String masterpassGsmNumber;
     protected String masterpassUserId;
 
+    protected String bexGsmNumber;
+    protected String bexUserId;
+
     protected String cardUserKey;
 
     protected Long buyerMemberId;
@@ -49,6 +56,7 @@ public class InitCheckoutPaymentRequest {
     protected boolean forceAuthForNonCreditCards;
     protected boolean depositPayment;
     protected boolean guestCheckout;
+    @Builder.Default
     protected boolean allowDeleteStoredCard = true;
     protected boolean useTopRedirection;
     protected String returnBackUrl;
@@ -59,4 +67,5 @@ public class InitCheckoutPaymentRequest {
     protected FraudCheckParameters fraudParams;
     protected Map<String, Object> additionalParams;
     protected Map<String, List<CustomInstallment>> cardBrandInstallments;
+    protected Boolean retry;
 }

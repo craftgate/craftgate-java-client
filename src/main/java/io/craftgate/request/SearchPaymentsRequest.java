@@ -1,15 +1,18 @@
 package io.craftgate.request;
 
 import io.craftgate.model.*;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchPaymentsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchPaymentsRequest extends BaseRequest {
 
     private Integer page;
     private Integer size;

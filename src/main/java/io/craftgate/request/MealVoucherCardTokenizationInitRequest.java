@@ -2,12 +2,15 @@ package io.craftgate.request;
 
 import io.craftgate.model.ApmType;
 import io.craftgate.request.dto.MealVoucherCardTokenizationData;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class MealVoucherCardTokenizationInitRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class MealVoucherCardTokenizationInitRequest extends BaseRequest {
 
     private ApmType apmType;
     private MealVoucherCardTokenizationData mealVoucherCardTokenizationData;

@@ -2,17 +2,20 @@ package io.craftgate.request;
 
 import io.craftgate.model.ApmType;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BnplLimitInquiryRequest {
+@EqualsAndHashCode(callSuper = false)
+public class BnplLimitInquiryRequest extends BaseRequest {
 
     private ApmType apmType;
     private Long merchantApmId;

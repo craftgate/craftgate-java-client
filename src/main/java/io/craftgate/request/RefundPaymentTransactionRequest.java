@@ -5,10 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class RefundPaymentTransactionRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class RefundPaymentTransactionRequest extends BaseRequest {
 
     private Long paymentTransactionId;
     private String conversationId;

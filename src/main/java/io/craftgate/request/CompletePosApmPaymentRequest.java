@@ -1,13 +1,16 @@
 package io.craftgate.request;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.Map;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class CompletePosApmPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class CompletePosApmPaymentRequest extends BaseRequest {
 
     private Long paymentId;
     private Map<String, Object> additionalParams;

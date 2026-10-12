@@ -3,14 +3,17 @@ package io.craftgate.request;
 import io.craftgate.model.CardAssociation;
 import io.craftgate.model.PaymentAuthenticationType;
 import io.craftgate.request.dto.UpdateMerchantPosUser;
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class UpdateMerchantPosRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class UpdateMerchantPosRequest extends BaseRequest {
     private String name;
     private String hostname;
     private String clientId;

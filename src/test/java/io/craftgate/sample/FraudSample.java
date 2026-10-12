@@ -4,14 +4,19 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.FraudAction;
 import io.craftgate.model.FraudCheckStatus;
 import io.craftgate.model.FraudOperation;
+import io.craftgate.model.FraudRuleScope;
 import io.craftgate.model.FraudValueType;
 import io.craftgate.request.AddCardFingerprintFraudValueListRequest;
+import io.craftgate.request.DeleteValueListRequest;
 import io.craftgate.request.FraudValueListRequest;
+import io.craftgate.request.RemoveValueFromValueListRequest;
 import io.craftgate.request.SearchFraudChecksRequest;
 import io.craftgate.request.SearchFraudRuleRequest;
+import io.craftgate.request.UpdateFraudCheckStatusRequest;
 import io.craftgate.response.FraudAllValueListsResponse;
 import io.craftgate.response.FraudCheckListResponse;
 import io.craftgate.response.FraudRuleListResponse;
+import io.craftgate.response.FraudRuleResponse;
 import io.craftgate.response.FraudValueListResponse;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +25,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FraudSample {
 
@@ -52,7 +58,10 @@ public class FraudSample {
     @Test
     void update_fraud_check_status() {
         long fraudCheckId = 1L;
-        craftgate.fraud().updateFraudCheckStatus(fraudCheckId, FraudCheckStatus.FRAUD);
+        craftgate.fraud().updateFraudCheckStatus(UpdateFraudCheckStatusRequest.builder()
+                .id(fraudCheckId)
+                .checkStatus(FraudCheckStatus.FRAUD)
+                .build());
     }
 
     @Test
@@ -108,12 +117,17 @@ public class FraudSample {
 
     @Test
     void remove_value_from_fraud_value_list() {
-        craftgate.fraud().removeValueFromValueList("ipList", "da0150ff-10be-4cb3-b66e-efcdaaff8233");
+        craftgate.fraud().removeValueFromValueList(RemoveValueFromValueListRequest.builder()
+                .listName("ipList")
+                .valueId("da0150ff-10be-4cb3-b66e-efcdaaff8233")
+                .build());
     }
 
     @Test
     void delete_fraud_value_list() {
-        craftgate.fraud().deleteValueList("ipList");
+        craftgate.fraud().deleteValueList(DeleteValueListRequest.builder()
+                .listName("ipList")
+                .build());
     }
 
 
@@ -125,6 +139,17 @@ public class FraudSample {
         FraudRuleListResponse response = craftgate.fraud().searchRules(request);
 
         assertFalse(response.getItems().isEmpty());
+    }
+
+    @Test
+    void search_global_fraud_rules() {
+        SearchFraudRuleRequest request = SearchFraudRuleRequest.builder()
+                .scope(FraudRuleScope.GLOBAL)
+                .build();
+        FraudRuleListResponse response = craftgate.fraud().searchRules(request);
+
+        assertFalse(response.getItems().isEmpty());
+        assertTrue(response.getItems().stream().allMatch(FraudRuleResponse::getIsGlobal));
     }
 
 }

@@ -7,10 +7,14 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchWithdrawsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchWithdrawsRequest extends BaseRequest {
 
     private Long memberId;
     private Currency currency;

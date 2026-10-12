@@ -2,15 +2,18 @@ package io.craftgate.request;
 
 import io.craftgate.model.ApmType;
 import io.craftgate.model.Currency;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class InitApmDepositPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitApmDepositPaymentRequest extends BaseRequest {
 
     private ApmType apmType;
     private Long merchantApmId;
@@ -25,4 +28,5 @@ public class InitApmDepositPaymentRequest {
     private String apmUserIdentity;
     private Map<String, Object> additionalParams;
     private String clientIp;
+    private Integer clientPort;
 }

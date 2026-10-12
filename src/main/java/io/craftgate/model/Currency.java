@@ -19,5 +19,6 @@ public enum Currency {
     RUB,
     JPY,
     EGP,
-    MXN
+    MXN,
+    RON
 }

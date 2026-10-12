@@ -2,14 +2,17 @@ package io.craftgate.request;
 
 
 import io.craftgate.model.ReportFileType;
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class RetrieveDailyPaymentReportRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class RetrieveDailyPaymentReportRequest extends BaseRequest {
 
     private LocalDate reportDate;
     private ReportFileType fileType;

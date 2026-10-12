@@ -4,15 +4,18 @@ import io.craftgate.model.Currency;
 import io.craftgate.model.PaymentGroup;
 import io.craftgate.request.dto.GarantiPayInstallment;
 import io.craftgate.request.dto.PaymentItem;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class InitGarantiPayPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitGarantiPayPaymentRequest extends BaseRequest {
 
     protected BigDecimal price;
     protected BigDecimal paidPrice;
@@ -23,6 +26,7 @@ public class InitGarantiPayPaymentRequest {
     protected String externalId;
     protected String callbackUrl;
     protected String clientIp;
+    protected Integer clientPort;
     protected String paymentChannel;
     protected Long buyerMemberId;
     protected String bankOrderId;

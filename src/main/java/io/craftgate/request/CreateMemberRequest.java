@@ -2,14 +2,17 @@ package io.craftgate.request;
 
 import io.craftgate.model.MemberType;
 import io.craftgate.model.SettlementEarningsDestination;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class CreateMemberRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class CreateMemberRequest extends BaseRequest {
 
     private String memberExternalId;
     private String name;

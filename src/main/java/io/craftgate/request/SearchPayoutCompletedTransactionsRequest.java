@@ -1,14 +1,17 @@
 package io.craftgate.request;
 
 import io.craftgate.model.SettlementType;
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class SearchPayoutCompletedTransactionsRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class SearchPayoutCompletedTransactionsRequest extends BaseRequest {
 
     private Long settlementFileId;
     private SettlementType settlementType;

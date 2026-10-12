@@ -1,20 +1,25 @@
 package io.craftgate.request;
 
-import io.craftgate.model.*;
+import io.craftgate.model.Currency;
+import io.craftgate.model.PaymentGroup;
+import io.craftgate.model.PaymentMethod;
+import io.craftgate.model.PaymentSource;
 import io.craftgate.request.dto.PaymentItem;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class InitMultiPaymentRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class InitMultiPaymentRequest extends BaseRequest {
 
     private BigDecimal price;
-    private BigDecimal paidPrice;
     private Currency currency;
     private PaymentGroup paymentGroup;
     private PaymentSource paymentSource;
@@ -22,11 +27,10 @@ public class InitMultiPaymentRequest {
     private String externalId;
     private String callbackUrl;
 
-    @Builder.Default
-    protected PaymentPhase paymentPhase = PaymentPhase.AUTH;
     private String paymentChannel;
 
     private List<PaymentMethod> enabledPaymentMethods;
+    private List<Integer> enabledInstallments;
 
     private String cardUserKey;
 
@@ -48,4 +52,5 @@ public class InitMultiPaymentRequest {
     private Long ttl;
     private Integer maximumSplitPaymentCount;
     private Map<String, Object> additionalParams;
+    private Boolean retry;
 }

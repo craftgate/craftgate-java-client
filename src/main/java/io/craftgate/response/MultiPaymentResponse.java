@@ -15,7 +15,7 @@ public class MultiPaymentResponse {
     private String token;
     private String conversationId;
     private String externalId;
-    private BigDecimal paidPrice;
+    private BigDecimal price;
     private BigDecimal remainingAmount;
     private LocalDateTime tokenExpireDate;
     private Set<Long> paymentIds;

@@ -27,7 +27,7 @@ public class RequestQueryParamsBuilder {
                 field.setAccessible(true);
                 Object value = field.get(object);
 
-                if (Objects.nonNull(value)) {
+                if (Objects.nonNull(value) && !(value instanceof HeaderOptions)) {
                     query.append(field.getName()).append("=").append(URLEncoder.encode(formatValue(value), "UTF-8")).append("&");
                 }
             }

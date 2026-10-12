@@ -9,10 +9,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import io.craftgate.request.common.BaseRequest;
 
 @Data
-@Builder
-public class CreateMerchantPosRequest {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = false)
+public class CreateMerchantPosRequest extends BaseRequest {
 
     @Builder.Default
     private PosStatus status = PosStatus.AUTOPILOT;
