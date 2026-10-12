@@ -21,6 +21,7 @@ public class RetrieveLoyaltiesRequest extends BaseRequest {
     private String secureFieldsToken;
 
     private String clientIp;
+    private Integer clientPort;
     private String conversationId;
     private FraudCheckParameters fraudParams;
 }
