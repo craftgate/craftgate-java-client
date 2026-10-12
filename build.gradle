@@ -22,11 +22,34 @@ dependencies {
 test {
     useJUnitPlatform()
     exclude 'io/craftgate/sample/**'
+    systemProperty 'craftgate.expectedVersion', project.version.toString() == 'unspecified' ? 'unknown' : project.version.toString()
+}
+
+tasks.register('sampleTest', Test) {
+    description = 'Runs the samples against the Craftgate sandbox API.'
+    group = 'verification'
+    useJUnitPlatform()
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    include 'io/craftgate/sample/**'
+}
+
+if (project.hasProperty('testJavaHome')) {
+    tasks.withType(Test).configureEach {
+        executable = new File(project.property('testJavaHome').toString(), 'bin/java').absolutePath
+    }
 }
 
 java {
     withJavadocJar()
     withSourcesJar()
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('io/craftgate/craftgate-version.properties') {
+        expand(version: project.version)
+    }
 }
 
 group = 'io.craftgate'

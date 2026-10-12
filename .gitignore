@@ -6,3 +6,7 @@ build
 
 .idea
 out/
+
+# OS and IDE files
+.DS_Store
+bin/
