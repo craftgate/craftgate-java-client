@@ -12,6 +12,7 @@ public enum PosIntegrator {
     CHECKOUT,
     DENIZBANK,
     ELEKSE,
+    ENPARA,
     FIBABANK,
     FIBABANK_ASSECO,
     FINANSBANK,
