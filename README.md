@@ -12,21 +12,23 @@ This repo contains the Java client for Craftgate API.
 - Java 1.8 or newer
 
 ## Installation
+Replace `VERSION` with the latest version shown on the Maven Central badge above.
+
 Apache Maven:
-```bash
+```xml
 <dependency>
   <groupId>io.craftgate</groupId>
   <artifactId>craftgate</artifactId>
-  <version>1.0.82</version>
+  <version>VERSION</version>
 </dependency>
 ```
 Gradle Groovy DSL
 ```
-implementation 'io.craftgate:craftgate:1.0.80'
+implementation 'io.craftgate:craftgate:VERSION'
 ```
 Gradle Kotlin DSL
 ```
-implementation("io.craftgate:craftgate:1.0.80")
+implementation("io.craftgate:craftgate:VERSION")
 ```
 
 ## Usage
@@ -41,7 +43,7 @@ Craftgate craftgate = new Craftgate("<YOUR API KEY>", "<YOUR SECRET KEY>");
 
 ```
 
-By default the Craftgate client connects to the production API servers at `https://api.craftgate.io`. For testing purposes, please use the sandbox URL `https://sandbox-api.craftgate.io` using the .
+By default the Craftgate client connects to the production API servers at `https://api.craftgate.io`. For testing purposes, please use the sandbox URL `https://sandbox-api.craftgate.io`.
 
 ```java
 
@@ -51,10 +53,21 @@ Craftgate craftgate = new Craftgate("<YOUR API KEY>", "<YOUR SECRET KEY>", "http
 ```
 
 ## Examples
-Included in the project are a number of examples that cover almost all use-cases. Refer to [the `sample/` folder](./src/test/java/io/craftgate/sample)] for more info.
+Included in the project are a number of examples that cover almost all use-cases. Refer to [the `sample/` folder](./src/test/java/io/craftgate/sample) for more info.
 
 ### Running the Examples
-If you've cloned this repo on your development machine and wish to run the examples you can run an example with the command `./gradlew test` or run single test with the command `./gradlew test --tests PaymentSample.create_payment_sample`
+The examples call the sandbox API, so first replace `api-key` and `secret-key` in the sample class you want to run with your sandbox credentials.
+
+Run all examples:
+```
+./gradlew sampleTest
+```
+Run a single example:
+```
+./gradlew sampleTest --tests io.craftgate.sample.PaymentSample.create_payment
+```
+
+`./gradlew test` runs only the unit tests and does not call the API.
 
 ### Credit Card Payment Use Case
 Let's quickly review an example where we implement a credit card payment scenario.

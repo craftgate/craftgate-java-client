@@ -44,7 +44,7 @@ public abstract class BaseAdapter {
         headers.put(API_KEY_HEADER_NAME, requestOptions.getApiKey());
         headers.put(RANDOM_HEADER_NAME, randomString);
         headers.put(AUTH_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE);
-        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":1.0.82");
+        headers.put(CLIENT_VERSION_HEADER_NAME, CLIENT_VERSION_HEADER_VALUE + ":" + ClientVersion.get());
         headers.put(SIGNATURE_HEADER_NAME, prepareAuthorizationString(request, path, randomString, requestOptions));
         if (Objects.nonNull(requestOptions.getLanguage())) {
             headers.put(LANGUAGE_HEADER_NAME, requestOptions.getLanguage());

@@ -25,6 +25,7 @@ public class BaseRequestFoundationTest {
     private static final String IDEMPOTENCY_KEY_HEADER_NAME = "x-idempotency-key";
     private static final String RANDOM_HEADER_NAME = "x-rnd-key";
     private static final String SIGNATURE_HEADER_NAME = "x-signature";
+    private static final String CLIENT_VERSION_HEADER_NAME = "x-client-version";
 
     private final RequestOptions requestOptions = RequestOptions.builder()
             .apiKey("api-key")
@@ -105,6 +106,18 @@ public class BaseRequestFoundationTest {
         assertFalse(query.contains("headerOptions"));
         assertFalse(query.contains("idempotencyKey"));
         assertFalse(query.contains("idempotency-key-1"));
+    }
+
+    @Test
+    void request_sends_client_version_from_build() {
+        CreatePaymentTokenRequest request = CreatePaymentTokenRequest.builder()
+                .value("card-value")
+                .build();
+
+        Map<String, String> headers = bodyAdapter.createHeaders(request, "/payment/v1/payment-tokens", requestOptions);
+
+        String expectedVersion = System.getProperty("craftgate.expectedVersion", "unknown");
+        assertEquals("craftgate-java-client:" + expectedVersion, headers.get(CLIENT_VERSION_HEADER_NAME));
     }
 
     @Test
