@@ -1,16 +1,39 @@
-name: Craftgate Java CI
+name: Craftgate Java Release
 
 on:
-  release:
-    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (format: 1.2.3)"
+        required: true
+      publish_to_maven_central:
+        description: "Publish artifacts to Maven Central"
+        type: boolean
+        default: true
 
 jobs:
-  build-artifact:
-    name: Publish Library
+  release:
+    name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Ensure branch context
+        run: |
+          if [[ "${GITHUB_REF}" != refs/heads/* ]]; then
+            echo "::error::Release workflow must run against a branch ref."
+            exit 1
+          fi
+
+      - name: Validate version
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+        run: .github/scripts/prepare-release.sh "$INPUT_VERSION"
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v6
@@ -25,18 +48,30 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Resolve version from tag
-        env:
-          TAG_NAME: ${{ github.event.release.tag_name }}
-        run: .github/scripts/resolve-version.sh "$TAG_NAME"
+      - name: Build and test
+        run: ./gradlew clean build -Pversion="$VERSION"
 
-      - name: Build and Publish with Gradle
+      - name: Create tag
+        run: |
+          git tag "$TAG"
+          git push origin "refs/tags/$TAG"
+
+      - name: Publish to Maven Central
+        if: inputs.publish_to_maven_central == true
         run: openssl enc -aes-256-cbc -md sha256 -pass pass:${{secrets.ENC_KEY}} -d -A -in craftgate.gpg.enc -out craftgate.gpg &&
-          ./gradlew clean &&
-          ./gradlew publish -Dorg.gradle.internal.http.socketTimeout=120000 -Dorg.gradle.internal.http.connectionTimeout=120000 -Pversion=${VERSION} -PrepoUser=${{secrets.CP_TOKEN_USERNAME}} -PrepoPassword=${{secrets.CP_TOKEN_PASSWORD}} -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}}
+          ./gradlew publish -Dorg.gradle.internal.http.socketTimeout=120000 -Dorg.gradle.internal.http.connectionTimeout=120000 -Pversion="$VERSION" -PrepoUser=${{secrets.CP_TOKEN_USERNAME}} -PrepoPassword=${{secrets.CP_TOKEN_PASSWORD}} -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}}
 
       - name: Trigger deployment visibility
-        run: | 
+        if: inputs.publish_to_maven_central == true
+        run: |
           curl -i -X POST https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.craftgate \
           -H "Authorization: Bearer $(echo -n "${{secrets.CP_TOKEN_USERNAME}}:${{secrets.CP_TOKEN_PASSWORD}}" | base64)"
 
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ env.TAG }}
+          name: ${{ env.TAG }}
+          generate_release_notes: true
+          files: |
+            build/libs/*.jar
