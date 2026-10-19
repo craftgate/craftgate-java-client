@@ -11,5 +11,8 @@ public enum PaymentAuthenticationType {
     YKB_WORLD_PAY,
     YKB_WORLD_PAY_SHOPPING_LOAN,
     GARANTI_PAY,
-    JUZDAN
+    JUZDAN,
+    CARD_VERIFICATION,
+    ISPAY,
+    POS_APM
 }

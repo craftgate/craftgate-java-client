@@ -7,5 +7,6 @@ public enum PosOperationType {
     PROVRFN,
     PAYMENT,
     REFUND,
-    INQUIRY
+    INQUIRY,
+    POS_APM
 }
