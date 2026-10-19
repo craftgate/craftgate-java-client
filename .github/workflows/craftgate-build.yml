@@ -50,13 +50,13 @@ jobs:
           distribution: 'zulu'
           java-version: '8'
 
-      # Same version resolution as the release workflow, with a fake "v" prefixed tag.
-      - name: Resolve version from tag
-        run: .github/scripts/resolve-version.sh v0.0.0-dryrun
+      # Same version validation as the release workflow, with a fake "v" prefixed version.
+      - name: Validate version
+        run: .github/scripts/prepare-release.sh v9.9.9
 
       - name: Build release artifacts without signing or publishing
         run: |
-          test "$VERSION" = "0.0.0-dryrun"
+          test "$VERSION" = "9.9.9"
           ./gradlew clean test publishToMavenLocal -Pversion="$VERSION" -x signMavenJavaPublication
 
       - name: Verify the version in the artifacts
