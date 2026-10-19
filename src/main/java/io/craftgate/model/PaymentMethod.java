@@ -16,7 +16,7 @@ public enum PaymentMethod {
     PAYPAL,
     KLARNA,
     AFTERPAY,
-    INSTANT_TRANSFER,
+    COMPAY,
     STRIPE,
     HEPSIPAY,
     GARANTI_PAY,
