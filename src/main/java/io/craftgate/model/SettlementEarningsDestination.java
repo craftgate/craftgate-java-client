@@ -4,6 +4,5 @@ public enum SettlementEarningsDestination {
 
     IBAN,
     WALLET,
-    CROSS_BORDER,
     NONE
 }
