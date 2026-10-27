@@ -2233,36 +2233,6 @@ public class PaymentSample {
     }
 
     @Test
-    void approve_payment_transactions() {
-        ApprovePaymentTransactionsRequest request = ApprovePaymentTransactionsRequest.builder()
-                .isTransactional(true)
-                .paymentTransactionIds(new HashSet<Long>() {{
-                    add(1L);
-                    add(2L);
-                }})
-                .build();
-
-        PaymentTransactionApprovalListResponse response = craftgate.payment().approvePaymentTransactions(request);
-        assertNotNull(response);
-        assertEquals(2, response.getSize());
-    }
-
-    @Test
-    void disapprove_payment_transactions() {
-        DisapprovePaymentTransactionsRequest request = DisapprovePaymentTransactionsRequest.builder()
-                .isTransactional(true)
-                .paymentTransactionIds(new HashSet<Long>() {{
-                    add(1L);
-                    add(2L);
-                }})
-                .build();
-
-        PaymentTransactionApprovalListResponse response = craftgate.payment().disapprovePaymentTransactions(request);
-        assertNotNull(response);
-        assertEquals(2, response.getSize());
-    }
-
-    @Test
     void create_pre_auth_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
@@ -2403,19 +2373,6 @@ public class PaymentSample {
         assertNull(response.getCardUserKey());
         assertNull(response.getCardToken());
         assertNull(response.getPaymentError());
-    }
-
-    @Test
-    void update_payment_transaction() {
-        UpdatePaymentTransactionRequest request = UpdatePaymentTransactionRequest.builder()
-                .paymentTransactionId(10L)
-                .subMerchantMemberId(1L)
-                .subMerchantMemberPrice(BigDecimal.TEN)
-                .build();
-
-        PaymentTransactionResponse response = craftgate.payment().updatePaymentTransaction(request);
-        assertEquals(request.getSubMerchantMemberId(), response.getSubMerchantMemberId());
-        assertEquals(request.getSubMerchantMemberPrice().doubleValue(), response.getSubMerchantMemberPrice().doubleValue());
     }
 
     @Test

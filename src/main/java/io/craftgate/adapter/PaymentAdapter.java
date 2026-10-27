@@ -219,24 +219,6 @@ public class PaymentAdapter extends BaseAdapter {
                 verifyCardRequest, VerifyCardResponse.class);
     }
 
-    public PaymentTransactionApprovalListResponse approvePaymentTransactions(ApprovePaymentTransactionsRequest approvePaymentTransactionsRequest) {
-        String path = "/payment/v1/payment-transactions/approve";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(approvePaymentTransactionsRequest, path, requestOptions),
-                approvePaymentTransactionsRequest, PaymentTransactionApprovalListResponse.class);
-    }
-
-    public PaymentTransactionApprovalListResponse disapprovePaymentTransactions(DisapprovePaymentTransactionsRequest disapprovePaymentTransactionsRequest) {
-        String path = "/payment/v1/payment-transactions/disapprove";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(disapprovePaymentTransactionsRequest, path, requestOptions),
-                disapprovePaymentTransactionsRequest, PaymentTransactionApprovalListResponse.class);
-    }
-
-    public PaymentTransactionResponse updatePaymentTransaction(UpdatePaymentTransactionRequest updatePaymentTransactionRequest) {
-        String path = "/payment/v1/payment-transactions/" + updatePaymentTransactionRequest.getPaymentTransactionId();
-        return HttpClient.put(requestOptions.getBaseUrl() + path, createHeaders(updatePaymentTransactionRequest, path, requestOptions),
-                updatePaymentTransactionRequest, PaymentTransactionResponse.class);
-    }
-
     public Object createApplePayMerchantSession(ApplePayMerchantSessionCreateRequest applePayMerchantSessionCreateRequest) {
         String path = "/payment/v1/apple-pay/merchant-sessions";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(applePayMerchantSessionCreateRequest, path, requestOptions),

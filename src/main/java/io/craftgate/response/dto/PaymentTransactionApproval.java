@@ -9,4 +9,5 @@ public class PaymentTransactionApproval {
     private Long paymentTransactionId;
     private ApprovalStatus approvalStatus;
     private String failedReason;
+    private String failedReasonCode;
 }

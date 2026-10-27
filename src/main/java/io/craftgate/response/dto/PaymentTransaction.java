@@ -17,12 +17,8 @@ public class PaymentTransaction {
     private BigDecimal walletPrice;
     private BigDecimal merchantCommissionRate;
     private BigDecimal merchantCommissionRateAmount;
-    private BigDecimal merchantPayoutAmount;
     private Long subMerchantMemberId;
     private BigDecimal subMerchantMemberPrice;
-    private BigDecimal subMerchantMemberPayoutRate;
-    private BigDecimal subMerchantMemberPayoutAmount;
     private TransactionStatus transactionStatus;
     private LocalDateTime blockageResolvedDate;
-    private Payout payout;
 }
