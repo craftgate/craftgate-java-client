@@ -11,6 +11,7 @@ public class PayoutRow {
     private String name;
     private String iban;
     private Long payoutId;
+    private Long settlementRowId;
     private Long merchantId;
     private String merchantType;
     private BigDecimal payoutAmount;
