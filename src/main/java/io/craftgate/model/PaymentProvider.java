@@ -30,7 +30,6 @@ public enum PaymentProvider {
     TOM_FINANCE,
     ALFABANK,
     ZIP,
-    DKB,
     HASO,
     PAYCELL,
     MULTINET,
@@ -44,5 +43,11 @@ public enum PaymentProvider {
     PAPEL,
     ALBARAKA,
     BKM_EXPRESS,
-    OFFLINE
+    OFFLINE,
+    CECABANK_BIZUM,
+    COMPAY,
+    ISBANK_IDEAL,
+    KARACA_FINANS,
+    PAYGURU,
+    PAYLANDS_BIZUM
 }
