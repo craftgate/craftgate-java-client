@@ -4,7 +4,6 @@ public enum PaymentAuthenticationType {
 
     THREE_DS,
     NON_THREE_DS,
-    BKM_EXPRESS,
     THREE_DS_FALLBACK_TO_NON_THREE_DS,
     GOOGLEPAY,
     APPLEPAY,

@@ -11,23 +11,6 @@ public class BkmExpressPaymentAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    public InitBkmExpressResponse init(InitBkmExpressRequest initBkmExpressRequest) {
-        String path = "/payment/v1/bkm-express/init";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(initBkmExpressRequest, path, requestOptions),
-                initBkmExpressRequest, InitBkmExpressResponse.class);
-    }
-
-    public PaymentResponse complete(CompleteBkmExpressRequest completeRequest) {
-        String path = "/payment/v1/bkm-express/complete";
-        return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(completeRequest, path, requestOptions),
-                completeRequest, PaymentResponse.class);
-    }
-
-    public PaymentResponse retrievePaymentByToken(String token) {
-        String path = "/payment/v1/bkm-express/" + token;
-        return HttpClient.get(requestOptions.getBaseUrl() + path, createHeaders(path, requestOptions), PaymentResponse.class);
-    }
-
     public BkmExpressGenerateTokenResponse generateToken(BkmExpressGenerateTokenRequest bkmExpressGenerateTokenRequest) {
         String path = "/payment/v2/bkm-express/generate-token";
         return HttpClient.post(requestOptions.getBaseUrl() + path, createHeaders(bkmExpressGenerateTokenRequest, path, requestOptions),
