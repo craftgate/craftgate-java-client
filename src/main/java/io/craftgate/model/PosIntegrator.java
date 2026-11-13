@@ -43,6 +43,7 @@ public enum PosIntegrator {
     QNB_PAY,
     REDSYS,
     RUBIK,
+    SAGLAMPAY,
     SIPAY,
     STRIPE,
     TAMI,
