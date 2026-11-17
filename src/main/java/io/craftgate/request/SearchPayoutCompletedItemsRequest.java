@@ -11,7 +11,7 @@ import io.craftgate.request.common.BaseRequest;
 @Data
 @SuperBuilder
 @EqualsAndHashCode(callSuper = false)
-public class SearchPayoutCompletedTransactionsRequest extends BaseRequest {
+public class SearchPayoutCompletedItemsRequest extends BaseRequest {
 
     private Long settlementFileId;
     private SettlementType settlementType;
