@@ -1,6 +1,7 @@
 package io.craftgate.adapter;
 
 import io.craftgate.net.HttpClient;
+import io.craftgate.request.CreateReportFromTemplateRequest;
 import io.craftgate.request.CreateReportRequest;
 import io.craftgate.request.RetrieveDailyPaymentReportRequest;
 import io.craftgate.request.RetrieveDailyTransactionReportRequest;
@@ -8,6 +9,7 @@ import io.craftgate.request.RetrieveReportRequest;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.common.RequestQueryParamsBuilder;
 import io.craftgate.response.ReportDemandResponse;
+import io.craftgate.response.ReportFromTemplateResponse;
 
 import java.util.Map;
 
@@ -43,6 +45,15 @@ public class FileReportingAdapter extends BaseAdapter {
                 headers,
                 request,
                 ReportDemandResponse.class);
+    }
+
+    public ReportFromTemplateResponse createReportFromTemplate(Long templateId, CreateReportFromTemplateRequest request) {
+        String path = "/file-reporting/v1/report-templates/" + templateId + "/reports";
+        Map<String, String> headers = createHeaders(request, path, requestOptions);
+        return HttpClient.post(requestOptions.getBaseUrl() + path,
+                headers,
+                request,
+                ReportFromTemplateResponse.class);
     }
 
     public byte[] retrieveReport(RetrieveReportRequest retrieveReportRequest, Long reportId) {

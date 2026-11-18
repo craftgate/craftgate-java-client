@@ -2,15 +2,19 @@ package io.craftgate.sample;
 
 import io.craftgate.Craftgate;
 import io.craftgate.model.ReportFileType;
+import io.craftgate.request.CreateReportFromTemplateRequest;
 import io.craftgate.request.CreateReportRequest;
 import io.craftgate.request.RetrieveDailyPaymentReportRequest;
 import io.craftgate.request.RetrieveDailyTransactionReportRequest;
 import io.craftgate.request.RetrieveReportRequest;
+import io.craftgate.request.dto.ReportFilter;
 import io.craftgate.response.ReportDemandResponse;
+import io.craftgate.response.ReportFromTemplateResponse;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.EnumSet;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -48,6 +52,18 @@ public class FileReportingSample {
                 .build();
 
         ReportDemandResponse response = craftgate.fileReporting().createReport(request);
+        assertNotNull(response);
+        assertNotNull(response.getId());
+    }
+
+    @Test
+    void create_report_from_template() {
+        CreateReportFromTemplateRequest request = CreateReportFromTemplateRequest.builder()
+                .filter(ReportFilter.reportDate(LocalDateTime.now().minusDays(2), LocalDateTime.now()))
+                .fileFormats(EnumSet.of(ReportFileType.CSV))
+                .build();
+
+        ReportFromTemplateResponse response = craftgate.fileReporting().createReportFromTemplate(7L, request);
         assertNotNull(response);
         assertNotNull(response.getId());
     }

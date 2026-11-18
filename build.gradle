@@ -12,8 +12,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'commons-codec:commons-codec:1.15'
 
-    compileOnly "org.projectlombok:lombok:1.18.4"
-    annotationProcessor("org.projectlombok:lombok:1.18.4")
+    compileOnly "org.projectlombok:lombok:1.18.38"
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
