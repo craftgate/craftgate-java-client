@@ -28,6 +28,7 @@ public enum PaymentMethod {
     MULTINET_NEO_GIFT,
     METROPOL,
     ISPAY,
+    ISPAY_POS_APM,
     PAYMOB,
     VODAFONE_DCB,
     KASPI,
