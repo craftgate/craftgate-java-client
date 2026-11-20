@@ -2,6 +2,9 @@ name: Craftgate Java CI
 
 on: [ push, pull_request ]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -12,12 +15,12 @@ jobs:
     name: Build with Java ${{ matrix.java-version }}
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       # The library is compiled with Java 8 (the last listed version becomes JAVA_HOME);
       # the tests run on the matrix version.
       - name: Set up JDK ${{ matrix.java-version }} and JDK 8
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6
         with:
           distribution: 'zulu'
           java-version: |
@@ -25,7 +28,7 @@ jobs:
             8
 
       - name: Cache Gradle packages
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
@@ -42,10 +45,10 @@ jobs:
     name: Release dry run
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Set up JDK 8
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6
         with:
           distribution: 'zulu'
           java-version: '8'
