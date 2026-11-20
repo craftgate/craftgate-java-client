@@ -8,21 +8,13 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.time.Clock;
 import java.time.Duration;
 import java.util.Objects;
 
 public class HookAdapter extends BaseAdapter {
 
-    private final Clock clock;
-
     public HookAdapter(RequestOptions requestOptions) {
-        this(requestOptions, Clock.systemUTC());
-    }
-
-    HookAdapter(RequestOptions requestOptions, Clock clock) {
         super(requestOptions);
-        this.clock = clock;
     }
 
     /**
@@ -30,8 +22,7 @@ public class HookAdapter extends BaseAdapter {
      * prefer {@link #isWebhookVerified(String, String, WebhookData, Duration)} and ignore payloadIds already processed.
      */
     public boolean isWebhookVerified(String merchantHookKey, String incomingSignature, WebhookData webhookData) {
-        if (Objects.isNull(merchantHookKey) || Objects.isNull(incomingSignature) || Objects.isNull(webhookData)
-                || Objects.isNull(webhookData.getEventTimestamp())) {
+        if (Objects.isNull(merchantHookKey) || Objects.isNull(incomingSignature) || Objects.isNull(webhookData)) {
             return false;
         }
 
@@ -40,13 +31,14 @@ public class HookAdapter extends BaseAdapter {
         if (Objects.isNull(signature)) {
             return false;
         }
+        // Constant time comparison so the signature cannot be guessed by measuring response times.
         return MessageDigest.isEqual(
                 signature.getBytes(StandardCharsets.UTF_8),
                 incomingSignature.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
-     * Verifies the webhook signature and rejects webhooks whose eventTimestamp is further than
+     * Verifies the webhook signature and also rejects webhooks whose eventTimestamp (epoch seconds) is further than
      * {@code tolerance} away from the current time, which limits replaying captured webhooks.
      */
     public boolean isWebhookVerified(String merchantHookKey, String incomingSignature, WebhookData webhookData, Duration tolerance) {
@@ -56,9 +48,8 @@ public class HookAdapter extends BaseAdapter {
         if (!isWebhookVerified(merchantHookKey, incomingSignature, webhookData)) {
             return false;
         }
-        long nowInSeconds = clock.millis() / 1000;
-        long ageInSeconds = Math.abs(nowInSeconds - webhookData.getEventTimestamp());
-        return ageInSeconds <= tolerance.getSeconds();
+        long nowInSeconds = System.currentTimeMillis() / 1000;
+        return Math.abs(nowInSeconds - webhookData.getEventTimestamp()) <= tolerance.getSeconds();
     }
 
     private String generateHash(String merchantHookKey, String data) {

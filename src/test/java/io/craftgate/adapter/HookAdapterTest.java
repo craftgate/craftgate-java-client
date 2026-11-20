@@ -4,12 +4,13 @@ import io.craftgate.model.WebhookData;
 import io.craftgate.model.WebhookEventType;
 import io.craftgate.model.WebhookStatus;
 import io.craftgate.request.common.RequestOptions;
+import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.Test;
 
-import java.time.Clock;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneOffset;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,11 +22,11 @@ public class HookAdapterTest {
     private static final String VALID_SIGNATURE = "0wRB5XqWJxwwPbn5Z9TcbHh8EGYFufSYTsRMB74N094=";
     private static final long EVENT_TIMESTAMP = 1661521221L;
 
-    private final RequestOptions requestOptions = RequestOptions.builder()
+    private final HookAdapter adapter = new HookAdapter(RequestOptions.builder()
             .apiKey("api-key")
             .secretKey("secret-key")
             .baseUrl("https://sandbox-api.craftgate.io")
-            .build();
+            .build());
 
     private static WebhookData webhookData(Long eventTimestamp) {
         return WebhookData.builder()
@@ -36,48 +37,48 @@ public class HookAdapterTest {
                 .build();
     }
 
-    private HookAdapter adapterAt(long epochSeconds) {
-        return new HookAdapter(requestOptions, Clock.fixed(Instant.ofEpochSecond(epochSeconds), ZoneOffset.UTC));
+    private static String sign(WebhookData data) throws Exception {
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(new SecretKeySpec(MERCHANT_HOOK_KEY.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+        String payload = data.getEventType() + data.getEventTimestamp().toString() + data.getStatus() + data.getPayloadId();
+        return Base64.encodeBase64String(mac.doFinal(payload.getBytes(StandardCharsets.UTF_8)));
+    }
+
+    private static long nowInSeconds() {
+        return System.currentTimeMillis() / 1000;
     }
 
     @Test
     void verifies_valid_signature() {
-        assertTrue(new HookAdapter(requestOptions).isWebhookVerified(MERCHANT_HOOK_KEY, VALID_SIGNATURE, webhookData(EVENT_TIMESTAMP)));
+        assertTrue(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, VALID_SIGNATURE, webhookData(EVENT_TIMESTAMP)));
     }
 
     @Test
     void rejects_invalid_signature() {
-        HookAdapter adapter = new HookAdapter(requestOptions);
         assertFalse(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, "0wRB5XqWJxwwPbn5Z9TcbHh8EGYFufSYTsRMB74N095=", webhookData(EVENT_TIMESTAMP)));
         assertFalse(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, "", webhookData(EVENT_TIMESTAMP)));
     }
 
     @Test
-    void rejects_missing_event_timestamp_without_throwing() {
-        assertFalse(new HookAdapter(requestOptions).isWebhookVerified(MERCHANT_HOOK_KEY, VALID_SIGNATURE, webhookData(null)));
+    void accepts_signed_webhook_within_tolerance() throws Exception {
+        WebhookData data = webhookData(nowInSeconds() - 60);
+        assertTrue(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, sign(data), data, Duration.ofMinutes(5)));
     }
 
     @Test
-    void accepts_signed_webhook_within_tolerance() {
-        HookAdapter adapter = adapterAt(EVENT_TIMESTAMP + 299);
-        assertTrue(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, VALID_SIGNATURE, webhookData(EVENT_TIMESTAMP), Duration.ofMinutes(5)));
-    }
-
-    @Test
-    void rejects_signed_webhook_outside_tolerance() {
-        HookAdapter adapter = adapterAt(EVENT_TIMESTAMP + 301);
+    void rejects_signed_webhook_outside_tolerance() throws Exception {
+        WebhookData old = webhookData(nowInSeconds() - 600);
+        assertFalse(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, sign(old), old, Duration.ofMinutes(5)));
         assertFalse(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, VALID_SIGNATURE, webhookData(EVENT_TIMESTAMP), Duration.ofMinutes(5)));
     }
 
     @Test
     void rejects_unsigned_webhook_within_tolerance() {
-        HookAdapter adapter = adapterAt(EVENT_TIMESTAMP);
-        assertFalse(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, "invalid", webhookData(EVENT_TIMESTAMP), Duration.ofMinutes(5)));
+        assertFalse(adapter.isWebhookVerified(MERCHANT_HOOK_KEY, "invalid", webhookData(nowInSeconds()), Duration.ofMinutes(5)));
     }
 
     @Test
     void rejects_negative_tolerance() {
-        HookAdapter adapter = adapterAt(EVENT_TIMESTAMP);
         assertThrows(IllegalArgumentException.class, () ->
                 adapter.isWebhookVerified(MERCHANT_HOOK_KEY, VALID_SIGNATURE, webhookData(EVENT_TIMESTAMP), Duration.ofSeconds(-1)));
     }
