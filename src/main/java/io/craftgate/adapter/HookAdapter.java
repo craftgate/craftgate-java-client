@@ -8,7 +8,6 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.time.Duration;
 import java.util.Objects;
 
 public class HookAdapter extends BaseAdapter {
@@ -17,10 +16,6 @@ public class HookAdapter extends BaseAdapter {
         super(requestOptions);
     }
 
-    /**
-     * Verifies the webhook signature only. It does not protect against replayed webhooks;
-     * prefer {@link #isWebhookVerified(String, String, WebhookData, Duration)} and ignore payloadIds already processed.
-     */
     public boolean isWebhookVerified(String merchantHookKey, String incomingSignature, WebhookData webhookData) {
         if (Objects.isNull(merchantHookKey) || Objects.isNull(incomingSignature) || Objects.isNull(webhookData)) {
             return false;
@@ -35,21 +30,6 @@ public class HookAdapter extends BaseAdapter {
         return MessageDigest.isEqual(
                 signature.getBytes(StandardCharsets.UTF_8),
                 incomingSignature.getBytes(StandardCharsets.UTF_8));
-    }
-
-    /**
-     * Verifies the webhook signature and also rejects webhooks whose eventTimestamp (epoch seconds) is further than
-     * {@code tolerance} away from the current time, which limits replaying captured webhooks.
-     */
-    public boolean isWebhookVerified(String merchantHookKey, String incomingSignature, WebhookData webhookData, Duration tolerance) {
-        if (Objects.isNull(tolerance) || tolerance.isNegative()) {
-            throw new IllegalArgumentException("tolerance must be a non-negative duration");
-        }
-        if (!isWebhookVerified(merchantHookKey, incomingSignature, webhookData)) {
-            return false;
-        }
-        long nowInSeconds = System.currentTimeMillis() / 1000;
-        return Math.abs(nowInSeconds - webhookData.getEventTimestamp()) <= tolerance.getSeconds();
     }
 
     private String generateHash(String merchantHookKey, String data) {
