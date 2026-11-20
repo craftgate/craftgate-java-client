@@ -3,6 +3,7 @@ package io.craftgate.request;
 import io.craftgate.model.CardVerificationAuthType;
 import io.craftgate.model.Currency;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import lombok.experimental.SuperBuilder;
@@ -18,6 +19,7 @@ public class InitCheckoutCardVerifyRequest extends BaseRequest {
     private Currency currency;
     private String conversationId;
     private String callbackUrl;
+    @ToString.Exclude
     private String cardUserKey;
     private CardVerificationAuthType paymentAuthenticationType;
     private Long ttl;

@@ -8,6 +8,7 @@ import lombok.ToString;
 @Builder
 public class RequestOptions {
 
+    @ToString.Exclude
     private String apiKey;
     @ToString.Exclude
     private String secretKey;

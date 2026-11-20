@@ -9,6 +9,7 @@ import lombok.ToString;
 public class MerchantPosUser {
 
     private Long id;
+    @ToString.Exclude
     private String posUsername;
     @ToString.Exclude
     private String posPassword;

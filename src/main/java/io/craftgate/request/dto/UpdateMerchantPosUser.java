@@ -10,6 +10,7 @@ import lombok.ToString;
 @Builder
 public class UpdateMerchantPosUser {
     private Long id;
+    @ToString.Exclude
     private String posUsername;
     @ToString.Exclude
     private String posPassword;

@@ -7,6 +7,7 @@ import lombok.ToString;
 public class MerchantApiCredential {
 
     private String name;
+    @ToString.Exclude
     private String apiKey;
     @ToString.Exclude
     private String secretKey;

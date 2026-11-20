@@ -14,11 +14,15 @@ import lombok.experimental.SuperBuilder;
 public class RetrieveLoyaltiesRequest extends BaseRequest {
     @ToString.Exclude
     private String cardNumber;
+    @ToString.Exclude
     private String expireYear;
+    @ToString.Exclude
     private String expireMonth;
     @ToString.Exclude
     private String cvc;
+    @ToString.Exclude
     private String cardUserKey;
+    @ToString.Exclude
     private String cardToken;
     private String secureFieldsToken;
     private Integer installment;

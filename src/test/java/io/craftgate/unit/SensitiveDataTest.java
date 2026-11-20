@@ -9,6 +9,7 @@ import io.craftgate.request.common.Jsons;
 import io.craftgate.request.common.RequestOptions;
 import io.craftgate.request.dto.Card;
 import io.craftgate.request.dto.CreateMerchantPosUser;
+import io.craftgate.request.dto.EncryptedCard;
 import io.craftgate.request.dto.VerifyCard;
 import org.junit.jupiter.api.Test;
 
@@ -30,14 +31,33 @@ public class SensitiveDataTest {
 
     @Test
     void card_to_string_hides_card_number_and_cvc_but_json_keeps_them() {
-        Card card = Card.builder().cardHolderName("Haluk Demir").cardNumber(CARD_NUMBER).cvc(CVC).build();
-        assertFalse(card.toString().contains(CARD_NUMBER));
-        assertFalse(card.toString().contains(CVC));
-        assertTrue(card.toString().contains("Haluk Demir"));
+        Card card = Card.builder()
+                .cardHolderName("Haluk Demir")
+                .cardNumber(CARD_NUMBER)
+                .cvc(CVC)
+                .expireYear("2044")
+                .expireMonth("07")
+                .cardUserKey("card-user-key")
+                .cardToken("card-token")
+                .encryptedCard(EncryptedCard.builder().cardData("encrypted-data").build())
+                .cardAlias("my-card")
+                .build();
+        String text = card.toString();
+        for (String hidden : new String[]{CARD_NUMBER, CVC, "Haluk Demir", "2044", "07", "card-user-key", "card-token", "encrypted-data"}) {
+            assertFalse(text.contains(hidden), hidden);
+        }
+        assertTrue(text.contains("my-card"));
 
         String json = Jsons.getGson().toJson(card);
-        assertTrue(json.contains(CARD_NUMBER));
-        assertTrue(json.contains(CVC));
+        for (String sent : new String[]{CARD_NUMBER, CVC, "Haluk Demir", "2044", "card-user-key", "card-token", "encrypted-data"}) {
+            assertTrue(json.contains(sent), sent);
+        }
+    }
+
+    @Test
+    void credentials_and_pos_usernames_are_hidden() {
+        assertFalse(RequestOptions.builder().apiKey("my-api-key").build().toString().contains("my-api-key"));
+        assertFalse(CreateMerchantPosUser.builder().posUsername("pos-user").build().toString().contains("pos-user"));
     }
 
     @Test
