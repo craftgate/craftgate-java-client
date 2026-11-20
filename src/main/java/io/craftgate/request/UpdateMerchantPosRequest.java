@@ -4,6 +4,7 @@ import io.craftgate.model.CardAssociation;
 import io.craftgate.model.PaymentAuthenticationType;
 import io.craftgate.request.dto.UpdateMerchantPosUser;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 import lombok.experimental.SuperBuilder;
@@ -24,6 +25,7 @@ public class UpdateMerchantPosRequest extends BaseRequest {
     private String terminalId;
     private String threedsPosnetId;
     private String threedsTerminalId;
+    @ToString.Exclude
     private String threedsKey;
     private String threedsPath;
     private Boolean enableForeignCard;
