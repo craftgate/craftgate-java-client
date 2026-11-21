@@ -63,4 +63,12 @@ public class FileReportingAdapter extends BaseAdapter {
         headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
         return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
     }
+
+    public byte[] downloadReport(RetrieveReportRequest request, Long reportId) {
+        String query = RequestQueryParamsBuilder.buildQueryParam(request);
+        String path = "/file-reporting/v1/reports/" + reportId + "/download" + query;
+        Map<String, String> headers = createHeadersWithoutBody(request, path, requestOptions);
+        headers.put(CONTENT_TYPE, APPLICATION_OCTET_STREAM);
+        return HttpClient.get(requestOptions.getBaseUrl() + path, headers, byte[].class);
+    }
 }

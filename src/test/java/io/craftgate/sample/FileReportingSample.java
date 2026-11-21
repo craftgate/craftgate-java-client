@@ -69,6 +69,16 @@ public class FileReportingSample {
     }
 
     @Test
+    void download_report() {
+        RetrieveReportRequest request = RetrieveReportRequest.builder()
+                .fileType(ReportFileType.CSV)
+                .build();
+
+        String response = new String(craftgate.fileReporting().downloadReport(request, 1L));
+        assertNotNull(response);
+    }
+
+    @Test
     void retrieve_report() {
         RetrieveReportRequest retrieveReportRequest = RetrieveReportRequest.builder()
                 .fileType(ReportFileType.CSV)
