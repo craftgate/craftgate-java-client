@@ -3,9 +3,6 @@ package io.craftgate;
 import io.craftgate.adapter.*;
 import io.craftgate.request.common.RequestOptions;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 public class Craftgate {
 
     private static final String BASE_URL = "https://api.craftgate.io";
@@ -43,7 +40,7 @@ public class Craftgate {
         RequestOptions requestOptions = RequestOptions.builder()
                 .apiKey(apiKey)
                 .secretKey(secretKey)
-                .baseUrl(requireSecureBaseUrl(baseUrl))
+                .baseUrl(baseUrl)
                 .language(language)
                 .build();
 
@@ -66,40 +63,6 @@ public class Craftgate {
         this.juzdanPaymentAdapter = new JuzdanPaymentAdapter(requestOptions);
         this.bkmExpressPaymentAdapter = new BkmExpressPaymentAdapter(requestOptions);
         this.mealVoucherCardTokenizationAdapter = new MealVoucherCardTokenizationAdapter(requestOptions);
-    }
-
-    /**
-     * Credentials and card data must not travel in plain text, so only https base URLs are accepted.
-     * Plain http is allowed for loopback hosts to keep local test servers usable.
-     */
-    private static String requireSecureBaseUrl(String baseUrl) {
-        if (baseUrl == null) {
-            throw new IllegalArgumentException("baseUrl must not be null");
-        }
-        URI uri;
-        try {
-            uri = new URI(baseUrl);
-        } catch (URISyntaxException e) {
-            throw new IllegalArgumentException("baseUrl is not a valid URL", e);
-        }
-        String scheme = uri.getScheme();
-        String host = uri.getHost();
-        if (host == null) {
-            throw new IllegalArgumentException("baseUrl is not a valid URL");
-        }
-        if ("https".equalsIgnoreCase(scheme)) {
-            return baseUrl;
-        }
-        if ("http".equalsIgnoreCase(scheme) && isLoopbackHost(host)) {
-            return baseUrl;
-        }
-        throw new IllegalArgumentException("baseUrl must use https");
-    }
-
-    private static boolean isLoopbackHost(String host) {
-        return "localhost".equalsIgnoreCase(host)
-                || "127.0.0.1".equals(host)
-                || "[::1]".equals(host);
     }
 
     public PaymentAdapter payment() {
