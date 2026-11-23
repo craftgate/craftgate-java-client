@@ -7,6 +7,7 @@ import org.apache.commons.codec.binary.Base64;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.Objects;
 
 public class HookAdapter extends BaseAdapter {
@@ -22,7 +23,13 @@ public class HookAdapter extends BaseAdapter {
 
         String data = webhookData.getEventType() + webhookData.getEventTimestamp().toString() + webhookData.getStatus() + webhookData.getPayloadId();
         String signature = generateHash(merchantHookKey, data);
-        return incomingSignature.equals(signature);
+        if (Objects.isNull(signature)) {
+            return false;
+        }
+        // Constant time comparison so the signature cannot be guessed by measuring response times.
+        return MessageDigest.isEqual(
+                signature.getBytes(StandardCharsets.UTF_8),
+                incomingSignature.getBytes(StandardCharsets.UTF_8));
     }
 
     private String generateHash(String merchantHookKey, String data) {

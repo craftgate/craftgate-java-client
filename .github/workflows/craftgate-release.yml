@@ -19,14 +19,14 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
 
-      - name: Ensure branch context
+      - name: Ensure master branch
         run: |
-          if [[ "${GITHUB_REF}" != refs/heads/* ]]; then
-            echo "::error::Release workflow must run against a branch ref."
+          if [[ "${GITHUB_REF}" != "refs/heads/master" ]]; then
+            echo "::error::Release workflow must run against the master branch, got '${GITHUB_REF}'."
             exit 1
           fi
 
@@ -36,13 +36,13 @@ jobs:
         run: .github/scripts/prepare-release.sh "$INPUT_VERSION"
 
       - name: Set up JDK 1.8
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6
         with:
           distribution: 'zulu'
           java-version: '8'
 
       - name: Cache Gradle packages
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
@@ -56,19 +56,36 @@ jobs:
           git tag "$TAG"
           git push origin "refs/tags/$TAG"
 
+      # Secrets are passed through env instead of being interpolated into the script text.
       - name: Publish to Maven Central
         if: inputs.publish_to_maven_central == true
-        run: openssl enc -aes-256-cbc -md sha256 -pass pass:${{secrets.ENC_KEY}} -d -A -in craftgate.gpg.enc -out craftgate.gpg &&
-          ./gradlew publish -Dorg.gradle.internal.http.socketTimeout=120000 -Dorg.gradle.internal.http.connectionTimeout=120000 -Pversion="$VERSION" -PrepoUser=${{secrets.CP_TOKEN_USERNAME}} -PrepoPassword=${{secrets.CP_TOKEN_PASSWORD}} -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}}
+        env:
+          ENC_KEY: ${{ secrets.ENC_KEY }}
+          CP_TOKEN_USERNAME: ${{ secrets.CP_TOKEN_USERNAME }}
+          CP_TOKEN_PASSWORD: ${{ secrets.CP_TOKEN_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+        run: |
+          openssl enc -aes-256-cbc -md sha256 -pass env:ENC_KEY -d -A -in craftgate.gpg.enc -out craftgate.gpg
+          ./gradlew publish -Dorg.gradle.internal.http.socketTimeout=120000 -Dorg.gradle.internal.http.connectionTimeout=120000 -Pversion="$VERSION" \
+            -PrepoUser="$CP_TOKEN_USERNAME" -PrepoPassword="$CP_TOKEN_PASSWORD" \
+            -Psigning.keyId="$SIGNING_KEY_ID" -Psigning.password="$SIGNING_PASSWORD"
+
+      - name: Remove decrypted signing key
+        if: always()
+        run: rm -f craftgate.gpg
 
       - name: Trigger deployment visibility
         if: inputs.publish_to_maven_central == true
+        env:
+          CP_TOKEN_USERNAME: ${{ secrets.CP_TOKEN_USERNAME }}
+          CP_TOKEN_PASSWORD: ${{ secrets.CP_TOKEN_PASSWORD }}
         run: |
           curl -i -X POST https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.craftgate \
-          -H "Authorization: Bearer $(echo -n "${{secrets.CP_TOKEN_USERNAME}}:${{secrets.CP_TOKEN_PASSWORD}}" | base64)"
+            -H "Authorization: Bearer $(printf '%s:%s' "$CP_TOKEN_USERNAME" "$CP_TOKEN_PASSWORD" | base64 -w0)"
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3
         with:
           tag_name: ${{ env.TAG }}
           name: v${{ env.VERSION }}
