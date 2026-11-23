@@ -6,7 +6,6 @@ import io.craftgate.model.PaymentMethod;
 import io.craftgate.model.PaymentSource;
 import io.craftgate.request.dto.PaymentItem;
 import lombok.Data;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,7 +32,6 @@ public class InitMultiPaymentRequest extends BaseRequest {
     private List<PaymentMethod> enabledPaymentMethods;
     private List<Integer> enabledInstallments;
 
-    @ToString.Exclude
     private String cardUserKey;
 
     private Long buyerMemberId;

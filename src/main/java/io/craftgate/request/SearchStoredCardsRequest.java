@@ -5,7 +5,6 @@ import io.craftgate.model.CardExpiryStatus;
 import io.craftgate.model.CardType;
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 import lombok.experimental.SuperBuilder;
@@ -20,9 +19,7 @@ public class SearchStoredCardsRequest extends BaseRequest {
     private String cardAlias;
     private String cardBrand;
     private CardType cardType;
-    @ToString.Exclude
     private String cardUserKey;
-    @ToString.Exclude
     private String cardToken;
     private String cardBankName;
     private CardAssociation cardAssociation;

@@ -7,7 +7,6 @@ import io.craftgate.model.PosStatus;
 import io.craftgate.request.dto.CreateMerchantPosUser;
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.List;
 import lombok.experimental.SuperBuilder;
@@ -28,7 +27,6 @@ public class CreateMerchantPosRequest extends BaseRequest {
     private String terminalId;
     private String threedsPosnetId;
     private String threedsTerminalId;
-    @ToString.Exclude
     private String threedsKey;
     private Boolean enableForeignCard;
     private Boolean enableInstallment;

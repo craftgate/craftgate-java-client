@@ -5,7 +5,6 @@ import io.craftgate.model.PaymentStatus;
 import io.craftgate.model.PaymentType;
 import io.craftgate.response.dto.WalletTransaction;
 import lombok.Data;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -27,9 +26,7 @@ public class DepositPaymentResponse {
     private PaymentType paymentType;
     private LocalDateTime createdDate;
     private PaymentStatus paymentStatus;
-    @ToString.Exclude
     private String cardUserKey;
-    @ToString.Exclude
     private String cardToken;
     private WalletTransaction walletTransaction;
     private Long fraudId;

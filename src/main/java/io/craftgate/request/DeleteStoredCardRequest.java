@@ -1,7 +1,6 @@
 package io.craftgate.request;
 
 import lombok.Data;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.EqualsAndHashCode;
 import io.craftgate.request.common.BaseRequest;
@@ -11,8 +10,6 @@ import io.craftgate.request.common.BaseRequest;
 @EqualsAndHashCode(callSuper = false)
 public class DeleteStoredCardRequest extends BaseRequest {
 
-    @ToString.Exclude
     private String cardUserKey;
-    @ToString.Exclude
     private String cardToken;
 }

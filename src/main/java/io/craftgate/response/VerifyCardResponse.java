@@ -3,15 +3,12 @@ package io.craftgate.response;
 import io.craftgate.model.CardVerifyStatus;
 import io.craftgate.model.RefundStatus;
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class VerifyCardResponse {
 
 
-    @ToString.Exclude
     private String cardUserKey;
-    @ToString.Exclude
     private String cardToken;
     private String htmlContent;
     private String redirectUrl;

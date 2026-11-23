@@ -4,7 +4,6 @@ import io.craftgate.model.*;
 import io.craftgate.response.dto.MerchantPos;
 import io.craftgate.response.dto.PaymentError;
 import lombok.Data;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -42,7 +41,6 @@ public class BasePaymentResponse {
     private String transId;
     private Integer mdStatus;
     private String orderId;
-    @ToString.Exclude
     private String cardHolderName;
     private String bankCardHolderName;
     private String cardIssuerBankName;
