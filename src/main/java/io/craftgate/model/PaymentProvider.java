@@ -24,7 +24,7 @@ public enum PaymentProvider {
     HEPSIPAY,
     STRIPE,
     KASPI,
-    INSTANT_TRANSFER,
+    COMPAY,
     MASLAK,
     TOMPAY,
     TOM_FINANCE,

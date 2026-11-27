@@ -21,7 +21,7 @@ public enum ApmType {
     GOOGLEPAY,
     CASH_ON_DELIVERY,
     FUND_TRANSFER,
-    INSTANT_TRANSFER,
+    COMPAY,
     BIZUM,
     PAYLANDS_MB_WAY,
 

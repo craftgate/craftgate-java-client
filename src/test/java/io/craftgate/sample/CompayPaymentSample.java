@@ -5,8 +5,8 @@ import io.craftgate.model.*;
 import io.craftgate.request.InitApmPaymentRequest;
 import io.craftgate.request.dto.PaymentItem;
 import io.craftgate.response.ApmPaymentInitResponse;
-import io.craftgate.response.InstantTransferBank;
-import io.craftgate.response.InstantTransferBanksResponse;
+import io.craftgate.response.CompayBank;
+import io.craftgate.response.CompayBanksResponse;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -17,20 +17,20 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InstantTransferPaymentSample {
+public class CompayPaymentSample {
 
     private final Craftgate craftgate = new Craftgate("api-key", "secret-key", "https://sandbox-api.craftgate.io");
 
     @Test
     void retrieve_active_banks() {
-        InstantTransferBanksResponse response = craftgate.payment().retrieveActiveBanks();
+        CompayBanksResponse response = craftgate.payment().retrieveActiveBanks();
         assertNotNull(response.getItems());
-        InstantTransferBank instantTransferBank = response.getItems().get(0);
-        assertNotNull(instantTransferBank);
+        CompayBank compayBank = response.getItems().get(0);
+        assertNotNull(compayBank);
     }
 
     @Test
-    void init_instant_transfer_apm_payment() {
+    void init_compay_apm_payment() {
         List<PaymentItem> items = new ArrayList<>();
 
         items.add(PaymentItem.builder()
@@ -46,7 +46,7 @@ public class InstantTransferPaymentSample {
                 .build());
 
         InitApmPaymentRequest request = InitApmPaymentRequest.builder()
-                .apmType(ApmType.INSTANT_TRANSFER)
+                .apmType(ApmType.COMPAY)
                 .price(BigDecimal.valueOf(1))
                 .paidPrice(BigDecimal.valueOf(1))
                 .currency(Currency.TRY)
@@ -56,6 +56,8 @@ public class InstantTransferPaymentSample {
                 .callbackUrl("https://www.your-website.com/craftgate-apm-callback")
                 .additionalParams(new HashMap() {{
                     put("bankCode", "0");
+                    put("shopUrl", "your-website.com");
+                    put("receiptDescription", "your-receipt-description");
                 }})
                 .items(items)
                 .build();
