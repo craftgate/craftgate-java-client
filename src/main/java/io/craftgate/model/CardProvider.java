@@ -4,5 +4,6 @@ public enum CardProvider {
     IYZICO,
     IPARA,
     BIRLESIK_ODEME,
-    MEX
+    MEX,
+    PARAM
 }

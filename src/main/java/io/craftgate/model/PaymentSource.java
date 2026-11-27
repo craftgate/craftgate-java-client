@@ -8,4 +8,5 @@ public enum PaymentSource {
     JUZDAN,
     HEPSIPAY,
     MONO,
+    MASTERPASS,
 }

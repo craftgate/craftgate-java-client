@@ -8,7 +8,6 @@ public enum CardAssociation {
     TROY,
     JCB,
     UNION_PAY,
-    MAESTRO,
     DISCOVER,
     DINERS_CLUB
 }

@@ -34,11 +34,14 @@ public enum PaymentMethod {
     BIZUM,
     PAYLANDS_MB_WAY,
     ZIP,
-    DKB,
     PAYCELL_DCB,
     SETCARD,
     SETCARD_GIFT,
     IWALLET,
     PAPEL,
-    BKM_EXPRESS
+    BKM_EXPRESS,
+    CECABANK_BIZUM,
+    ISBANK_IDEAL,
+    KARACA_FINANS,
+    PAYLANDS_BIZUM
 }

@@ -4,5 +4,6 @@ public enum SettlementSource {
 
     COLLECTION,
     WITHDRAW,
-    BOUNCED
+    BOUNCED,
+    MONEY_TRANSFER
 }
