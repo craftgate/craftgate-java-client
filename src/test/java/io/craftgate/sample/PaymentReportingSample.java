@@ -40,6 +40,7 @@ public class PaymentReportingSample {
                 .maxPaidPrice(BigDecimal.valueOf(100))
                 .installment(1)
                 .isThreeDS(false)
+                .isMaskedCardPayment(false)
                 .minCreatedDate(LocalDateTime.now().minusDays(30L))
                 .maxCreatedDate(LocalDateTime.now())
                 .build();

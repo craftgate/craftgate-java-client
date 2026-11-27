@@ -35,6 +35,7 @@ public class SearchPaymentsRequest extends BaseRequest {
     private BigDecimal maxPaidPrice;
     private Integer installment;
     private Boolean isThreeDS;
+    private Boolean isMaskedCardPayment;
     private LocalDateTime minCreatedDate;
     private LocalDateTime maxCreatedDate;
 }

@@ -29,6 +29,7 @@ public class BasePaymentResponse {
     private PaymentPhase paymentPhase;
     private String paymentChannel;
     private Boolean isThreeDS;
+    private Boolean isMaskedCardPayment;
     private BigDecimal merchantCommissionRate;
     private BigDecimal merchantCommissionRateAmount;
     private BigDecimal bankCommissionRate;
