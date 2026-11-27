@@ -17,7 +17,6 @@ public class ReportingPaymentTransaction extends PaymentTransaction {
     private BigDecimal refundablePrice;
     private MemberResponse subMerchantMember;
     private PaymentRefundStatus refundStatus;
-    private PayoutStatus payoutStatus;
     private BigDecimal bankCommissionRate;
     private BigDecimal bankCommissionRateAmount;
 }
