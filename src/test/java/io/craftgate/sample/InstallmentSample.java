@@ -4,6 +4,7 @@ import io.craftgate.Craftgate;
 import io.craftgate.model.CardAssociation;
 import io.craftgate.model.CardType;
 import io.craftgate.model.Currency;
+import io.craftgate.model.PaymentProvider;
 import io.craftgate.request.SearchInstallmentsRequest;
 import io.craftgate.response.BinNumberResponse;
 import io.craftgate.response.InstallmentListResponse;
@@ -51,6 +52,19 @@ public class InstallmentSample {
                 .price(BigDecimal.valueOf(100L))
                 .currency(Currency.TRY)
                 .distinctCardBrandsWithLowestCommissions(true)
+                .build();
+
+        InstallmentListResponse response = craftgate.installment().searchInstallments(request);
+        assertTrue(response.getItems().size() > 0);
+    }
+
+    @Test
+    void search_installments_with_payment_provider() {
+        SearchInstallmentsRequest request = SearchInstallmentsRequest.builder()
+                .binNumber("525864")
+                .price(BigDecimal.valueOf(100L))
+                .currency(Currency.TRY)
+                .paymentProvider(PaymentProvider.MASTERPASS)
                 .build();
 
         InstallmentListResponse response = craftgate.installment().searchInstallments(request);
