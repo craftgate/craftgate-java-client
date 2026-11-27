@@ -1,6 +1,7 @@
 package io.craftgate.request;
 
 import io.craftgate.model.Currency;
+import io.craftgate.model.PaymentProvider;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -18,4 +19,5 @@ public class SearchInstallmentsRequest extends BaseRequest {
     private Currency currency;
     private boolean distinctCardBrandsWithLowestCommissions;
     private boolean loyaltyExists;
+    private PaymentProvider paymentProvider;
 }
